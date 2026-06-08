@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Baby Journey | Lingua Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #F9FCB8;
+            color: #1f2937;
+            line-height: 1.5;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #5D8EBD;
+            margin-bottom: 24px;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            color: #2c3e50;
+        }
+        .btn-back {
+            display: inline-block;
+            background: #FCC14C;
+            color: #1f2937;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            border: 1px solid #F7FF5B;
+        }
+        .btn-back:hover {
+            background: #F7FF5B;
+            transform: translateY(-2px);
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: #FCC14C;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧳 Baby Journey</h1>
+        <div class="divider"></div>
+        <p>Страница готовится. Здесь скоро появится подробная информация о гайдах, тарифах и материалах для мам и малышей от 0 до 3 лет.</p>
+        <a href="index.html" class="btn-back">← Вернуться на главную</a>
+    </div>
+
+    <script>
+        // Сохраняем позицию при клике на ссылку "Вернуться на главную"
+        document.querySelectorAll('a[href="index.html"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                sessionStorage.setItem('scrollPosition', window.scrollY);
+            });
+        });
+        // Сохраняем позицию при закрытии вкладки (на всякий случай)
+        window.addEventListener('beforeunload', function() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        });
+    </script>
+</body>
+</html>
