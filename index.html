@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Lingua Journey | Академия системного билингвального обучения</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -34,20 +35,18 @@
             transition: width 0.1s;
         }
 
-        /* Стили для sticky-nav */
         .sticky-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(249, 252, 184, 0.95);
+            background: rgba(249, 252, 184, 0.92);
             backdrop-filter: blur(8px);
             z-index: 1000;
             padding: 12px 0;
             border-bottom: 2px solid #E67E22;
             transform: translateY(-100%);
             transition: transform 0.35s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .sticky-nav.show {
             transform: translateY(0);
@@ -62,29 +61,16 @@
             background: white;
             border-radius: 40px;
             padding: 8px 18px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #2c3e50;
             text-decoration: none;
             border: 1px solid #E67E22;
             transition: 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .sticky-nav a:hover {
             background: #E67E22;
             color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Адаптация для телефонов: плашка чуть уже и меньше */
-        @media (max-width: 768px) {
-            .sticky-nav .container {
-                gap: 8px;
-            }
-            .sticky-nav a {
-                padding: 6px 12px;
-                font-size: 0.7rem;
-            }
         }
 
         .scroll-hint {
@@ -99,12 +85,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(230, 126, 34, 0.8);
+            background: rgba(230, 126, 34, 0.7);
             border-radius: 50%;
             backdrop-filter: blur(4px);
             transition: 0.2s;
             z-index: 10;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         .scroll-hint:hover {
             background: #E67E22;
@@ -159,8 +144,7 @@
             margin: 12px 0 0 0;
         }
 
-        /* Общий стиль для всех кнопок с тенью */
-        .btn-ticket, .category-tag {
+        .btn-ticket {
             display: inline-block;
             background: #E67E22;
             padding: 12px 28px;
@@ -169,27 +153,14 @@
             color: white;
             text-decoration: none;
             border-radius: 16px;
-            transition: all 0.2s ease;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #F7FF5B;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.03);
         }
-        .btn-ticket:hover, .category-tag:hover {
-            background: #D35400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
-        .category-tag {
-            background: white;
-            color: #E67E22;
-            border: 1px solid #E67E22;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .category-tag:hover {
-            background: #E67E22;
-            color: white;
+        .btn-ticket:hover {
+            background: #F7FF5B;
+            transform: translateY(-2px);
+            border-color: #E67E22;
         }
 
         .scroll-top {
@@ -212,13 +183,13 @@
             border: none;
         }
         .scroll-top:hover {
-            background: #D35400;
+            background: #F7FF5B;
             transform: translateY(-4px);
         }
         .scroll-top svg {
             width: 24px;
             height: 24px;
-            stroke: white;
+            stroke: #1f2937;
             stroke-width: 2;
             fill: none;
             stroke-linecap: round;
@@ -229,28 +200,29 @@
             visibility: visible;
         }
 
-        /* Новая иконка диалога в правом верхнем углу */
-        .dialog-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
+        .operator-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
             cursor: pointer;
+            z-index: 1000;
         }
-        .dialog-icon .main-icon {
-            width: 48px;
-            height: 48px;
+        .operator-btn .operator-avatar {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: 0.2s;
         }
-        .dialog-icon .main-icon:hover {
+        .operator-btn .operator-avatar:hover {
             transform: scale(1.05);
         }
-        .dialog-social {
+        .operator-social {
             position: absolute;
-            top: 60px;
+            bottom: 70px;
             right: 0;
             display: flex;
             flex-direction: column;
@@ -259,25 +231,25 @@
             visibility: hidden;
             transition: 0.3s ease;
         }
-        .dialog-icon:hover .dialog-social {
+        .operator-btn:hover .operator-social {
             opacity: 1;
             visibility: visible;
         }
-        .dialog-social a {
+        .operator-social a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: 0.2s;
         }
-        .dialog-social a:hover {
+        .operator-social a:hover {
             transform: scale(1.1);
         }
-        .dialog-social img {
+        .operator-social img {
             width: 28px;
             height: 28px;
         }
@@ -328,7 +300,7 @@
             transition: 0.2s;
         }
         .image-wrapper:hover {
-            border-color: #D35400;
+            border-color: #F7FF5B;
             transform: translateY(-4px);
         }
         .hero-image {
@@ -370,19 +342,24 @@
             color: #5D8EBD;
             display: block;
         }
-        /* Кнопки на первом экране: центрирование на телефонах */
-        .categories-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+        .category-tag {
+            background: white;
+            border-radius: 60px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            border: 1px solid #E67E22;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
         }
-        @media (max-width: 768px) {
-            .categories-wrapper {
-                justify-content: center;
-            }
-            .first-screen-text p {
-                text-align: center;
-            }
+        .category-tag:hover {
+            background: #E67E22;
+            color: white;
+            border-color: white;
         }
 
         .category-card {
@@ -1071,23 +1048,13 @@
             .inspiration-content { flex-direction: column; }
             .sticky-nav a { padding: 6px 10px; font-size: 0.65rem; }
             .scroll-top { bottom: 20px; left: 20px; width: 40px; height: 40px; }
+            .operator-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
             .category-tag { padding: 6px 12px; font-size: 0.7rem; }
             .testimonials-slider-container { padding: 0 40px; }
             .slider-btn { width: 36px; height: 36px; }
             .slider-btn svg { width: 20px; height: 20px; }
             .honest-grid { flex-direction: column; }
             .honest-card { min-width: auto; }
-            .dialog-icon {
-                top: 10px;
-                right: 10px;
-            }
-            .dialog-icon .main-icon {
-                width: 40px;
-                height: 40px;
-            }
-            .dialog-social {
-                top: 50px;
-            }
         }
         @media (max-width: 600px) {
             .testimonial-card {
@@ -1100,15 +1067,6 @@
 
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- Иконка диалога в правом верхнем углу -->
-<div class="dialog-icon">
-    <img src="images/operator-photo.jpeg" alt="Диалог" class="main-icon">
-    <div class="dialog-social">
-        <a href="https://t.me/lingua_journey" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
-        <a href="https://vk.me/public221397766" target="_blank"><img src="images/vk-icon.png" alt="VK Чат"></a>
-    </div>
-</div>
-
 <div class="sticky-nav" id="stickyNav">
     <div class="container">
         <a href="#about">О нас</a>
@@ -1118,7 +1076,6 @@
         <a href="#english-journey">English Journey</a>
         <a href="#lingua-materials">Lingua Materials</a>
         <a href="#testimonials">Отзывы</a>
-        <a href="#contacts">Контакты</a>
     </div>
 </div>
 
@@ -1134,7 +1091,7 @@
                 <div class="logo-text">Lingua Journey <span>— академия системного билингвального обучения</span></div>
             </div>
             <p style="font-weight: 600; margin: 24px 0 12px 0; font-size: 1.3rem;">Подберём курс или гайд под ваш запрос:</p>
-            <div class="categories-wrapper">
+            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
                 <a href="#about" class="category-tag">📖 О нас</a>
                 <a href="#baby-journey" class="category-tag">🧳 мама + малыш</a>
                 <a href="#kids-journey" class="category-tag">🗺️ дошкольникам</a>
@@ -1142,7 +1099,6 @@
                 <a href="#english-journey" class="category-tag">🌍 взрослым</a>
                 <a href="#lingua-materials" class="category-tag">🎓 преподавателям</a>
                 <a href="#testimonials" class="category-tag">⭐ Отзывы</a>
-                <a href="#contacts" class="category-tag">📞 Контакты</a>
             </div>
         </div>
         <div class="first-screen-image">
@@ -1209,6 +1165,9 @@
                         </div>
                         <p>Мы знаем это не понаслышке. И знаем, что это лечится — не магией, а понятным маршрутом.</p>
                     </div>
+                    <div class="honest-image">
+                        <img src="images/honest-photo.jpeg" alt="Кэтэлина Андреевна">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1221,7 +1180,7 @@
                 <h2>Вам подойдёт <span class="highlight">Lingua Journey</span>, если…</h2>
                 <ul class="diagnostic-list">
                     <li>Вы хотите растить <span class="highlight">билингва</span>, но сами <span class="highlight">не знаете английского</span> или не знаете как</li>
-                    <li>Ребёнок уже говорит по-русски, но <span class="highlight">хочется ввести английский после 4 лет</span></li>
+                    <li>Ребёнок уже говорит по-русски, а <span class="highlight">английский не идёт</span></li>
                     <li>У ребёнка <span class="highlight">проблемы в школе</span>, <span class="highlight">не понимает темы</span> и не успевает за школьной программой. <span class="highlight">Не получается выполнять домашнее задание</span></li>
                     <li><span class="highlight">Начинаете и бросаете</span> английский годами</li>
                     <li>Понимаете на слух, а <span class="highlight">сказать ничего не можете</span></li>
@@ -1248,7 +1207,7 @@
         </div>
     </section>
 
-    <!-- 6 ЭКРАН - Отзывы (слайдер) -->
+    <!-- 6 ЭКРАН - Отзывы -->
     <section id="testimonials" class="testimonials-section" style="padding: 60px 0;">
         <div class="container">
             <h2>Почему <span class="highlight">Lingua Journey</span> выбирают уже 8 лет</h2>
@@ -1364,7 +1323,7 @@
     </div>
 
     <!-- 10 ЭКРАН - Baby Journey -->
-    <div class="peach-section" id="baby-journey" style="padding: 60px 0;">
+    <div class="peach-section" id="baby-journey" style="padding: 60px 0 80px 0;">
         <div class="peach-bg"></div>
         <div class="container">
             <div class="category-card">
@@ -1521,8 +1480,8 @@
         </div>
     </section>
 
-    <!-- 15 ЭКРАН - Бесплатная консультация (теперь с id="contacts") -->
-    <section id="contacts" style="background: white; padding: 60px 0;">
+    <!-- 15 ЭКРАН - Бесплатная консультация -->
+    <section style="background: white; padding: 60px 0;">
         <div class="container">
             <div class="diagnostic-block" style="max-width: 800px; margin: 0 auto; text-align: center;">
                 <h2 style="margin-bottom: 16px;">Не знаете, с чего начать?</h2>
@@ -1546,16 +1505,16 @@
 
 <footer>
     <div class="container">
-        <div class="footer-social-title">Мы в социальных сетях:</div>
         <div class="social-icons">
             <a href="https://vk.com/linguajourney_ru" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
             <a href="https://t.me/lingua_journey" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
-            <a href="https://www.instagram.com/linguajourney_ru?igsh=MTU2ZW1vcGZveXdibQ%3D%3D&utm_source=qr" target="_blank" class="insta-with-star">
+            <a href="#" target="_blank" class="insta-with-star">
                 <img src="images/inst-icon.png" alt="Instagram">
                 <span class="star">*</span>
             </a>
-            <a href="https://rutube.ru/channel/74778279/" target="_blank"><img src="images/rutube-icon.png" alt="RUTUBE"></a>
-            <a href="https://dzen.ru/linguamaterials?share_to=link" target="_blank"><img src="images/dzen-icon.png" alt="Дзен"></a>
+            <a href="#" target="_blank"><img src="images/youtube-icon.png" alt="YouTube"></a>
+            <a href="#" target="_blank"><img src="images/rutube-icon.png" alt="RUTUBE"></a>
+            <a href="#" target="_blank"><img src="images/dzen-icon.png" alt="Дзен"></a>
         </div>
         <div class="social-warning">
             *Instagram и Meta (Facebook) признаны экстремистскими организациями и запрещены на территории РФ
@@ -1564,7 +1523,16 @@
     </div>
 </footer>
 
-<!-- Стрелка наверх (слева) -->
+<!-- Кнопка оператора -->
+<div class="operator-btn">
+    <img src="images/operator-photo.jpeg" alt="Оператор" class="operator-avatar">
+    <div class="operator-social">
+        <a href="https://t.me/lingua_journey" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
+        <a href="https://vk.me/public221397766" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
+    </div>
+</div>
+
+<!-- Стрелка наверх -->
 <button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 19V5M5 12l7-7 7 7" />
@@ -1573,28 +1541,14 @@
 
 <script>
     var stickyNav = document.getElementById('stickyNav');
-    var lastScrollTop = 0;
-    var scrollThreshold = 900; // Порог срабатывания: количество пикселей от верха, после которого шторка может появиться
-
+    var firstScreen = document.querySelector('.first-screen');
+    
     window.addEventListener('scroll', function() {
-        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Условия для показа/скрытия шторки
-        // 1. Если прокрутили дальше, чем на scrollThreshold (условно, после первых двух экранов)
-        // 2. И сейчас листаем вверх (currentScroll < lastScrollTop)
-        if (currentScroll > scrollThreshold && currentScroll < lastScrollTop) {
+        if (window.scrollY > (firstScreen.offsetHeight - 80)) {
             stickyNav.classList.add('show');
-        } 
-        // Если листаем вниз (currentScroll > lastScrollTop), то скрываем
-        else if (currentScroll > lastScrollTop) {
+        } else {
             stickyNav.classList.remove('show');
         }
-        // Если мы в самом верху (currentScroll === 0), то точно скрываем
-        else if (currentScroll === 0) {
-            stickyNav.classList.remove('show');
-        }
-        
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
     var scrollTopBtn = document.getElementById('scrollTopBtn');
