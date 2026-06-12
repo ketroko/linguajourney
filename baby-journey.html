@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Baby Journey | Lingua Journey</title>
+    <title>Baby Journey | Lingua Journey — английский с пелёнок</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -11,76 +11,1144 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Open Sans', sans-serif;
             background: #F9FCB8;
             color: #1f2937;
             line-height: 1.5;
-            animation: fadeIn 0.5s ease-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: #E67E22;
+            z-index: 1001;
+            transition: width 0.1s;
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 24px;
-            text-align: center;
+            padding: 0 24px;
+        }
+        section {
+            padding: 60px 0;
         }
         h1 {
             font-size: 2.5rem;
-            color: #5D8EBD;
-            margin-bottom: 24px;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 1.2rem;
+        h2 {
+            font-size: 2rem;
+            text-align: center;
             margin-bottom: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            position: relative;
+        }
+        h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #E67E22;
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+        .btn-ticket {
+            display: inline-block;
+            background: #E67E22;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+        .btn-ticket:hover {
+            background: #D35400;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: #E67E22;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .back-home:hover {
+            background: #D35400;
+            transform: scale(1.05);
+        }
+        .back-home svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: #E67E22;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            border: none;
+        }
+        .scroll-top:hover {
+            background: #D35400;
+            transform: translateY(-4px);
+        }
+        .scroll-top svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dialog-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            cursor: pointer;
+        }
+        .dialog-icon .main-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: 0.2s;
+        }
+        .dialog-icon .main-icon:hover {
+            transform: scale(1.05);
+        }
+        .dialog-social {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+        }
+        .dialog-icon:hover .dialog-social {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dialog-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: 0.2s;
+        }
+        .dialog-social a:hover {
+            transform: scale(1.1);
+        }
+        .dialog-social img {
+            width: 28px;
+            height: 28px;
+        }
+        .first-screen {
+            background: #F9FCB8;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 0 20px;
+        }
+        .first-screen-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg-decor.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .first-screen .container {
+            position: relative;
+            z-index: 2;
+        }
+        .first-screen-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .first-screen-text {
+            flex: 1;
+        }
+        .first-screen-image {
+            flex: 1;
+        }
+        .first-screen-image img {
+            width: 100%;
+            border-radius: 32px;
+            border: 2px solid #E67E22;
+        }
+        .cards-grid, .advantages-grid, .tariffs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .card, .advantage-item, .tariff-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px;
+            flex: 1;
+            min-width: 220px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            border: 1px solid #E67E22;
+            transition: 0.2s;
+        }
+        .card:hover, .advantage-item:hover, .tariff-card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3, .tariff-card h3 {
+            font-size: 1.5rem;
+            color: #E67E22;
+            margin-bottom: 16px;
+        }
+        .advantage-item .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .advantage-item strong {
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .advantage-item p {
+            text-align: center;
+        }
+        .tariff-card .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2c3e50;
+            margin: 16px 0;
+            text-align: center;
+        }
+        .old-price {
+            font-size: 1.2rem;
+            color: #888;
+            text-decoration: line-through;
+            text-decoration-color: #E67E22;
+            margin-left: 10px;
+        }
+        .discount-date {
+            font-size: 0.8rem;
+            color: #E67E22;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .btn-details {
+            background: transparent;
+            color: #E67E22;
+            border: 1px solid #E67E22;
+            margin-top: 16px;
+            width: 100%;
+        }
+        .btn-details:hover {
+            background: #E67E22;
+            color: white;
+        }
+        .hand-luggage-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 32px;
+            padding: 24px;
+            width: calc(50% - 15px);
+            max-width: 400px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            border: 1px solid #E67E22;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card .product-photo {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            border: 1px solid #E67E22;
+        }
+        .product-card h3 {
+            font-size: 1.3rem;
+            color: #E67E22;
+            margin-bottom: 12px;
+        }
+        .product-card .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 12px 0;
+        }
+        .slider-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slider-track img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 24px;
+            border: 2px solid #E67E22;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #E67E22;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .slider-btn:hover {
+            background: #D35400;
+        }
+        .slider-btn.prev {
+            left: 10px;
+        }
+        .slider-btn.next {
+            right: 10px;
+        }
+        .slider-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .checklist-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .checklist-text {
+            flex: 1;
+        }
+        .checklist-text h3 {
+            margin-bottom: 20px;
+        }
+        .checklist-text p {
+            margin: 20px 0;
+        }
+        .video-container {
+            margin: 30px 0;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 48px;
+            padding: 32px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-content h3 {
+            font-size: 1.8rem;
+            color: #E67E22;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .modal-content .tariff-desc {
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E67E22;
+        }
+        .modal-content .section-title {
+            font-weight: 700;
+            margin: 16px 0 8px;
             color: #2c3e50;
         }
-        .btn-back {
-            display: inline-block;
-            background: #FCC14C;
-            color: #1f2937;
-            padding: 12px 28px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
+        .modal-content ul {
+            list-style: none;
+            margin: 10px 0 20px;
+        }
+        .modal-content li {
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .modal-content li:before {
+            content: "✓";
+            color: #E67E22;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
             transition: 0.2s;
-            border: 1px solid #F7FF5B;
         }
-        .btn-back:hover {
-            background: #F7FF5B;
-            transform: translateY(-2px);
+        .close-modal:hover {
+            color: #E67E22;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #FCC14C;
-            margin: 20px auto;
-            border-radius: 2px;
+        .order-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-telegram:hover {
+            background: #006699;
+        }
+        .btn-vk {
+            background: #4c75a3;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-vk:hover {
+            background: #3a5a7a;
+        }
+        .product-slider-container {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .product-slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .product-slider-track img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 24px;
+            border: 1px solid #E67E22;
+            cursor: pointer;
+        }
+        .product-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #E67E22;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .product-slider-btn:hover {
+            background: #D35400;
+        }
+        .product-slider-btn.prev {
+            left: 10px;
+        }
+        .product-slider-btn.next {
+            right: 10px;
+        }
+        .product-slider-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .fullscreen-modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .fullscreen-modal .fullscreen-slider {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+        }
+        .fullscreen-modal .fullscreen-slider img {
+            width: 100%;
+            border-radius: 16px;
+        }
+        .fullscreen-modal .fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 4010;
+        }
+        .fullscreen-modal .fullscreen-prev, .fullscreen-modal .fullscreen-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .fullscreen-modal .fullscreen-prev:hover, .fullscreen-modal .fullscreen-next:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        .fullscreen-modal .fullscreen-prev {
+            left: 20px;
+        }
+        .fullscreen-modal .fullscreen-next {
+            right: 20px;
+        }
+        .peach-bg {
+            background: #FEF9E6;
+        }
+        .yellow-bg {
+            background: #F9FCB8;
+            position: relative;
+            overflow: hidden;
+        }
+        .yellow-bg .bg-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg-decor.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .yellow-bg .container {
+            position: relative;
+            z-index: 2;
+        }
+        footer {
+            background: #F9FCB8;
+            text-align: center;
+            padding: 36px 0;
+            border-top: 3px dotted #E67E22;
+            color: #5D8EBD;
+        }
+        .footer-social-title {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5D8EBD;
+            margin-bottom: 12px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0 16px;
+        }
+        .social-icons a {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .social-icons a:hover {
+            transform: translateY(-3px);
+        }
+        .social-icons img {
+            width: 32px;
+            height: 32px;
+        }
+        .insta-with-star {
+            position: relative;
+        }
+        .insta-with-star .star {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            font-size: 0.7rem;
+            color: #E67E22;
+            font-weight: bold;
+        }
+        .social-warning {
+            text-align: center;
+            font-size: 0.6rem;
+            color: #8fc5e8;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            section { padding: 40px 0; }
+            .first-screen-container { flex-direction: column; text-align: center; }
+            .checklist-content { flex-direction: column; text-align: center; }
+            .tariffs-grid { gap: 20px; }
+            .tariff-card { min-width: 100%; }
+            .hand-luggage-grid { gap: 20px; }
+            .product-card { width: 100%; max-width: none; }
+            .back-home { top: 10px; left: 10px; width: 36px; height: 36px; }
+            .dialog-icon { top: 10px; right: 10px; }
+            .dialog-icon .main-icon { width: 40px; height: 40px; }
+            .scroll-top { bottom: 20px; left: 20px; width: 40px; height: 40px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🧳 Baby Journey</h1>
-        <div class="divider"></div>
-        <p>Страница готовится. Здесь скоро появится подробная информация о гайдах, тарифах и материалах для мам и малышей от 0 до 3 лет.</p>
-        <a href="index.html" class="btn-back">← Вернуться на главную</a>
-    </div>
 
-    <script>
-        // Сохраняем позицию при клике на ссылку "Вернуться на главную"
-        document.querySelectorAll('a[href="index.html"]').forEach(function(link) {
-            link.addEventListener('click', function() {
-                sessionStorage.setItem('scrollPosition', window.scrollY);
-            });
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="back-home" onclick="window.location.href='index.html'">
+    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6" /></svg>
+</div>
+
+<div class="dialog-icon">
+    <img src="images/operator-photo.jpeg" alt="Диалог" class="main-icon">
+    <div class="dialog-social">
+        <a href="https://t.me/lingua_journey" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
+        <a href="https://vk.me/public221397766" target="_blank"><img src="images/vk-icon.png" alt="VK Чат"></a>
+    </div>
+</div>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
+    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" /></svg>
+</button>
+
+<!-- 1 окно -->
+<div class="first-screen">
+    <div class="first-screen-bg"></div>
+    <div class="container first-screen-container">
+        <div class="first-screen-text">
+            <h1>🧳 Baby Journey: английский с пелёнок</h1>
+            <p style="font-size: 1.2rem; margin: 20px 0;">Отправьтесь в большое языковое путешествие вместе с малышом.</p>
+            <a href="#tariffs" class="btn-ticket" style="margin-top: 20px;">Перейти к тарифам</a>
+            <p style="font-weight: 700; color: #E67E22; margin-top: 16px;">🎁 Доступ открывается сразу после оплаты</p>
+        </div>
+        <div class="first-screen-image">
+            <img src="images/mom-baby.jpeg" alt="Мама с малышом">
+        </div>
+    </div>
+</div>
+
+<!-- 2 окно: Для кого этот курс (белый) -->
+<section style="background: white;">
+    <div class="container">
+        <h2>✨ Для кого этот курс</h2>
+        <div class="cards-grid">
+            <div class="card"><h3>👶 0–3 года</h3><p>Идеальный возраст для первого знакомства с английским через голос мамы, игры и ритуалы.</p></div>
+            <div class="card"><h3>👩‍👧 Родители, которые готовы учиться</h3><p>Вы будете учиться вместе с ребёнком. Это идеальное время сделать то, на что не находилось времени раньше.</p></div>
+            <div class="card"><h3>🧠 Любопытные малыши</h3><p>Для тех, кто тянется к новому. Поможем использовать это время с пользой.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 3 окно: Почему билингвизм с рождения (персиковый) -->
+<section class="peach-bg">
+    <div class="container">
+        <h2>🌟 Почему билингвизм с рождения</h2>
+        <div class="advantages-grid">
+            <div class="advantage-item"><span class="emoji">🧠</span><strong>Гибкость ума</strong><p>Два языка развивают когнитивные способности</p></div>
+            <div class="advantage-item"><span class="emoji">🗣️</span><strong>Лёгкое произношение</strong><p>Ребёнок осваивает звуки естественно</p></div>
+            <div class="advantage-item"><span class="emoji">📚</span><strong>Проще в будущем</strong><p>В жизни будет проще, так как английский станет родным</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 4 окно: О Baby Journey (белый) -->
+<section style="background: white;">
+    <div class="container">
+        <h2>🎥 О Baby Journey</h2>
+        <div class="video-container">
+            <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ТВОЕГО_ВИДЕО/" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p style="text-align: center;">Об обучении, примеры материалов из тарифов и товары — смотри видео.</p>
+    </div>
+</section>
+
+<!-- 5 окно: Бесплатный чек-лист (жёлтый с декором) -->
+<div class="yellow-bg">
+    <div class="bg-decor"></div>
+    <div class="container">
+        <h2>📥 Бесплатный чек-лист</h2>
+        <div class="checklist-content">
+            <div class="slider-container">
+                <div class="slider-track" id="checklistSlider">
+                    <img src="images/checklist-page1.jpg" alt="Чек-лист страница 1">
+                    <img src="images/checklist-page2.jpg" alt="Чек-лист страница 2">
+                    <img src="images/checklist-page3.jpg" alt="Чек-лист страница 3">
+                </div>
+                <button class="slider-btn prev" id="sliderPrev"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <button class="slider-btn next" id="sliderNext"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
+            <div class="checklist-text">
+                <h3 style="color:#E67E22;">Первые 5 шагов к английским словам, если вы сами не знаете язык</h3>
+                <p>✅ 33 страницы первых слов, разбор важных тем и первых карточек для практики<br>✅ Видео с произношением<br>✅ Мультики и песни для развития речи<br>✅ Чат единомышленников во ВКонтакте для поддержки</p>
+                <a href="images/baby-checklist.pdf" class="btn-ticket" download>📥 Скачать бесплатно</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 6 окно: Тарифы (белый) -->
+<section id="tariffs" style="background: white;">
+    <div class="container">
+        <h2>🚀 Выберите свой формат путешествия</h2>
+        <div class="tariffs-grid">
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">💼</div><h3>Чемодан</h3><p>Подписка на закрытый канал во ВКонтакте. Пополняется каждую неделю новыми материалами для вас и малыша. Подходит для категорий Baby Journey и Kid's Journey.</p><div class="price">490 ₽ <span style="font-size:0.9rem;">/мес</span></div></div><button class="btn-ticket btn-details" data-modal="modal-subscribe">Подписаться</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🎒</div><h3>Попутчик</h3><p>Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</p><div class="price">990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-basic">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🧭</div><h3>Гид</h3><p>Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</p><div class="price">2 990 ₽ <span class="old-price">4 990 ₽</span></div><div class="discount-date" id="discount-guide">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-guide">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👥</div><h3>Наставник</h3><p>Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</p><div class="price">5 990 ₽ <span class="old-price">9 990 ₽</span></div><div class="discount-date" id="discount-pro">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-pro">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👩‍🏫</div><h3>Автор</h3><p>Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</p><div class="price">12 990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-author">Что внутри</button></div>
+        </div>
+    </div>
+</section>
+
+<!-- 7 окно: Ручная кладь (персиковый) -->
+<section id="hand-luggage" class="peach-bg">
+    <div class="container">
+        <h2>🧳 Ручная кладь</h2>
+        <p style="text-align: center; margin-bottom: 40px;">Маленькие помощники, которые всегда под рукой — дома, в дороге, на холодильнике</p>
+        <div class="hand-luggage-grid">
+            <div class="product-card" data-product="Наклейки «Фразы дня»" id="product-stickers">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-stickers">
+                        <img src="images/product-stickers-1.jpg" alt="Наклейки 1"><img src="images/product-stickers-2.jpg" alt="Наклейки 2"><img src="images/product-stickers-3.jpg" alt="Наклейки 3">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-stickers"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-stickers"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+                <h3>🎀 Наклейки «Фразы дня»</h3>
+                <p>10 наклеек с ключевыми фразами</p>
+                <div class="price">390 ₽</div>
+                <button class="btn-ticket" onclick="openOrderModal('Наклейки «Фразы дня»')">Оформить заказ</button>
+            </div>
+            <div class="product-card" data-product="Карточки «Первые слова»" id="product-cards">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-cards">
+                        <img src="images/product-cards-1.jpg" alt="Карточки 1"><img src="images/product-cards-2.jpg" alt="Карточки 2"><img src="images/product-cards-3.jpg" alt="Карточки 3">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+                <h3>🃏 Карточки «Первые слова»</h3>
+                <p>30 двухсторонних карточек</p>
+                <div class="price">890 ₽</div>
+                <button class="btn-ticket" onclick="openOrderModal('Карточки «Первые слова»')">Оформить заказ</button>
+            </div>
+            <div class="product-card" data-product="Магнит-планер" id="product-planner">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-planner">
+                        <img src="images/product-planner-1.jpg" alt="Планер 1"><img src="images/product-planner-2.jpg" alt="Планер 2"><img src="images/product-planner-3.jpg" alt="Планер 3">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-planner"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-planner"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+                <h3>📅 Магнит-планер</h3>
+                <p>Многоразовая магнитная доска</p>
+                <div class="price">590 ₽</div>
+                <button class="btn-ticket" onclick="openOrderModal('Магнит-планер')">Оформить заказ</button>
+            </div>
+            <div class="product-card" data-product="Печатный чек-лист" id="product-checklist">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-print-checklist">
+                        <img src="images/print-checklist-1.jpg" alt="Чек-лист 1">
+                        <img src="images/print-checklist-2.jpg" alt="Чек-лист 2">
+                        <img src="images/print-checklist-3.jpg" alt="Чек-лист 3">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-print-checklist"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-print-checklist"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+                <h3>📄 Печатный чек-лист</h3>
+                <p>Бесплатный чек-лист в печатном виде</p>
+                <div class="price">490 ₽</div>
+                <button class="btn-ticket" onclick="openOrderModal('Печатный чек-лист')">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8 окно: Остались вопросы? (белый) -->
+<section style="background: white;">
+    <div class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; background: white; border-radius: 48px; padding: 48px; border: 2px solid #E67E22;">
+            <h2 style="margin-bottom: 16px;">Остались вопросы? Свяжитесь с нами</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 30px 0;">
+                <a href="https://vk.me/public221397766" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
+                <span style="align-self: center;">или</span>
+                <a href="https://t.me/lingua_journey" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
+            </div>
+            <p style="margin: 20px 0;">Или оставьте нам ваше имя и почту — мы свяжемся с вами</p>
+            <form id="contactForm" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                <input type="text" placeholder="Ваше имя" style="padding: 12px; border-radius: 16px; border: 1px solid #E67E22; min-width: 200px;">
+                <input type="email" placeholder="Ваша почта" style="padding: 12px; border-radius: 16px; border: 1px solid #E67E22; min-width: 200px;">
+                <button type="submit" class="btn-ticket" style="background: #E67E22;">Отправить</button>
+            </form>
+            <p style="font-size: 0.85rem; margin-top: 24px;">Отвечаем в течение суток</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-social-title">Мы в социальных сетях:</div>
+        <div class="social-icons">
+            <a href="https://vk.com/linguajourney_ru" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
+            <a href="https://t.me/lingua_journey" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
+            <a href="https://www.instagram.com/linguajourney_ru" target="_blank" class="insta-with-star"><img src="images/inst-icon.png" alt="Instagram"><span class="star">*</span></a>
+            <a href="https://rutube.ru/channel/74778279/" target="_blank"><img src="images/rutube-icon.png" alt="RUTUBE"></a>
+            <a href="https://dzen.ru/linguamaterials" target="_blank"><img src="images/dzen-icon.png" alt="Дзен"></a>
+        </div>
+        <div class="social-warning">*Instagram и Meta (Facebook) признаны экстремистскими организациями и запрещены на территории РФ</div>
+        <p>© 2026 Lingua Journey — академия системного билингвального обучения</p>
+    </div>
+</footer>
+
+<!-- Модальные окна тарифов и товаров -->
+<div id="modal-subscribe" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>💼 Чемодан</h3><ul><li>Еженедельные материалы для Baby Journey и Kid's Journey</li><li>Материалы для печати (карточки, планы, расписания)</li><li>Онлайн-игры и интерактивные упражнения</li><li>Материалы для вашего английского (A1–B1)</li><li>Чат единомышленников во ВКонтакте</li><li>Доступ ко всем предыдущим публикациям сразу после подписки</li></ul><div class="order-buttons"><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Оформить подписку</button></div></div></div>
+
+<div id="modal-basic" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🎒 Попутчик</h3><div class="product-slider-container"><div class="product-slider-track" id="track-basic-modal"><img src="images/basic-1.jpg" alt="Попутчик 1"><img src="images/basic-2.jpg" alt="Попутчик 2"><img src="images/basic-3.jpg" alt="Попутчик 3"></div><button class="product-slider-btn prev" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</div><div class="section-title">Что внутри:</div><ul><li>PDF-гайд «Baby English»</li><li>50 слов, 21 фраза, 10 бытовых сценариев</li><li>Аудио-файлы с медленным произношением</li><li>Плейлист из 10 песен с пояснениями к движениям и словам</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+
+<div id="modal-guide" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🧭 Гид</h3><div class="product-slider-container"><div class="product-slider-track" id="track-guide-modal"><img src="images/guide-1.jpg" alt="Гид 1"><img src="images/guide-2.jpg" alt="Гид 2"><img src="images/guide-3.jpg" alt="Гид 3"></div><button class="product-slider-btn prev" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</div><div class="section-title">Что добавляется:</div><ul><li>20 карточек для игр (PDF для печати)</li><li>Видеоинструкции (как играть, вводить фразы, реагировать на отказ)</li><li>Список мультиков по возрастам</li><li>Шпаргалка на телефон</li><li>Трекер привычек для мамы</li><li>Отслеживание прогресса</li><li>Разборы ключевых тем (произношение, отказ ребёнка, вовлечение семьи, смешение языков и другие)</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+
+<div id="modal-pro" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👥 Наставник</h3><div class="product-slider-container"><div class="product-slider-track" id="track-pro-modal"><img src="images/pro-1.jpg" alt="Наставник 1"><img src="images/pro-2.jpg" alt="Наставник 2"><img src="images/pro-3.jpg" alt="Наставник 3"></div><button class="product-slider-btn prev" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</div><div class="section-title">Что добавляется:</div><ul><li>Обратная связь (отвечаем на вопросы, помогаем с произношением)</li><li>Разбор одного вашего видео</li><li>Материалы для вашего английского (A1–A2)</li><li>Доступ к расширенной библиотеке разборов ключевых тем</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+
+<div id="modal-author" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👩‍🏫 Автор</h3><div class="product-slider-container"><div class="product-slider-track" id="track-author-modal"><img src="images/author-1.jpg" alt="Автор 1"><img src="images/author-2.jpg" alt="Автор 2"><img src="images/author-3.jpg" alt="Автор 3"></div><button class="product-slider-btn prev" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</div><div class="section-title">Что добавляется:</div><ul><li>Личная обратная связь в чате 4 недели</li><li>3 видеоконсультации в течение 1.5 лет</li><li>Разбор двух ваших видео</li><li>Полный доступ ко всем разборам нераскрытых тем</li><li>Полные материалы для вашего английского (A1–B1)</li><li>Доступ к эксклюзивной библиотеке (шаблоны игр, вебинары, чек-листы)</li><li>Расширенный модуль по билингвизму для детей 2–4 лет</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+
+<div id="orderModal" class="modal"><div class="modal-content" style="max-width: 400px;"><span class="close-modal" onclick="closeOrderModal()">&times;</span><h3 id="orderProductTitle">Оформление заказа</h3><div class="order-buttons"><a href="#" id="orderVkLink" target="_blank" class="btn-ticket btn-vk">Оформить заказ во ВКонтакте</a><a href="#" id="orderTgLink" target="_blank" class="btn-ticket btn-telegram">Оформить заказ в Telegram</a></div></div></div>
+
+<script>
+    function updateDiscountDates() {
+        const today = new Date();
+        const future = new Date(today);
+        future.setDate(today.getDate() + 2);
+        const day = String(future.getDate()).padStart(2, '0');
+        const month = String(future.getMonth() + 1).padStart(2, '0');
+        const dateStr = `${day}.${month}`;
+        const guideElem = document.getElementById('discount-guide');
+        const proElem = document.getElementById('discount-pro');
+        if (guideElem) guideElem.innerHTML = `скидка до ${dateStr}`;
+        if (proElem) proElem.innerHTML = `скидка до ${dateStr}`;
+    }
+    updateDiscountDates();
+
+    // Прогресс-бар
+    window.addEventListener('scroll', function() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('scrollProgress').style.width = scrolled + '%';
+    });
+
+    // Сохранение позиции скролла
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('scrollPos', window.scrollY);
+    });
+    window.addEventListener('load', () => {
+        const savedPos = localStorage.getItem('scrollPos');
+        if (savedPos) {
+            window.scrollTo(0, parseInt(savedPos));
+            localStorage.removeItem('scrollPos');
+        }
+    });
+
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 600) scrollTopBtn.classList.add('show');
+        else scrollTopBtn.classList.remove('show');
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Слайдер для чек-листа
+    const track = document.getElementById('checklistSlider');
+    const slides = track ? Array.from(track.children) : [];
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    let currentIndex = 0;
+    function updateSlider() {
+        if (!track || slides.length === 0) return;
+        const slideWidth = slides[0].clientWidth;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+    if (prevBtn && nextBtn && slides.length > 0) {
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
         });
-        // Сохраняем позицию при закрытии вкладки (на всякий случай)
-        window.addEventListener('beforeunload', function() {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
         });
-    </script>
+        window.addEventListener('resize', updateSlider);
+        setTimeout(updateSlider, 100);
+    }
+
+    // Модальные окна
+    const modals = document.querySelectorAll('.modal');
+    const detailButtons = document.querySelectorAll('[data-modal]');
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    function closeModal(modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    detailButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal');
+            openModal(modalId);
+        });
+    });
+    modals.forEach(modal => {
+        const closeBtn = modal.querySelector('.close-modal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => closeModal(modal));
+        }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal(modal);
+        });
+    });
+
+    function initModalSliders() {
+        document.querySelectorAll('.product-slider-container').forEach(container => {
+            const trackElem = container.querySelector('.product-slider-track');
+            if (!trackElem) return;
+            const slides = Array.from(trackElem.children);
+            const prevBtn = container.querySelector('.prev');
+            const nextBtn = container.querySelector('.next');
+            let current = 0;
+            function updateSlide() {
+                const slideWidth = slides[0]?.clientWidth || 0;
+                trackElem.style.transform = `translateX(-${current * slideWidth}px)`;
+            }
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    current = (current - 1 + slides.length) % slides.length;
+                    updateSlide();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    current = (current + 1) % slides.length;
+                    updateSlide();
+                });
+            }
+            window.addEventListener('resize', updateSlide);
+            setTimeout(updateSlide, 100);
+        });
+    }
+    initModalSliders();
+
+    function openFullscreenSlider(productId) {
+        const container = document.querySelector(`#${productId} .product-slider-track`);
+        if (!container) return;
+        const images = Array.from(container.querySelectorAll('img')).map(img => img.src);
+        let idx = 0;
+        const modal = document.createElement('div');
+        modal.className = 'fullscreen-modal';
+        modal.innerHTML = `<div class="fullscreen-close">&times;</div><div class="fullscreen-prev">‹</div><div class="fullscreen-next">›</div><div class="fullscreen-slider"><img src="${images[0]}" alt="Фото"></div>`;
+        document.body.appendChild(modal);
+        setTimeout(() => modal.classList.add('show'), 10);
+        const imgEl = modal.querySelector('.fullscreen-slider img');
+        const update = () => { imgEl.src = images[idx]; };
+        modal.querySelector('.fullscreen-close').onclick = () => {
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+        };
+        modal.querySelector('.fullscreen-prev').onclick = () => {
+            idx = (idx - 1 + images.length) % images.length;
+            update();
+        };
+        modal.querySelector('.fullscreen-next').onclick = () => {
+            idx = (idx + 1) % images.length;
+            update();
+        };
+        modal.onclick = (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        };
+    }
+    document.querySelectorAll('.product-card .product-slider-track img').forEach(img => {
+        const productId = img.closest('.product-card')?.id;
+        if (productId) {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => openFullscreenSlider(productId));
+        }
+    });
+
+    function openOrderModal(productName) {
+        const modal = document.getElementById('orderModal');
+        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
+        const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}".`);
+        document.getElementById('orderVkLink').href = `https://vk.me/public221397766?text=${msg}`;
+        document.getElementById('orderTgLink').href = `https://t.me/lingua_journey?text=${msg}`;
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeOrderModal() {
+        const modal = document.getElementById('orderModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    window.openOrderModal = openOrderModal;
+    window.closeOrderModal = closeOrderModal;
+
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = e.target.querySelector('input[type="text"]').value;
+        const email = e.target.querySelector('input[type="email"]').value;
+        if (name && email) {
+            alert(`Спасибо, ${name}! Мы свяжемся с вами в течение суток.`);
+            e.target.reset();
+        } else {
+            alert('Пожалуйста, заполните имя и email');
+        }
+    });
+</script>
+
 </body>
 </html>
