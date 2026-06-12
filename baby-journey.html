@@ -80,6 +80,18 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
+        .btn-vk {
+            background: #4c75a3;
+        }
+        .btn-vk:hover {
+            background: #3a5a7a;
+        }
+        .btn-telegram {
+            background: #0088cc;
+        }
+        .btn-telegram:hover {
+            background: #006699;
+        }
         .back-home {
             position: fixed;
             top: 20px;
@@ -510,26 +522,6 @@
             justify-content: center;
             margin-top: 24px;
         }
-        .btn-telegram {
-            background: #0088cc;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-telegram:hover {
-            background: #006699;
-        }
-        .btn-vk {
-            background: #4c75a3;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-vk:hover {
-            background: #3a5a7a;
-        }
         .product-slider-container {
             position: relative;
             margin: 20px 0;
@@ -730,6 +722,13 @@
             .dialog-icon { top: 10px; right: 10px; }
             .dialog-icon .main-icon { width: 40px; height: 40px; }
             .scroll-top { bottom: 20px; left: 20px; width: 40px; height: 40px; }
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .or-text {
+                margin: 8px 0;
+            }
         }
     </style>
 </head>
@@ -764,7 +763,7 @@
             <p style="font-weight: 700; color: #E67E22; margin-top: 16px;">🎁 Доступ открывается сразу после оплаты</p>
         </div>
         <div class="first-screen-image">
-            <img src="images/mom-baby.jpeg" alt="Мама с малышом">
+            <img src="images/mom-baby-new.jpeg" alt="Мама с малышом">
         </div>
     </div>
 </div>
@@ -843,7 +842,7 @@
 </section>
 
 <!-- 7 окно: Ручная кладь (персиковый) -->
-<section id="hand-luggage" class="peach-bg">
+<section class="peach-bg">
     <div class="container">
         <h2>🧳 Ручная кладь</h2>
         <p style="text-align: center; margin-bottom: 40px;">Маленькие помощники, которые всегда под рукой — дома, в дороге, на холодильнике</p>
@@ -911,17 +910,17 @@
     <div class="container">
         <div style="max-width: 800px; margin: 0 auto; text-align: center; background: white; border-radius: 48px; padding: 48px; border: 2px solid #E67E22;">
             <h2 style="margin-bottom: 16px;">Остались вопросы? Свяжитесь с нами</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 30px 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; margin: 30px 0;">
                 <a href="https://vk.me/public221397766" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
-                <span style="align-self: center;">или</span>
+                <span class="or-text">или</span>
                 <a href="https://t.me/lingua_journey" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
             </div>
             <p style="margin: 20px 0;">Или оставьте нам ваше имя и почту — мы свяжемся с вами</p>
-            <form id="contactForm" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-                <input type="text" placeholder="Ваше имя" style="padding: 12px; border-radius: 16px; border: 1px solid #E67E22; min-width: 200px;">
-                <input type="email" placeholder="Ваша почта" style="padding: 12px; border-radius: 16px; border: 1px solid #E67E22; min-width: 200px;">
-                <button type="submit" class="btn-ticket" style="background: #E67E22;">Отправить</button>
-            </form>
+            
+            <!-- Яндекс Форма -->
+            <script src="https://forms.yandex.ru/_static/embed.js"></script>
+            <iframe src="https://forms.yandex.ru/u/6a2c50945056906567d116f5?iframe=1" frameborder="0" name="ya-form-6a2c50945056906567d116f5" width="650" style="max-width:100%;"></iframe>
+            
             <p style="font-size: 0.85rem; margin-top: 24px;">Отвечаем в течение суток</p>
         </div>
     </div>
@@ -942,7 +941,7 @@
     </div>
 </footer>
 
-<!-- Модальные окна тарифов и товаров -->
+<!-- Модальные окна тарифов и товаров (остаются без изменений, они у вас уже есть) -->
 <div id="modal-subscribe" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>💼 Чемодан</h3><ul><li>Еженедельные материалы для Baby Journey и Kid's Journey</li><li>Материалы для печати (карточки, планы, расписания)</li><li>Онлайн-игры и интерактивные упражнения</li><li>Материалы для вашего английского (A1–B1)</li><li>Чат единомышленников во ВКонтакте</li><li>Доступ ко всем предыдущим публикациям сразу после подписки</li></ul><div class="order-buttons"><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Оформить подписку</button></div></div></div>
 
 <div id="modal-basic" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🎒 Попутчик</h3><div class="product-slider-container"><div class="product-slider-track" id="track-basic-modal"><img src="images/basic-1.jpg" alt="Попутчик 1"><img src="images/basic-2.jpg" alt="Попутчик 2"><img src="images/basic-3.jpg" alt="Попутчик 3"></div><button class="product-slider-btn prev" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</div><div class="section-title">Что внутри:</div><ul><li>PDF-гайд «Baby English»</li><li>50 слов, 21 фраза, 10 бытовых сценариев</li><li>Аудио-файлы с медленным произношением</li><li>Плейлист из 10 песен с пояснениями к движениям и словам</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
@@ -1009,14 +1008,8 @@
         track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
     if (prevBtn && nextBtn && slides.length > 0) {
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-        });
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-        });
+        nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); });
+        prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); });
         window.addEventListener('resize', updateSlider);
         setTimeout(updateSlider, 100);
     }
@@ -1036,19 +1029,12 @@
         document.body.style.overflow = '';
     }
     detailButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modalId = button.getAttribute('data-modal');
-            openModal(modalId);
-        });
+        button.addEventListener('click', () => openModal(button.getAttribute('data-modal')));
     });
     modals.forEach(modal => {
         const closeBtn = modal.querySelector('.close-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => closeModal(modal));
-        }
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal(modal);
-        });
+        if (closeBtn) closeBtn.addEventListener('click', () => closeModal(modal));
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(modal); });
     });
 
     function initModalSliders() {
@@ -1063,18 +1049,8 @@
                 const slideWidth = slides[0]?.clientWidth || 0;
                 trackElem.style.transform = `translateX(-${current * slideWidth}px)`;
             }
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    current = (current - 1 + slides.length) % slides.length;
-                    updateSlide();
-                });
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    current = (current + 1) % slides.length;
-                    updateSlide();
-                });
-            }
+            if (prevBtn) prevBtn.addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; updateSlide(); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { current = (current + 1) % slides.length; updateSlide(); });
             window.addEventListener('resize', updateSlide);
             setTimeout(updateSlide, 100);
         });
@@ -1136,18 +1112,6 @@
     }
     window.openOrderModal = openOrderModal;
     window.closeOrderModal = closeOrderModal;
-
-    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = e.target.querySelector('input[type="text"]').value;
-        const email = e.target.querySelector('input[type="email"]').value;
-        if (name && email) {
-            alert(`Спасибо, ${name}! Мы свяжемся с вами в течение суток.`);
-            e.target.reset();
-        } else {
-            alert('Пожалуйста, заполните имя и email');
-        }
-    });
 </script>
 
 </body>
