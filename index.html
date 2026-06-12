@@ -512,16 +512,9 @@
             position: relative;
             z-index: 2;
         }
-        .honest-with-image {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-        }
         .honest-text {
-            flex: 1.5;
+            width: 100%;
         }
-
         .honest-grid {
             display: flex;
             flex-wrap: wrap;
@@ -1043,7 +1036,6 @@
                 height: auto;
                 max-height: 280px;
             }
-            .honest-with-image { flex-direction: column; }
             .about-content { flex-direction: column; text-align: center; }
             .inspiration-content { flex-direction: column; }
             .sticky-nav a { padding: 6px 10px; font-size: 0.65rem; }
@@ -1140,34 +1132,29 @@
         </div>
     </section>
 
-    <!-- 3 ЭКРАН - Давайте честно -->
+    <!-- 3 ЭКРАН - Давайте честно (без картинки справа) -->
     <div class="firstscreen-bg-section" style="padding: 60px 0;">
         <div class="firstscreen-bg-layer"></div>
         <div class="container">
             <div class="honest-block">
-                <div class="honest-with-image">
-                    <div class="honest-text">
-                        <h2 class="left-underline">Давайте честно</h2>
-                        <p style="font-size: 1.2rem;"><strong>Большинство берётся за английский — и бросает.</strong><br>Через месяц, через полгода, после первого «ничего не понимаю».</p>
-                        <div class="honest-grid">
-                            <div class="honest-card">
-                                <img src="images/card-time.jpg" alt="Нет времени">
-                                <div class="card-overlay"><span><strong>Нет времени</strong><br>Вечно «надо бы», но руки не доходят.</span></div>
-                            </div>
-                            <div class="honest-card">
-                                <img src="images/card-fear.jpg" alt="Страшно ошибаться">
-                                <div class="card-overlay"><span><strong>Страшно ошибаться</strong><br>Стыдно сказать не так, показаться глупым.</span></div>
-                            </div>
-                            <div class="honest-card">
-                                <img src="images/card-system.jpg" alt="Нет системы">
-                                <div class="card-overlay"><span><strong>Нет системы</strong><br>Пробуем одно, потом другое — и ничего не доводим до конца.</span></div>
-                            </div>
+                <div class="honest-text">
+                    <h2 class="left-underline">Давайте честно</h2>
+                    <p style="font-size: 1.2rem;"><strong>Большинство берётся за английский — и бросает.</strong><br>Через месяц, через полгода, после первого «ничего не понимаю».</p>
+                    <div class="honest-grid">
+                        <div class="honest-card">
+                            <img src="images/card-time.jpg" alt="Нет времени">
+                            <div class="card-overlay"><span><strong>Нет времени</strong><br>Вечно «надо бы», но руки не доходят.</span></div>
                         </div>
-                        <p>Мы знаем это не понаслышке. И знаем, что это лечится — не магией, а понятным маршрутом.</p>
+                        <div class="honest-card">
+                            <img src="images/card-fear.jpg" alt="Страшно ошибаться">
+                            <div class="card-overlay"><span><strong>Страшно ошибаться</strong><br>Стыдно сказать не так, показаться глупым.</span></div>
+                        </div>
+                        <div class="honest-card">
+                            <img src="images/card-system.jpg" alt="Нет системы">
+                            <div class="card-overlay"><span><strong>Нет системы</strong><br>Пробуем одно, потом другое — и ничего не доводим до конца.</span></div>
+                        </div>
                     </div>
-                    <div class="honest-image">
-                        <img src="images/honest-photo.jpeg" alt="Кэтэлина Андреевна">
-                    </div>
+                    <p>Мы знаем это не понаслышке. И знаем, что это лечится — не магией, а понятным маршрутом.</p>
                 </div>
             </div>
         </div>
@@ -1523,7 +1510,6 @@
     </div>
 </footer>
 
-<!-- Кнопка оператора -->
 <div class="operator-btn">
     <img src="images/operator-photo.jpeg" alt="Оператор" class="operator-avatar">
     <div class="operator-social">
@@ -1532,7 +1518,6 @@
     </div>
 </div>
 
-<!-- Стрелка наверх -->
 <button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 19V5M5 12l7-7 7 7" />
@@ -1584,7 +1569,6 @@
         document.getElementById('scrollProgress').style.width = scrolled + '%';
     });
 
-    // Слайдер отзывов
     var track = document.getElementById('testimonialsTrack');
     var cards = document.querySelectorAll('.testimonial-card');
     var prevBtn = document.getElementById('prevBtn');
