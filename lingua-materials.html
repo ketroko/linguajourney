@@ -726,7 +726,7 @@
 <section id="free" style="background: #FEF9E6;">
     <div class="container">
         <h2>📥 Бесплатные материалы</h2>
-        <p style="text-align: center; margin-bottom: 20px;">Присоединяйтесь к сообществу — получайте готовые разработки бесплатно</p>
+        <p style="text-align: center; margin-bottom: 20px;">Присоединяйтесь к сообществу — получайте готовые материалы бесплатно</p>
         <div class="links-grid">
             <a href="https://t.me/linguamaterials" target="_blank" class="link-card">
                 <img src="images/tg-icon.png" alt="Telegram" class="icon-img" style="width: 60px; height: 60px;">
@@ -790,7 +790,7 @@
         <div class="delivery-block">
             <h2 style="margin-bottom: 16px;">🚚 Доставка</h2>
             <p><strong>Электронные товары (PDF, ZIP, DOC)</strong> — скачиваются сразу после оплаты. Ссылка придёт на вашу почту.</p>
-            <p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и всему миру. Доставка по России — от 300 ₽, по миру — от 500 ₽. Сроки: 3–14 дней в зависимости от региона.</p>
+            <p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и по всему миру. Доставка по России — от 300 ₽, по миру — от 500 ₽. Сроки: 3–14 дней в зависимости от региона.</p>
             <p style="margin-top: 16px; font-size: 0.9rem; color: #888;">По всем вопросам пишите в Telegram или VK — отвечаем в течение суток.</p>
         </div>
     </div>
@@ -852,7 +852,7 @@
             <p>💫 Декор для вашего кабинета, офиса, рабочего пространства, если ваши students отвлекаются и смотрят на часы с мыслью «сколько минут осталось до конца урока», или, если это вы сами…</p>
             <p>⭐️ Изделие из черного АБС пластика<br>
             ⭐️ Надежная упаковка (изделие доедет в целости и сохранности)<br>
-            ⭐️ Доставка по всей России (Почта России/СДЭК)</p>
+            ⭐️ Доставка по всей России (Почта России/СДЭК) и по всему миру</p>
             <p>🔎 На видео продемонстрировали набор – 28 см в высоту<br>
             15 наборов данного размера в наличии</p>
             <p>📌 Есть изготовление по индивидуальным параметрам (отправим простую инструкцию для замеров)</p>
@@ -872,7 +872,7 @@
             { id: 11, name: "Декор FOCUS", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "decor" }
         ];
 
-        // ВСЕ ТЕМЫ
+        // ВСЕ ТЕМЫ — «Другое» В САМОМ КОНЦЕ
         const allTopicsRaw = [
             { value: "alphabet", label: "🔤 Алфавит" },
             { value: "animals", label: "🐱 Животные" },
@@ -903,7 +903,8 @@
             { value: "toys", label: "🧸 Игрушки" },
             { value: "travel", label: "✈️ Путешествия" },
             { value: "weather", label: "☀️ Погода" },
-            { value: "weekdays", label: "📅 Дни недели" }
+            { value: "weekdays", label: "📅 Дни недели" },
+            { value: "other", label: "📌 Другое" }
         ];
         
         const allTopics = [...allTopicsRaw].sort((a, b) => a.label.localeCompare(b.label, 'ru'));

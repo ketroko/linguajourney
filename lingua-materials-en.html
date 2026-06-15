@@ -872,7 +872,7 @@
             { id: 11, name: "FOCUS Decor", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "decor" }
         ];
 
-        // ALL TOPICS (sorted alphabetically in English)
+        // ALL TOPICS — "Other" AT THE VERY END
         const allTopicsRaw = [
             { value: "alphabet", label: "🔤 Alphabet" },
             { value: "animals", label: "🐱 Animals" },
@@ -903,7 +903,8 @@
             { value: "toys", label: "🧸 Toys" },
             { value: "travel", label: "✈️ Travel" },
             { value: "weather", label: "☀️ Weather" },
-            { value: "weekdays", label: "📅 Days of the Week" }
+            { value: "weekdays", label: "📅 Days of the Week" },
+            { value: "other", label: "📌 Other" }
         ];
         
         const allTopics = [...allTopicsRaw].sort((a, b) => a.label.localeCompare(b.label, 'en'));
