@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ (как в предыдущем правильном варианте) */
         * {
             margin: 0;
             padding: 0;
@@ -370,14 +369,6 @@
             cursor: pointer;
             accent-color: #CC0000;
         }
-        .filter-checkbox.disabled {
-            color: #aaa;
-            cursor: not-allowed;
-        }
-        .filter-checkbox.disabled input {
-            cursor: not-allowed;
-            accent-color: #ccc;
-        }
         .topic-search {
             width: 100%;
             padding: 8px 12px;
@@ -407,27 +398,6 @@
         .topics-scroll::-webkit-scrollbar-thumb {
             background: #CC0000;
             border-radius: 4px;
-        }
-        .grammar-subtopics {
-            margin-left: 28px;
-            margin-top: 8px;
-            margin-bottom: 12px;
-            padding-left: 12px;
-            border-left: 2px solid #CC0000;
-        }
-        .grammar-subtopic-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        .grammar-subtopic-checkbox input {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-            accent-color: #CC0000;
         }
         .filter-reset {
             align-self: flex-end;
@@ -679,422 +649,174 @@
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<div class="back-home" onclick="window.location.href='index.html'">
-    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6" /></svg>
-</div>
-
-<div class="language-switch">
-    <a href="lingua-materials.html" class="active">RU</a> | <a href="lingua-materials-en.html">EN</a>
-</div>
-
-<div class="dialog-icon">
-    <img src="images/operator-photo.jpeg" alt="Диалог" class="main-icon">
-    <div class="dialog-social">
-        <a href="https://t.me/linguamaterials" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
-        <a href="https://vk.com/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
-    </div>
-</div>
-
-<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
-    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" /></svg>
-</button>
+<div class="back-home" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6" /></svg></div>
+<div class="language-switch"><a href="lingua-materials.html" class="active">RU</a> | <a href="lingua-materials-en.html">EN</a></div>
+<div class="dialog-icon"><img src="images/operator-photo.jpeg" alt="Диалог" class="main-icon"><div class="dialog-social"><a href="https://t.me/linguamaterials" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a><a href="https://vk.com/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a></div></div>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх"><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" /></svg></button>
 
 <!-- Первый экран -->
-<div class="first-screen">
-    <div class="first-screen-bg"></div>
-    <div class="container first-screen-container">
-        <div class="first-screen-text">
-            <h1>🎓 Lingua Materials</h1>
-            <p style="font-size: 1.2rem; margin: 20px 0;">Готовые разработки для преподавателей английского. Экономьте часы подготовки — скачивайте и проводите уроки с удовольствием.</p>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                <a href="#free" class="btn-white">Бесплатные материалы →</a>
-                <a href="#products" class="btn-red">Платные разработки →</a>
-            </div>
-        </div>
-        <div class="first-screen-image">
-            <img src="images/books-stack.jpeg" alt="Книги и материалы">
-        </div>
-    </div>
-</div>
+<div class="first-screen"><div class="first-screen-bg"></div><div class="container first-screen-container"><div class="first-screen-text"><h1>🎓 Lingua Materials</h1><p style="font-size: 1.2rem; margin: 20px 0;">Готовые разработки для преподавателей английского. Экономьте часы подготовки — скачивайте и проводите уроки с удовольствием.</p><div style="display: flex; gap: 16px; flex-wrap: wrap;"><a href="#free" class="btn-white">Бесплатные материалы →</a><a href="#products" class="btn-red">Платные разработки →</a></div></div><div class="first-screen-image"><img src="images/books-stack.jpeg" alt="Книги и материалы"></div></div></div>
 
-<!-- Прогрев: преимущества -->
-<section style="background: white;">
-    <div class="container">
-        <h2>Почему преподаватели выбирают Lingua Materials</h2>
-        <div class="benefits-grid">
-            <div class="benefit-card"><span class="emoji">⏱️</span><strong>Экономия времени</strong><p>Готовые уроки — не нужно придумывать с нуля</p></div>
-            <div class="benefit-card"><span class="emoji">📚</span><strong>Проверено на практике</strong><p>Материалы протестированы на реальных уроках</p></div>
-            <div class="benefit-card"><span class="emoji">🎨</span><strong>Красивый дизайн</strong><p>Дети и взрослые занимаются с удовольствием</p></div>
-            <div class="benefit-card"><span class="emoji">🔄</span><strong>Регулярные обновления</strong><p>Новые материалы каждую неделю</p></div>
-        </div>
-    </div>
-</section>
+<!-- Прогрев -->
+<section style="background: white;"><div class="container"><h2>Почему преподаватели выбирают Lingua Materials</h2><div class="benefits-grid"><div class="benefit-card"><span class="emoji">⏱️</span><strong>Экономия времени</strong><p>Готовые уроки — не нужно придумывать с нуля</p></div><div class="benefit-card"><span class="emoji">📚</span><strong>Проверено на практике</strong><p>Материалы протестированы на реальных уроках</p></div><div class="benefit-card"><span class="emoji">🎨</span><strong>Красивый дизайн</strong><p>Дети и взрослые занимаются с удовольствием</p></div><div class="benefit-card"><span class="emoji">🔄</span><strong>Регулярные обновления</strong><p>Новые материалы каждую неделю</p></div></div></div></section>
 
 <!-- Бесплатные материалы -->
-<section id="free" style="background: #FEF9E6;">
-    <div class="container">
-        <h2>📥 Бесплатные материалы</h2>
-        <p style="text-align: center; margin-bottom: 20px;">Присоединяйтесь к сообществу — получайте готовые разработки бесплатно</p>
-        <div class="links-grid">
-            <a href="https://t.me/linguamaterials" target="_blank" class="link-card">
-                <img src="images/tg-icon.png" alt="Telegram" class="icon-img" style="width: 60px; height: 60px;">
-                <h3>Telegram-канал</h3>
-                <p>500+ бесплатных файлов: рабочие листы, карточки, презентации</p>
-                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span>
-            </a>
-            <a href="https://vk.com/linguamaterials" target="_blank" class="link-card">
-                <img src="images/vk-icon.png" alt="VK" class="icon-img" style="width: 60px; height: 60px;">
-                <h3>Группа ВКонтакте</h3>
-                <p>Обсуждения, анонсы, эксклюзивные материалы для подписчиков</p>
-                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span>
-            </a>
-        </div>
-    </div>
-</section>
+<section id="free" style="background: #FEF9E6;"><div class="container"><h2>📥 Бесплатные материалы</h2><p style="text-align: center; margin-bottom: 20px;">Присоединяйтесь к сообществу — получайте готовые разработки бесплатно</p><div class="links-grid"><a href="https://t.me/linguamaterials" target="_blank" class="link-card"><img src="images/tg-icon.png" alt="Telegram" class="icon-img" style="width: 60px; height: 60px;"><h3>Telegram-канал</h3><p>500+ бесплатных файлов: рабочие листы, карточки, презентации</p><span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span></a><a href="https://vk.com/linguamaterials" target="_blank" class="link-card"><img src="images/vk-icon.png" alt="VK" class="icon-img" style="width: 60px; height: 60px;"><h3>Группа ВКонтакте</h3><p>Обсуждения, анонсы, эксклюзивные материалы для подписчиков</p><span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span></a></div></div></section>
 
 <!-- Каталог материалов -->
-<section id="products" style="background: white;">
-    <div class="container">
-        <h2>📂 Каталог материалов</h2>
-        <p style="text-align: center; margin-bottom: 30px;">Выберите формат, возраст, уровень и тему — мы покажем подходящие товары</p>
-        
-        <div class="filters-container">
-            <div class="filter-group">
-                <div class="filter-title">📌 Формат</div>
-                <label class="filter-checkbox"><input type="checkbox" value="online" class="filter-format"> Онлайн занятия</label>
-                <label class="filter-checkbox"><input type="checkbox" value="offline" class="filter-format"> Офлайн занятия</label>
-                <label class="filter-checkbox"><input type="checkbox" value="cabin" class="filter-format"> Кабинет</label>
-            </div>
-            <div class="filter-group">
-                <div class="filter-title">👥 Возраст</div>
-                <label class="filter-checkbox"><input type="checkbox" value="toddlers" class="filter-age"> Малыши</label>
-                <label class="filter-checkbox"><input type="checkbox" value="kids" class="filter-age"> Дошкольники</label>
-                <label class="filter-checkbox"><input type="checkbox" value="teens" class="filter-age"> Школьники</label>
-                <label class="filter-checkbox"><input type="checkbox" value="adults" class="filter-age"> Взрослые</label>
-            </div>
-            <div class="filter-group">
-                <div class="filter-title">📊 Уровень</div>
-                <label class="filter-checkbox"><input type="checkbox" value="starter" class="filter-level"> Starter</label>
-                <label class="filter-checkbox"><input type="checkbox" value="a1" class="filter-level"> A1</label>
-                <label class="filter-checkbox"><input type="checkbox" value="a2" class="filter-level"> A2</label>
-                <label class="filter-checkbox"><input type="checkbox" value="b1" class="filter-level"> B1</label>
-                <label class="filter-checkbox"><input type="checkbox" value="b2" class="filter-level"> B2</label>
-            </div>
-            <div class="filter-group">
-                <div class="filter-title">📖 Тема</div>
-                <input type="text" id="topicSearch" class="topic-search" placeholder="🔍 Поиск темы...">
-                <div id="topicsContainer" class="topics-scroll"></div>
-            </div>
-            <button class="btn-red filter-reset">Сбросить все фильтры</button>
-        </div>
-
-        <div class="filter-products-grid" id="filteredProductsGrid"></div>
-    </div>
-</section>
+<section id="products" style="background: white;"><div class="container"><h2>📂 Каталог материалов</h2><p style="text-align: center; margin-bottom: 30px;">Выберите формат, возраст, уровень и тему — мы покажем подходящие товары</p><div class="filters-container"><div class="filter-group"><div class="filter-title">📌 Формат</div><label class="filter-checkbox"><input type="checkbox" value="online" class="filter-format"> Онлайн занятия</label><label class="filter-checkbox"><input type="checkbox" value="offline" class="filter-format"> Офлайн занятия</label><label class="filter-checkbox"><input type="checkbox" value="cabin" class="filter-format"> Кабинет</label></div><div class="filter-group"><div class="filter-title">👥 Возраст</div><label class="filter-checkbox"><input type="checkbox" value="toddlers" class="filter-age"> Малыши</label><label class="filter-checkbox"><input type="checkbox" value="kids" class="filter-age"> Дошкольники</label><label class="filter-checkbox"><input type="checkbox" value="teens" class="filter-age"> Школьники</label><label class="filter-checkbox"><input type="checkbox" value="adults" class="filter-age"> Взрослые</label></div><div class="filter-group"><div class="filter-title">📊 Уровень</div><label class="filter-checkbox"><input type="checkbox" value="starter" class="filter-level"> Starter</label><label class="filter-checkbox"><input type="checkbox" value="a1" class="filter-level"> A1</label><label class="filter-checkbox"><input type="checkbox" value="a2" class="filter-level"> A2</label><label class="filter-checkbox"><input type="checkbox" value="b1" class="filter-level"> B1</label><label class="filter-checkbox"><input type="checkbox" value="b2" class="filter-level"> B2</label></div><div class="filter-group"><div class="filter-title">📖 Тема</div><input type="text" id="topicSearch" class="topic-search" placeholder="🔍 Поиск темы..."><div id="topicsContainer" class="topics-scroll"></div></div><button class="btn-red filter-reset">Сбросить все фильтры</button></div><div class="filter-products-grid" id="filteredProductsGrid"></div></div></section>
 
 <!-- Доставка -->
-<section style="background: #FEF9E6;">
-    <div class="container">
-        <div class="delivery-block">
-            <h2 style="margin-bottom: 16px;">🚚 Доставка</h2>
-            <p><strong>Электронные товары (PDF, ZIP, DOC)</strong> — скачиваются сразу после оплаты. Ссылка придёт на вашу почту.</p>
-            <p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и всему миру. Доставка по России — от 300 ₽, по миру — от 500 ₽. Сроки: 3–14 дней в зависимости от региона.</p>
-            <p style="margin-top: 16px; font-size: 0.9rem; color: #888;">По всем вопросам пишите в Telegram или VK — отвечаем в течение суток.</p>
-        </div>
-    </div>
-</section>
+<section style="background: #FEF9E6;"><div class="container"><div class="delivery-block"><h2 style="margin-bottom: 16px;">🚚 Доставка</h2><p><strong>Электронные товары (PDF, ZIP, DOC)</strong> — скачиваются сразу после оплаты. Ссылка придёт на вашу почту.</p><p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и всему миру. Доставка по России — от 300 ₽, по миру — от 500 ₽. Сроки: 3–14 дней в зависимости от региона.</p><p style="margin-top: 16px; font-size: 0.9rem; color: #888;">По всем вопросам пишите в Telegram или VK — отвечаем в течение суток.</p></div></div></section>
 
 <!-- Футер -->
-<div class="footer-section">
-    <div class="footer-bg"></div>
-    <div class="container" style="padding: 36px 0; text-align: center;">
-        <div class="footer-social-title">Мы в социальных сетях:</div>
-        <div class="social-icons">
-            <a href="https://vk.com/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
-            <a href="https://t.me/linguamaterials" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
-            <a href="https://www.instagram.com/linguajourney_ru" target="_blank" class="insta-with-star"><img src="images/inst-icon.png" alt="Instagram"><span class="star">*</span></a>
-            <a href="https://rutube.ru/channel/74778279/" target="_blank"><img src="images/rutube-icon.png" alt="RUTUBE"></a>
-            <a href="https://dzen.ru/linguamaterials" target="_blank"><img src="images/dzen-icon.png" alt="Дзен"></a>
-        </div>
-        <div class="social-warning">*Instagram и Meta (Facebook) признаны экстремистскими организациями и запрещены на территории РФ</div>
-        <p>© 2026 Lingua Journey — академия системного билингвального обучения</p>
-    </div>
-</div>
+<div class="footer-section"><div class="footer-bg"></div><div class="container" style="padding: 36px 0; text-align: center;"><div class="footer-social-title">Мы в социальных сетях:</div><div class="social-icons"><a href="https://vk.com/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a><a href="https://t.me/linguamaterials" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a><a href="https://www.instagram.com/linguajourney_ru" target="_blank" class="insta-with-star"><img src="images/inst-icon.png" alt="Instagram"><span class="star">*</span></a><a href="https://rutube.ru/channel/74778279/" target="_blank"><img src="images/rutube-icon.png" alt="RUTUBE"></a><a href="https://dzen.ru/linguamaterials" target="_blank"><img src="images/dzen-icon.png" alt="Дзен"></a></div><div class="social-warning">*Instagram и Meta (Facebook) признаны экстремистскими организациями и запрещены на территории РФ</div><p>© 2026 Lingua Journey — академия системного билингвального обучения</p></div></div>
 
-<!-- Модальное окно для заказа (ВК и Telegram) -->
-<div id="orderModal" class="modal">
-    <div class="modal-content" style="max-width: 500px;">
-        <span class="close-modal" onclick="closeOrderModal()">&times;</span>
-        <h3 id="orderProductTitle">Оформление заказа</h3>
-        <div class="order-buttons">
-            <a href="#" id="orderVkLink" target="_blank" class="btn-red" style="background: #4c75a3;">Во ВКонтакте</a>
-            <a href="#" id="orderTgLink" target="_blank" class="btn-red" style="background: #0088cc;">В Telegram</a>
-        </div>
-    </div>
-</div>
+<!-- Модалка заказа -->
+<div id="orderModal" class="modal"><div class="modal-content" style="max-width: 500px;"><span class="close-modal" onclick="closeOrderModal()">&times;</span><h3 id="orderProductTitle">Оформление заказа</h3><div class="order-buttons"><a href="#" id="orderVkLink" target="_blank" class="btn-red" style="background: #4c75a3;">Во ВКонтакте</a><a href="#" id="orderTgLink" target="_blank" class="btn-red" style="background: #0088cc;">В Telegram</a></div></div></div>
 
-<!-- Модальное окно для FOCUS -->
-<div id="focusModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeFocusModal()">&times;</span>
-        <h3>🎯 Декор FOCUS</h3>
-        <!-- Слайдер: видео Rutube + 2 фото -->
-        <div class="focus-slider-container">
-            <div class="focus-slider-track">
-                <div class="focus-slide">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                        <iframe src="https://rutube.ru/embed/dadaadbd3423aa06e88c560d76415c22/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 24px;"></iframe>
-                    </div>
-                </div>
-                <div class="focus-slide">
-                    <img src="images/focus-photo-1.jpg" alt="Фото FOCUS 1" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+1'">
-                </div>
-                <div class="focus-slide">
-                    <img src="images/focus-photo-2.jpg" alt="Фото FOCUS 2" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+2'">
-                </div>
-            </div>
-            <button class="focus-slider-prev">‹</button>
-            <button class="focus-slider-next">›</button>
-        </div>
-        <!-- Описание товара -->
-        <div style="text-align: left;">
-            <p><strong>Декор для тех, кому нужны FOCUSED STUDENTS</strong></p>
-            <p>💫 Декор для вашего кабинета, офиса, рабочего пространства, если ваши students отвлекаются и смотрят на часы с мыслью «сколько минут осталось до конца урока», или, если это вы сами…</p>
-            <p>⭐️ Изделие из черного АБС пластика<br>
-            ⭐️ Надежная упаковка (изделие доедет в целости и сохранности)<br>
-            ⭐️ Доставка по всей России (Почта России/СДЭК)</p>
-            <p>🔎 На видео продемонстрировали набор – 28 см в высоту<br>
-            15 наборов данного размера в наличии</p>
-            <p>📌 Есть изготовление по индивидуальным параметрам (отправим простую инструкцию для замеров)</p>
-            <p>💫 Стоимость изделий по желаемым параметрам рассчитывается индивидуально (писать в <a href="https://vk.com/linguajourney_workshop" target="_blank" class="btn-red" style="display: inline-block; padding: 6px 16px; font-size: 0.9rem;">Мастерскую LinguaJourney</a> или на почту <a href="mailto:linguamaterials@yandex.ru">linguamaterials@yandex.ru</a>)</p>
-            <p style="font-size: 0.8rem; color: #888;">*часы не входят в комплект</p>
-        </div>
-        <div class="order-buttons">
-            <button class="btn-red" onclick="openOrderFromFocus()">Оформить заказ</button>
-        </div>
-    </div>
-</div>
+<!-- Модалка FOCUS -->
+<div id="focusModal" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeFocusModal()">&times;</span><h3>🎯 Декор FOCUS</h3><div class="focus-slider-container"><div class="focus-slider-track"><div class="focus-slide"><div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://rutube.ru/embed/dadaadbd3423aa06e88c560d76415c22/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 24px;"></iframe></div></div><div class="focus-slide"><img src="images/focus-photo-1.jpg" alt="Фото FOCUS 1" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+1'"></div><div class="focus-slide"><img src="images/focus-photo-2.jpg" alt="Фото FOCUS 2" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+2'"></div></div><button class="focus-slider-prev">‹</button><button class="focus-slider-next">›</button></div><div style="text-align: left;"><p><strong>Декор для тех, кому нужны FOCUSED STUDENTS</strong></p><p>💫 Декор для вашего кабинета, офиса, рабочего пространства, если ваши students отвлекаются и смотрят на часы с мыслью «сколько минут осталось до конца урока», или, если это вы сами…</p><p>⭐️ Изделие из черного АБС пластика<br>⭐️ Надежная упаковка (изделие доедет в целости и сохранности)<br>⭐️ Доставка по всей России (Почта России/СДЭК)</p><p>🔎 На видео продемонстрировали набор – 28 см в высоту<br>15 наборов данного размера в наличии</p><p>📌 Есть изготовление по индивидуальным параметрам (отправим простую инструкцию для замеров)</p><p>💫 Стоимость изделий по желаемым параметрам рассчитывается индивидуально (писать в <a href="https://vk.com/linguajourney_workshop" target="_blank" class="btn-red" style="display: inline-block; padding: 6px 16px; font-size: 0.9rem;">Мастерскую LinguaJourney</a> или на почту <a href="mailto:linguamaterials@yandex.ru">linguamaterials@yandex.ru</a>)</p><p style="font-size: 0.8rem; color: #888;">*часы не входят в комплект</p></div><div class="order-buttons"><button class="btn-red" onclick="openOrderFromFocus()">Оформить заказ</button></div></div></div>
 
 <script>
-    // БАЗА ТОВАРОВ - ТОЛЬКО ДЕКОР FOCUS, без возраста и уровня
-    const catalogProducts = [
-        { id: 11, name: "Декор FOCUS", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "decor" }
+    // ========== ДАННЫЕ ==========
+    const products = [
+        { id: 11, name: "Декор FOCUS", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "🖼️ Декор" }
     ];
 
-    // ВСЕ ТЕМЫ (БЕЗ СОРТИРОВКИ, ПОТОМ ОТСОРТИРУЕМ)
-    const allTopicsUnsorted = [
-        { value: "alphabet", label: "🔤 Алфавит" },
-        { value: "animals", label: "🐱 Животные" },
-        { value: "birthday", label: "🎂 День рождения" },
-        { value: "city", label: "🏙️ Улица/город" },
-        { value: "clothes", label: "👕 Одежда" },
-        { value: "colors", label: "🎨 Цвета" },
-        { value: "countries", label: "🌍 Страны и национальности" },
-        { value: "decor", label: "🖼️ Декор" },
-        { value: "facebody", label: "👤 Лицо и тело" },
-        { value: "family", label: "👨‍👩‍👧 Семья и друзья" },
-        { value: "fashion", label: "👗 Мода" },
-        { value: "food", label: "🍎 Еда" },
-        { value: "grammar", label: "📖 Грамматика" },
-        { value: "hobbies", label: "🎮 Хобби" },
-        { value: "holidays", label: "🎄 Праздники" },
-        { value: "house", label: "🏠 Дом" },
-        { value: "illnesses", label: "🤒 Болезни" },
-        { value: "numbers", label: "🔢 Цифры" },
-        { value: "ordinal", label: "🔢 Порядковые числительные" },
-        { value: "politics", label: "🏛️ Политика" },
-        { value: "professions", label: "👨‍⚕️ Профессии" },
-        { value: "pronouns", label: "📚 Местоимения" },
-        { value: "school", label: "🏫 Школа" },
-        { value: "seasons", label: "🍂 Времена года/месяцы" },
-        { value: "shopping", label: "🛍️ Покупки/шопинг" },
-        { value: "time", label: "⏰ Время" },
-        { value: "toys", label: "🧸 Игрушки" },
-        { value: "travel", label: "✈️ Путешествия" },
-        { value: "weather", label: "☀️ Погода" },
-        { value: "weekdays", label: "📅 Дни недели" }
-    ];
-    
-    // СОРТИРУЕМ ПО АЛФАВИТУ (по полю label, русский язык)
-    const allTopics = [...allTopicsUnsorted].sort((a, b) => a.label.localeCompare(b.label, 'ru'));
+    // Все темы (сортировка по алфавиту)
+    const allTopics = [
+        "🔤 Алфавит", "🤒 Болезни", "⏰ Время", "🍂 Времена года/месяцы", "📖 Грамматика",
+        "🖼️ Декор", "🎂 День рождения", "📅 Дни недели", "🏠 Дом", "🍎 Еда", "🐱 Животные", "🧸 Игрушки",
+        "👤 Лицо и тело", "📚 Местоимения", "👗 Мода", "👕 Одежда", "☀️ Погода", "🏛️ Политика",
+        "🛍️ Покупки/шопинг", "🔢 Порядковые числительные", "🎄 Праздники", "👨‍⚕️ Профессии",
+        "✈️ Путешествия", "👨‍👩‍👧 Семья и друзья", "🌍 Страны и национальности", "🏙️ Улица/город",
+        "🎮 Хобби", "🎨 Цвета", "🔢 Цифры", "🏫 Школа"
+    ].sort();
 
-    // Подтемы грамматики
-    const grammarSubtopics = [
-        "Артикли", "Вопросительные слова", "Герундий", "Глагол to be", "Have got/Has got",
-        "Исчисляемые/неисчисляемые", "Местоимения", "Модальные глаголы", "Множественное число",
-        "Неправильные глаголы", "Пассивный залог (passive voice)", "Порядковые числительные",
-        "Предлоги", "Present Simple", "Present Continuous", "Past Simple", "Past Continuous",
-        "Future Simple", "Comparative/Superlative", "There is/There are"
-    ];
+    // ========== DOM ЭЛЕМЕНТЫ ==========
+    const productsGrid = document.getElementById('filteredProductsGrid');
+    const topicsContainer = document.getElementById('topicsContainer');
 
-    // Функция для получения доступных тем (на основе выбранных фильтров)
-    // ВОЗРАСТ И УРОВЕНЬ НЕ ФИЛЬТРУЮТ ТОВАР, ПОЭТОМУ ОНИ НЕ ВЛИЯЮТ НА ДОСТУПНОСТЬ ТЕМ
-    function getAvailableTopics() {
-        const selectedFormats = Array.from(document.querySelectorAll('.filter-format:checked')).map(cb => cb.value);
-        
-        if (selectedFormats.length === 0) {
-            return allTopics.map(t => ({ ...t, available: true }));
-        }
-        
-        const available = new Set();
-        catalogProducts.forEach(product => {
-            if (selectedFormats.includes(product.format)) {
-                available.add(product.topic);
-            }
-        });
-        
-        return allTopics.map(topic => ({
-            ...topic,
-            available: available.has(topic.value)
-        }));
-    }
-
-    // Рендер тем
-    function renderTopics() {
-        const topicsContainer = document.getElementById('topicsContainer');
-        if (!topicsContainer) return;
-        
-        const availableTopics = getAvailableTopics();
-        const selectedTopics = Array.from(document.querySelectorAll('.filter-topic:checked')).map(cb => cb.value);
-        const searchTerm = document.getElementById('topicSearch')?.value.toLowerCase() || '';
-        
-        let filteredTopics = availableTopics;
-        if (searchTerm) {
-            filteredTopics = availableTopics.filter(t => t.label.toLowerCase().includes(searchTerm));
-        }
-        
-        topicsContainer.innerHTML = filteredTopics.map(topic => {
-            let html = `<div style="margin-bottom: 8px;">
-                <label class="filter-checkbox ${!topic.available ? 'disabled' : ''}" style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" value="${topic.value}" class="filter-topic" ${selectedTopics.includes(topic.value) && topic.available ? 'checked' : ''} ${!topic.available ? 'disabled' : ''}>
-                    ${topic.label}
-                </label>`;
-            
-            // Если тема "Грамматика" и она выбрана — показываем подтемы
-            if (topic.value === 'grammar' && selectedTopics.includes('grammar')) {
-                html += `<div class="grammar-subtopics">`;
-                grammarSubtopics.forEach(subtopic => {
-                    html += `<label class="grammar-subtopic-checkbox">
-                        <input type="checkbox" value="${subtopic}" class="filter-grammar-subtopic" data-parent="grammar">
-                        ${subtopic}
-                    </label>`;
-                });
-                html += `</div>`;
-            }
-            html += `</div>`;
-            return html;
-        }).join('');
-        
-        document.querySelectorAll('.filter-topic:not([disabled])').forEach(cb => {
-            cb.removeEventListener('change', handleTopicChange);
-            cb.addEventListener('change', handleTopicChange);
-        });
-        
-        document.querySelectorAll('.filter-grammar-subtopic').forEach(cb => {
-            cb.removeEventListener('change', handleGrammarSubtopicChange);
-            cb.addEventListener('change', handleGrammarSubtopicChange);
-        });
-    }
-    
-    function handleTopicChange() {
-        renderTopics();
-        renderFilteredProducts();
-    }
-    
-    function handleGrammarSubtopicChange() {
-        renderFilteredProducts();
-    }
-    
-    // Рендер товаров — ВСЕГДА ПОКАЗЫВАЕТ ТОВАР, НЕЗАВИСИМО ОТ ФИЛЬТРОВ ВОЗРАСТА И УРОВНЯ
-    function renderFilteredProducts() {
+    // ========== РЕНДЕР ТОВАРОВ ==========
+    function renderProducts() {
         const selectedFormats = Array.from(document.querySelectorAll('.filter-format:checked')).map(cb => cb.value);
         const selectedTopics = Array.from(document.querySelectorAll('.filter-topic:checked')).map(cb => cb.value);
-        const selectedGrammarSubtopics = Array.from(document.querySelectorAll('.filter-grammar-subtopic:checked')).map(cb => cb.value);
         
-        let filtered = [...catalogProducts];
+        let filtered = [...products];
+        if (selectedFormats.length) filtered = filtered.filter(p => selectedFormats.includes(p.format));
+        if (selectedTopics.length) filtered = filtered.filter(p => selectedTopics.includes(p.topic));
         
-        // Фильтрация только по формату и теме (возраст и уровень НЕ влияют)
-        if (selectedFormats.length > 0) {
-            filtered = filtered.filter(p => selectedFormats.includes(p.format));
-        }
-        if (selectedTopics.length > 0) {
-            filtered = filtered.filter(p => selectedTopics.includes(p.topic));
-        }
-        
-        // Если выбрана грамматика и её подтемы — показываем товары с темой grammar
-        if (selectedGrammarSubtopics.length > 0 && selectedTopics.includes('grammar')) {
-            filtered = filtered.filter(p => p.topic === 'grammar');
-        }
-        
-        const grid = document.getElementById('filteredProductsGrid');
-        if (!grid) return;
-        
-        if (filtered.length === 0) {
-            grid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
+        if (!filtered.length) {
+            productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
             return;
         }
         
-        grid.innerHTML = filtered.map(p => {
-            // Теги: только формат и тема (никаких возраст/уровень)
+        productsGrid.innerHTML = filtered.map(p => {
             const formatLabel = p.format === 'online' ? '💻 Онлайн' : p.format === 'offline' ? '📚 Офлайн' : '🏫 Кабинет';
             return `
             <div class="filter-product-card">
                 <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x300?text=📚'">
                 <h3>${p.name}</h3>
-                <div class="tags">${formatLabel} | 🎨 Декор</div>
+                <div class="tags">${formatLabel} | ${p.topic}</div>
                 <div class="price"><span class="old-price">${p.oldPrice} ₽</span> ${p.price} ₽</div>
                 <a href="#" class="details-link" onclick="openFocusModal(); return false;">Подробнее</a><br>
                 <button class="btn-red" onclick="openOrderModal('${p.name}', ${p.price})">Оформить заказ</button>
             </div>
         `}).join('');
     }
+
+    // ========== РЕНДЕР ТЕМ ==========
+    function renderTopics() {
+        const selectedTopicsSet = new Set(Array.from(document.querySelectorAll('.filter-topic:checked')).map(cb => cb.value));
+        const searchTerm = document.getElementById('topicSearch')?.value.toLowerCase() || '';
+        
+        let filtered = allTopics;
+        if (searchTerm) filtered = allTopics.filter(t => t.toLowerCase().includes(searchTerm));
+        
+        topicsContainer.innerHTML = filtered.map(topic => `
+            <div style="margin-bottom: 8px;">
+                <label class="filter-checkbox" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" value="${topic}" class="filter-topic" ${selectedTopicsSet.has(topic) ? 'checked' : ''}>
+                    ${topic}
+                </label>
+            </div>
+        `).join('');
+        
+        // Перепривязываем события к новым чекбоксам
+        document.querySelectorAll('.filter-topic').forEach(cb => {
+            cb.removeEventListener('change', handleTopicChange);
+            cb.addEventListener('change', handleTopicChange);
+        });
+    }
     
-    // Сброс фильтров
-    function resetFilters() {
-        document.querySelectorAll('.filter-format, .filter-age, .filter-level, .filter-topic, .filter-grammar-subtopic').forEach(cb => cb.checked = false);
-        document.getElementById('topicSearch').value = '';
-        renderTopics();
-        renderFilteredProducts();
+    function handleTopicChange() {
+        renderProducts();
     }
     
     function handleFormatChange() {
-        renderTopics();
-        renderFilteredProducts();
+        renderProducts();
     }
     
-    function handleTopicSearch() {
+    function handleAgeLevelChange() {
+        // Возраст и уровень пока не влияют на товары, но оставляем задел
+        // Можно ничего не делать или добавить логику позже
+    }
+    
+    function handleTopicSearchInput() {
         renderTopics();
     }
     
-    function bindEvents() {
-        document.querySelectorAll('.filter-format').forEach(filter => {
-            filter.removeEventListener('change', handleFormatChange);
-            filter.addEventListener('change', handleFormatChange);
+    function resetAllFilters() {
+        document.querySelectorAll('.filter-format, .filter-age, .filter-level, .filter-topic').forEach(cb => cb.checked = false);
+        document.getElementById('topicSearch').value = '';
+        renderTopics();
+        renderProducts();
+    }
+    
+    // ========== ИНИЦИАЛИЗАЦИЯ ФИЛЬТРОВ ==========
+    function initFilters() {
+        // Форматы
+        document.querySelectorAll('.filter-format').forEach(cb => {
+            cb.removeEventListener('change', handleFormatChange);
+            cb.addEventListener('change', handleFormatChange);
         });
-        // Возраст и уровень НЕ ТРОГАЮТ товары, но я оставил их для возможного будущего использования
-        // Они не влияют на отображение товара
+        // Возраст и уровень (пока не фильтруют)
+        document.querySelectorAll('.filter-age, .filter-level').forEach(cb => {
+            cb.removeEventListener('change', handleAgeLevelChange);
+            cb.addEventListener('change', handleAgeLevelChange);
+        });
+        // Поиск по темам
         const searchInput = document.getElementById('topicSearch');
         if (searchInput) {
-            searchInput.removeEventListener('input', handleTopicSearch);
-            searchInput.addEventListener('input', handleTopicSearch);
+            searchInput.removeEventListener('input', handleTopicSearchInput);
+            searchInput.addEventListener('input', handleTopicSearchInput);
         }
+        // Кнопка сброса
+        const resetBtn = document.querySelector('.filter-reset');
+        if (resetBtn) {
+            resetBtn.removeEventListener('click', resetAllFilters);
+            resetBtn.addEventListener('click', resetAllFilters);
+        }
+        
+        renderTopics();
+        renderProducts();
     }
     
-    // Функция открытия модалки заказа
+    // ========== МОДАЛКИ ==========
     function openOrderModal(productName, price) {
         const modal = document.getElementById('orderModal');
         document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
         const message = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}" за ${price} ₽.`);
-        
-        // ПРАВИЛЬНЫЕ ССЫЛКИ:
-        // 1. Кнопка "Во ВКонтакте" → ЧАТ с сообществом linguamaterials
         document.getElementById('orderVkLink').href = `https://vk.me/linguamaterials?text=${message}`;
-        // 2. Кнопка "В Telegram" → чат с ketelina_lm
         document.getElementById('orderTgLink').href = `https://t.me/ketelina_lm?text=${message}`;
-        
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+    }
+    
+    function closeOrderModal() {
+        document.getElementById('orderModal').classList.remove('show');
+        document.body.style.overflow = '';
     }
     
     function openOrderFromFocus() {
@@ -1102,92 +824,90 @@
         openOrderModal("Декор FOCUS", 1490);
     }
     
-    function closeOrderModal() {
-        const modal = document.getElementById('orderModal');
-        modal.classList.remove('show');
-        document.body.style.overflow = '';
+    // Слайдер (инициализация один раз)
+    let focusSliderInitialized = false;
+    let focusSliderTrack = null;
+    let focusCurrentIndex = 0;
+    
+    function updateFocusSlider() {
+        if (!focusSliderTrack) return;
+        const slides = focusSliderTrack.children;
+        if (!slides.length) return;
+        const slideWidth = slides[0].clientWidth;
+        focusSliderTrack.style.transform = `translateX(-${focusCurrentIndex * slideWidth}px)`;
     }
     
-    // Функции для модалки FOCUS
-    let focusCurrentIndex = 0;
     function initFocusSlider() {
-        const track = document.querySelector('.focus-slider-track');
-        const slides = track ? track.children : [];
+        if (focusSliderInitialized) return;
+        focusSliderTrack = document.querySelector('.focus-slider-track');
+        if (!focusSliderTrack) return;
+        
+        const slides = focusSliderTrack.children;
         const prevBtn = document.querySelector('.focus-slider-prev');
         const nextBtn = document.querySelector('.focus-slider-next');
-        if (!track || slides.length === 0) return;
-        function updateSlide() {
-            const slideWidth = slides[0].clientWidth;
-            track.style.transform = `translateX(-${focusCurrentIndex * slideWidth}px)`;
+        if (!slides.length) return;
+        
+        if (prevBtn) {
+            prevBtn.onclick = () => {
+                focusCurrentIndex = (focusCurrentIndex - 1 + slides.length) % slides.length;
+                updateFocusSlider();
+            };
         }
-        if (prevBtn) prevBtn.onclick = () => { focusCurrentIndex = (focusCurrentIndex - 1 + slides.length) % slides.length; updateSlide(); };
-        if (nextBtn) nextBtn.onclick = () => { focusCurrentIndex = (focusCurrentIndex + 1) % slides.length; updateSlide(); };
-        window.addEventListener('resize', updateSlide);
-        setTimeout(updateSlide, 100);
+        if (nextBtn) {
+            nextBtn.onclick = () => {
+                focusCurrentIndex = (focusCurrentIndex + 1) % slides.length;
+                updateFocusSlider();
+            };
+        }
+        window.addEventListener('resize', () => setTimeout(updateFocusSlider, 100));
+        setTimeout(updateFocusSlider, 100);
+        focusSliderInitialized = true;
     }
     
     function openFocusModal() {
         const modal = document.getElementById('focusModal');
-        if (modal) {
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            setTimeout(initFocusSlider, 50);
-        }
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        initFocusSlider();
     }
     
     function closeFocusModal() {
         const modal = document.getElementById('focusModal');
-        if (modal) {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-            focusCurrentIndex = 0;
-            const track = document.querySelector('.focus-slider-track');
-            if (track) track.style.transform = 'translateX(0px)';
-        }
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+        focusCurrentIndex = 0;
+        if (focusSliderTrack) focusSliderTrack.style.transform = 'translateX(0px)';
     }
     
-    // Скролл-прогресс и кнопка наверх
+    // Закрытие по клику на фон
+    window.onclick = function(e) {
+        if (e.target === document.getElementById('orderModal')) closeOrderModal();
+        if (e.target === document.getElementById('focusModal')) closeFocusModal();
+    };
+    
+    // ========== СКРОЛЛ ПРОГРЕСС И КНОПКА НАВЕРХ ==========
     window.addEventListener('scroll', function() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+        const scrolled = height ? (winScroll / height) * 100 : 0;
         document.getElementById('scrollProgress').style.width = scrolled + '%';
         
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
-        if (window.scrollY > 600) scrollTopBtn.classList.add('show');
-        else scrollTopBtn.classList.remove('show');
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 600) btn.classList.add('show');
+        else btn.classList.remove('show');
     });
     
-    document.getElementById('scrollTopBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.getElementById('scrollTopBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     
-    window.onclick = function(event) {
-        const orderModal = document.getElementById('orderModal');
-        const focusModal = document.getElementById('focusModal');
-        if (event.target === orderModal) closeOrderModal();
-        if (event.target === focusModal) closeFocusModal();
-    };
+    // ========== СТАРТ ==========
+    document.addEventListener('DOMContentLoaded', initFilters);
     
-    document.addEventListener('DOMContentLoaded', () => {
-        renderTopics();
-        renderFilteredProducts();
-        bindEvents();
-        
-        const resetBtn = document.querySelector('.filter-reset');
-        if (resetBtn) {
-            resetBtn.addEventListener('click', resetFilters);
-        }
-    });
-    
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('scrollPosition', window.scrollY);
-    });
-    
+    // Экспорт в глобалку для onclick в HTML
     window.openOrderModal = openOrderModal;
     window.closeOrderModal = closeOrderModal;
     window.openFocusModal = openFocusModal;
     window.closeFocusModal = closeFocusModal;
     window.openOrderFromFocus = openOrderFromFocus;
 </script>
-
 </body>
 </html>
