@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ (как в предыдущем полном коде) */
         * {
             margin: 0;
             padding: 0;
@@ -256,7 +255,6 @@
         .first-screen-image img {
             width: 100%;
             border-radius: 32px;
-            border: 2px solid white;
         }
         .btn-white {
             display: inline-block;
@@ -680,11 +678,12 @@
     <a href="lingua-materials.html" class="active">RU</a> | <a href="lingua-materials-en.html">EN</a>
 </div>
 
+<!-- ИКОНКА В ПРАВОМ ВЕРХНЕМ УГЛУ -->
 <div class="dialog-icon">
-    <img src="images/operator-photo.jpeg" alt="Диалог" class="main-icon">
+    <img src="images/dialog-icon-photo.jpg" alt="Диалог" class="main-icon" onerror="this.src='https://via.placeholder.com/48x48?text=📞'">
     <div class="dialog-social">
-        <a href="https://t.me/linguamaterials" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
-        <a href="https://vk.com/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
+        <a href="https://t.me/ketelina_lm" target="_blank"><img src="images/tg-icon.png" alt="Telegram"></a>
+        <a href="https://vk.me/linguamaterials" target="_blank"><img src="images/vk-icon.png" alt="VK"></a>
     </div>
 </div>
 
@@ -692,7 +691,7 @@
     <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" /></svg>
 </button>
 
-<!-- Первый экран -->
+<!-- ПЕРВЫЙ ЭКРАН -->
 <div class="first-screen">
     <div class="first-screen-bg"></div>
     <div class="container first-screen-container">
@@ -705,12 +704,12 @@
             </div>
         </div>
         <div class="first-screen-image">
-            <img src="images/books-stack.jpeg" alt="Книги и материалы">
+            <img src="images/books-stack-2.png" alt="Книги и материалы">
         </div>
     </div>
 </div>
 
-<!-- Прогрев: преимущества -->
+<!-- ПРОГРЕВ: ПРЕИМУЩЕСТВА -->
 <section style="background: white;">
     <div class="container">
         <h2>Почему преподаватели выбирают Lingua Materials</h2>
@@ -723,7 +722,7 @@
     </div>
 </section>
 
-<!-- Бесплатные материалы -->
+<!-- БЕСПЛАТНЫЕ МАТЕРИАЛЫ -->
 <section id="free" style="background: #FEF9E6;">
     <div class="container">
         <h2>📥 Бесплатные материалы</h2>
@@ -745,7 +744,7 @@
     </div>
 </section>
 
-<!-- Каталог материалов -->
+<!-- КАТАЛОГ МАТЕРИАЛОВ -->
 <section id="products" style="background: white;">
     <div class="container">
         <h2>📂 Каталог материалов</h2>
@@ -785,7 +784,7 @@
     </div>
 </section>
 
-<!-- Доставка -->
+<!-- ДОСТАВКА -->
 <section style="background: #FEF9E6;">
     <div class="container">
         <div class="delivery-block">
@@ -797,7 +796,7 @@
     </div>
 </section>
 
-<!-- Футер -->
+<!-- ФУТЕР -->
 <div class="footer-section">
     <div class="footer-bg"></div>
     <div class="container" style="padding: 36px 0; text-align: center;">
@@ -814,7 +813,7 @@
     </div>
 </div>
 
-<!-- Модальное окно для заказа (ВК и Telegram) -->
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ЗАКАЗА -->
 <div id="orderModal" class="modal">
     <div class="modal-content" style="max-width: 500px;">
         <span class="close-modal" onclick="closeOrderModal()">&times;</span>
@@ -826,7 +825,7 @@
     </div>
 </div>
 
-<!-- Модальное окно для FOCUS -->
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ FOCUS -->
 <div id="focusModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeFocusModal()">&times;</span>
@@ -868,7 +867,7 @@
 
 <script>
     (function() {
-        // ---------- ТОВАРЫ ----------
+        // ТОВАРЫ
         const catalogProducts = [
             { id: 11, name: "Декор FOCUS", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "decor" }
         ];
@@ -907,10 +906,8 @@
             { value: "weekdays", label: "📅 Дни недели" }
         ];
         
-        // СОРТИРУЕМ ПО АЛФАВИТУ
         const allTopics = [...allTopicsRaw].sort((a, b) => a.label.localeCompare(b.label, 'ru'));
 
-        // Подтемы грамматики
         const grammarSubtopics = [
             "Артикли", "Вопросительные слова", "Герундий", "Глагол to be", "Have got/Has got",
             "Исчисляемые/неисчисляемые", "Местоимения", "Модальные глаголы", "Множественное число",
@@ -919,23 +916,18 @@
             "Future Simple", "Comparative/Superlative", "There is/There are"
         ];
 
-        // DOM-элементы
         let topicsContainer, productsGrid, resetBtn, topicSearch;
         let formatCheckboxes = [], ageCheckboxes = [], levelCheckboxes = [];
-        
-        // Текущие фильтры
         let currentFormatFilters = [];
         let currentAgeFilters = [];
         let currentLevelFilters = [];
         let currentTopicFilters = [];
         let currentGrammarSubtopics = [];
 
-        // Функция получения доступных тем
         function getAvailableTopics() {
             if (currentFormatFilters.length === 0 && currentAgeFilters.length === 0 && currentLevelFilters.length === 0) {
                 return allTopics.map(t => ({ ...t, available: true }));
             }
-            
             const available = new Set();
             catalogProducts.forEach(product => {
                 let match = true;
@@ -944,14 +936,9 @@
                 if (currentLevelFilters.length > 0 && !currentLevelFilters.includes(product.level)) match = false;
                 if (match) available.add(product.topic);
             });
-            
-            return allTopics.map(topic => ({
-                ...topic,
-                available: available.has(topic.value)
-            }));
+            return allTopics.map(topic => ({ ...topic, available: available.has(topic.value) }));
         }
 
-        // Рендер списка тем
         function renderTopicsList() {
             if (!topicsContainer) return;
             const availableTopics = getAvailableTopics();
@@ -960,16 +947,13 @@
             if (searchTerm) {
                 filteredTopics = availableTopics.filter(t => t.label.toLowerCase().includes(searchTerm));
             }
-            
             topicsContainer.innerHTML = filteredTopics.map(topic => {
                 const isChecked = currentTopicFilters.includes(topic.value);
                 const isAvailable = topic.available;
-                const disabledClass = !isAvailable ? 'disabled' : '';
-                const disabledAttr = !isAvailable ? 'disabled' : '';
                 return `
                     <div style="margin-bottom: 8px;">
-                        <label class="filter-checkbox ${disabledClass}" style="display: flex; align-items: center; gap: 8px; ${!isAvailable ? 'opacity:0.6; cursor:not-allowed;' : 'cursor:pointer;'}">
-                            <input type="checkbox" value="${topic.value}" class="filter-topic" ${isChecked && isAvailable ? 'checked' : ''} ${disabledAttr}>
+                        <label class="filter-checkbox ${!isAvailable ? 'disabled' : ''}" style="display: flex; align-items: center; gap: 8px; ${!isAvailable ? 'opacity:0.6; cursor:not-allowed;' : 'cursor:pointer;'}">
+                            <input type="checkbox" value="${topic.value}" class="filter-topic" ${isChecked && isAvailable ? 'checked' : ''} ${!isAvailable ? 'disabled' : ''}>
                             ${topic.label}
                         </label>
                         ${topic.value === 'grammar' && isChecked ? `
@@ -990,7 +974,6 @@
                 cb.removeEventListener('change', handleTopicCheckboxChange);
                 cb.addEventListener('change', handleTopicCheckboxChange);
             });
-            
             document.querySelectorAll('.filter-grammar-subtopic').forEach(cb => {
                 cb.removeEventListener('change', handleGrammarSubtopicChange);
                 cb.addEventListener('change', handleGrammarSubtopicChange);
@@ -1052,58 +1035,34 @@
             renderProducts();
         }
         
-        // Рендер товаров — ТЕПЕРЬ С ТЕГОМ "ДЕКОР"
         function renderProducts() {
             if (!productsGrid) return;
-            
             let filtered = [...catalogProducts];
-            
-            if (currentFormatFilters.length > 0) {
-                filtered = filtered.filter(p => currentFormatFilters.includes(p.format));
-            }
-            if (currentAgeFilters.length > 0) {
-                filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
-            }
-            if (currentLevelFilters.length > 0) {
-                filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
-            }
-            if (currentTopicFilters.length > 0) {
-                filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
-            }
+            if (currentFormatFilters.length > 0) filtered = filtered.filter(p => currentFormatFilters.includes(p.format));
+            if (currentAgeFilters.length > 0) filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
+            if (currentLevelFilters.length > 0) filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
+            if (currentTopicFilters.length > 0) filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
             if (currentGrammarSubtopics.length > 0 && currentTopicFilters.includes('grammar')) {
                 filtered = filtered.filter(p => p.topic === 'grammar');
             }
-            
             if (filtered.length === 0) {
                 productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
                 return;
             }
-            
             productsGrid.innerHTML = filtered.map(p => {
-                // Собираем ТОЛЬКО те теги, которые есть у товара
                 const tags = [];
-                
-                // Формат
                 if (p.format === 'online') tags.push('💻 Онлайн');
                 else if (p.format === 'offline') tags.push('📚 Офлайн');
                 else if (p.format === 'cabin') tags.push('🏫 Кабинет');
-                
-                // Возраст (если есть)
                 if (p.age === 'toddlers') tags.push('Малыши');
                 else if (p.age === 'kids') tags.push('Дошкольники');
                 else if (p.age === 'teens') tags.push('Школьники');
                 else if (p.age === 'adults') tags.push('Взрослые');
-                
-                // Уровень (если есть)
                 if (p.level) tags.push(p.level.toUpperCase());
-                
-                // ТЕМА (ДЕКОР) — ВОТ ОНА, ЕБАНАЯ!
                 if (p.topic === 'decor') tags.push('🎨 Декор');
                 else if (p.topic === 'grammar') tags.push('📖 Грамматика');
                 else if (p.topic === 'food') tags.push('🍎 Еда');
-                
                 const tagsString = tags.join(' | ');
-                
                 return `
                     <div class="filter-product-card">
                         <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x300?text=📚'">
@@ -1123,12 +1082,10 @@
             currentLevelFilters = [];
             currentTopicFilters = [];
             currentGrammarSubtopics = [];
-            
             if (formatCheckboxes.length) formatCheckboxes.forEach(cb => cb.checked = false);
             if (ageCheckboxes.length) ageCheckboxes.forEach(cb => cb.checked = false);
             if (levelCheckboxes.length) levelCheckboxes.forEach(cb => cb.checked = false);
             if (topicSearch) topicSearch.value = '';
-            
             renderTopicsList();
             renderProducts();
         }
@@ -1137,17 +1094,14 @@
             renderTopicsList();
         }
         
-        // ИНИЦИАЛИЗАЦИЯ
         document.addEventListener('DOMContentLoaded', () => {
             topicsContainer = document.getElementById('topicsContainer');
             productsGrid = document.getElementById('filteredProductsGrid');
             resetBtn = document.querySelector('.filter-reset');
             topicSearch = document.getElementById('topicSearch');
-            
             formatCheckboxes = document.querySelectorAll('.filter-format');
             ageCheckboxes = document.querySelectorAll('.filter-age');
             levelCheckboxes = document.querySelectorAll('.filter-level');
-            
             if (formatCheckboxes.length) {
                 formatCheckboxes.forEach(cb => {
                     cb.removeEventListener('change', handleFormatCheckboxChange);
@@ -1174,7 +1128,6 @@
                 topicSearch.removeEventListener('input', handleTopicSearchInput);
                 topicSearch.addEventListener('input', handleTopicSearchInput);
             }
-            
             renderTopicsList();
             renderProducts();
         });
@@ -1248,14 +1201,12 @@
     window.closeFocusModal = closeFocusModal;
     window.openOrderFromFocus = openOrderFromFocus;
     
-    // Скролл
     window.addEventListener('scroll', function() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         const progressBar = document.getElementById('scrollProgress');
         if (progressBar) progressBar.style.width = scrolled + '%';
-        
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         if (scrollTopBtn) {
             if (window.scrollY > 600) scrollTopBtn.classList.add('show');
