@@ -709,6 +709,27 @@
             margin-top: 12px;
             margin-bottom: 16px;
         }
+        .payment-modal-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .payment-modal-text .code-word {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #E67E22;
+            letter-spacing: 2px;
+            display: block;
+            margin: 8px 0;
+        }
+        .order-modal-text {
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 16px 0 8px;
+            color: #2c3e50;
+        }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.5rem; }
@@ -729,6 +750,12 @@
             }
             .or-text {
                 margin: 8px 0;
+            }
+            .payment-modal-text {
+                font-size: 1rem;
+            }
+            .payment-modal-text .code-word {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -797,10 +824,14 @@
 <section style="background: white;">
     <div class="container">
         <h2>🎥 О Baby Journey</h2>
+        <!-- ВИДЕО ВРЕМЕННО УБРАНО (сохранено для возврата) -->
+        <!--
         <div class="video-container">
             <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ТВОЕГО_ВИДЕО/" frameborder="0" allowfullscreen></iframe>
         </div>
+        -->
         <p style="text-align: center;">Об обучении, примеры материалов из тарифов и товары — смотри видео.</p>
+        <p style="text-align: center; font-style: italic; color: #888; margin-top: 10px;">🎬 Видео скоро появится — следите за обновлениями!</p>
     </div>
 </section>
 
@@ -833,11 +864,11 @@
     <div class="container">
         <h2>🚀 Выберите свой формат путешествия</h2>
         <div class="tariffs-grid">
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">💼</div><h3>Чемодан</h3><p>Подписка на закрытый канал во ВКонтакте. Пополняется каждую неделю новыми материалами для вас и малыша. Подходит для категорий Baby Journey и Kid's Journey.</p><div class="price">490 ₽ <span style="font-size:0.9rem;">/мес</span></div></div><button class="btn-ticket btn-details" data-modal="modal-subscribe">Подписаться</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">🎒</div><h3>Попутчик</h3><p>Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</p><div class="price">990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-basic">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">🧭</div><h3>Гид</h3><p>Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</p><div class="price">2 990 ₽ <span class="old-price">4 990 ₽</span></div><div class="discount-date" id="discount-guide">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-guide">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">👥</div><h3>Наставник</h3><p>Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</p><div class="price">5 990 ₽ <span class="old-price">9 990 ₽</span></div><div class="discount-date" id="discount-pro">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-pro">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">👩‍🏫</div><h3>Автор</h3><p>Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</p><div class="price">12 990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-author">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">💼</div><h3>Чемодан</h3><p>Подписка на закрытый канал во ВКонтакте. Пополняется каждую неделю новыми материалами для вас и малыша. Подходит для категорий Baby Journey и Kid's Journey.</p><div class="price">490 ₽ <span style="font-size:0.9rem;">/мес</span></div></div><button class="btn-ticket btn-details" onclick="openPaymentModal('ЧЕМОДАН')">Подписаться</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🎒</div><h3>Попутчик</h3><p>Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</p><div class="price">990 ₽</div></div><button class="btn-ticket btn-details" onclick="openPaymentModal('ПОПУТЧИК')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🧭</div><h3>Гид</h3><p>Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</p><div class="price">2 990 ₽ <span class="old-price">4 990 ₽</span></div><div class="discount-date" id="discount-guide">скидка до </div></div><button class="btn-ticket btn-details" onclick="openPaymentModal('ГИД')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👥</div><h3>Наставник</h3><p>Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</p><div class="price">5 990 ₽ <span class="old-price">9 990 ₽</span></div><div class="discount-date" id="discount-pro">скидка до </div></div><button class="btn-ticket btn-details" onclick="openPaymentModal('НАСТАВНИК')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👩‍🏫</div><h3>Автор</h3><p>Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</p><div class="price">12 990 ₽</div></div><button class="btn-ticket btn-details" onclick="openPaymentModal('АВТОР')">Что внутри</button></div>
         </div>
     </div>
 </section>
@@ -942,18 +973,46 @@
     </div>
 </footer>
 
-<!-- Модальные окна тарифов и товаров -->
-<div id="modal-subscribe" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>💼 Чемодан</h3><ul><li>Еженедельные материалы для Baby Journey и Kid's Journey</li><li>Материалы для печати (карточки, планы, расписания)</li><li>Онлайн-игры и интерактивные упражнения</li><li>Материалы для вашего английского (A1–B1)</li><li>Чат единомышленников во ВКонтакте</li><li>Доступ ко всем предыдущим публикациям сразу после подписки</li></ul><div class="order-buttons"><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Оформить подписку</button></div></div></div>
+<!-- Модальное окно для оплаты ТАРИФОВ (с кодовым словом) -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content" style="max-width: 500px;">
+        <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+        <h3>💳 Оплата</h3>
+        <div class="payment-modal-text">
+            Напишите нам кодовое слово
+            <span class="code-word" id="codeWordDisplay">НАЗВАНИЕ ТАРИФА</span>
+            и мы вышлем реквизиты для оплаты.
+        </div>
+        <div class="order-buttons">
+            <a href="#" id="paymentVkLink" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
+            <a href="#" id="paymentTgLink" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
+        </div>
+    </div>
+</div>
 
-<div id="modal-basic" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🎒 Попутчик</h3><div class="product-slider-container"><div class="product-slider-track" id="track-basic-modal"><img src="images/basic-1.jpg" alt="Попутчик 1"><img src="images/basic-2.jpg" alt="Попутчик 2"><img src="images/basic-3.jpg" alt="Попутчик 3"></div><button class="product-slider-btn prev" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</div><div class="section-title">Что внутри:</div><ul><li>PDF-гайд «Baby English»</li><li>50 слов, 21 фраза, 10 бытовых сценариев</li><li>Аудио-файлы с медленным произношением</li><li>Плейлист из 10 песен с пояснениями к движениям и словам</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+<!-- Модальное окно для заказа ТОВАРОВ (без кодового слова) -->
+<div id="orderModal" class="modal">
+    <div class="modal-content" style="max-width: 450px;">
+        <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+        <h3 id="orderProductTitle">Оформление заказа</h3>
+        <div class="order-modal-text">Выберите удобный способ связи:</div>
+        <div class="order-buttons">
+            <a href="#" id="orderVkLink" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
+            <a href="#" id="orderTgLink" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
+        </div>
+    </div>
+</div>
 
-<div id="modal-guide" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🧭 Гид</h3><div class="product-slider-container"><div class="product-slider-track" id="track-guide-modal"><img src="images/guide-1.jpg" alt="Гид 1"><img src="images/guide-2.jpg" alt="Гид 2"><img src="images/guide-3.jpg" alt="Гид 3"></div><button class="product-slider-btn prev" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</div><div class="section-title">Что добавляется:</div><ul><li>20 карточек для игр (PDF для печати)</li><li>Видеоинструкции (как играть, вводить фразы, реагировать на отказ)</li><li>Список мультиков по возрастам</li><li>Шпаргалка на телефон</li><li>Трекер привычек для мамы</li><li>Отслеживание прогресса</li><li>Разборы ключевых тем (произношение, отказ ребёнка, вовлечение семьи, смешение языков и другие)</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+<!-- Модальные окна "Что внутри" для тарифов -->
+<div id="modal-subscribe" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>💼 Чемодан</h3><ul><li>Еженедельные материалы для Baby Journey и Kid's Journey</li><li>Материалы для печати (карточки, планы, расписания)</li><li>Онлайн-игры и интерактивные упражнения</li><li>Материалы для вашего английского (A1–B1)</li><li>Чат единомышленников во ВКонтакте</li><li>Доступ ко всем предыдущим публикациям сразу после подписки</li></ul><div class="order-buttons"><button class="btn-ticket" onclick="openPaymentModal('ЧЕМОДАН')">Оформить подписку</button></div></div></div>
 
-<div id="modal-pro" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👥 Наставник</h3><div class="product-slider-container"><div class="product-slider-track" id="track-pro-modal"><img src="images/pro-1.jpg" alt="Наставник 1"><img src="images/pro-2.jpg" alt="Наставник 2"><img src="images/pro-3.jpg" alt="Наставник 3"></div><button class="product-slider-btn prev" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</div><div class="section-title">Что добавляется:</div><ul><li>Обратная связь (отвечаем на вопросы, помогаем с произношением)</li><li>Разбор одного вашего видео</li><li>Материалы для вашего английского (A1–A2)</li><li>Доступ к расширенной библиотеке разборов ключевых тем</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+<div id="modal-basic" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🎒 Попутчик</h3><div class="product-slider-container"><div class="product-slider-track" id="track-basic-modal"><img src="images/basic-1.jpg" alt="Попутчик 1"><img src="images/basic-2.jpg" alt="Попутчик 2"><img src="images/basic-3.jpg" alt="Попутчик 3"></div><button class="product-slider-btn prev" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</div><div class="section-title">Что внутри:</div><ul><li>PDF-гайд «Baby English»</li><li>50 слов, 21 фраза, 10 бытовых сценариев</li><li>Аудио-файлы с медленным произношением</li><li>Плейлист из 10 песен с пояснениями к движениям и словам</li></ul><button class="btn-ticket" onclick="openPaymentModal('ПОПУТЧИК')">Перейти к оплате</button></div></div>
 
-<div id="modal-author" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👩‍🏫 Автор</h3><div class="product-slider-container"><div class="product-slider-track" id="track-author-modal"><img src="images/author-1.jpg" alt="Автор 1"><img src="images/author-2.jpg" alt="Автор 2"><img src="images/author-3.jpg" alt="Автор 3"></div><button class="product-slider-btn prev" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</div><div class="section-title">Что добавляется:</div><ul><li>Личная обратная связь в чате 4 недели</li><li>3 видеоконсультации в течение 1.5 лет</li><li>Разбор двух ваших видео</li><li>Полный доступ ко всем разборам нераскрытых тем</li><li>Полные материалы для вашего английского (A1–B1)</li><li>Доступ к эксклюзивной библиотеке (шаблоны игр, вебинары, чек-листы)</li><li>Расширенный модуль по билингвизму для детей 2–4 лет</li></ul><button class="btn-ticket" onclick="alert('Здесь будет ссылка на оплату через ЮMoney')">Перейти к оплате</button></div></div>
+<div id="modal-guide" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>🧭 Гид</h3><div class="product-slider-container"><div class="product-slider-track" id="track-guide-modal"><img src="images/guide-1.jpg" alt="Гид 1"><img src="images/guide-2.jpg" alt="Гид 2"><img src="images/guide-3.jpg" alt="Гид 3"></div><button class="product-slider-btn prev" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-guide-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</div><div class="section-title">Что добавляется:</div><ul><li>20 карточек для игр (PDF для печати)</li><li>Видеоинструкции (как играть, вводить фразы, реагировать на отказ)</li><li>Список мультиков по возрастам</li><li>Шпаргалка на телефон</li><li>Трекер привычек для мамы</li><li>Отслеживание прогресса</li><li>Разборы ключевых тем (произношение, отказ ребёнка, вовлечение семьи, смешение языков и другие)</li></ul><button class="btn-ticket" onclick="openPaymentModal('ГИД')">Перейти к оплате</button></div></div>
 
-<div id="orderModal" class="modal"><div class="modal-content" style="max-width: 400px;"><span class="close-modal" onclick="closeOrderModal()">&times;</span><h3 id="orderProductTitle">Оформление заказа</h3><div class="order-buttons"><a href="#" id="orderVkLink" target="_blank" class="btn-ticket btn-vk">Оформить заказ во ВКонтакте</a><a href="#" id="orderTgLink" target="_blank" class="btn-ticket btn-telegram">Оформить заказ в Telegram</a></div></div></div>
+<div id="modal-pro" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👥 Наставник</h3><div class="product-slider-container"><div class="product-slider-track" id="track-pro-modal"><img src="images/pro-1.jpg" alt="Наставник 1"><img src="images/pro-2.jpg" alt="Наставник 2"><img src="images/pro-3.jpg" alt="Наставник 3"></div><button class="product-slider-btn prev" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-pro-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</div><div class="section-title">Что добавляется:</div><ul><li>Обратная связь (отвечаем на вопросы, помогаем с произношением)</li><li>Разбор одного вашего видео</li><li>Материалы для вашего английского (A1–A2)</li><li>Доступ к расширенной библиотеке разборов ключевых тем</li></ul><button class="btn-ticket" onclick="openPaymentModal('НАСТАВНИК')">Перейти к оплате</button></div></div>
+
+<div id="modal-author" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>👩‍🏫 Автор</h3><div class="product-slider-container"><div class="product-slider-track" id="track-author-modal"><img src="images/author-1.jpg" alt="Автор 1"><img src="images/author-2.jpg" alt="Автор 2"><img src="images/author-3.jpg" alt="Автор 3"></div><button class="product-slider-btn prev" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</div><div class="section-title">Что добавляется:</div><ul><li>Личная обратная связь в чате 4 недели</li><li>3 видеоконсультации в течение 1.5 лет</li><li>Разбор двух ваших видео</li><li>Полный доступ ко всем разборам нераскрытых тем</li><li>Полные материалы для вашего английского (A1–B1)</li><li>Доступ к эксклюзивной библиотеке (шаблоны игр, вебинары, чек-листы)</li><li>Расширенный модуль по билингвизму для детей 2–4 лет</li></ul><button class="btn-ticket" onclick="openPaymentModal('АВТОР')">Перейти к оплате</button></div></div>
 
 <script>
     function updateDiscountDates() {
@@ -1015,7 +1074,7 @@
         setTimeout(updateSlider, 100);
     }
 
-    // Модальные окна
+    // Модальные окна "Что внутри"
     const modals = document.querySelectorAll('.modal');
     const detailButtons = document.querySelectorAll('[data-modal]');
     function openModal(modalId) {
@@ -1097,20 +1156,55 @@
         }
     });
 
-    function openOrderModal(productName) {
-        const modal = document.getElementById('orderModal');
-        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
-        const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}".`);
-        document.getElementById('orderVkLink').href = `https://vk.me/public221397766?text=${msg}`;
-        document.getElementById('orderTgLink').href = `https://t.me/lingua_journey?text=${msg}`;
+    // Функция для открытия модального окна оплаты ТАРИФОВ (с кодовым словом)
+    function openPaymentModal(codeWord) {
+        const modal = document.getElementById('paymentModal');
+        document.getElementById('codeWordDisplay').textContent = codeWord;
+        
+        const message = encodeURIComponent(`Здравствуйте! Хочу оплатить "${codeWord}".`);
+        document.getElementById('paymentVkLink').href = `https://vk.me/public221397766?text=${message}`;
+        document.getElementById('paymentTgLink').href = `https://t.me/lingua_journey?text=${message}`;
+        
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
+    
+    function closePaymentModal() {
+        const modal = document.getElementById('paymentModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    // Функция для открытия модального окна заказа ТОВАРОВ (без кодового слова)
+    function openOrderModal(productName) {
+        const modal = document.getElementById('orderModal');
+        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
+        
+        const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}".`);
+        document.getElementById('orderVkLink').href = `https://vk.me/public221397766?text=${msg}`;
+        document.getElementById('orderTgLink').href = `https://t.me/lingua_journey?text=${msg}`;
+        
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    
     function closeOrderModal() {
         const modal = document.getElementById('orderModal');
         modal.classList.remove('show');
         document.body.style.overflow = '';
     }
+
+    // Закрытие модалок по клику вне окна
+    window.onclick = function(event) {
+        const paymentModal = document.getElementById('paymentModal');
+        const orderModal = document.getElementById('orderModal');
+        if (event.target === paymentModal) closePaymentModal();
+        if (event.target === orderModal) closeOrderModal();
+    };
+
+    // Экспорт в глобальную область
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
     window.openOrderModal = openOrderModal;
     window.closeOrderModal = closeOrderModal;
 </script>
