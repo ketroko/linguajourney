@@ -464,7 +464,7 @@
         }
         .modal-content {
             background: white;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
             border-radius: 48px;
             padding: 32px;
@@ -497,6 +497,7 @@
         .modal-content ul {
             list-style: none;
             margin: 10px 0 20px;
+            padding-left: 0;
         }
         .modal-content li {
             margin-bottom: 12px;
@@ -738,6 +739,42 @@
             margin: 16px 0 8px;
             color: #2c3e50;
         }
+        /* Стили для переключателя версий */
+        .version-toggle {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+        .version-toggle .toggle-btn {
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 2px solid #E67E22;
+            background: white;
+            color: #E67E22;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            user-select: none;
+        }
+        .version-toggle .toggle-btn.active {
+            background: #E67E22;
+            color: white;
+        }
+        .version-toggle .toggle-btn:hover {
+            transform: scale(1.02);
+        }
+        .version-toggle input[type="radio"] {
+            display: none;
+        }
+        .product-desc-small {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 12px;
+            min-height: 40px;
+        }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.5rem; }
@@ -764,6 +801,13 @@
             }
             .payment-modal-text .code-word {
                 font-size: 1.2rem;
+            }
+            .modal-content {
+                padding: 20px;
+            }
+            .version-toggle .toggle-btn {
+                font-size: 0.7rem;
+                padding: 6px 12px;
             }
         }
     </style>
@@ -872,11 +916,11 @@
     <div class="container">
         <h2>🚀 Выберите свой формат путешествия</h2>
         <div class="tariffs-grid">
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">💼</div><h3>Чемодан</h3><p>Подписка на закрытый канал во ВКонтакте. Пополняется каждую неделю новыми материалами для вас и малыша. Подходит для категорий Baby Journey и Kid's Journey.</p><div class="price">490 ₽ <span style="font-size:0.9rem;">/мес</span></div></div><button class="btn-ticket btn-details" data-modal="modal-subscribe" onclick="openModal('modal-subscribe')">Подписаться</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">🎒</div><h3>Попутчик</h3><p>Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</p><div class="price">990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-basic" onclick="openModal('modal-basic')">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">🧭</div><h3>Гид</h3><p>Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</p><div class="price">2 990 ₽ <span class="old-price">4 990 ₽</span></div><div class="discount-date" id="discount-guide">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-guide" onclick="openModal('modal-guide')">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">👥</div><h3>Наставник</h3><p>Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</p><div class="price">5 990 ₽ <span class="old-price">9 990 ₽</span></div><div class="discount-date" id="discount-pro">скидка до </div></div><button class="btn-ticket btn-details" data-modal="modal-pro" onclick="openModal('modal-pro')">Что внутри</button></div>
-            <div class="tariff-card"><div><div style="font-size:2.5rem;">👩‍🏫</div><h3>Автор</h3><p>Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</p><div class="price">12 990 ₽</div></div><button class="btn-ticket btn-details" data-modal="modal-author" onclick="openModal('modal-author')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">💼</div><h3>Чемодан</h3><p>Подписка на закрытый канал во ВКонтакте. Пополняется каждую неделю новыми материалами для вас и малыша. Подходит для категорий Baby Journey и Kid's Journey.</p><div class="price">490 ₽ <span style="font-size:0.9rem;">/мес</span></div></div><button class="btn-ticket btn-details" onclick="openModal('modal-subscribe')">Подписаться</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🎒</div><h3>Попутчик</h3><p>Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</p><div class="price">990 ₽</div></div><button class="btn-ticket btn-details" onclick="openModal('modal-basic')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">🧭</div><h3>Гид</h3><p>Всё из «Попутчика» + игры, видео и разборы ключевых нераскрытых тем.</p><div class="price">2 990 ₽ <span class="old-price">4 990 ₽</span></div><div class="discount-date" id="discount-guide">скидка до </div></div><button class="btn-ticket btn-details" onclick="openModal('modal-guide')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👥</div><h3>Наставник</h3><p>Всё из «Гида» + доп. материалы + поддержка от обученного наставника.</p><div class="price">5 990 ₽ <span class="old-price">9 990 ₽</span></div><div class="discount-date" id="discount-pro">скидка до </div></div><button class="btn-ticket btn-details" onclick="openModal('modal-pro')">Что внутри</button></div>
+            <div class="tariff-card"><div><div style="font-size:2.5rem;">👩‍🏫</div><h3>Автор</h3><p>Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</p><div class="price">12 990 ₽</div></div><button class="btn-ticket btn-details" onclick="openModal('modal-author')">Что внутри</button></div>
         </div>
     </div>
 </section>
@@ -902,7 +946,7 @@
                 <button class="btn-ticket" onclick="openOrderModal('Наклейки «Фразы дня»')">Оформить заказ</button>
             </div>
 
-            <!-- НОВЫЙ ТОВАР: Первые слова (6 карточек из чек-листа) -->
+            <!-- Товар: Первые слова (6 карточек из чек-листа) -->
             <div class="product-card" data-product="Первые слова" id="product-first-words">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-first-words">
@@ -919,38 +963,102 @@
                 <button class="btn-ticket" onclick="openOrderModal('Первые слова')">Оформить заказ</button>
             </div>
 
-            <!-- Товар: Базовый набор карточек «Английский с пелёнок» (НОВОЕ НАЗВАНИЕ) -->
+            <!-- Товар: Базовый набор карточек «Английский с пелёнок» (ДВЕ ВЕРСИИ) -->
             <div class="product-card" data-product="Базовый набор карточек «Английский с пелёнок»" id="product-cards">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-cards">
                         <img src="images/product-cards-1.jpg" alt="Карточки 1">
                         <img src="images/product-cards-2.jpg" alt="Карточки 2">
-                        <img src="images/product-cards-3.jpg" alt="Карточки 3">
                     </div>
                     <button class="product-slider-btn prev" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
                     <button class="product-slider-btn next" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
                 </div>
+
                 <h3>🃏 Базовый набор карточек «Английский с пелёнок»</h3>
-                <p>60 слов и фраз (39 слов + 21 фраза) — заламинированные карточки</p>
-                <div class="price">890 ₽</div>
+                <p>60 карточек (39 слов + 21 фраза) для малышей до 3 лет и их мам</p>
+
+                <!-- ВЫБОР ВЕРСИИ (PDF или физический набор) -->
+                <div class="version-toggle">
+                    <label class="toggle-btn active" id="label-pdf">
+                        <input type="radio" name="cardVersion" value="pdf" checked> 📄 Электронная версия
+                    </label>
+                    <label class="toggle-btn" id="label-physical">
+                        <input type="radio" name="cardVersion" value="physical"> 🚚 Готовый набор
+                    </label>
+                </div>
+
+                <!-- ЦЕНА (меняется через JS) -->
+                <div class="price" id="cardPrice">790 ₽</div>
+
+                <!-- ОПИСАНИЕ ПОД ЦЕНОЙ (меняется через JS) -->
+                <div class="product-desc-small" id="cardDescription">
+                    PDF-файл + видео с произношением + транскрипции
+                </div>
+
                 <a href="#" class="details-link" onclick="openProductModal('productCardsModal'); return false;">Подробнее</a><br>
-                <button class="btn-ticket" onclick="openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
+                <button class="btn-ticket" id="orderButton" onclick="openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ НАБОРА -->
+            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ НАБОРА С ПОДРОБНЫМ ОПИСАНИЕМ -->
             <div id="productCardsModal" class="modal">
-                <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productCardsModal')">&times;</span>
                     <h3>🃏 Базовый набор карточек «Английский с пелёнок»</h3>
-                    <div style="margin: 20px 0;">
-                        <img src="images/product-cards-1.jpg" alt="Базовый набор карточек «Английский с пелёнок»" style="width: 100%; border-radius: 24px; border: 1px solid #E67E22;">
+
+                    <!-- ВИДЕО (вставлена твоя ссылка) -->
+                    <div style="margin: 16px 0; border-radius: 16px; overflow: hidden;">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                            <iframe src="https://rutube.ru/embed/01ee792689219d735f0109b4d35c07a5/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px;"></iframe>
+                        </div>
                     </div>
+
+                    <!-- ФОТО НАБОРА -->
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+                        <img src="images/product-cards-1.jpg" alt="Карточки" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
+                        <img src="images/product-cards-2.jpg" alt="Карточки" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
+                    </div>
+
+                    <!-- ОПИСАНИЕ -->
                     <div style="text-align: left;">
-                        <p><strong>Первые 60 слов и фраз для малышей на английском (39 слов + 21 фраза).</strong></p>
-                        <p>Яркие заламинированные карточки в конвертах на липучках.</p>
-                        <p style="margin-top: 10px;">🚚 Доставка по всей России (Почта России/СДЭК)</p>
+                        <p><strong>Что входит в набор:</strong></p>
+                        <ul>
+                            <li><strong>PDF-файл</strong> — 60 карточек для печати (39 слов + 21 бытовая фраза)</li>
+                            <li><strong>Видео</strong> с правильным произношением всех слов и фраз</li>
+                            <li><strong>Транскрипции на русском языке</strong> — легко читать даже без знания английского</li>
+                            <li><strong>Инструкция по произношению</strong> сложных звуков (межзубные [θ], [ð])</li>
+                        </ul>
+
+                        <p style="margin-top: 16px;"><strong>🎯 Для кого:</strong></p>
+                        <ul>
+                            <li>👶 Для детей до 3 лет</li>
+                            <li>👩‍👧 Для мам, которые хотят учить английский с малышом с пелёнок</li>
+                            <li>🗣️ Для родителей, которые сами не уверены в своём произношении</li>
+                        </ul>
+
+                        <p style="margin-top: 16px;"><strong>📦 Как получить доступ:</strong><br>
+                        После оплаты вы получаете доступ к закрытому чату ВКонтакте, где закреплены PDF-файл и видео. Всё можно скачать на телефон или компьютер и начинать заниматься уже сегодня.</p>
+
+                        <hr style="margin: 16px 0; border: 1px dashed #E67E22;">
+
+                        <p><strong>✨ Хотите получить уже готовые, заламинированные карточки?</strong><br>
+                        Если у вас нет времени печатать, вырезать и ламинировать — мы можем сделать всё за вас!</p>
+
+                        <p><strong>Что вы получите за доплату:</strong></p>
+                        <ul>
+                            <li>✅ 60 готовых карточек на плотной глянцевой бумаге</li>
+                            <li>✅ Полноцветная печать + ламинация (карточки не рвутся и не мнутся)</li>
+                            <li>✅ Аккуратно вырезаны и упакованы</li>
+                            <li>✅ PDF-файл и видео с произношением — в подарок</li>
+                        </ul>
+
+                        <p style="margin-top: 12px;"><strong>💰 Стоимость готового набора:</strong> +700 ₽ к стоимости PDF<br>
+                        <strong>Итоговая цена:</strong> 1 490 ₽ (вместе с PDF и видео)</p>
+
+                        <p style="margin-top: 10px;">🚚 Доставка по всей России. Почта России или СДЭК (на ваш выбор).<br>
+                        Стоимость доставки оплачивается отдельно.</p>
                     </div>
-                    <div class="order-buttons">
+
+                    <div class="order-buttons" style="margin-top: 20px;">
                         <button class="btn-ticket" onclick="closeModal('productCardsModal'); openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
                     </div>
                 </div>
@@ -1147,6 +1255,7 @@
         }
     }
 
+    // Инициализация слайдеров в модалках
     function initModalSliders() {
         document.querySelectorAll('.product-slider-container').forEach(container => {
             const trackElem = container.querySelector('.product-slider-track');
@@ -1269,6 +1378,39 @@
         modal.classList.remove('show');
         document.body.style.overflow = '';
     }
+
+    // ПЕРЕКЛЮЧЕНИЕ МЕЖДУ PDF И ФИЗИЧЕСКИМ НАБОРОМ
+    document.addEventListener('DOMContentLoaded', function() {
+        const pdfRadio = document.querySelector('input[name="cardVersion"][value="pdf"]');
+        const physicalRadio = document.querySelector('input[name="cardVersion"][value="physical"]');
+        const priceEl = document.getElementById('cardPrice');
+        const descEl = document.getElementById('cardDescription');
+        const orderBtn = document.getElementById('orderButton');
+        const labelPdf = document.getElementById('label-pdf');
+        const labelPhysical = document.getElementById('label-physical');
+
+        function updateCard() {
+            if (pdfRadio.checked) {
+                priceEl.textContent = '790 ₽';
+                descEl.textContent = 'PDF-файл + видео с произношением + транскрипции';
+                orderBtn.textContent = 'Оформить заказ';
+                orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
+                labelPdf.classList.add('active');
+                labelPhysical.classList.remove('active');
+            } else if (physicalRadio.checked) {
+                priceEl.textContent = '1 490 ₽';
+                descEl.textContent = 'Готовые заламинированные карточки с доставкой + PDF + видео в подарок';
+                orderBtn.textContent = 'Оформить заказ';
+                orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
+                labelPhysical.classList.add('active');
+                labelPdf.classList.remove('active');
+            }
+        }
+
+        pdfRadio.addEventListener('change', updateCard);
+        physicalRadio.addEventListener('change', updateCard);
+        updateCard();
+    });
 
     // Закрытие модалок по клику вне окна
     window.onclick = function(event) {
