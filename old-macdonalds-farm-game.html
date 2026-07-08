@@ -2,232 +2,170 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Old MacDonald's Farm — LinguaJourney Games</title>
     <style>
-        /* ===== ВЕСЬ СТАРЫЙ CSS ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ ===== */
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
         *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
         body{background:#F9FCB8;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Open Sans',sans-serif;touch-action:none;overflow:hidden}
-        #game-wrapper{position:relative;width:100vw;height:100vh;max-width:1100px;max-height:1100px;padding:20px;display:flex;align-items:center;justify-content:center}
-        #game-container{position:relative;width:100%;height:100%;background:#F9FCB8;overflow:hidden;touch-action:none;border-radius:32px;box-shadow:0 8px 40px rgba(0,0,0,0.15);border:4px solid #E67E22}
-        .level-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:1;border-radius:28px}
-        .level{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10;padding:20px}
+        #game-wrapper{position:relative;width:100vw;height:100vh;max-width:1100px;max-height:1100px;padding:8px;display:flex;align-items:center;justify-content:center}
+        #game-container{position:relative;width:100%;height:100%;background:#F9FCB8;overflow:hidden;touch-action:none;border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,0.15);border:3px solid #E67E22}
+        .level-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:1;border-radius:16px}
+        .level{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10;padding:8px}
         .level.active{display:flex}
-        .level-title{font-size:1.4rem;font-weight:800;color:#E67E22;background:rgba(255,255,255,0.92);padding:6px 20px;border-radius:60px;margin-bottom:10px;border:3px solid #E67E22;backdrop-filter:blur(4px);text-align:center;z-index:2;box-shadow:0 4px 16px rgba(230,126,34,0.15)}
-        #farm-level .shadow-zone{position:absolute;z-index:2;pointer-events:none;transition:opacity 0.4s ease;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        #farm-level .shadow-zone img{width:100%;height:100%;object-fit:contain;opacity:0.4;filter:grayscale(1) brightness(0.5);transition:opacity 0.4s ease}
+        .level-title{font-size:1rem;font-weight:800;color:#E67E22;background:rgba(255,255,255,0.92);padding:4px 14px;border-radius:30px;margin-bottom:4px;border:2px solid #E67E22;backdrop-filter:blur(4px);text-align:center;z-index:2;box-shadow:0 2px 12px rgba(230,126,34,0.15)}
+        
+        /* ===== УРОВЕНЬ 1: ФЕРМА (TAP-TO-PLACE) ===== */
+        #farm-level .shadow-zone{position:absolute;z-index:2;pointer-events:none;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        #farm-level .shadow-zone img{width:100%;height:100%;object-fit:contain;opacity:0.3;filter:grayscale(1) brightness(0.5)}
         #farm-level .shadow-zone.placed{opacity:0;pointer-events:none}
-        #farm-level .shadow-zone.placed img{opacity:0}
-        #farm-level #brand-block{position:absolute;top:10px;left:8px;z-index:30;display:flex;flex-direction:column;align-items:flex-start;gap:3px;background:rgba(255,255,255,0.92);padding:6px 12px 8px 10px;border-radius:16px;border:2px solid #E67E22;backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(0,0,0,0.1);max-width:230px;text-decoration:none;cursor:pointer}
-        #farm-level #brand-block .brand-row{display:flex;align-items:center;gap:8px}
-        #farm-level #brand-block .logo-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;overflow:hidden;flex-shrink:0}
+        
+        /* ★★★ БРЕНД-БЛОК ★★★ */
+        #farm-level #brand-block{position:absolute;top:4px;left:4px;z-index:30;display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:rgba(255,255,255,0.92);padding:3px 6px 4px 6px;border-radius:10px;border:2px solid #E67E22;backdrop-filter:blur(4px);max-width:140px;text-decoration:none;cursor:pointer}
+        #farm-level #brand-block .brand-row{display:flex;align-items:center;gap:4px}
+        #farm-level #brand-block .logo-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.5rem;overflow:hidden;flex-shrink:0}
         #farm-level #brand-block .logo-icon img{width:100%;height:100%;object-fit:cover}
-        #farm-level #brand-block .logo-text{font-weight:700;font-size:0.75rem;color:#2c3e50;letter-spacing:0.3px}
+        #farm-level #brand-block .logo-text{font-weight:700;font-size:0.5rem;color:#2c3e50;letter-spacing:0.2px}
         #farm-level #brand-block .logo-text span{color:#E67E22}
-        #farm-level #brand-block .logo-text .games-label{font-size:0.5rem;color:#888}
-        #farm-level #brand-block .instruction-text{font-size:0.6rem;color:#555;font-weight:500;line-height:1.2;padding-left:2px;border-top:1px solid rgba(230,126,34,0.15);padding-top:4px;margin-top:1px;width:100%}
-        #farm-level #brand-block .instruction-text .icon{margin-right:3px}
-        #farm-level #items-panel-left{position:absolute;top:123px;left:15px;display:flex;flex-direction:column;gap:8px;z-index:20;background:rgba(255,255,255,0.92);padding:12px 10px;border-radius:30px;box-shadow:0 4px 20px rgba(0,0,0,0.12);border:2px solid #E67E22;backdrop-filter:blur(4px);max-height:calc(80vh - 110px);overflow-y:auto}
-        #farm-level #items-panel-right{position:absolute;top:131px;left:958px;display:flex;flex-direction:column;gap:8px;z-index:20;background:rgba(255,255,255,0.92);padding:12px 10px;border-radius:30px;box-shadow:0 4px 20px rgba(0,0,0,0.12);border:2px solid #E67E22;backdrop-filter:blur(4px);max-height:calc(80vh - 110px);overflow-y:auto}
-        #farm-level .item-card{width:60px;height:60px;cursor:grab;touch-action:none;transition:transform 0.2s;border-radius:12px;background:rgba(255,255,255,0.7);padding:4px;border:2px solid #E67E22;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        #farm-level .item-card:active{cursor:grabbing;transform:scale(0.9)}
-        #farm-level .item-card img{width:100%;height:100%;object-fit:contain;pointer-events:none;max-width:50px;max-height:50px}
-        #farm-level .item-card.dragging{opacity:0.4;transform:scale(0.8)}
-        #farm-level .item-card.placed{display:none}
-        #farm-level .drop-zone{position:absolute;z-index:5;border-radius:12px;border:none;background:transparent;transition:all 0.3s;display:flex;align-items:center;justify-content:center;pointer-events:none}
-        #farm-level .drop-zone.placed{border:none;background:transparent;pointer-events:none}
-        #farm-level .drop-zone.placed img{width:100%;height:100%;object-fit:contain;animation:popIn 0.3s ease;max-width:90%;max-height:90%}
-        #farm-level #reset-btn{position:absolute;top:12px;right:20px;z-index:30;background:rgba(255,255,255,0.92);border:2px solid #E67E22;border-radius:40px;padding:4px 14px;font-size:0.65rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 10px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
+        #farm-level #brand-block .logo-text .games-label{font-size:0.35rem;color:#888}
+        #farm-level #brand-block .instruction-text{font-size:0.35rem;color:#555;font-weight:500;line-height:1.1;padding-left:2px;border-top:1px solid rgba(230,126,34,0.15);padding-top:2px;margin-top:1px;width:100%;display:none}
+        
+        /* ★★★ КНОПКА СБРОСА ★★★ */
+        #farm-level #reset-btn{position:absolute;top:4px;right:4px;z-index:30;background:rgba(255,255,255,0.92);border:2px solid #E67E22;border-radius:20px;padding:2px 8px;font-size:0.45rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
         #farm-level #reset-btn:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
         #farm-level #reset-btn.test-hidden{display:none!important}
-        .animal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:520px;width:100%;z-index:2}
-        .animal-grid .animal-btn{background:rgba(255,255,255,0.9);border-radius:20px;padding:12px;border:4px solid #E67E22;cursor:pointer;transition:0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1/1;box-shadow:0 4px 16px rgba(0,0,0,0.08);backdrop-filter:blur(4px);min-height:70px;position:relative;gap:2px}
+        
+        /* ★★★ ПАНЕЛЬ С КАРТОЧКАМИ (СНИЗУ) ★★★ */
+        #farm-level #items-panel-bottom{position:absolute;bottom:8px;left:8px;right:8px;z-index:20;display:flex;flex-direction:row;gap:6px;background:rgba(255,255,255,0.92);padding:6px 8px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.15);border:2px solid #E67E22;backdrop-filter:blur(4px);overflow-x:auto;overflow-y:hidden;justify-content:flex-start;max-height:80px;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+        #farm-level #items-panel-bottom::-webkit-scrollbar{display:none}
+        
+        #farm-level #items-panel-left{display:none}
+        #farm-level #items-panel-right{display:none}
+        
+        /* ★★★ КАРТОЧКИ В ПАНЕЛИ ★★★ */
+        #farm-level .item-card{width:50px;height:50px;min-width:50px;min-height:50px;cursor:pointer;touch-action:manipulation;transition:transform 0.2s,border-color 0.2s;border-radius:10px;background:rgba(255,255,255,0.8);padding:4px;border:3px solid #E67E22;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        #farm-level .item-card:active{transform:scale(0.92)}
+        #farm-level .item-card img{width:100%;height:100%;object-fit:contain;pointer-events:none;max-width:40px;max-height:40px}
+        #farm-level .item-card.selected{border-color:#4CAF50;background:rgba(76,175,80,0.2);transform:scale(1.05)}
+        #farm-level .item-card.placed{display:none}
+        
+        /* ★★★ ЗОНЫ ДЛЯ КАРТОЧЕК (УВЕЛИЧЕНЫ) ★★★ */
+        #farm-level .drop-zone{position:absolute;z-index:5;border-radius:14px;border:3px dashed rgba(230,126,34,0.3);background:rgba(230,126,34,0.05);transition:all 0.3s;display:flex;align-items:center;justify-content:center;pointer-events:none;min-width:50px;min-height:50px}
+        #farm-level .drop-zone.active{background:rgba(76,175,80,0.15);border-color:#4CAF50}
+        #farm-level .drop-zone.placed{border:3px solid rgba(76,175,80,0.3);background:rgba(76,175,80,0.1);pointer-events:none}
+        #farm-level .drop-zone.placed img{width:100%;height:100%;object-fit:contain;animation:popIn 0.3s ease;max-width:90%;max-height:90%}
+        #farm-level .drop-zone.wrong{border-color:#f44336;background:rgba(244,67,54,0.15);animation:shake 0.3s ease}
+        
+        /* ★★★ ИНСТРУКЦИЯ ДЛЯ 1-Й ИГРЫ ★★★ */
+        #farm-level #tap-instruction{position:absolute;bottom:90px;left:50%;transform:translateX(-50%);z-index:15;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);color:#F7FF5B;padding:6px 16px;border-radius:20px;font-size:0.6rem;font-weight:600;text-align:center;border:1px solid #F7FF5B;white-space:nowrap;pointer-events:none}
+        #farm-level #tap-instruction .highlight{color:#fff}
+        
+        /* ===== УРОВНИ 2 И 3 ===== */
+        .animal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:400px;width:100%;z-index:2;padding:0 10px}
+        .animal-grid .animal-btn{background:rgba(255,255,255,0.92);border-radius:16px;padding:12px 8px;border:4px solid #E67E22;cursor:pointer;transition:0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1/1;box-shadow:0 4px 16px rgba(0,0,0,0.08);backdrop-filter:blur(4px);min-height:70px;position:relative;gap:2px}
         .animal-grid .animal-btn:active{transform:scale(0.95)}
-        .animal-grid .animal-btn img{width:70%;height:70%;object-fit:contain;pointer-events:none;transition:0.3s}
+        .animal-grid .animal-btn img{width:65%;height:65%;object-fit:contain;pointer-events:none;transition:0.3s}
         .animal-grid .animal-btn .animal-label{display:none}
         .animal-grid .animal-btn.correct{border-color:#4CAF50;background:rgba(76,175,80,0.2)}
         .animal-grid .animal-btn.correct img{transform:scale(1.1)}
         .animal-grid .animal-btn.wrong{border-color:#f44336;background:rgba(244,67,54,0.15)}
-        .animal-grid .animal-btn .star{position:absolute;top:-8px;right:-8px;font-size:2rem;animation:popIn 0.3s ease;display:none}
+        .animal-grid .animal-btn .star{position:absolute;top:-6px;right:-6px;font-size:1.8rem;animation:popIn 0.3s ease;display:none}
         .animal-grid .animal-btn.correct .star{display:block}
-        .question-counter{font-size:0.85rem;font-weight:700;color:#2c3e50;background:rgba(255,255,255,0.8);padding:4px 16px;border-radius:40px;margin-bottom:6px;z-index:2}
-        .progress-bar{width:200px;height:6px;background:rgba(255,255,255,0.3);border-radius:10px;margin-bottom:10px;overflow:hidden;border:1px solid rgba(230,126,34,0.3);z-index:2}
+        
+        .question-counter{font-size:0.75rem;font-weight:700;color:#2c3e50;background:rgba(255,255,255,0.8);padding:2px 12px;border-radius:30px;margin-bottom:4px;z-index:2}
+        .progress-bar{width:160px;height:5px;background:rgba(255,255,255,0.3);border-radius:10px;margin-bottom:6px;overflow:hidden;border:1px solid rgba(230,126,34,0.3);z-index:2}
         .progress-bar .fill{height:100%;width:0%;background:#4CAF50;border-radius:10px;transition:width 0.4s ease}
-        .sound-repeat-btn{font-size:2.8rem;background:rgba(255,255,255,0.85);border:3px solid #E67E22;border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.1);backdrop-filter:blur(4px);z-index:2;margin-bottom:10px}
+        
+        .sound-repeat-btn{font-size:2.4rem;background:rgba(255,255,255,0.85);border:3px solid #E67E22;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.1);backdrop-filter:blur(4px);z-index:2;margin-bottom:4px}
         .sound-repeat-btn:hover{transform:scale(1.05);background:#E67E22;color:#fff}
         .sound-repeat-btn:active{transform:scale(0.95)}
-        .dont-know-btn{font-size:1rem;font-weight:700;color:#888;background:rgba(255,255,255,0.8);border:2px solid #ccc;border-radius:40px;padding:6px 20px;cursor:pointer;transition:0.2s;font-family:'Open Sans',sans-serif;z-index:2;margin-top:8px}
+        
+        .dont-know-btn{font-size:0.8rem;font-weight:700;color:#888;background:rgba(255,255,255,0.8);border:2px solid #ccc;border-radius:30px;padding:6px 18px;cursor:pointer;transition:0.2s;font-family:'Open Sans',sans-serif;z-index:2;margin-top:6px}
         .dont-know-btn:hover{background:#f0f0f0;transform:scale(1.03)}
-        #arrow-left{position:absolute;bottom:10px;left:191px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
+        #l2-question,#l3-question{font-size:1.1rem;font-weight:700;color:#2c3e50;margin-bottom:6px;background:rgba(255,255,255,0.7);padding:4px 16px;border-radius:30px;min-height:32px;z-index:2;text-align:center}
+        
+        /* ===== СТРЕЛКИ ===== */
+        #arrow-left{position:absolute;bottom:8px;left:10px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
         #arrow-left:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
-        #arrow-right{position:absolute;bottom:10px;right:190px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
+        #arrow-right{position:absolute;bottom:8px;right:10px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
         #arrow-right:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
-        #bottom-right-buttons{position:absolute;bottom:22px;right:19px;display:flex;gap:12px;z-index:50;align-items:center}
-        #music-toggle{background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:52px;height:52px;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+        
+        /* ===== КНОПКИ ===== */
+        #bottom-right-buttons{position:absolute;bottom:8px;right:55px;display:flex;gap:6px;z-index:50;align-items:center}
+        #music-toggle{background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:36px;height:36px;font-size:1rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
         #music-toggle:hover{background:#E67E22;transform:scale(1.05)}
-        #exit-btn{background:rgba(255,255,255,0.9);border:2px solid #f44336;border-radius:50%;width:52px;height:52px;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+        #exit-btn{background:rgba(255,255,255,0.9);border:2px solid #f44336;border-radius:50%;width:36px;height:36px;font-size:1rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
         #exit-btn:hover{background:#f44336;transform:scale(1.05);color:#fff}
-        #test-btn{position:absolute;bottom:21px;right:953px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:40px;padding:8px 18px;font-size:0.8rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
+        
+        #test-btn{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:30px;padding:4px 14px;font-size:0.6rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
         #test-btn:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
         #test-btn.active{background:#4CAF50;color:#fff;border-color:#4CAF50}
-        .modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:100;display:none;justify-content:center;align-items:center;animation:fadeIn 0.4s ease;border-radius:28px}
+        
+        /* ===== МОДАЛКИ ===== */
+        .modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:100;display:none;justify-content:center;align-items:center;animation:fadeIn 0.4s ease;border-radius:16px}
         .modal-overlay.show{display:flex}
-        .modal-box{background:linear-gradient(145deg,#F9FCB8,#FEF9E6);border-radius:48px;padding:32px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.4);border:4px solid #E67E22;animation:popIn 0.4s ease;position:relative;max-height:85vh;overflow-y:auto}
-        .modal-box .close-modal{position:absolute;top:12px;right:18px;font-size:1.8rem;cursor:pointer;color:#888;transition:0.2s;background:0 0;border:none;font-weight:700}
+        .modal-box{background:linear-gradient(145deg,#F9FCB8,#FEF9E6);border-radius:32px;padding:20px 20px;max-width:min(440px, 92vw);width:92%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.4);border:4px solid #E67E22;animation:popIn 0.4s ease;position:relative;max-height:85vh;overflow-y:auto}
+        .modal-box .close-modal{position:absolute;top:6px;right:12px;font-size:1.6rem;cursor:pointer;color:#888;transition:0.2s;background:0 0;border:none;font-weight:700}
         .modal-box .close-modal:hover{color:#E67E22;transform:scale(1.1)}
-        .modal-box .emoji-big{font-size:3.4rem;margin-bottom:4px}
-        .modal-box h2{font-size:2rem;font-weight:800;color:#E67E22;margin-bottom:8px}
-        .modal-box .modal-text{font-size:1.05rem;color:#2c3e50;margin-bottom:16px;line-height:1.6}
+        .modal-box .emoji-big{font-size:2.8rem;margin-bottom:2px}
+        .modal-box h2{font-size:1.4rem;font-weight:800;color:#E67E22;margin-bottom:4px}
+        .modal-box .modal-text{font-size:0.85rem;color:#2c3e50;margin-bottom:12px;line-height:1.5}
         .modal-box .modal-text .highlight{color:#E67E22;font-weight:700}
-        .btn-modal{border:none;color:#fff;font-size:1.2rem;font-weight:700;padding:12px 32px;border-radius:60px;cursor:pointer;transition:0.3s;font-family:'Open Sans',sans-serif;margin:6px;min-width:140px}
+        .btn-modal{border:none;color:#fff;font-size:0.9rem;font-weight:700;padding:10px 20px;border-radius:40px;cursor:pointer;transition:0.3s;font-family:'Open Sans',sans-serif;margin:4px;min-width:100px}
         .btn-modal-primary{background:#E67E22;box-shadow:0 6px 24px rgba(230,126,34,0.4)}
         .btn-modal-primary:hover{transform:scale(1.05)}
         .btn-modal-green{background:#4CAF50;box-shadow:0 6px 24px rgba(76,175,80,0.4)}
         .btn-modal-green:hover{transform:scale(1.05)}
         .btn-modal-red{background:#f44336;box-shadow:0 6px 24px rgba(244,67,54,0.4)}
         .btn-modal-red:hover{transform:scale(1.05)}
-        .btn-modal-small{font-size:0.9rem;padding:8px 20px;min-width:100px}
+        .btn-modal-small{font-size:0.75rem;padding:6px 14px;min-width:80px}
         #finish-modal .modal-box{border-color:#4CAF50}
         #finish-modal .modal-box h2{color:#4CAF50}
-        .result-row{display:flex;justify-content:center;gap:20px;margin:12px 0;flex-wrap:wrap}
-        .result-item{background:rgba(255,255,255,0.7);padding:6px 16px;border-radius:40px;font-weight:700;color:#2c3e50;border:1px solid #E67E22}
-        .result-item span{color:#E67E22;font-size:1.1rem}
-        .error-list{text-align:left;margin:12px 0;max-height:200px;overflow-y:auto;padding:0 8px}
-        .error-item{padding:8px 12px;margin-bottom:4px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;background:rgba(255,255,255,0.5);flex-wrap:wrap;gap:4px}
+        
+        .result-row{display:flex;justify-content:center;gap:10px;margin:10px 0;flex-wrap:wrap}
+        .result-item{background:rgba(255,255,255,0.7);padding:4px 12px;border-radius:30px;font-weight:700;color:#2c3e50;border:1px solid #E67E22;font-size:0.7rem}
+        .result-item span{color:#E67E22;font-size:0.85rem}
+        
+        .error-list{text-align:left;margin:10px 0;max-height:200px;overflow-y:auto;padding:0 6px}
+        .error-item{padding:6px 10px;margin-bottom:4px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;background:rgba(255,255,255,0.5);flex-wrap:wrap;gap:4px}
         .error-item .correct-answer{color:#4CAF50;font-weight:700}
         .error-item .chosen-label{color:#E67E22;font-weight:600}
+        
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes popIn{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
-        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
         
-        /* ================================================================ */
-        /* ★★★ АДАПТАЦИЯ ТОЛЬКО ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ ★★★ */
-        /* ================================================================ */
-        
-        @media(max-width:768px){
-            #game-wrapper{padding:10px}
-            #game-container{border-radius:20px;border-width:3px}
-            .level{padding:10px}
-            .level-title{font-size:1.1rem;padding:4px 14px;margin-bottom:6px;border-width:2px}
-            
-            /* ★★★ БРЕНД-БЛОК ★★★ */
-            #farm-level #brand-block{top:6px;left:6px;padding:4px 8px 5px 8px;max-width:160px;border-radius:12px;border-width:2px}
-            #farm-level #brand-block .logo-icon{width:22px;height:22px}
-            #farm-level #brand-block .logo-text{font-size:0.65rem}
-            #farm-level #brand-block .instruction-text{font-size:0.5rem;padding-top:3px}
-            
-            /* ★★★ КНОПКА СБРОСА ★★★ */
-            #farm-level #reset-btn{top:6px;right:6px;font-size:0.55rem;padding:3px 10px}
-            
-            /* ★★★ ПАНЕЛИ ★★★ */
-            #farm-level #items-panel-left{left:6px;padding:8px 6px;gap:5px;border-radius:20px}
-            #farm-level #items-panel-right{right:6px;padding:8px 6px;gap:5px;border-radius:20px}
-            
-            /* ★★★ КАРТОЧКИ ★★★ */
-            #farm-level .item-card{width:44px;height:44px;padding:3px}
-            #farm-level .item-card img{max-width:36px;max-height:36px}
-            
-            /* ★★★ 2-Й И 3-Й УРОВНИ ★★★ */
-            .animal-grid{gap:10px;max-width:380px}
-            .animal-grid .animal-btn{min-height:60px;padding:10px;border-width:3px}
-            .animal-grid .animal-btn .star{font-size:1.6rem;top:-6px;right:-6px}
-            .question-counter{font-size:0.75rem;padding:3px 12px}
-            .sound-repeat-btn{width:56px;height:56px;font-size:2.2rem;border-width:2px}
-            .dont-know-btn{font-size:0.85rem;padding:4px 14px}
-            #l2-question, #l3-question{font-size:1.2rem;padding:3px 16px;min-height:34px}
-            .progress-bar{width:160px;height:5px}
-            
-            /* ★★★ СТРЕЛКИ ★★★ */
-            #arrow-left{width:40px;height:40px;font-size:1.3rem;bottom:10px;left:12px}
-            #arrow-right{width:40px;height:40px;font-size:1.3rem;bottom:10px;right:12px}
-            
-            /* ★★★ КНОПКИ ★★★ */
-            #bottom-right-buttons{bottom:12px;right:12px;gap:8px}
-            #music-toggle{width:42px;height:42px;font-size:1.2rem;border-width:2px}
-            #exit-btn{width:42px;height:42px;font-size:1.2rem;border-width:2px}
-            
-            #test-btn{bottom:12px;right:50%;transform:translateX(50%);font-size:0.65rem;padding:4px 12px}
-            
-            /* ★★★ МОДАЛКИ ★★★ */
-            .modal-box{padding:20px 20px;border-radius:32px;border-width:3px}
-            .modal-box h2{font-size:1.5rem}
-            .modal-box .modal-text{font-size:0.9rem}
-            .btn-modal{font-size:0.95rem;padding:8px 20px;min-width:100px}
-            .btn-modal-small{font-size:0.75rem;padding:6px 14px;min-width:80px}
-            .result-item{font-size:0.75rem;padding:4px 12px}
-            .result-item span{font-size:0.9rem}
-            .error-item{font-size:0.75rem;padding:5px 8px}
+        /* ===== ДЛЯ ПЛАНШЕТОВ ===== */
+        @media(min-width:768px){
+            #game-wrapper{padding:20px}
+            #game-container{border-radius:28px;border-width:4px}
+            #farm-level .item-card{width:60px;height:60px;min-width:60px;min-height:60px}
+            #farm-level .item-card img{max-width:48px;max-height:48px}
+            .animal-grid{grid-template-columns:repeat(4,1fr);gap:15px;max-width:520px}
+            .animal-grid .animal-btn{min-height:80px;padding:14px}
+            .level-title{font-size:1.2rem;padding:6px 18px}
+            #arrow-left,#arrow-right{width:44px;height:44px;font-size:1.4rem}
+            #music-toggle,#exit-btn{width:44px;height:44px;font-size:1.3rem}
+            #test-btn{font-size:0.75rem;padding:6px 18px}
+            #farm-level #brand-block{max-width:200px;padding:5px 10px 6px 10px}
+            #farm-level #brand-block .logo-icon{width:24px;height:24px}
+            #farm-level #farm-level #brand-block .logo-text{font-size:0.7rem}
+            #farm-level #items-panel-bottom{max-height:90px;padding:8px 12px;gap:10px}
+            #farm-level #reset-btn{font-size:0.6rem;padding:3px 12px}
+            .modal-box{padding:28px 32px;border-radius:40px}
+            .modal-box h2{font-size:1.8rem}
+            #farm-level #tap-instruction{font-size:0.75rem;padding:8px 24px;bottom:110px}
         }
         
-        @media(max-width:480px){
-            #game-wrapper{padding:5px}
-            #game-container{border-radius:16px;border-width:2px}
-            .level{padding:5px}
-            .level-title{font-size:0.85rem;padding:3px 10px;margin-bottom:4px;border-width:2px}
-            
-            /* ★★★ БРЕНД-БЛОК ★★★ */
-            #farm-level #brand-block{top:4px;left:4px;padding:3px 6px 4px 6px;max-width:120px;border-radius:10px;border-width:2px}
-            #farm-level #brand-block .logo-icon{width:18px;height:18px}
-            #farm-level #brand-block .logo-text{font-size:0.5rem}
-            #farm-level #brand-block .instruction-text{font-size:0.4rem;padding-top:2px}
-            
-            /* ★★★ КНОПКА СБРОСА ★★★ */
-            #farm-level #reset-btn{top:4px;right:4px;font-size:0.4rem;padding:2px 8px;border-radius:20px}
-            
-            /* ★★★ ПАНЕЛИ ★★★ */
-            #farm-level #items-panel-left{left:4px;padding:5px 3px;gap:4px;border-radius:16px}
-            #farm-level #items-panel-right{right:4px;padding:5px 3px;gap:4px;border-radius:16px}
-            
-            /* ★★★ КАРТОЧКИ ★★★ */
-            #farm-level .item-card{width:34px;height:34px;padding:2px;border-width:1.5px}
-            #farm-level .item-card img{max-width:28px;max-height:28px}
-            
-            /* ★★★ 2-Й И 3-Й УРОВНИ ★★★ */
-            .animal-grid{gap:8px;max-width:280px}
-            .animal-grid .animal-btn{min-height:50px;padding:8px;border-width:2px}
-            .animal-grid .animal-btn .star{font-size:1.2rem;top:-4px;right:-4px}
-            .animal-grid .animal-btn img{width:60%;height:60%}
-            .question-counter{font-size:0.65rem;padding:2px 10px}
-            .sound-repeat-btn{width:44px;height:44px;font-size:1.8rem;border-width:2px}
-            .dont-know-btn{font-size:0.7rem;padding:3px 12px}
-            #l2-question, #l3-question{font-size:0.95rem;padding:2px 12px;min-height:28px}
-            .progress-bar{width:120px;height:4px}
-            
-            /* ★★★ СТРЕЛКИ ★★★ */
-            #arrow-left{width:32px;height:32px;font-size:1rem;bottom:6px;left:6px;border-width:2px}
-            #arrow-right{width:32px;height:32px;font-size:1rem;bottom:6px;right:6px;border-width:2px}
-            
-            /* ★★★ КНОПКИ ★★★ */
-            #bottom-right-buttons{bottom:6px;right:6px;gap:4px}
-            #music-toggle{width:32px;height:32px;font-size:0.9rem;border-width:2px}
-            #exit-btn{width:32px;height:32px;font-size:0.9rem;border-width:2px}
-            
-            #test-btn{bottom:6px;right:50%;transform:translateX(50%);font-size:0.5rem;padding:2px 8px;border-radius:20px}
-            
-            /* ★★★ МОДАЛКИ ★★★ */
-            .modal-box{padding:14px 14px;border-radius:24px;border-width:2px}
-            .modal-box h2{font-size:1.2rem}
-            .modal-box .modal-text{font-size:0.75rem}
-            .btn-modal{font-size:0.75rem;padding:6px 14px;min-width:70px}
-            .btn-modal-small{font-size:0.6rem;padding:4px 10px;min-width:60px}
-            .result-item{font-size:0.6rem;padding:3px 8px}
-            .result-item span{font-size:0.7rem}
-            .error-item{font-size:0.6rem;padding:4px 6px}
-        }
-        
-        @media(max-width:380px){
-            #farm-level .item-card{width:28px;height:28px;padding:1px;border-width:1px}
-            #farm-level .item-card img{max-width:22px;max-height:22px}
-            #farm-level #brand-block{max-width:100px}
-            #farm-level #brand-block .logo-text{font-size:0.4rem}
-            .animal-grid .animal-btn{min-height:40px;padding:5px;border-width:2px}
-            .sound-repeat-btn{width:36px;height:36px;font-size:1.4rem}
-            #arrow-left,#arrow-right{width:26px;height:26px;font-size:0.8rem}
-            #music-toggle,#exit-btn{width:26px;height:26px;font-size:0.7rem}
+        @media(min-width:1024px){
+            #farm-level #items-panel-bottom{max-height:100px;gap:12px}
+            #farm-level .item-card{width:70px;height:70px;min-width:70px;min-height:70px}
+            #farm-level .item-card img{max-width:56px;max-height:56px}
+            #farm-level #brand-block .instruction-text{display:block}
+            #farm-level #tap-instruction{display:none}
         }
     </style>
 </head>
-<!-- ВЕСЬ HTML И JS ОСТАЁТСЯ ТАКИМ ЖЕ, КАК БЫЛ -->
 <body>
 
 <div id="game-wrapper">
@@ -240,20 +178,18 @@
     <div id="farm-level" class="level active">
         <a href="catalog.html" id="brand-block">
             <div class="brand-row">
-                <div class="logo-icon">
-                    <img src="images/logo-icon.png" alt="LinguaJourney" onerror="this.style.display='none'; this.parentElement.textContent='LJ';">
-                </div>
+                <div class="logo-icon"><img src="images/logo-icon.png" alt="LinguaJourney" onerror="this.style.display='none'; this.parentElement.textContent='LJ';"></div>
                 <div class="logo-text">Lingua<span>Journey</span> <span class="games-label">Games</span></div>
             </div>
-            <div class="instruction-text">
-                <span class="icon">⭐</span> Перетащи животных и другие элементы по местам на ферме Макдональда
-            </div>
+            <div class="instruction-text"><span class="icon">⭐</span> Нажми на карточку, затем на её место</div>
         </a>
         <div id="shadow-zones"></div>
         <div id="drop-zones"></div>
+        <div id="items-panel-bottom"></div>
         <div id="items-panel-left"></div>
         <div id="items-panel-right"></div>
-        <button id="reset-btn" onclick="resetFarm()">🔄 Сброс</button>
+        <button id="reset-btn" onclick="resetFarm()">🔄</button>
+        <div id="tap-instruction">👆 <span class="highlight">Нажми</span> на карточку, затем <span class="highlight">на её место</span> на ферме</div>
     </div>
 
     <!-- ===== УРОВЕНЬ 2 ===== -->
@@ -262,7 +198,7 @@
         <div class="question-counter" id="l2-counter">1 of 11</div>
         <div class="progress-bar"><div class="fill" id="l2-progress"></div></div>
         <div class="sound-repeat-btn" id="l2-repeat-btn" onclick="repeatLevel2Sound()">🔉</div>
-        <div id="l2-question" style="font-size:1.5rem;font-weight:700;color:#2c3e50;margin-bottom:8px;background:rgba(255,255,255,0.7);padding:4px 20px;border-radius:40px;min-height:38px;z-index:2;text-align:center;">👂 Listen</div>
+        <div id="l2-question">👂 Listen</div>
         <div class="animal-grid" id="l2-grid"></div>
         <button class="dont-know-btn" id="l2-dont-know" onclick="level2DontKnow()">🤷 I don't know</button>
     </div>
@@ -273,7 +209,7 @@
         <div class="question-counter" id="l3-counter">1 of 11</div>
         <div class="progress-bar"><div class="fill" id="l3-progress"></div></div>
         <div class="sound-repeat-btn" id="l3-repeat-btn" onclick="repeatLevel3Sound()">🔉</div>
-        <div id="l3-question" style="font-size:1.5rem;font-weight:700;color:#2c3e50;margin-bottom:8px;background:rgba(255,255,255,0.7);padding:4px 20px;border-radius:40px;min-height:38px;z-index:2;text-align:center;">👂 Who says that?</div>
+        <div id="l3-question">👂 Who says that?</div>
         <div class="animal-grid" id="l3-grid"></div>
         <button class="dont-know-btn" id="l3-dont-know" onclick="level3DontKnow()">🤷 I don't know</button>
     </div>
@@ -294,7 +230,7 @@
         <div class="modal-box">
             <h2>👋 Выйти из игры?</h2>
             <div class="modal-text">Результаты <span class="highlight">не будут сохранены</span>.<br>Ты уверена, что хочешь выйти?</div>
-            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
                 <button class="btn-modal btn-modal-red" onclick="exitGame()">Выйти</button>
                 <button class="btn-modal btn-modal-primary" onclick="closeModal('exit-modal')">Продолжить</button>
             </div>
@@ -305,7 +241,7 @@
         <div class="modal-box">
             <button class="close-modal" onclick="closeModal('test-modal')">✕</button>
             <h2>📝 Режим «Тест»</h2>
-            <div class="modal-text">В этом режиме игра <span class="highlight">запоминает твои ответы</span>.<br><br>После прохождения всех трёх уровней ты увидишь:<br>✅ сколько правильных ответов в каждой игре<br>✅ сможешь посмотреть свои ошибки<br><br><span style="font-size:0.9rem;color:#888;">Подсказки и тряска картинок отключены.</span></div>
+            <div class="modal-text">В этом режиме игра <span class="highlight">запоминает твои ответы</span>.<br><br>После прохождения всех трёх уровней ты увидишь:<br>✅ сколько правильных ответов в каждой игре<br>✅ сможешь посмотреть свои ошибки<br><br><span style="font-size:0.75rem;color:#888;">Подсказки и тряска картинок отключены.</span></div>
             <button class="btn-modal btn-modal-green" onclick="startTestMode()">🚀 Начать тест</button>
         </div>
     </div>
@@ -328,7 +264,7 @@
                 <div class="result-item">🎵 Animal Sounds: <span id="res-level3">0</span>/11</div>
             </div>
             <button class="btn-modal btn-modal-primary btn-modal-small" onclick="showErrors()">📋 Посмотреть ошибки</button>
-            <div style="margin-top:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+            <div style="margin-top:10px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
                 <button class="btn-modal btn-modal-green btn-modal-small" onclick="restartGame()">🔄 Пройти заново</button>
                 <button class="btn-modal btn-modal-primary btn-modal-small" onclick="closeModal('results-modal'); exitTestMode();">🏠 К тренировке</button>
             </div>
@@ -340,7 +276,7 @@
             <button class="close-modal" onclick="closeModal('errors-modal'); openModal('results-modal');">✕</button>
             <h2>📋 Ошибки</h2>
             <div id="errors-list-container" class="error-list"><div class="modal-text" style="text-align:center;color:#888;">Загружаю ошибки...</div></div>
-            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;">
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:10px;">
                 <button class="btn-modal btn-modal-primary btn-modal-small" onclick="closeModal('errors-modal'); openModal('results-modal');">⬅️ К результатам</button>
                 <button class="btn-modal btn-modal-green btn-modal-small" onclick="restartGame()">🔄 Пройти тест заново</button>
             </div>
@@ -446,7 +382,7 @@
     }
 
     // ============================================================
-    // 3. УРОВЕНЬ 1: ФЕРМА
+    // 3. УРОВЕНЬ 1: ФЕРМА (TAP-TO-PLACE)
     // ============================================================
     const farmItems = [
         { id: 'cow', name: 'Cow', x: 494, y: 482, w: 234, h: 149, sound: 'cow' },
@@ -467,14 +403,12 @@
         { id: 'sun', name: 'Sun', x: 270, y: 118, w: 140, h: 140, sound: null },
     ];
 
+    // Разделение на левую и правую панель (для совместимости, но используется одна нижняя)
     const leftItems = ['cow', 'horse', 'duck', 'pig', 'sheep', 'cat', 'dog', 'chicken', 'farmer', 'bee'];
     const rightItems = ['bird', 'frog', 'cloud1', 'cloud2', 'cloud3', 'sun'];
 
     let farmPlaced = [];
-    let farmDraggedElement = null;
-    let farmDragOffsetX = 0;
-    let farmDragOffsetY = 0;
-    let farmIsDragging = false;
+    let farmSelectedCard = null;
     let farmIsComplete = false;
     let farmTestResults = {};
     let farmChosenAnswers = {};
@@ -484,6 +418,7 @@
         farmPlaced = [];
         farmTestResults = {};
         farmChosenAnswers = {};
+        farmSelectedCard = null;
         if (farmAutoTransitionTimer) {
             clearTimeout(farmAutoTransitionTimer);
             farmAutoTransitionTimer = null;
@@ -491,7 +426,7 @@
         createFarmShadows();
         createFarmDropZones();
         createFarmItemsPanel();
-        initFarmDragAndDrop();
+        initFarmTapToPlace();
         document.getElementById('bg-farm').style.display = 'block';
         document.getElementById('bg-levels').style.display = 'none';
         if (isTestMode) {
@@ -532,21 +467,22 @@
             zone.style.top = (item.y - item.h/2) + 'px';
             zone.style.width = item.w + 'px';
             zone.style.height = item.h + 'px';
+            zone.style.minWidth = '50px';
+            zone.style.minHeight = '50px';
             container.appendChild(zone);
         });
     }
 
     function createFarmItemsPanel() {
-        const leftPanel = document.getElementById('items-panel-left');
-        const rightPanel = document.getElementById('items-panel-right');
-        leftPanel.innerHTML = '';
-        rightPanel.innerHTML = '';
+        const bottomPanel = document.getElementById('items-panel-bottom');
+        bottomPanel.innerHTML = '';
 
-        farmItems.forEach(item => {
+        // Все элементы в одну нижнюю панель
+        const allItems = [...farmItems];
+        allItems.forEach(item => {
             const card = document.createElement('div');
             card.className = 'item-card';
             card.dataset.itemId = item.id;
-            card.draggable = false;
             const img = document.createElement('img');
             img.src = 'images/' + item.id + '.png';
             img.alt = item.name;
@@ -555,126 +491,177 @@
                 this.parentElement.textContent = item.id[0].toUpperCase();
             };
             card.appendChild(img);
-
-            if (leftItems.includes(item.id)) {
-                leftPanel.appendChild(card);
-            } else {
-                rightPanel.appendChild(card);
-            }
+            bottomPanel.appendChild(card);
         });
     }
 
-    // ============================================================
-    // 4. ПЕРЕТАСКИВАНИЕ
-    // ============================================================
-    function initFarmDragAndDrop() {
+    // ★★★ TAP-TO-PLACE (ВМЕСТО DRAG-AND-DROP) ★★★
+    function initFarmTapToPlace() {
+        // Выбор карточки
         const cards = document.querySelectorAll('#farm-level .item-card');
         cards.forEach(card => {
-            card.addEventListener('mousedown', function(e) {
-                e.preventDefault();
+            card.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (this.classList.contains('placed')) return;
+                
+                // Снимаем выделение с предыдущей
+                if (farmSelectedCard) {
+                    farmSelectedCard.classList.remove('selected');
+                }
+                
+                // Выделяем текущую
+                this.classList.add('selected');
+                farmSelectedCard = this;
                 playSound('click');
-                startFarmDrag(this, e.clientX, e.clientY);
+                
+                // Подсвечиваем все зоны
+                document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
+                    if (!zone.classList.contains('placed')) {
+                        zone.classList.add('active');
+                    }
+                });
             });
+            
+            // Для touch-устройств
             card.addEventListener('touchstart', function(e) {
                 e.preventDefault();
-                const touch = e.touches[0];
-                startFarmDrag(this, touch.clientX, touch.clientY);
+                if (this.classList.contains('placed')) return;
+                
+                if (farmSelectedCard) {
+                    farmSelectedCard.classList.remove('selected');
+                }
+                this.classList.add('selected');
+                farmSelectedCard = this;
+                playSound('click');
+                
+                document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
+                    if (!zone.classList.contains('placed')) {
+                        zone.classList.add('active');
+                    }
+                });
             }, { passive: false });
         });
 
-        document.addEventListener('mousemove', function(e) {
-            if (farmIsDragging && farmDraggedElement) farmMoveFarmDrag(e.clientX, e.clientY);
-        });
-        document.addEventListener('touchmove', function(e) {
-            if (farmIsDragging && farmDraggedElement) {
-                const touch = e.touches[0];
-                farmMoveFarmDrag(touch.clientX, touch.clientY);
-                e.preventDefault();
-            }
-        }, { passive: false });
-        document.addEventListener('mouseup', function(e) {
-            if (farmIsDragging && farmDraggedElement) farmEndFarmDrag(e.clientX, e.clientY);
-        });
-        document.addEventListener('touchend', function(e) {
-            if (farmIsDragging && farmDraggedElement) {
-                const touch = e.changedTouches[0];
-                farmEndFarmDrag(touch.clientX, touch.clientY);
-            }
-        });
-    }
-
-    function startFarmDrag(card, clientX, clientY) {
-        if (card.classList.contains('placed')) return;
-        const rect = card.getBoundingClientRect();
-        farmDragOffsetX = clientX - rect.left;
-        farmDragOffsetY = clientY - rect.top;
-        farmDraggedElement = card;
-        farmIsDragging = true;
-        const clone = card.cloneNode(true);
-        clone.className = 'item-card dragging';
-        clone.id = 'drag-clone';
-        clone.style.position = 'fixed';
-        clone.style.width = rect.width + 'px';
-        clone.style.height = rect.height + 'px';
-        clone.style.left = (clientX - farmDragOffsetX) + 'px';
-        clone.style.top = (clientY - farmDragOffsetY) + 'px';
-        clone.style.zIndex = '1000';
-        clone.style.pointerEvents = 'none';
-        clone.style.opacity = '0.9';
-        clone.style.transform = 'scale(1.15)';
-        document.body.appendChild(clone);
-        card.style.opacity = '0.3';
-    }
-
-    function farmMoveFarmDrag(clientX, clientY) {
-        const clone = document.getElementById('drag-clone');
-        if (clone) {
-            clone.style.left = (clientX - farmDragOffsetX) + 'px';
-            clone.style.top = (clientY - farmDragOffsetY) + 'px';
-        }
-    }
-
-    function farmEndFarmDrag(clientX, clientY) {
-        const clone = document.getElementById('drag-clone');
-        if (clone) clone.remove();
-        if (farmDraggedElement) farmDraggedElement.style.opacity = '1';
-        const itemId = farmDraggedElement ? farmDraggedElement.dataset.itemId : null;
-        let targetZone = null;
-        document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
-            const zoneRect = zone.getBoundingClientRect();
-            if (clientX >= zoneRect.left && clientX <= zoneRect.right &&
-                clientY >= zoneRect.top && clientY <= zoneRect.bottom) {
-                targetZone = zone;
-            }
-        });
-        if (targetZone && itemId) {
-            const zoneItemId = targetZone.dataset.itemId;
-            if (zoneItemId === itemId && !targetZone.classList.contains('placed')) {
-                if (isTestMode) {
-                    farmTestResults[itemId] = true;
-                    farmChosenAnswers[itemId] = itemId;
+        // Клик по зоне для размещения
+        const zones = document.querySelectorAll('#farm-level .drop-zone');
+        zones.forEach(zone => {
+            zone.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (this.classList.contains('placed')) return;
+                if (!farmSelectedCard) {
+                    // Если нет выбранной карточки — подсветить зону красным
+                    this.classList.add('wrong');
+                    setTimeout(() => {
+                        this.classList.remove('wrong');
+                    }, 400);
+                    return;
                 }
-                farmPlaceItem(itemId, targetZone);
-            } else if (zoneItemId === itemId && targetZone.classList.contains('placed')) {
-                // УЖЕ СТОИТ
-            } else {
-                if (isTestMode) {
-                    farmTestResults[itemId] = false;
-                    farmChosenAnswers[itemId] = itemId;
-                    targetZone.style.border = '3px solid #f44336';
-                    setTimeout(() => { targetZone.style.border = 'none'; }, 500);
+                
+                const cardId = farmSelectedCard.dataset.itemId;
+                const zoneId = this.dataset.itemId;
+                
+                // Проверяем, не заблокирован ли элемент в тесте
+                if (isTestMode && farmTestLocked && farmTestLocked[cardId]) {
+                    return;
+                }
+                
+                if (cardId === zoneId) {
+                    // Правильно!
+                    if (isTestMode) {
+                        farmTestResults[cardId] = true;
+                        if (!farmTestLocked) farmTestLocked = {};
+                        farmTestLocked[cardId] = true;
+                        farmChosenAnswers[cardId] = cardId;
+                    }
+                    // Убираем выделение с карточки
+                    farmSelectedCard.classList.remove('selected');
+                    // Размещаем
+                    farmPlaceItem(cardId, this);
+                    farmSelectedCard = null;
+                    // Убираем подсветку зон
+                    document.querySelectorAll('#farm-level .drop-zone').forEach(z => {
+                        z.classList.remove('active');
+                    });
                 } else {
+                    // Неправильно!
+                    if (isTestMode) {
+                        farmTestResults[cardId] = false;
+                        if (!farmTestLocked) farmTestLocked = {};
+                        farmTestLocked[cardId] = true;
+                        farmChosenAnswers[cardId] = cardId;
+                    }
+                    this.classList.add('wrong');
+                    setTimeout(() => {
+                        this.classList.remove('wrong');
+                    }, 400);
                     playSound('nooo');
-                    targetZone.style.animation = 'shake 0.3s ease';
-                    setTimeout(() => { targetZone.style.animation = ''; }, 300);
                 }
+            });
+            
+            // Для touch-устройств
+            zone.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (this.classList.contains('placed')) return;
+                if (!farmSelectedCard) {
+                    this.classList.add('wrong');
+                    setTimeout(() => {
+                        this.classList.remove('wrong');
+                    }, 400);
+                    return;
+                }
+                
+                const cardId = farmSelectedCard.dataset.itemId;
+                const zoneId = this.dataset.itemId;
+                
+                if (isTestMode && farmTestLocked && farmTestLocked[cardId]) {
+                    return;
+                }
+                
+                if (cardId === zoneId) {
+                    if (isTestMode) {
+                        farmTestResults[cardId] = true;
+                        if (!farmTestLocked) farmTestLocked = {};
+                        farmTestLocked[cardId] = true;
+                        farmChosenAnswers[cardId] = cardId;
+                    }
+                    farmSelectedCard.classList.remove('selected');
+                    farmPlaceItem(cardId, this);
+                    farmSelectedCard = null;
+                    document.querySelectorAll('#farm-level .drop-zone').forEach(z => {
+                        z.classList.remove('active');
+                    });
+                } else {
+                    if (isTestMode) {
+                        farmTestResults[cardId] = false;
+                        if (!farmTestLocked) farmTestLocked = {};
+                        farmTestLocked[cardId] = true;
+                        farmChosenAnswers[cardId] = cardId;
+                    }
+                    this.classList.add('wrong');
+                    setTimeout(() => {
+                        this.classList.remove('wrong');
+                    }, 400);
+                    playSound('nooo');
+                }
+            }, { passive: false });
+        });
+
+        // Клик вне зоны — снять выделение
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#farm-level .item-card') && !e.target.closest('#farm-level .drop-zone')) {
+                if (farmSelectedCard) {
+                    farmSelectedCard.classList.remove('selected');
+                    farmSelectedCard = null;
+                }
+                document.querySelectorAll('#farm-level .drop-zone').forEach(z => {
+                    z.classList.remove('active');
+                });
             }
-        }
-        farmIsDragging = false;
-        farmDraggedElement = null;
-        const cloneCheck = document.getElementById('drag-clone');
-        if (cloneCheck) cloneCheck.remove();
+        });
     }
+
+    let farmTestLocked = {};
 
     function farmPlaceItem(itemId, zone) {
         zone.classList.add('placed');
@@ -706,8 +693,9 @@
             playSound('yay');
         }
         
-        zone.style.transform = 'scale(1.15)';
+        zone.style.transform = 'scale(1.1)';
         setTimeout(() => { zone.style.transform = 'scale(1)'; }, 300);
+        
         if (farmPlaced.length === farmItems.length) {
             farmIsComplete = true;
             if (farmAutoTransitionTimer) {
@@ -734,20 +722,20 @@
         farmIsComplete = false;
         farmTestResults = {};
         farmChosenAnswers = {};
+        farmSelectedCard = null;
+        farmTestLocked = {};
         if (farmAutoTransitionTimer) {
             clearTimeout(farmAutoTransitionTimer);
             farmAutoTransitionTimer = null;
         }
         document.querySelectorAll('#farm-level .item-card').forEach(card => {
-            card.classList.remove('placed');
+            card.classList.remove('placed', 'selected');
             card.style.display = 'flex';
-            card.style.opacity = '1';
         });
         document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
-            zone.classList.remove('placed');
+            zone.classList.remove('placed', 'active', 'wrong');
             zone.innerHTML = '';
             zone.style.transform = '';
-            zone.style.border = 'none';
         });
         document.querySelectorAll('#farm-level .shadow-zone').forEach(shadow => {
             shadow.classList.remove('placed');
@@ -1351,9 +1339,11 @@
     window.level3DontKnow = level3DontKnow;
     window.resetFarm = resetFarm;
 
-    console.log('🐮 Old MacDonald\'s Farm — FINAL!');
-    console.log('✅ Десктопная версия НЕ ТРОНУТА');
-    console.log('✅ Добавлена адаптация для телефонов и планшетов');
+    console.log('🐮 Old MacDonald\'s Farm — МОБИЛЬНАЯ ВЕРСИЯ!');
+    console.log('✅ Tap-to-place вместо drag-and-drop');
+    console.log('✅ Карточки снизу');
+    console.log('✅ Сетка 3×4 для 2-й и 3-й игр');
+    console.log('✅ Увеличенные зоны для пальцев');
 </script>
 
 </body>
