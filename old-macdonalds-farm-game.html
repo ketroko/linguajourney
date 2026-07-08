@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Old MacDonald's Farm — LinguaJourney Games</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+        body{background:#F9FCB8;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Open Sans',sans-serif;touch-action:none;overflow:hidden}
+        #game-wrapper{position:relative;width:100vw;height:100vh;max-width:1100px;max-height:1100px;padding:20px;display:flex;align-items:center;justify-content:center}
+        #game-container{position:relative;width:100%;height:100%;background:#F9FCB8;overflow:hidden;touch-action:none;border-radius:32px;box-shadow:0 8px 40px rgba(0,0,0,0.15);border:4px solid #E67E22}
+        .level-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:1;border-radius:28px}
+        .level{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10;padding:20px}
+        .level.active{display:flex}
+        .level-title{font-size:1.4rem;font-weight:800;color:#E67E22;background:rgba(255,255,255,0.92);padding:6px 20px;border-radius:60px;margin-bottom:10px;border:3px solid #E67E22;backdrop-filter:blur(4px);text-align:center;z-index:2;box-shadow:0 4px 16px rgba(230,126,34,0.15)}
+        #farm-level .shadow-zone{position:absolute;z-index:2;pointer-events:none;transition:opacity 0.4s ease;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        #farm-level .shadow-zone img{width:100%;height:100%;object-fit:contain;opacity:0.4;filter:grayscale(1) brightness(0.5);transition:opacity 0.4s ease}
+        #farm-level .shadow-zone.placed{opacity:0;pointer-events:none}
+        #farm-level .shadow-zone.placed img{opacity:0}
+        #farm-level #brand-block{position:absolute;top:10px;left:8px;z-index:30;display:flex;flex-direction:column;align-items:flex-start;gap:3px;background:rgba(255,255,255,0.92);padding:6px 12px 8px 10px;border-radius:16px;border:2px solid #E67E22;backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(0,0,0,0.1);max-width:230px;text-decoration:none;cursor:pointer}
+        #farm-level #brand-block .brand-row{display:flex;align-items:center;gap:8px}
+        #farm-level #brand-block .logo-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;overflow:hidden;flex-shrink:0}
+        #farm-level #brand-block .logo-icon img{width:100%;height:100%;object-fit:cover}
+        #farm-level #brand-block .logo-text{font-weight:700;font-size:0.75rem;color:#2c3e50;letter-spacing:0.3px}
+        #farm-level #brand-block .logo-text span{color:#E67E22}
+        #farm-level #brand-block .logo-text .games-label{font-size:0.5rem;color:#888}
+        #farm-level #brand-block .instruction-text{font-size:0.6rem;color:#555;font-weight:500;line-height:1.2;padding-left:2px;border-top:1px solid rgba(230,126,34,0.15);padding-top:4px;margin-top:1px;width:100%}
+        #farm-level #brand-block .instruction-text .icon{margin-right:3px}
+        #farm-level #items-panel-left{position:absolute;top:123px;left:15px;display:flex;flex-direction:column;gap:8px;z-index:20;background:rgba(255,255,255,0.92);padding:12px 10px;border-radius:30px;box-shadow:0 4px 20px rgba(0,0,0,0.12);border:2px solid #E67E22;backdrop-filter:blur(4px);max-height:calc(80vh - 110px);overflow-y:auto}
+        #farm-level #items-panel-right{position:absolute;top:131px;left:958px;display:flex;flex-direction:column;gap:8px;z-index:20;background:rgba(255,255,255,0.92);padding:12px 10px;border-radius:30px;box-shadow:0 4px 20px rgba(0,0,0,0.12);border:2px solid #E67E22;backdrop-filter:blur(4px);max-height:calc(80vh - 110px);overflow-y:auto}
+        #farm-level .item-card{width:60px;height:60px;cursor:grab;touch-action:none;transition:transform 0.2s;border-radius:12px;background:rgba(255,255,255,0.7);padding:4px;border:2px solid #E67E22;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        #farm-level .item-card:active{cursor:grabbing;transform:scale(0.9)}
+        #farm-level .item-card img{width:100%;height:100%;object-fit:contain;pointer-events:none;max-width:50px;max-height:50px}
+        #farm-level .item-card.dragging{opacity:0.4;transform:scale(0.8)}
+        #farm-level .item-card.placed{display:none}
+        #farm-level .drop-zone{position:absolute;z-index:5;border-radius:12px;border:none;background:transparent;transition:all 0.3s;display:flex;align-items:center;justify-content:center;pointer-events:none}
+        #farm-level .drop-zone.placed{border:none;background:transparent;pointer-events:none}
+        #farm-level .drop-zone.placed img{width:100%;height:100%;object-fit:contain;animation:popIn 0.3s ease;max-width:90%;max-height:90%}
+        #farm-level #reset-btn{position:absolute;top:12px;right:20px;z-index:30;background:rgba(255,255,255,0.92);border:2px solid #E67E22;border-radius:40px;padding:4px 14px;font-size:0.65rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 10px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
+        #farm-level #reset-btn:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
+        #farm-level #reset-btn.test-hidden{display:none!important}
+        .animal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:520px;width:100%;z-index:2}
+        .animal-grid .animal-btn{background:rgba(255,255,255,0.9);border-radius:20px;padding:12px;border:4px solid #E67E22;cursor:pointer;transition:0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1/1;box-shadow:0 4px 16px rgba(0,0,0,0.08);backdrop-filter:blur(4px);min-height:70px;position:relative;gap:2px}
+        .animal-grid .animal-btn:active{transform:scale(0.95)}
+        .animal-grid .animal-btn img{width:70%;height:70%;object-fit:contain;pointer-events:none;transition:0.3s}
+        .animal-grid .animal-btn .animal-label{display:none}
+        .animal-grid .animal-btn.correct{border-color:#4CAF50;background:rgba(76,175,80,0.2)}
+        .animal-grid .animal-btn.correct img{transform:scale(1.1)}
+        .animal-grid .animal-btn.wrong{border-color:#f44336;background:rgba(244,67,54,0.15)}
+        .animal-grid .animal-btn .star{position:absolute;top:-8px;right:-8px;font-size:2rem;animation:popIn 0.3s ease;display:none}
+        .animal-grid .animal-btn.correct .star{display:block}
+        .question-counter{font-size:0.85rem;font-weight:700;color:#2c3e50;background:rgba(255,255,255,0.8);padding:4px 16px;border-radius:40px;margin-bottom:6px;z-index:2}
+        .progress-bar{width:200px;height:6px;background:rgba(255,255,255,0.3);border-radius:10px;margin-bottom:10px;overflow:hidden;border:1px solid rgba(230,126,34,0.3);z-index:2}
+        .progress-bar .fill{height:100%;width:0%;background:#4CAF50;border-radius:10px;transition:width 0.4s ease}
+        .sound-repeat-btn{font-size:2.8rem;background:rgba(255,255,255,0.85);border:3px solid #E67E22;border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.1);backdrop-filter:blur(4px);z-index:2;margin-bottom:10px}
+        .sound-repeat-btn:hover{transform:scale(1.05);background:#E67E22;color:#fff}
+        .sound-repeat-btn:active{transform:scale(0.95)}
+        .dont-know-btn{font-size:1rem;font-weight:700;color:#888;background:rgba(255,255,255,0.8);border:2px solid #ccc;border-radius:40px;padding:6px 20px;cursor:pointer;transition:0.2s;font-family:'Open Sans',sans-serif;z-index:2;margin-top:8px}
+        .dont-know-btn:hover{background:#f0f0f0;transform:scale(1.03)}
+        #arrow-left{position:absolute;bottom:10px;left:191px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
+        #arrow-left:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
+        #arrow-right{position:absolute;bottom:10px;right:190px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);color:#2c3e50;font-weight:700}
+        #arrow-right:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
+        #bottom-right-buttons{position:absolute;bottom:22px;right:19px;display:flex;gap:12px;z-index:50;align-items:center}
+        #music-toggle{background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:50%;width:52px;height:52px;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+        #music-toggle:hover{background:#E67E22;transform:scale(1.05)}
+        #exit-btn{background:rgba(255,255,255,0.9);border:2px solid #f44336;border-radius:50%;width:52px;height:52px;font-size:1.6rem;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+        #exit-btn:hover{background:#f44336;transform:scale(1.05);color:#fff}
+        #test-btn{position:absolute;bottom:21px;right:953px;z-index:50;background:rgba(255,255,255,0.9);border:2px solid #E67E22;border-radius:40px;padding:8px 18px;font-size:0.8rem;font-weight:700;color:#2c3e50;cursor:pointer;transition:0.2s;box-shadow:0 2px 12px rgba(0,0,0,0.1);backdrop-filter:blur(4px);font-family:'Open Sans',sans-serif}
+        #test-btn:hover{background:#E67E22;color:#fff;transform:scale(1.05)}
+        #test-btn.active{background:#4CAF50;color:#fff;border-color:#4CAF50}
+        .modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:100;display:none;justify-content:center;align-items:center;animation:fadeIn 0.4s ease;border-radius:28px}
+        .modal-overlay.show{display:flex}
+        .modal-box{background:linear-gradient(145deg,#F9FCB8,#FEF9E6);border-radius:48px;padding:32px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.4);border:4px solid #E67E22;animation:popIn 0.4s ease;position:relative;max-height:85vh;overflow-y:auto}
+        .modal-box .close-modal{position:absolute;top:12px;right:18px;font-size:1.8rem;cursor:pointer;color:#888;transition:0.2s;background:0 0;border:none;font-weight:700}
+        .modal-box .close-modal:hover{color:#E67E22;transform:scale(1.1)}
+        .modal-box .emoji-big{font-size:3.4rem;margin-bottom:4px}
+        .modal-box h2{font-size:2rem;font-weight:800;color:#E67E22;margin-bottom:8px}
+        .modal-box .modal-text{font-size:1.05rem;color:#2c3e50;margin-bottom:16px;line-height:1.6}
+        .modal-box .modal-text .highlight{color:#E67E22;font-weight:700}
+        .btn-modal{border:none;color:#fff;font-size:1.2rem;font-weight:700;padding:12px 32px;border-radius:60px;cursor:pointer;transition:0.3s;font-family:'Open Sans',sans-serif;margin:6px;min-width:140px}
+        .btn-modal-primary{background:#E67E22;box-shadow:0 6px 24px rgba(230,126,34,0.4)}
+        .btn-modal-primary:hover{transform:scale(1.05)}
+        .btn-modal-green{background:#4CAF50;box-shadow:0 6px 24px rgba(76,175,80,0.4)}
+        .btn-modal-green:hover{transform:scale(1.05)}
+        .btn-modal-red{background:#f44336;box-shadow:0 6px 24px rgba(244,67,54,0.4)}
+        .btn-modal-red:hover{transform:scale(1.05)}
+        .btn-modal-small{font-size:0.9rem;padding:8px 20px;min-width:100px}
+        #finish-modal .modal-box{border-color:#4CAF50}
+        #finish-modal .modal-box h2{color:#4CAF50}
+        .result-row{display:flex;justify-content:center;gap:20px;margin:12px 0;flex-wrap:wrap}
+        .result-item{background:rgba(255,255,255,0.7);padding:6px 16px;border-radius:40px;font-weight:700;color:#2c3e50;border:1px solid #E67E22}
+        .result-item span{color:#E67E22;font-size:1.1rem}
+        .error-list{text-align:left;margin:12px 0;max-height:200px;overflow-y:auto;padding:0 8px}
+        .error-item{padding:8px 12px;margin-bottom:4px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;background:rgba(255,255,255,0.5);flex-wrap:wrap;gap:4px}
+        .error-item .correct-answer{color:#4CAF50;font-weight:700}
+        .error-item .chosen-label{color:#E67E22;font-weight:600}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes popIn{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+        @media(max-width:700px){.animal-grid{grid-template-columns:repeat(3,1fr);gap:12px;max-width:380px}.animal-grid .animal-btn{min-height:60px;padding:10px}.level-title{font-size:1.1rem;padding:4px 14px}.sound-repeat-btn{width:56px;height:56px;font-size:2.2rem}#farm-level .item-card{width:44px;height:44px;padding:3px}#farm-level .item-card img{max-width:36px;max-height:36px}#farm-level #items-panel-left,#farm-level #items-panel-right{padding:8px 6px;gap:5px;top:85px}#farm-level #brand-block{max-width:180px;padding:4px 10px 6px 8px}#farm-level #brand-block .logo-text{font-size:0.65rem}#farm-level #brand-block .instruction-text{font-size:0.5rem}#farm-level #brand-block .logo-icon{width:22px;height:22px}.modal-box{padding:24px 20px}.modal-box h2{font-size:1.5rem}.btn-modal{font-size:1rem;padding:10px 24px;min-width:100px}#bottom-right-buttons{bottom:15px;right:15px;gap:8px}#music-toggle,#exit-btn{width:42px;height:42px;font-size:1.2rem}#test-btn{font-size:0.65rem;padding:5px 12px;bottom:15px;right:15px}#arrow-left,#arrow-right{width:40px;height:40px;font-size:1.2rem}.result-row{gap:10px}.result-item{font-size:0.8rem;padding:4px 12px}.error-item{font-size:0.75rem;padding:6px 10px}.dont-know-btn{font-size:0.85rem;padding:4px 16px}}
+        @media(max-width:450px){.animal-grid{grid-template-columns:repeat(2,1fr);gap:10px;max-width:280px}.animal-grid .animal-btn{min-height:50px;padding:8px;border-width:3px}.animal-grid .animal-btn .star{font-size:1.4rem;top:-6px;right:-6px}.level-title{font-size:0.95rem;padding:3px 12px}.sound-repeat-btn{width:48px;height:48px;font-size:1.8rem}#farm-level .item-card{width:34px;height:34px;padding:2px}#farm-level .item-card img{max-width:28px;max-height:28px}#farm-level #items-panel-left,#farm-level #items-panel-right{padding:5px 3px;gap:4px;top:75px;border-radius:20px}#farm-level #brand-block{max-width:140px;padding:3px 8px 5px 6px}#farm-level #brand-block .logo-text{font-size:0.55rem}#farm-level #brand-block .instruction-text{font-size:0.4rem}#farm-level #brand-block .logo-icon{width:18px;height:18px;font-size:0.5rem}.modal-box{padding:18px 14px}.modal-box h2{font-size:1.3rem}.btn-modal{font-size:0.85rem;padding:8px 16px;min-width:80px}#bottom-right-buttons{bottom:12px;right:12px;gap:6px}#music-toggle,#exit-btn{width:36px;height:36px;font-size:1rem}#test-btn{font-size:0.55rem;padding:4px 10px;bottom:12px;right:12px}#arrow-left,#arrow-right{width:34px;height:34px;font-size:1rem}.result-item{font-size:0.7rem;padding:3px 10px}.error-item{font-size:0.65rem;padding:4px 8px}.question-counter{font-size:0.7rem}.progress-bar{width:150px;height:5px}.dont-know-btn{font-size:0.75rem;padding:3px 12px}}
+    </style>
+</head>
+<body>
+
+<div id="game-wrapper">
+<div id="game-container">
+
+    <img class="level-bg" id="bg-farm" src="images/farm-background-clean.jpg" alt="Ферма">
+    <img class="level-bg" id="bg-levels" src="images/farm-background-level2.jpg" alt="Ферма 2" style="display:none;">
+
+    <!-- ===== УРОВЕНЬ 1 ===== -->
+    <div id="farm-level" class="level active">
+        <a href="catalog.html" id="brand-block">
+            <div class="brand-row">
+                <div class="logo-icon">
+                    <img src="images/logo-icon.png" alt="LinguaJourney" onerror="this.style.display='none'; this.parentElement.textContent='LJ';">
+                </div>
+                <div class="logo-text">Lingua<span>Journey</span> <span class="games-label">Games</span></div>
+            </div>
+            <div class="instruction-text">
+                <span class="icon">⭐</span> Перетащи животных и другие элементы по местам на ферме Макдональда
+            </div>
+        </a>
+        <div id="shadow-zones"></div>
+        <div id="drop-zones"></div>
+        <div id="items-panel-left"></div>
+        <div id="items-panel-right"></div>
+        <button id="reset-btn" onclick="resetFarm()">🔄 Сброс</button>
+    </div>
+
+    <!-- ===== УРОВЕНЬ 2 ===== -->
+    <div id="level2" class="level">
+        <div class="level-title">🔍 Choose the Animal</div>
+        <div class="question-counter" id="l2-counter">1 of 11</div>
+        <div class="progress-bar"><div class="fill" id="l2-progress"></div></div>
+        <div class="sound-repeat-btn" id="l2-repeat-btn" onclick="repeatLevel2Sound()">🔉</div>
+        <div id="l2-question" style="font-size:1.5rem;font-weight:700;color:#2c3e50;margin-bottom:8px;background:rgba(255,255,255,0.7);padding:4px 20px;border-radius:40px;min-height:38px;z-index:2;text-align:center;">👂 Listen</div>
+        <div class="animal-grid" id="l2-grid"></div>
+        <button class="dont-know-btn" id="l2-dont-know" onclick="level2DontKnow()">🤷 I don't know</button>
+    </div>
+
+    <!-- ===== УРОВЕНЬ 3 ===== -->
+    <div id="level3" class="level">
+        <div class="level-title">🎵 Animal Sounds</div>
+        <div class="question-counter" id="l3-counter">1 of 11</div>
+        <div class="progress-bar"><div class="fill" id="l3-progress"></div></div>
+        <div class="sound-repeat-btn" id="l3-repeat-btn" onclick="repeatLevel3Sound()">🔉</div>
+        <div id="l3-question" style="font-size:1.5rem;font-weight:700;color:#2c3e50;margin-bottom:8px;background:rgba(255,255,255,0.7);padding:4px 20px;border-radius:40px;min-height:38px;z-index:2;text-align:center;">👂 Who says that?</div>
+        <div class="animal-grid" id="l3-grid"></div>
+        <button class="dont-know-btn" id="l3-dont-know" onclick="level3DontKnow()">🤷 I don't know</button>
+    </div>
+
+    <!-- ===== СТРЕЛКИ ===== -->
+    <div id="arrow-left" onclick="prevLevel()">‹</div>
+    <div id="arrow-right" onclick="nextLevel()">›</div>
+
+    <!-- ===== КНОПКИ ===== -->
+    <div id="bottom-right-buttons">
+        <button id="music-toggle" onclick="toggleMusic()">🔊</button>
+        <button id="exit-btn" onclick="showExitModal()">📴</button>
+    </div>
+    <button id="test-btn" onclick="toggleTestMode()">📝 Тест</button>
+
+    <!-- ===== МОДАЛКИ ===== -->
+    <div id="exit-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2>👋 Выйти из игры?</h2>
+            <div class="modal-text">Результаты <span class="highlight">не будут сохранены</span>.<br>Ты уверена, что хочешь выйти?</div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+                <button class="btn-modal btn-modal-red" onclick="exitGame()">Выйти</button>
+                <button class="btn-modal btn-modal-primary" onclick="closeModal('exit-modal')">Продолжить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="test-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal('test-modal')">✕</button>
+            <h2>📝 Режим «Тест»</h2>
+            <div class="modal-text">В этом режиме игра <span class="highlight">запоминает твои ответы</span>.<br><br>После прохождения всех трёх уровней ты увидишь:<br>✅ сколько правильных ответов в каждой игре<br>✅ сможешь посмотреть свои ошибки<br><br><span style="font-size:0.9rem;color:#888;">Подсказки и тряска картинок отключены.</span></div>
+            <button class="btn-modal btn-modal-green" onclick="startTestMode()">🚀 Начать тест</button>
+        </div>
+    </div>
+
+    <div id="finish-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="emoji-big">🎉</div>
+            <h2>Ты молодец! 🌟</h2>
+            <div class="modal-text">Ты собрала всю ферму и нашла всех животных!<br>🌟 Отличная работа!</div>
+            <button class="btn-modal btn-modal-primary" onclick="restartGame()">🔄 Начать заново</button>
+        </div>
+    </div>
+
+    <div id="results-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2>📊 Результаты теста</h2>
+            <div class="result-row">
+                <div class="result-item">🧩 Ферма: <span id="res-farm">0</span>/16</div>
+                <div class="result-item">🔍 Choose the Animal: <span id="res-level2">0</span>/11</div>
+                <div class="result-item">🎵 Animal Sounds: <span id="res-level3">0</span>/11</div>
+            </div>
+            <button class="btn-modal btn-modal-primary btn-modal-small" onclick="showErrors()">📋 Посмотреть ошибки</button>
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+                <button class="btn-modal btn-modal-green btn-modal-small" onclick="restartGame()">🔄 Пройти заново</button>
+                <button class="btn-modal btn-modal-primary btn-modal-small" onclick="closeModal('results-modal'); exitTestMode();">🏠 К тренировке</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="errors-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal('errors-modal'); openModal('results-modal');">✕</button>
+            <h2>📋 Ошибки</h2>
+            <div id="errors-list-container" class="error-list"><div class="modal-text" style="text-align:center;color:#888;">Загружаю ошибки...</div></div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;">
+                <button class="btn-modal btn-modal-primary btn-modal-small" onclick="closeModal('errors-modal'); openModal('results-modal');">⬅️ К результатам</button>
+                <button class="btn-modal btn-modal-green btn-modal-small" onclick="restartGame()">🔄 Пройти тест заново</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script>
+    // ============================================================
+    // 1. ЗВУКИ
+    // ============================================================
+    const sounds = {
+        cow: 'sounds/cow.mp3',
+        horse: 'sounds/horse.mp3',
+        duck: 'sounds/duck.mp3',
+        pig: 'sounds/pig.mp3',
+        sheep: 'sounds/sheep.mp3',
+        cat: 'sounds/cat.mp3',
+        dog: 'sounds/dog.mp3',
+        chicken: 'sounds/chicken.mp3',
+        bird: 'sounds/bird.mp3',
+        frog: 'sounds/frog.mp3',
+        bee: 'sounds/bee.mp3',
+        'where-cow': 'sounds/where-cow.mp3',
+        'where-duck': 'sounds/where-duck.mp3',
+        'where-pig': 'sounds/where-pig.mp3',
+        'where-sheep': 'sounds/where-sheep.mp3',
+        'where-horse': 'sounds/where-horse.mp3',
+        'where-cat': 'sounds/where-cat.mp3',
+        'where-dog': 'sounds/where-dog.mp3',
+        'where-chicken': 'sounds/where-chicken.mp3',
+        'where-bird': 'sounds/where-bird.mp3',
+        'where-frog': 'sounds/where-frog.mp3',
+        'where-bee': 'sounds/where-bee.mp3',
+        yay: 'sounds/yay.mp3',
+        nooo: 'sounds/nooo.mp3',
+        hooray: 'sounds/hooray.mp3',
+        click: 'sounds/click.mp3',
+        drag: 'sounds/drag-start.mp3',
+    };
+
+    function playSound(soundId) {
+        const url = sounds[soundId];
+        if (!url) return;
+        try {
+            const audio = new Audio(url);
+            audio.volume = 0.7;
+            audio.play().catch(e => console.log('Звук не загрузился:', e));
+        } catch(e) {
+            console.log('Ошибка воспроизведения звука:', e);
+        }
+    }
+
+    // ============================================================
+    // 2. ФОНОВАЯ МУЗЫКА — ТИШЕ НА 15%
+    // ============================================================
+    let bgMusic = null;
+    let isMusicPlaying = false;
+    let isGameFinished = false;
+
+    function initMusic() {
+        try {
+            bgMusic = new Audio('sounds/bg-music.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.15; // ★★★ БЫЛО 0.3, СТАЛО 0.15 (тише на 50%) ★★★
+            bgMusic.addEventListener('ended', function() {
+                if (!isGameFinished) {
+                    this.currentTime = 0;
+                    this.play().catch(e => console.log('Музыка не загрузилась:', e));
+                }
+            });
+        } catch(e) {
+            console.log('Ошибка инициализации музыки:', e);
+        }
+    }
+
+    function startMusic() {
+        if (!bgMusic) initMusic();
+        if (bgMusic && !isMusicPlaying && !isGameFinished) {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                document.getElementById('music-toggle').textContent = '🔊';
+            }).catch(e => {
+                console.log('Автозапуск заблокирован, повтор...', e);
+                setTimeout(startMusic, 1000);
+            });
+        }
+    }
+
+    function stopMusic() {
+        if (bgMusic) {
+            bgMusic.pause();
+            isMusicPlaying = false;
+            document.getElementById('music-toggle').textContent = '🔇';
+        }
+    }
+
+    function toggleMusic() {
+        if (isMusicPlaying) stopMusic();
+        else startMusic();
+    }
+
+    // ============================================================
+    // 3. УРОВЕНЬ 1: ФЕРМА
+    // ============================================================
+    const farmItems = [
+        { id: 'cow', name: 'Cow', x: 494, y: 482, w: 234, h: 149, sound: 'cow' },
+        { id: 'horse', name: 'Horse', x: 592, y: 317, w: 164, h: 122, sound: 'horse' },
+        { id: 'duck', name: 'Duck', x: 731, y: 532, w: 85, h: 80, sound: 'duck' },
+        { id: 'pig', name: 'Pig', x: 675, y: 425, w: 83, h: 64, sound: 'pig' },
+        { id: 'sheep', name: 'Sheep', x: 604, y: 410, w: 93, h: 79, sound: 'sheep' },
+        { id: 'cat', name: 'Cat', x: 339, y: 617, w: 200, h: 128, sound: 'cat' },
+        { id: 'dog', name: 'Dog', x: 439, y: 367, w: 79, h: 69, sound: 'dog' },
+        { id: 'chicken', name: 'Chicken', x: 702, y: 377, w: 74, h: 51, sound: 'chicken' },
+        { id: 'bird', name: 'Bird', x: 501, y: 257, w: 70, h: 60, sound: 'bird' },
+        { id: 'frog', name: 'Frog', x: 655, y: 536, w: 60, h: 45, sound: 'frog' },
+        { id: 'farmer', name: 'Farmer', x: 299, y: 406, w: 247, h: 247, sound: null },
+        { id: 'bee', name: 'Bee', x: 543, y: 600, w: 50, h: 45, sound: 'bee' },
+        { id: 'cloud1', name: 'Cloud 1', x: 417, y: 183, w: 215, h: 82, sound: null },
+        { id: 'cloud2', name: 'Cloud 2', x: 584, y: 130, w: 202, h: 89, sound: null },
+        { id: 'cloud3', name: 'Cloud 3', x: 745, y: 175, w: 187, h: 74, sound: null },
+        { id: 'sun', name: 'Sun', x: 270, y: 118, w: 140, h: 140, sound: null },
+    ];
+
+    const leftItems = ['cow', 'horse', 'duck', 'pig', 'sheep', 'cat', 'dog', 'chicken', 'farmer', 'bee'];
+    const rightItems = ['bird', 'frog', 'cloud1', 'cloud2', 'cloud3', 'sun'];
+
+    let farmPlaced = [];
+    let farmDraggedElement = null;
+    let farmDragOffsetX = 0;
+    let farmDragOffsetY = 0;
+    let farmIsDragging = false;
+    let farmIsComplete = false;
+    let farmTestResults = {};
+    let farmChosenAnswers = {};
+    let farmAutoTransitionTimer = null;
+
+    function initFarm() {
+        farmPlaced = [];
+        farmTestResults = {};
+        farmChosenAnswers = {};
+        if (farmAutoTransitionTimer) {
+            clearTimeout(farmAutoTransitionTimer);
+            farmAutoTransitionTimer = null;
+        }
+        createFarmShadows();
+        createFarmDropZones();
+        createFarmItemsPanel();
+        initFarmDragAndDrop();
+        document.getElementById('bg-farm').style.display = 'block';
+        document.getElementById('bg-levels').style.display = 'none';
+        if (isTestMode) {
+            document.getElementById('reset-btn').classList.add('test-hidden');
+        } else {
+            document.getElementById('reset-btn').classList.remove('test-hidden');
+        }
+    }
+
+    function createFarmShadows() {
+        const container = document.getElementById('shadow-zones');
+        container.innerHTML = '';
+        farmItems.forEach(item => {
+            const shadow = document.createElement('div');
+            shadow.className = 'shadow-zone';
+            shadow.dataset.itemId = item.id;
+            shadow.style.left = (item.x - item.w/2) + 'px';
+            shadow.style.top = (item.y - item.h/2) + 'px';
+            shadow.style.width = item.w + 'px';
+            shadow.style.height = item.h + 'px';
+            const img = document.createElement('img');
+            img.src = 'images/' + item.id + '.png';
+            img.alt = item.name;
+            img.onerror = function() { this.style.display = 'none'; };
+            shadow.appendChild(img);
+            container.appendChild(shadow);
+        });
+    }
+
+    function createFarmDropZones() {
+        const container = document.getElementById('drop-zones');
+        container.innerHTML = '';
+        farmItems.forEach(item => {
+            const zone = document.createElement('div');
+            zone.className = 'drop-zone';
+            zone.dataset.itemId = item.id;
+            zone.style.left = (item.x - item.w/2) + 'px';
+            zone.style.top = (item.y - item.h/2) + 'px';
+            zone.style.width = item.w + 'px';
+            zone.style.height = item.h + 'px';
+            container.appendChild(zone);
+        });
+    }
+
+    function createFarmItemsPanel() {
+        const leftPanel = document.getElementById('items-panel-left');
+        const rightPanel = document.getElementById('items-panel-right');
+        leftPanel.innerHTML = '';
+        rightPanel.innerHTML = '';
+
+        farmItems.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.dataset.itemId = item.id;
+            card.draggable = false;
+            const img = document.createElement('img');
+            img.src = 'images/' + item.id + '.png';
+            img.alt = item.name;
+            img.onerror = function() {
+                this.style.display = 'none';
+                this.parentElement.textContent = item.id[0].toUpperCase();
+            };
+            card.appendChild(img);
+
+            if (leftItems.includes(item.id)) {
+                leftPanel.appendChild(card);
+            } else {
+                rightPanel.appendChild(card);
+            }
+        });
+    }
+
+    // ============================================================
+    // 4. ПЕРЕТАСКИВАНИЕ
+    // ============================================================
+    function initFarmDragAndDrop() {
+        const cards = document.querySelectorAll('#farm-level .item-card');
+        cards.forEach(card => {
+            card.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                playSound('click');
+                startFarmDrag(this, e.clientX, e.clientY);
+            });
+            card.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                startFarmDrag(this, touch.clientX, touch.clientY);
+            }, { passive: false });
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (farmIsDragging && farmDraggedElement) farmMoveFarmDrag(e.clientX, e.clientY);
+        });
+        document.addEventListener('touchmove', function(e) {
+            if (farmIsDragging && farmDraggedElement) {
+                const touch = e.touches[0];
+                farmMoveFarmDrag(touch.clientX, touch.clientY);
+                e.preventDefault();
+            }
+        }, { passive: false });
+        document.addEventListener('mouseup', function(e) {
+            if (farmIsDragging && farmDraggedElement) farmEndFarmDrag(e.clientX, e.clientY);
+        });
+        document.addEventListener('touchend', function(e) {
+            if (farmIsDragging && farmDraggedElement) {
+                const touch = e.changedTouches[0];
+                farmEndFarmDrag(touch.clientX, touch.clientY);
+            }
+        });
+    }
+
+    function startFarmDrag(card, clientX, clientY) {
+        if (card.classList.contains('placed')) return;
+        const cardWidth = 60;
+        const cardHeight = 60;
+        farmDragOffsetX = cardWidth / 2;
+        farmDragOffsetY = cardHeight / 2;
+        farmDraggedElement = card;
+        farmIsDragging = true;
+        const clone = card.cloneNode(true);
+        clone.className = 'item-card dragging';
+        clone.id = 'drag-clone';
+        clone.style.position = 'fixed';
+        clone.style.width = cardWidth + 'px';
+        clone.style.height = cardHeight + 'px';
+        clone.style.left = (clientX - farmDragOffsetX) + 'px';
+        clone.style.top = (clientY - farmDragOffsetY) + 'px';
+        clone.style.zIndex = '1000';
+        clone.style.pointerEvents = 'none';
+        clone.style.opacity = '0.9';
+        clone.style.transform = 'scale(1.15)';
+        clone.style.border = '2px solid #E67E22';
+        clone.style.background = 'rgba(255,255,255,0.85)';
+        clone.style.padding = '4px';
+        clone.style.borderRadius = '12px';
+        clone.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+        const img = clone.querySelector('img');
+        if (img) {
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.pointerEvents = 'none';
+            img.style.maxWidth = '50px';
+            img.style.maxHeight = '50px';
+        }
+        document.body.appendChild(clone);
+        card.style.opacity = '0.3';
+    }
+
+    function farmMoveFarmDrag(clientX, clientY) {
+        const clone = document.getElementById('drag-clone');
+        if (clone) {
+            clone.style.left = (clientX - farmDragOffsetX) + 'px';
+            clone.style.top = (clientY - farmDragOffsetY) + 'px';
+        }
+    }
+
+    function farmEndFarmDrag(clientX, clientY) {
+        const clone = document.getElementById('drag-clone');
+        if (clone) clone.remove();
+        if (farmDraggedElement) farmDraggedElement.style.opacity = '1';
+        const itemId = farmDraggedElement ? farmDraggedElement.dataset.itemId : null;
+        let targetZone = null;
+        document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
+            const zoneRect = zone.getBoundingClientRect();
+            if (clientX >= zoneRect.left && clientX <= zoneRect.right &&
+                clientY >= zoneRect.top && clientY <= zoneRect.bottom) {
+                targetZone = zone;
+            }
+        });
+        if (targetZone && itemId) {
+            const zoneItemId = targetZone.dataset.itemId;
+            if (zoneItemId === itemId && !targetZone.classList.contains('placed')) {
+                if (isTestMode) {
+                    farmTestResults[itemId] = true;
+                    farmChosenAnswers[itemId] = itemId;
+                }
+                farmPlaceItem(itemId, targetZone);
+            } else if (zoneItemId === itemId && targetZone.classList.contains('placed')) {
+                // УЖЕ СТОИТ
+            } else {
+                if (isTestMode) {
+                    farmTestResults[itemId] = false;
+                    farmChosenAnswers[itemId] = itemId;
+                    targetZone.style.border = '3px solid #f44336';
+                    setTimeout(() => { targetZone.style.border = 'none'; }, 500);
+                } else {
+                    playSound('nooo');
+                    targetZone.style.animation = 'shake 0.3s ease';
+                    setTimeout(() => { targetZone.style.animation = ''; }, 300);
+                }
+            }
+        }
+        farmIsDragging = false;
+        farmDraggedElement = null;
+        const cloneCheck = document.getElementById('drag-clone');
+        if (cloneCheck) cloneCheck.remove();
+    }
+
+    // ★★★ В ТРЕНИРОВКЕ — СНАЧАЛА НАЗВАНИЕ, ПОТОМ ЗВУК ★★★
+    function farmPlaceItem(itemId, zone) {
+        zone.classList.add('placed');
+        const shadow = document.querySelector('#farm-level .shadow-zone[data-item-id="' + itemId + '"]');
+        if (shadow) shadow.classList.add('placed');
+        const img = document.createElement('img');
+        img.src = 'images/' + itemId + '.png';
+        img.alt = itemId;
+        img.onerror = function() { this.style.display = 'none'; };
+        zone.appendChild(img);
+        const card = document.querySelector('#farm-level .item-card[data-item-id="' + itemId + '"]');
+        if (card) card.classList.add('placed');
+        if (!farmPlaced.includes(itemId)) farmPlaced.push(itemId);
+        const item = farmItems.find(i => i.id === itemId);
+        
+        // ★★★ В ТРЕНИРОВКЕ — СНАЧАЛА НАЗВАНИЕ, ПОТОМ ЗВУК ★★★
+        if (!isTestMode && item && item.sound) {
+            const whereSound = 'where-' + itemId;
+            if (sounds[whereSound]) {
+                playSound(whereSound);
+                setTimeout(() => {
+                    playSound(item.sound);
+                }, 1200);
+            } else {
+                playSound(item.sound);
+            }
+        } else if (item && item.sound) {
+            playSound(item.sound);
+        } else {
+            playSound('yay');
+        }
+        
+        zone.style.transform = 'scale(1.15)';
+        setTimeout(() => { zone.style.transform = 'scale(1)'; }, 300);
+        if (farmPlaced.length === farmItems.length) {
+            farmIsComplete = true;
+            if (farmAutoTransitionTimer) {
+                clearTimeout(farmAutoTransitionTimer);
+                farmAutoTransitionTimer = null;
+            }
+            // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+            farmAutoTransitionTimer = setTimeout(() => {
+                if (isTestMode) {
+                    if (farmIsComplete && l2Current >= l2Questions.length && l3Current >= l3Questions.length) {
+                        checkAllLevelsCompleted();
+                    } else if (farmIsComplete) {
+                        goToLevel(2);
+                    }
+                } else {
+                    goToLevel(2);
+                }
+                farmAutoTransitionTimer = null;
+            }, 1800);
+        }
+    }
+
+    function resetFarm() {
+        farmPlaced = [];
+        farmIsComplete = false;
+        farmTestResults = {};
+        farmChosenAnswers = {};
+        if (farmAutoTransitionTimer) {
+            clearTimeout(farmAutoTransitionTimer);
+            farmAutoTransitionTimer = null;
+        }
+        document.querySelectorAll('#farm-level .item-card').forEach(card => {
+            card.classList.remove('placed');
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+        });
+        document.querySelectorAll('#farm-level .drop-zone').forEach(zone => {
+            zone.classList.remove('placed');
+            zone.innerHTML = '';
+            zone.style.transform = '';
+            zone.style.border = 'none';
+        });
+        document.querySelectorAll('#farm-level .shadow-zone').forEach(shadow => {
+            shadow.classList.remove('placed');
+        });
+    }
+
+    // ============================================================
+    // 5. УРОВЕНЬ 2
+    // ============================================================
+    const level2Animals = [
+        { id: 'cow', label: 'Cow' }, { id: 'horse', label: 'Horse' }, { id: 'duck', label: 'Duck' },
+        { id: 'pig', label: 'Pig' }, { id: 'sheep', label: 'Sheep' }, { id: 'cat', label: 'Cat' },
+        { id: 'dog', label: 'Dog' }, { id: 'chicken', label: 'Chicken' }, { id: 'bird', label: 'Bird' },
+        { id: 'frog', label: 'Frog' }, { id: 'bee', label: 'Bee' }
+    ];
+
+    let l2Questions = [], l2Current = 0, l2Answered = false, l2CorrectCount = 0, l2Results = {}, l2Locked = {}, l2CurrentSound = null, l2ChosenAnswers = {};
+    let l2AutoTransitionTimer = null;
+
+    function initLevel2() {
+        const grid = document.getElementById('l2-grid');
+        grid.innerHTML = '';
+        l2Current = 0; l2Answered = false; l2CorrectCount = 0; l2Results = {}; l2Locked = {}; l2ChosenAnswers = {};
+        if (l2AutoTransitionTimer) {
+            clearTimeout(l2AutoTransitionTimer);
+            l2AutoTransitionTimer = null;
+        }
+        l2Questions = generateLevel2Questions();
+        document.getElementById('l2-progress').style.width = '0%';
+        renderLevel2Grid();
+        showLevel2Question();
+        document.getElementById('bg-farm').style.display = 'none';
+        document.getElementById('bg-levels').style.display = 'block';
+        document.getElementById('l2-dont-know').style.display = 'inline-block';
+    }
+
+    function generateLevel2Questions() {
+        const shuffled = [...level2Animals].sort(() => Math.random() - 0.5);
+        return shuffled.map(animal => {
+            const others = level2Animals.filter(a => a.id !== animal.id).sort(() => Math.random() - 0.5);
+            const options = [animal, ...others.slice(0, 3)];
+            return { correct: animal, options: options.sort(() => Math.random() - 0.5) };
+        });
+    }
+
+    function renderLevel2Grid() {
+        const grid = document.getElementById('l2-grid');
+        grid.innerHTML = '';
+        for (let i = 0; i < 4; i++) {
+            const btn = document.createElement('div');
+            btn.className = 'animal-btn';
+            btn.dataset.index = i;
+            const img = document.createElement('img');
+            img.alt = 'animal';
+            const label = document.createElement('span');
+            label.className = 'animal-label';
+            const star = document.createElement('span');
+            star.className = 'star';
+            star.textContent = '⭐';
+            btn.appendChild(img); btn.appendChild(label); btn.appendChild(star);
+            btn.addEventListener('click', function() { handleLevel2Click(this); });
+            grid.appendChild(btn);
+        }
+    }
+
+    function showLevel2Question() {
+        if (l2Current >= l2Questions.length) { completeLevel2(); return; }
+        l2Answered = false;
+        const q = l2Questions[l2Current];
+        const grid = document.getElementById('l2-grid');
+        const btns = grid.querySelectorAll('.animal-btn');
+        document.getElementById('l2-counter').textContent = (l2Current + 1) + ' of ' + l2Questions.length;
+        document.getElementById('l2-progress').style.width = ((l2Current) / l2Questions.length * 100) + '%';
+        btns.forEach((btn, idx) => {
+            const animal = q.options[idx];
+            btn.dataset.animalId = animal.id;
+            btn.classList.remove('correct', 'wrong');
+            btn.querySelector('img').src = 'images/' + animal.id + '.png';
+            btn.querySelector('img').alt = animal.label;
+            btn.querySelector('.animal-label').textContent = '';
+            btn.querySelector('.star').style.display = 'none';
+            btn.style.borderColor = '';
+            btn.style.background = '';
+        });
+        document.getElementById('l2-question').textContent = '👂 Listen';
+        l2CurrentSound = 'where-' + q.correct.id;
+        setTimeout(() => playSound(l2CurrentSound), 300);
+    }
+
+    function repeatLevel2Sound() { if (l2CurrentSound) playSound(l2CurrentSound); }
+
+    function level2DontKnow() {
+        if (l2Answered) return;
+        const q = l2Questions[l2Current];
+        l2Answered = true;
+        l2Results[q.correct.id] = false;
+        l2ChosenAnswers[q.correct.id] = '❌ Не знаю';
+        if (isTestMode) l2Locked[q.correct.id] = true;
+        document.getElementById('l2-question').textContent = '✅ ' + q.correct.label;
+        playSound(q.correct.id);
+        const grid = document.getElementById('l2-grid');
+        grid.querySelectorAll('.animal-btn').forEach(btn => {
+            if (btn.dataset.animalId === q.correct.id) {
+                btn.classList.add('correct');
+                btn.querySelector('.star').style.display = 'block';
+            }
+        });
+        if (l2AutoTransitionTimer) {
+            clearTimeout(l2AutoTransitionTimer);
+            l2AutoTransitionTimer = null;
+        }
+        // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 2500ms ★★★
+        l2AutoTransitionTimer = setTimeout(() => {
+            l2Current++;
+            showLevel2Question();
+            l2AutoTransitionTimer = null;
+        }, 2500);
+    }
+
+    function handleLevel2Click(btn) {
+        if (l2Answered) return;
+        const animalId = btn.dataset.animalId;
+        const q = l2Questions[l2Current];
+        const isCorrect = (animalId === q.correct.id);
+        if (isTestMode && l2Locked[q.correct.id]) return;
+        if (isCorrect) {
+            l2Answered = true; l2CorrectCount++; l2Results[q.correct.id] = true;
+            l2ChosenAnswers[q.correct.id] = '✅ ' + animalId;
+            if (isTestMode) l2Locked[q.correct.id] = true;
+            btn.classList.add('correct');
+            btn.querySelector('.star').style.display = 'block';
+            playSound(animalId);
+            document.getElementById('l2-question').textContent = '✅ ' + q.correct.label;
+            if (l2AutoTransitionTimer) {
+                clearTimeout(l2AutoTransitionTimer);
+                l2AutoTransitionTimer = null;
+            }
+            // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+            l2AutoTransitionTimer = setTimeout(() => {
+                l2Current++;
+                showLevel2Question();
+                l2AutoTransitionTimer = null;
+            }, 1800);
+        } else {
+            l2Results[q.correct.id] = false;
+            l2ChosenAnswers[q.correct.id] = '❌ ' + animalId;
+            if (isTestMode) l2Locked[q.correct.id] = true;
+            btn.classList.add('wrong');
+            if (!isTestMode) {
+                playSound('nooo');
+                btn.style.animation = 'shake 0.3s ease';
+                setTimeout(() => { btn.style.animation = ''; }, 400);
+                setTimeout(() => { btn.classList.remove('wrong'); }, 500);
+            } else {
+                document.getElementById('l2-question').textContent = '❌ ' + q.correct.label;
+                if (l2AutoTransitionTimer) {
+                    clearTimeout(l2AutoTransitionTimer);
+                    l2AutoTransitionTimer = null;
+                }
+                // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+                l2AutoTransitionTimer = setTimeout(() => {
+                    btn.classList.remove('wrong');
+                    l2Current++;
+                    showLevel2Question();
+                    l2AutoTransitionTimer = null;
+                }, 1800);
+            }
+        }
+    }
+
+    function completeLevel2() {
+        document.getElementById('l2-progress').style.width = '100%';
+        document.getElementById('l2-dont-know').style.display = 'none';
+        if (l2AutoTransitionTimer) {
+            clearTimeout(l2AutoTransitionTimer);
+            l2AutoTransitionTimer = null;
+        }
+        // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+        l2AutoTransitionTimer = setTimeout(() => {
+            if (isTestMode) {
+                if (farmIsComplete && l2Current >= l2Questions.length) {
+                    goToLevel(3);
+                } else {
+                    goToLevel(3);
+                }
+            } else {
+                goToLevel(3);
+            }
+            l2AutoTransitionTimer = null;
+        }, 1800);
+    }
+
+    // ============================================================
+    // 6. УРОВЕНЬ 3
+    // ============================================================
+    let l3Questions = [], l3Current = 0, l3Answered = false, l3CorrectCount = 0, l3Results = {}, l3Locked = {}, l3CurrentSound = null, l3ChosenAnswers = {};
+    let l3AutoTransitionTimer = null;
+
+    function initLevel3() {
+        const grid = document.getElementById('l3-grid');
+        grid.innerHTML = '';
+        l3Current = 0; l3Answered = false; l3CorrectCount = 0; l3Results = {}; l3Locked = {}; l3ChosenAnswers = {};
+        if (l3AutoTransitionTimer) {
+            clearTimeout(l3AutoTransitionTimer);
+            l3AutoTransitionTimer = null;
+        }
+        l3Questions = generateLevel3Questions();
+        document.getElementById('l3-progress').style.width = '0%';
+        renderLevel3Grid();
+        showLevel3Question();
+        document.getElementById('bg-farm').style.display = 'none';
+        document.getElementById('bg-levels').style.display = 'block';
+        document.getElementById('l3-dont-know').style.display = 'inline-block';
+    }
+
+    function generateLevel3Questions() {
+        const shuffled = [...level2Animals].sort(() => Math.random() - 0.5);
+        return shuffled.map(animal => {
+            const others = level2Animals.filter(a => a.id !== animal.id).sort(() => Math.random() - 0.5);
+            const options = [animal, ...others.slice(0, 3)];
+            return { correct: animal, options: options.sort(() => Math.random() - 0.5) };
+        });
+    }
+
+    function renderLevel3Grid() {
+        const grid = document.getElementById('l3-grid');
+        grid.innerHTML = '';
+        for (let i = 0; i < 4; i++) {
+            const btn = document.createElement('div');
+            btn.className = 'animal-btn';
+            btn.dataset.index = i;
+            const img = document.createElement('img');
+            img.alt = 'animal';
+            const label = document.createElement('span');
+            label.className = 'animal-label';
+            const star = document.createElement('span');
+            star.className = 'star';
+            star.textContent = '⭐';
+            btn.appendChild(img); btn.appendChild(label); btn.appendChild(star);
+            btn.addEventListener('click', function() { handleLevel3Click(this); });
+            grid.appendChild(btn);
+        }
+    }
+
+    function showLevel3Question() {
+        if (l3Current >= l3Questions.length) { completeLevel3(); return; }
+        l3Answered = false;
+        const q = l3Questions[l3Current];
+        const grid = document.getElementById('l3-grid');
+        const btns = grid.querySelectorAll('.animal-btn');
+        document.getElementById('l3-counter').textContent = (l3Current + 1) + ' of ' + l3Questions.length;
+        document.getElementById('l3-progress').style.width = ((l3Current) / l3Questions.length * 100) + '%';
+        btns.forEach((btn, idx) => {
+            const animal = q.options[idx];
+            btn.dataset.animalId = animal.id;
+            btn.classList.remove('correct', 'wrong');
+            btn.querySelector('img').src = 'images/' + animal.id + '.png';
+            btn.querySelector('img').alt = animal.label;
+            btn.querySelector('.animal-label').textContent = '';
+            btn.querySelector('.star').style.display = 'none';
+            btn.style.borderColor = '';
+            btn.style.background = '';
+        });
+        document.getElementById('l3-question').textContent = '👂 Who says that?';
+        l3CurrentSound = q.correct.id;
+        setTimeout(() => playSound(l3CurrentSound), 300);
+    }
+
+    function repeatLevel3Sound() { if (l3CurrentSound) playSound(l3CurrentSound); }
+
+    function level3DontKnow() {
+        if (l3Answered) return;
+        const q = l3Questions[l3Current];
+        l3Answered = true;
+        l3Results[q.correct.id] = false;
+        l3ChosenAnswers[q.correct.id] = '❌ Не знаю';
+        if (isTestMode) l3Locked[q.correct.id] = true;
+        document.getElementById('l3-question').textContent = '✅ ' + q.correct.label;
+        playSound(q.correct.id);
+        const grid = document.getElementById('l3-grid');
+        grid.querySelectorAll('.animal-btn').forEach(btn => {
+            if (btn.dataset.animalId === q.correct.id) {
+                btn.classList.add('correct');
+                btn.querySelector('.star').style.display = 'block';
+            }
+        });
+        if (l3AutoTransitionTimer) {
+            clearTimeout(l3AutoTransitionTimer);
+            l3AutoTransitionTimer = null;
+        }
+        // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 2500ms ★★★
+        l3AutoTransitionTimer = setTimeout(() => {
+            l3Current++;
+            showLevel3Question();
+            l3AutoTransitionTimer = null;
+        }, 2500);
+    }
+
+    function handleLevel3Click(btn) {
+        if (l3Answered) return;
+        const animalId = btn.dataset.animalId;
+        const q = l3Questions[l3Current];
+        const isCorrect = (animalId === q.correct.id);
+        if (isTestMode && l3Locked[q.correct.id]) return;
+        if (isCorrect) {
+            l3Answered = true; l3CorrectCount++; l3Results[q.correct.id] = true;
+            l3ChosenAnswers[q.correct.id] = '✅ ' + animalId;
+            if (isTestMode) l3Locked[q.correct.id] = true;
+            btn.classList.add('correct');
+            btn.querySelector('.star').style.display = 'block';
+            playSound(animalId);
+            document.getElementById('l3-question').textContent = '✅ ' + q.correct.label;
+            if (l3AutoTransitionTimer) {
+                clearTimeout(l3AutoTransitionTimer);
+                l3AutoTransitionTimer = null;
+            }
+            // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+            l3AutoTransitionTimer = setTimeout(() => {
+                l3Current++;
+                showLevel3Question();
+                l3AutoTransitionTimer = null;
+            }, 1800);
+        } else {
+            l3Results[q.correct.id] = false;
+            l3ChosenAnswers[q.correct.id] = '❌ ' + animalId;
+            if (isTestMode) l3Locked[q.correct.id] = true;
+            btn.classList.add('wrong');
+            if (!isTestMode) {
+                playSound('nooo');
+                btn.style.animation = 'shake 0.3s ease';
+                setTimeout(() => { btn.style.animation = ''; }, 400);
+                setTimeout(() => { btn.classList.remove('wrong'); }, 500);
+            } else {
+                document.getElementById('l3-question').textContent = '❌ ' + q.correct.label;
+                if (l3AutoTransitionTimer) {
+                    clearTimeout(l3AutoTransitionTimer);
+                    l3AutoTransitionTimer = null;
+                }
+                // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+                l3AutoTransitionTimer = setTimeout(() => {
+                    btn.classList.remove('wrong');
+                    l3Current++;
+                    showLevel3Question();
+                    l3AutoTransitionTimer = null;
+                }, 1800);
+            }
+        }
+    }
+
+    function completeLevel3() {
+        document.getElementById('l3-progress').style.width = '100%';
+        document.getElementById('l3-dont-know').style.display = 'none';
+        if (l3AutoTransitionTimer) {
+            clearTimeout(l3AutoTransitionTimer);
+            l3AutoTransitionTimer = null;
+        }
+        // ★★★ УВЕЛИЧЕНА ЗАДЕРЖКА ДО 1800ms ★★★
+        l3AutoTransitionTimer = setTimeout(() => {
+            if (isTestMode) {
+                checkAllLevelsCompleted();
+            } else {
+                showFinishModal();
+            }
+            l3AutoTransitionTimer = null;
+        }, 1800);
+    }
+
+    // ============================================================
+    // 7. ПЕРЕХОДЫ
+    // ============================================================
+    let currentLevel = 1;
+    const totalLevels = 3;
+
+    function goToLevel(level) {
+        document.querySelectorAll('.level').forEach(el => el.classList.remove('active'));
+        if (level === 1) {
+            document.getElementById('farm-level').classList.add('active');
+            if (farmPlaced.length === 0) initFarm();
+            currentLevel = 1;
+        } else if (level === 2) {
+            document.getElementById('level2').classList.add('active');
+            if (l2Current === 0) initLevel2();
+            currentLevel = 2;
+        } else if (level === 3) {
+            document.getElementById('level3').classList.add('active');
+            if (l3Current === 0) initLevel3();
+            currentLevel = 3;
+        }
+    }
+
+    function nextLevel() { const next = currentLevel + 1; if (next <= totalLevels) goToLevel(next); }
+    function prevLevel() { const prev = currentLevel - 1; if (prev >= 1) goToLevel(prev); }
+
+    function checkAllLevelsCompleted() {
+        if (isTestMode) {
+            const farmDone = farmPlaced.length === farmItems.length;
+            const l2Done = l2Current >= l2Questions.length;
+            const l3Done = l3Current >= l3Questions.length;
+            if (farmDone && l2Done && l3Done) {
+                showTestResults();
+            }
+        }
+    }
+
+    // ============================================================
+    // 8. МОДАЛКИ
+    // ============================================================
+    function openModal(id) { document.getElementById(id).classList.add('show'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+    function showFinishModal() {
+        isGameFinished = true;
+        openModal('finish-modal');
+    }
+
+    function showExitModal() { openModal('exit-modal'); }
+    function exitGame() { closeModal('exit-modal'); window.location.href = 'index.html'; }
+
+    // ============================================================
+    // 9. ТЕСТ
+    // ============================================================
+    let isTestMode = false;
+
+    function toggleTestMode() {
+        if (isTestMode) {
+            isTestMode = false;
+            document.getElementById('test-btn').classList.remove('active');
+            document.getElementById('test-btn').textContent = '📝 Тест';
+            document.getElementById('reset-btn').classList.remove('test-hidden');
+            goToLevel(1);
+            resetFarm();
+            l2Current = 0; l3Current = 0;
+            document.getElementById('level2').classList.remove('active');
+            document.getElementById('level3').classList.remove('active');
+            document.getElementById('farm-level').classList.add('active');
+            startMusic();
+        } else {
+            openModal('test-modal');
+        }
+    }
+
+    function startTestMode() {
+        closeModal('test-modal');
+        isTestMode = true;
+        document.getElementById('test-btn').classList.add('active');
+        document.getElementById('test-btn').textContent = '📝 Тест (вкл)';
+        document.getElementById('reset-btn').classList.add('test-hidden');
+        resetFarm();
+        l2Current = 0; l3Current = 0;
+        goToLevel(1);
+        startMusic();
+    }
+
+    function exitTestMode() {
+        isTestMode = false;
+        document.getElementById('test-btn').classList.remove('active');
+        document.getElementById('test-btn').textContent = '📝 Тест';
+        document.getElementById('reset-btn').classList.remove('test-hidden');
+        goToLevel(1);
+        resetFarm();
+        l2Current = 0; l3Current = 0;
+        document.getElementById('level2').classList.remove('active');
+        document.getElementById('level3').classList.remove('active');
+        document.getElementById('farm-level').classList.add('active');
+        startMusic();
+    }
+
+    // ============================================================
+    // 10. РЕЗУЛЬТАТЫ
+    // ============================================================
+    function showTestResults() {
+        // ★★★ МУЗЫКА НЕ ВЫКЛЮЧАЕТСЯ ★★★
+        
+        const farmTotal = farmItems.length; // 16
+        let farmCorrect = 0; 
+        for (const key in farmTestResults) { 
+            if (farmTestResults[key] === true) farmCorrect++; 
+        }
+        
+        const l2Total = l2Questions.length; // 11
+        let l2Correct = 0; 
+        for (const key in l2Results) { 
+            if (l2Results[key] === true) l2Correct++; 
+        }
+        
+        const l3Total = l3Questions.length; // 11
+        let l3Correct = 0; 
+        for (const key in l3Results) { 
+            if (l3Results[key] === true) l3Correct++; 
+        }
+        
+        // ★★★ ТОЛЬКО ДВЕ ЦИФРЫ ★★★
+        document.getElementById('res-farm').textContent = farmCorrect + '/' + farmTotal;
+        document.getElementById('res-level2').textContent = l2Correct + '/' + l2Total;
+        document.getElementById('res-level3').textContent = l3Correct + '/' + l3Total;
+        
+        openModal('results-modal');
+    }
+
+    function showErrors() {
+        const container = document.getElementById('errors-list-container');
+        let html = '';
+
+        const farmErrors = [];
+        for (const key in farmTestResults) {
+            if (farmTestResults[key] === false) {
+                const item = farmItems.find(i => i.id === key);
+                const chosen = farmChosenAnswers[key] || '❌ Неизвестно';
+                farmErrors.push({ label: item ? item.name : key, correct: key, chosen: chosen });
+            }
+        }
+
+        const l2Errors = [];
+        for (const key in l2Results) {
+            if (l2Results[key] === false) {
+                const animal = level2Animals.find(a => a.id === key);
+                const chosen = l2ChosenAnswers[key] || '❌ Неизвестно';
+                l2Errors.push({ label: animal ? animal.label : key, correct: key, chosen: chosen });
+            }
+        }
+
+        const l3Errors = [];
+        for (const key in l3Results) {
+            if (l3Results[key] === false) {
+                const animal = level2Animals.find(a => a.id === key);
+                const chosen = l3ChosenAnswers[key] || '❌ Неизвестно';
+                l3Errors.push({ label: animal ? animal.label : key, correct: key, chosen: chosen });
+            }
+        }
+
+        const totalErrors = farmErrors.length + l2Errors.length + l3Errors.length;
+
+        if (totalErrors === 0) {
+            html = '<div class="modal-text" style="text-align:center; color:#4CAF50;">🌟 Отлично! Ошибок нет!</div>';
+        } else {
+            html = '<div class="modal-text" style="text-align:center; margin-bottom:8px;">🔍 Вот что было неправильно:</div>';
+
+            if (farmErrors.length > 0) {
+                html += '<div style="font-weight:700; color:#E67E22; margin-top:8px;">🧩 Ферма:</div>';
+                farmErrors.forEach(e => {
+                    html += '<div class="error-item"><span><strong>' + e.label + '</strong></span><span class="chosen-label">Твой ответ: ' + e.chosen + '</span><span class="correct-answer">✅ Правильно: ' + e.correct + '</span></div>';
+                });
+            }
+
+            if (l2Errors.length > 0) {
+                html += '<div style="font-weight:700; color:#E67E22; margin-top:8px;">🔍 Choose the Animal:</div>';
+                l2Errors.forEach(e => {
+                    html += '<div class="error-item"><span><strong>' + e.label + '</strong></span><span class="chosen-label">Твой ответ: ' + e.chosen + '</span><span class="correct-answer">✅ Правильно: ' + e.correct + '</span></div>';
+                });
+            }
+
+            if (l3Errors.length > 0) {
+                html += '<div style="font-weight:700; color:#E67E22; margin-top:8px;">🎵 Animal Sounds:</div>';
+                l3Errors.forEach(e => {
+                    html += '<div class="error-item"><span><strong>' + e.label + '</strong></span><span class="chosen-label">Твой ответ: ' + e.chosen + '</span><span class="correct-answer">✅ Правильно: ' + e.correct + '</span></div>';
+                });
+            }
+        }
+
+        container.innerHTML = html;
+        openModal('errors-modal');
+    }
+
+    // ============================================================
+    // 11. РЕСТАРТ
+    // ============================================================
+    function restartGame() {
+        closeModal('finish-modal');
+        closeModal('results-modal');
+        closeModal('errors-modal');
+        if (isTestMode) {
+            isTestMode = false;
+            document.getElementById('test-btn').classList.remove('active');
+            document.getElementById('test-btn').textContent = '📝 Тест';
+            document.getElementById('reset-btn').classList.remove('test-hidden');
+        }
+        isGameFinished = false;
+        resetFarm();
+        l2Current = 0; l3Current = 0;
+        document.getElementById('level2').classList.remove('active');
+        document.getElementById('level3').classList.remove('active');
+        document.getElementById('farm-level').classList.add('active');
+        goToLevel(1);
+        startMusic();
+    }
+
+    // ============================================================
+    // 12. ЗАПУСК
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        initMusic();
+        document.getElementById('music-toggle').textContent = '🔊';
+        goToLevel(1);
+        setTimeout(startMusic, 1000);
+    });
+
+    window.prevLevel = prevLevel;
+    window.nextLevel = nextLevel;
+    window.toggleMusic = toggleMusic;
+    window.showExitModal = showExitModal;
+    window.exitGame = exitGame;
+    window.closeModal = closeModal;
+    window.openModal = openModal;
+    window.toggleTestMode = toggleTestMode;
+    window.startTestMode = startTestMode;
+    window.exitTestMode = exitTestMode;
+    window.restartGame = restartGame;
+    window.showErrors = showErrors;
+    window.repeatLevel2Sound = repeatLevel2Sound;
+    window.repeatLevel3Sound = repeatLevel3Sound;
+    window.level2DontKnow = level2DontKnow;
+    window.level3DontKnow = level3DontKnow;
+    window.resetFarm = resetFarm;
+
+    console.log('🐮 Old MacDonald\'s Farm — FINAL!');
+    console.log('✅ Корова: x=494, y=482');
+    console.log('✅ 2-я и 3-я игры в тесте РАБОТАЮТ');
+    console.log('✅ Автопереключение между уровнями');
+    console.log('✅ В тренировке — название + звук');
+    console.log('✅ В тесте — только звук');
+    console.log('✅ Музыка тише (0.15 вместо 0.3)');
+    console.log('✅ Увеличены задержки для дозвучивания звуков');
+    console.log('✅ Find the Animal → Choose the Animal');
+</script>
+
+</body>
+</html>
