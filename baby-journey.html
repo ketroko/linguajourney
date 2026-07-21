@@ -3,820 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Baby Journey | Lingua Journey — английский с пелёнок</title>
+    <title>Baby Journey | Lingua Journey</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: #F9FCB8;
-            color: #1f2937;
-            line-height: 1.5;
-        }
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: #E67E22;
-            z-index: 1001;
-            transition: width 0.1s;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        section {
-            padding: 60px 0;
-        }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        h2 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 32px;
-            font-weight: 700;
-            color: #2c3e50;
-            position: relative;
-        }
-        h2:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: #E67E22;
-            margin: 12px auto 0;
-            border-radius: 2px;
-        }
-        .btn-ticket {
-            display: inline-block;
-            background: #E67E22;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            border-radius: 16px;
-            transition: all 0.2s ease;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-        }
-        .btn-ticket:hover {
-            background: #D35400;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
-        .btn-vk {
-            background: #4c75a3;
-        }
-        .btn-vk:hover {
-            background: #3a5a7a;
-        }
-        .btn-telegram {
-            background: #0088cc;
-        }
-        .btn-telegram:hover {
-            background: #006699;
-        }
-        .back-home {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1100;
-            background: #E67E22;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .back-home:hover {
-            background: #D35400;
-            transform: scale(1.05);
-        }
-        .back-home svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: #E67E22;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            cursor: pointer;
-            border: none;
-        }
-        .scroll-top:hover {
-            background: #D35400;
-            transform: translateY(-4px);
-        }
-        .scroll-top svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        .scroll-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .dialog-icon {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
-            cursor: pointer;
-        }
-        .dialog-icon .main-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: 0.2s;
-        }
-        .dialog-icon .main-icon:hover {
-            transform: scale(1.05);
-        }
-        .dialog-social {
-            position: absolute;
-            top: 60px;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-        }
-        .dialog-icon:hover .dialog-social {
-            opacity: 1;
-            visibility: visible;
-        }
-        .dialog-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: 0.2s;
-        }
-        .dialog-social a:hover {
-            transform: scale(1.1);
-        }
-        .dialog-social img {
-            width: 28px;
-            height: 28px;
-        }
-        .first-screen {
-            background: #F9FCB8;
-            position: relative;
-            overflow: hidden;
-            padding: 40px 0 20px;
-        }
-        .first-screen-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        .first-screen .container {
-            position: relative;
-            z-index: 2;
-        }
-        .first-screen-container {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .first-screen-text {
-            flex: 1;
-        }
-        .first-screen-image {
-            flex: 1;
-        }
-        .first-screen-image img {
-            width: 100%;
-            border-radius: 32px;
-            border: 2px solid #E67E22;
-        }
-        .cards-grid, .advantages-grid, .tariffs-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-        .card, .advantage-item, .tariff-card {
-            background: white;
-            border-radius: 32px;
-            padding: 28px;
-            flex: 1;
-            min-width: 220px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            border: 1px solid #E67E22;
-            transition: 0.2s;
-        }
-        .card:hover, .advantage-item:hover, .tariff-card:hover {
-            transform: translateY(-5px);
-        }
-        .card h3, .tariff-card h3 {
-            font-size: 1.5rem;
-            color: #E67E22;
-            margin-bottom: 16px;
-        }
-        .advantage-item .emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .advantage-item strong {
-            display: block;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        .advantage-item p {
-            text-align: center;
-        }
-        .tariff-card .price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #2c3e50;
-            margin: 16px 0;
-            text-align: center;
-        }
-        .old-price {
-            font-size: 1.2rem;
-            color: #888;
-            text-decoration: line-through;
-            text-decoration-color: #E67E22;
-            margin-left: 10px;
-        }
-        .discount-date {
-            font-size: 0.8rem;
-            color: #E67E22;
-            text-align: center;
-            margin-top: 8px;
-        }
-        .btn-details {
-            background: transparent;
-            color: #E67E22;
-            border: 1px solid #E67E22;
-            margin-top: 16px;
-            width: 100%;
-        }
-        .btn-details:hover {
-            background: #E67E22;
-            color: white;
-        }
-        .hand-luggage-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-        .product-card {
-            background: white;
-            border-radius: 32px;
-            padding: 24px;
-            width: calc(50% - 15px);
-            max-width: 400px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            border: 1px solid #E67E22;
-            transition: 0.2s;
-            text-align: center;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-card .product-photo {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 24px;
-            margin-bottom: 16px;
-            cursor: pointer;
-            border: 1px solid #E67E22;
-        }
-        .product-card h3 {
-            font-size: 1.3rem;
-            color: #E67E22;
-            margin-bottom: 12px;
-        }
-        .product-card .price {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin: 12px 0;
-        }
-        .details-link {
-            color: #E67E22;
-            text-decoration: underline;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .slider-container {
-            position: relative;
-            max-width: 500px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 24px;
-        }
-        .slider-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .slider-track img {
-            width: 100%;
-            flex-shrink: 0;
-            border-radius: 24px;
-            border: 2px solid #E67E22;
-        }
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #E67E22;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            z-index: 10;
-        }
-        .slider-btn:hover {
-            background: #D35400;
-        }
-        .slider-btn.prev {
-            left: 10px;
-        }
-        .slider-btn.next {
-            right: 10px;
-        }
-        .slider-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        .checklist-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-            margin-top: 30px;
-        }
-        .checklist-text {
-            flex: 1;
-        }
-        .checklist-text h3 {
-            margin-bottom: 20px;
-        }
-        .checklist-text p {
-            margin: 20px 0;
-        }
-        .video-container {
-            margin: 30px 0;
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .modal.show {
-            display: flex;
-            opacity: 1;
-        }
-        .modal-content {
-            background: white;
-            max-width: 650px;
-            width: 90%;
-            border-radius: 48px;
-            padding: 32px;
-            position: relative;
-            max-height: 85vh;
-            overflow-y: auto;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-        .modal.show .modal-content {
-            transform: scale(1);
-        }
-        .modal-content h3 {
-            font-size: 1.8rem;
-            color: #E67E22;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .modal-content .tariff-desc {
-            font-style: italic;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #E67E22;
-        }
-        .modal-content .section-title {
-            font-weight: 700;
-            margin: 16px 0 8px;
-            color: #2c3e50;
-        }
-        .modal-content ul {
-            list-style: none;
-            margin: 10px 0 20px;
-            padding-left: 0;
-        }
-        .modal-content li {
-            margin-bottom: 12px;
-            padding-left: 28px;
-            position: relative;
-        }
-        .modal-content li:before {
-            content: "✓";
-            color: #E67E22;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 24px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #888;
-            transition: 0.2s;
-        }
-        .close-modal:hover {
-            color: #E67E22;
-        }
-        .order-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 24px;
-        }
-        .product-slider-container {
-            position: relative;
-            margin: 20px 0;
-            border-radius: 24px;
-            overflow: hidden;
-        }
-        .product-slider-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .product-slider-track img {
-            width: 100%;
-            flex-shrink: 0;
-            border-radius: 24px;
-            border: 1px solid #E67E22;
-            cursor: pointer;
-        }
-        .product-slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #E67E22;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            z-index: 10;
-        }
-        .product-slider-btn:hover {
-            background: #D35400;
-        }
-        .product-slider-btn.prev {
-            left: 10px;
-        }
-        .product-slider-btn.next {
-            right: 10px;
-        }
-        .product-slider-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        .fullscreen-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 4000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s;
-        }
-        .fullscreen-modal.show {
-            visibility: visible;
-            opacity: 1;
-        }
-        .fullscreen-modal .fullscreen-slider {
-            position: relative;
-            width: 90%;
-            max-width: 800px;
-        }
-        .fullscreen-modal .fullscreen-slider img {
-            width: 100%;
-            border-radius: 16px;
-        }
-        .fullscreen-modal .fullscreen-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
-            color: white;
-            cursor: pointer;
-            z-index: 4010;
-        }
-        .fullscreen-modal .fullscreen-prev, .fullscreen-modal .fullscreen-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .fullscreen-modal .fullscreen-prev:hover, .fullscreen-modal .fullscreen-next:hover {
-            background: rgba(0,0,0,0.8);
-        }
-        .fullscreen-modal .fullscreen-prev {
-            left: 20px;
-        }
-        .fullscreen-modal .fullscreen-next {
-            right: 20px;
-        }
-        .peach-bg {
-            background: #FEF9E6;
-        }
-        .yellow-bg {
-            background: #F9FCB8;
-            position: relative;
-            overflow: hidden;
-        }
-        .yellow-bg .bg-decor {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        .yellow-bg .container {
-            position: relative;
-            z-index: 2;
-        }
-        footer {
-            background: #F9FCB8;
-            text-align: center;
-            padding: 36px 0;
-            border-top: 3px dotted #E67E22;
-            color: #5D8EBD;
-        }
-        .footer-social-title {
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #5D8EBD;
-            margin-bottom: 12px;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0 16px;
-        }
-        .social-icons a {
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-        .social-icons a:hover {
-            transform: translateY(-3px);
-        }
-        .social-icons img {
-            width: 32px;
-            height: 32px;
-        }
-        .insta-with-star {
-            position: relative;
-        }
-        .insta-with-star .star {
-            position: absolute;
-            top: -5px;
-            right: -8px;
-            font-size: 0.7rem;
-            color: #E67E22;
-            font-weight: bold;
-        }
-        .social-warning {
-            text-align: center;
-            font-size: 0.6rem;
-            color: #8fc5e8;
-            margin-top: 12px;
-            margin-bottom: 16px;
-        }
-        .payment-modal-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-align: center;
-            margin: 20px 0;
-            line-height: 1.6;
-        }
-        .payment-modal-text .code-word {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #E67E22;
-            letter-spacing: 2px;
-            display: block;
-            margin: 8px 0;
-        }
-        .order-modal-text {
-            font-size: 1.1rem;
-            text-align: center;
-            margin: 16px 0 8px;
-            color: #2c3e50;
-        }
-        .version-toggle {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 12px 0;
-        }
-        .version-toggle .toggle-btn {
-            cursor: pointer;
-            padding: 8px 18px;
-            border-radius: 30px;
-            border: 2px solid #E67E22;
-            background: white;
-            color: #E67E22;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: 0.2s;
-            user-select: none;
-        }
-        .version-toggle .toggle-btn.active {
-            background: #E67E22;
-            color: white;
-        }
-        .version-toggle .toggle-btn:hover {
-            transform: scale(1.02);
-        }
-        .version-toggle input[type="radio"] {
-            display: none;
-        }
-        .product-desc-small {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 12px;
-            min-height: 40px;
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.5rem; }
-            section { padding: 40px 0; }
-            .first-screen-container { flex-direction: column; text-align: center; }
-            .checklist-content { flex-direction: column; text-align: center; }
-            .tariffs-grid { gap: 20px; }
-            .tariff-card { min-width: 100%; }
-            .hand-luggage-grid { gap: 20px; }
-            .product-card { width: 100%; max-width: none; }
-            .back-home { top: 10px; left: 10px; width: 36px; height: 36px; }
-            .dialog-icon { top: 10px; right: 10px; }
-            .dialog-icon .main-icon { width: 40px; height: 40px; }
-            .scroll-top { bottom: 20px; left: 20px; width: 40px; height: 40px; }
-            .contact-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .or-text {
-                margin: 8px 0;
-            }
-            .payment-modal-text {
-                font-size: 1rem;
-            }
-            .payment-modal-text .code-word {
-                font-size: 1.2rem;
-            }
-            .modal-content {
-                padding: 20px;
-            }
-            .version-toggle .toggle-btn {
-                font-size: 0.7rem;
-                padding: 6px 12px;
-            }
+        /* ===== ВСЕ СТИЛИ ===== */
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Open Sans',sans-serif;background:#F9FCB8;color:#1f2937;line-height:1.5}
+        .scroll-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:#E67E22;z-index:1001;transition:width .1s}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+        section{padding:60px 0}
+        h1{font-size:2.5rem;font-weight:800;color:#2c3e50;margin-bottom:20px}
+        h2{font-size:2rem;text-align:center;margin-bottom:32px;font-weight:700;color:#2c3e50;position:relative}
+        h2:after{content:'';display:block;width:80px;height:3px;background:#E67E22;margin:12px auto 0;border-radius:2px}
+        .btn-ticket{display:inline-block;background:#E67E22;padding:14px 32px;font-size:1.1rem;font-weight:600;color:#fff;text-decoration:none;border-radius:16px;transition:all .2s;border:none;box-shadow:0 4px 6px rgba(0,0,0,0.15);cursor:pointer}
+        .btn-ticket:hover{background:#D35400;transform:translateY(-3px);box-shadow:0 6px 10px rgba(0,0,0,0.2)}
+        .btn-vk{background:#4c75a3}.btn-vk:hover{background:#3a5a7a}
+        .btn-telegram{background:#0088cc}.btn-telegram:hover{background:#006699}
+        .back-home{position:fixed;top:20px;left:20px;z-index:1100;background:#E67E22;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+        .back-home:hover{background:#D35400;transform:scale(1.05)}
+        .back-home svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
+        .scroll-top{position:fixed;bottom:30px;left:30px;width:50px;height:50px;background:#E67E22;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s;opacity:0;visibility:hidden;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.15);cursor:pointer;border:none}
+        .scroll-top:hover{background:#D35400;transform:translateY(-4px)}
+        .scroll-top svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
+        .scroll-top.show{opacity:1;visibility:visible}
+        .dialog-icon{position:fixed;top:20px;right:20px;z-index:1100;cursor:pointer}
+        .dialog-icon .main-icon{width:48px;height:48px;border-radius:50%;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:.2s}
+        .dialog-icon .main-icon:hover{transform:scale(1.05)}
+        .dialog-social{position:absolute;top:60px;right:0;display:flex;flex-direction:column;gap:10px;opacity:0;visibility:hidden;transition:.3s}
+        .dialog-icon:hover .dialog-social{opacity:1;visibility:visible}
+        .dialog-social a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:.2s}
+        .dialog-social a:hover{transform:scale(1.1)}
+        .dialog-social img{width:28px;height:28px}
+        .first-screen{background:#F9FCB8;position:relative;overflow:hidden;padding:40px 0 20px}
+        .first-screen-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/bg-decor.png');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.15;pointer-events:none}
+        .first-screen .container{position:relative;z-index:2}
+        .first-screen-container{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+        .first-screen-text{flex:1}
+        .first-screen-image{flex:1}
+        .first-screen-image img{width:100%;border-radius:32px;border:2px solid #E67E22}
+        .cards-grid,.advantages-grid,.tariffs-grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;margin-top:40px}
+        .card,.advantage-item,.tariff-card{background:#fff;border-radius:32px;padding:28px;flex:1;min-width:220px;box-shadow:0 12px 28px rgba(0,0,0,0.08);border:1px solid #E67E22;transition:.2s}
+        .card:hover,.advantage-item:hover,.tariff-card:hover{transform:translateY(-5px)}
+        .card h3,.tariff-card h3{font-size:1.5rem;color:#E67E22;margin-bottom:16px}
+        .advantage-item .emoji{font-size:3rem;display:block;margin-bottom:16px;text-align:center}
+        .advantage-item strong{display:block;text-align:center;margin-bottom:8px}
+        .advantage-item p{text-align:center}
+        .tariff-card .price{font-size:1.8rem;font-weight:800;color:#2c3e50;margin:16px 0;text-align:center}
+        .old-price{font-size:1.2rem;color:#888;text-decoration:line-through;text-decoration-color:#E67E22;margin-left:10px}
+        .discount-date{font-size:0.8rem;color:#E67E22;text-align:center;margin-top:8px}
+        .btn-details{background:transparent;color:#E67E22;border:1px solid #E67E22;margin-top:16px;width:100%}
+        .btn-details:hover{background:#E67E22;color:#fff}
+        .hand-luggage-grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;margin-top:40px}
+        .product-card{background:#fff;border-radius:32px;padding:24px;width:calc(50% - 15px);max-width:400px;box-shadow:0 12px 28px rgba(0,0,0,0.08);border:1px solid #E67E22;transition:.2s;text-align:center}
+        .product-card:hover{transform:translateY(-5px)}
+        .product-card .product-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:24px;margin-bottom:16px;cursor:pointer;border:1px solid #E67E22}
+        .product-card h3{font-size:1.3rem;color:#E67E22;margin-bottom:12px}
+        .product-card .price{font-size:1.5rem;font-weight:800;margin:12px 0}
+        .details-link{color:#E67E22;text-decoration:underline;font-size:0.9rem;cursor:pointer;display:inline-block;margin-bottom:12px}
+        .slider-container{position:relative;max-width:500px;margin:0 auto;overflow:hidden;border-radius:24px}
+        .slider-track{display:flex;transition:transform .5s}
+        .slider-track img{width:100%;flex-shrink:0;border-radius:24px;border:2px solid #E67E22}
+        .slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:#E67E22;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:10}
+        .slider-btn:hover{background:#D35400}
+        .slider-btn.prev{left:10px}.slider-btn.next{right:10px}
+        .slider-btn svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
+        .checklist-content{display:flex;flex-wrap:wrap;gap:40px;align-items:center;margin-top:30px}
+        .checklist-text{flex:1}
+        .checklist-text h3{margin-bottom:20px}
+        .checklist-text p{margin:20px 0}
+        .video-container{margin:30px 0;border-radius:32px;overflow:hidden;position:relative;padding-bottom:56.25%;height:0}
+        .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:3000;justify-content:center;align-items:center;opacity:0;transition:opacity .3s}
+        .modal.show{display:flex;opacity:1}
+        .modal-content{background:#fff;max-width:650px;width:90%;border-radius:48px;padding:32px;position:relative;max-height:85vh;overflow-y:auto;transform:scale(0.95);transition:transform .3s}
+        .modal.show .modal-content{transform:scale(1)}
+        .modal-content h3{font-size:1.8rem;color:#E67E22;margin-bottom:16px;text-align:center}
+        .modal-content .tariff-desc{font-style:italic;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid #E67E22}
+        .modal-content .section-title{font-weight:700;margin:16px 0 8px;color:#2c3e50}
+        .modal-content ul{list-style:none;margin:10px 0 20px;padding-left:0}
+        .modal-content li{margin-bottom:12px;padding-left:28px;position:relative}
+        .modal-content li:before{content:"✓";color:#E67E22;font-weight:700;position:absolute;left:0;top:0}
+        .close-modal{position:absolute;top:20px;right:24px;font-size:28px;font-weight:700;cursor:pointer;color:#888;transition:.2s}
+        .close-modal:hover{color:#E67E22}
+        .order-buttons{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:24px}
+        .product-slider-container{position:relative;margin:20px 0;border-radius:24px;overflow:hidden}
+        .product-slider-track{display:flex;transition:transform .5s}
+        .product-slider-track img{width:100%;flex-shrink:0;border-radius:24px;border:1px solid #E67E22;cursor:pointer}
+        .product-slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:#E67E22;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:10}
+        .product-slider-btn:hover{background:#D35400}
+        .product-slider-btn.prev{left:10px}.product-slider-btn.next{right:10px}
+        .product-slider-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none}
+        .fullscreen-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:4000;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:.3s}
+        .fullscreen-modal.show{visibility:visible;opacity:1}
+        .fullscreen-modal .fullscreen-slider{position:relative;width:90%;max-width:800px}
+        .fullscreen-modal .fullscreen-slider img{width:100%;border-radius:16px}
+        .fullscreen-modal .fullscreen-close{position:absolute;top:20px;right:30px;font-size:40px;color:#fff;cursor:pointer;z-index:4010}
+        .fullscreen-modal .fullscreen-prev,.fullscreen-modal .fullscreen-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;font-size:40px;cursor:pointer;padding:10px;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;transition:.2s}
+        .fullscreen-modal .fullscreen-prev:hover,.fullscreen-modal .fullscreen-next:hover{background:rgba(0,0,0,0.8)}
+        .fullscreen-modal .fullscreen-prev{left:20px}.fullscreen-modal .fullscreen-next{right:20px}
+        .peach-bg{background:#FEF9E6}
+        .yellow-bg{background:#F9FCB8;position:relative;overflow:hidden}
+        .yellow-bg .bg-decor{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('images/bg-decor.png');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.15;pointer-events:none}
+        .yellow-bg .container{position:relative;z-index:2}
+        footer{background:#F9FCB8;text-align:center;padding:36px 0;border-top:3px dotted #E67E22;color:#5D8EBD}
+        .footer-social-title{text-align:center;font-size:0.9rem;font-weight:600;color:#5D8EBD;margin-bottom:12px}
+        .social-icons{display:flex;justify-content:center;gap:20px;margin:20px 0 16px}
+        .social-icons a{display:inline-block;transition:transform .2s}
+        .social-icons a:hover{transform:translateY(-3px)}
+        .social-icons img{width:32px;height:32px}
+        .insta-with-star{position:relative}
+        .insta-with-star .star{position:absolute;top:-5px;right:-8px;font-size:0.7rem;color:#E67E22;font-weight:700}
+        .social-warning{text-align:center;font-size:0.6rem;color:#8fc5e8;margin-top:12px;margin-bottom:16px}
+        .payment-modal-text{font-size:1.2rem;font-weight:600;text-align:center;margin:20px 0;line-height:1.6}
+        .payment-modal-text .code-word{font-size:1.6rem;font-weight:800;color:#E67E22;letter-spacing:2px;display:block;margin:8px 0}
+        .order-modal-text{font-size:1.1rem;text-align:center;margin:16px 0 8px;color:#2c3e50}
+        .version-toggle{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+        .version-toggle .toggle-btn{cursor:pointer;padding:8px 18px;border-radius:30px;border:2px solid #E67E22;background:#fff;color:#E67E22;font-weight:600;font-size:0.8rem;transition:.2s;user-select:none}
+        .version-toggle .toggle-btn.active{background:#E67E22;color:#fff}
+        .version-toggle .toggle-btn:hover{transform:scale(1.02)}
+        .version-toggle input[type="radio"]{display:none}
+        .product-desc-small{font-size:0.85rem;color:#555;margin-bottom:12px;min-height:40px}
+        .modal-slider-container{position:relative;margin:16px 0;border-radius:16px;overflow:hidden;background:#f5f0e8}
+        .modal-slider-track{display:flex;transition:transform .5s}
+        .modal-slider-track img{width:100%;flex-shrink:0;border-radius:16px;border:1px solid #E67E22}
+        .modal-slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:#E67E22;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:10}
+        .modal-slider-btn:hover{background:#D35400}
+        .modal-slider-btn.prev{left:10px}.modal-slider-btn.next{right:10px}
+        .modal-slider-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none}
+        @media(max-width:768px){
+            h1{font-size:1.8rem}h2{font-size:1.5rem}section{padding:40px 0}
+            .first-screen-container{flex-direction:column;text-align:center}
+            .checklist-content{flex-direction:column;text-align:center}
+            .tariffs-grid{gap:20px}.tariff-card{min-width:100%}
+            .hand-luggage-grid{gap:20px}.product-card{width:100%;max-width:none}
+            .back-home{top:10px;left:10px;width:36px;height:36px}
+            .dialog-icon{top:10px;right:10px}
+            .dialog-icon .main-icon{width:40px;height:40px}
+            .scroll-top{bottom:20px;left:20px;width:40px;height:40px}
+            .contact-buttons{flex-direction:column;align-items:center}
+            .or-text{margin:8px 0}
+            .payment-modal-text{font-size:1rem}
+            .payment-modal-text .code-word{font-size:1.2rem}
+            .modal-content{padding:20px}
+            .version-toggle .toggle-btn{font-size:0.7rem;padding:6px 12px}
+            .modal-slider-btn{width:30px;height:30px}
+            .modal-slider-btn svg{width:16px;height:16px}
+        }
+        @media(max-width:480px){
+            .product-card{padding:16px}
+            .product-card h3{font-size:1.1rem}
+            .version-toggle .toggle-btn{font-size:0.6rem;padding:4px 10px}
+            .modal-content{padding:14px}
+            .modal-content h3{font-size:1.3rem}
         }
     </style>
 </head>
 <body>
 
+<!-- ===== ВСЯ РАЗМЕТКА ===== -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <div class="back-home" onclick="window.location.href='index.html'">
-    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6" /></svg>
+    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6"/></svg>
 </div>
 
 <div class="dialog-icon">
@@ -828,7 +178,7 @@
 </div>
 
 <button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
-    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7" /></svg>
+    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
 </button>
 
 <!-- 1 окно -->
@@ -837,9 +187,9 @@
     <div class="container first-screen-container">
         <div class="first-screen-text">
             <h1>🧳 Baby Journey: английский с пелёнок</h1>
-            <p style="font-size: 1.2rem; margin: 20px 0;">Отправьтесь в большое языковое путешествие вместе с малышом.</p>
-            <a href="#tariffs" class="btn-ticket" style="margin-top: 20px;">Перейти к тарифам</a>
-            <p style="font-weight: 700; color: #E67E22; margin-top: 16px;">🎁 Доступ открывается сразу после оплаты</p>
+            <p style="font-size:1.2rem;margin:20px 0;">Отправьтесь в большое языковое путешествие вместе с малышом.</p>
+            <a href="#tariffs" class="btn-ticket" style="margin-top:20px;">Перейти к тарифам</a>
+            <p style="font-weight:700;color:#E67E22;margin-top:16px;">🎁 Доступ открывается сразу после оплаты</p>
         </div>
         <div class="first-screen-image">
             <img src="images/mom-baby-new.jpeg" alt="Мама с малышом">
@@ -847,8 +197,8 @@
     </div>
 </div>
 
-<!-- 2 окно: Для кого этот курс (белый) -->
-<section style="background: white;">
+<!-- 2 окно: Для кого этот курс -->
+<section style="background:#fff;">
     <div class="container">
         <h2>✨ Для кого этот курс</h2>
         <div class="cards-grid">
@@ -859,7 +209,7 @@
     </div>
 </section>
 
-<!-- 3 окно: Почему билингвизм с рождения (персиковый) -->
+<!-- 3 окно: Почему билингвизм с рождения -->
 <section class="peach-bg">
     <div class="container">
         <h2>🌟 Почему билингвизм с рождения</h2>
@@ -871,22 +221,16 @@
     </div>
 </section>
 
-<!-- 4 окно: О Baby Journey (белый) -->
-<section style="background: white;">
+<!-- 4 окно: О Baby Journey -->
+<section style="background:#fff;">
     <div class="container">
         <h2>🎥 О Baby Journey</h2>
-        <!-- ВИДЕО ВРЕМЕННО УБРАНО (сохранено для возврата) -->
-        <!--
-        <div class="video-container">
-            <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ТВОЕГО_ВИДЕО/" frameborder="0" allowfullscreen></iframe>
-        </div>
-        -->
-        <p style="text-align: center;">Об обучении, примеры материалов из тарифов и товары — смотри видео.</p>
-        <p style="text-align: center; font-style: italic; color: #888; margin-top: 10px;">🎬 Видео скоро появится — следите за обновлениями!</p>
+        <p style="text-align:center;">Об обучении, примеры материалов из тарифов и товары — смотри видео.</p>
+        <p style="text-align:center;font-style:italic;color:#888;margin-top:10px;">🎬 Видео скоро появится — следите за обновлениями!</p>
     </div>
 </section>
 
-<!-- 5 окно: Бесплатный чек-лист (жёлтый с декором) -->
+<!-- 5 окно: Бесплатный чек-лист -->
 <div class="yellow-bg">
     <div class="bg-decor"></div>
     <div class="container">
@@ -910,8 +254,8 @@
     </div>
 </section>
 
-<!-- 6 окно: Тарифы (белый) -->
-<section id="tariffs" style="background: white;">
+<!-- 6 окно: Тарифы -->
+<section id="tariffs" style="background:#fff;">
     <div class="container">
         <h2>🚀 Выберите свой формат путешествия</h2>
         <div class="tariffs-grid">
@@ -924,12 +268,13 @@
     </div>
 </section>
 
-<!-- 7 окно: Ручная кладь (персиковый) -->
+<!-- 7 окно: Ручная кладь -->
 <section class="peach-bg">
     <div class="container">
         <h2>🧳 Ручная кладь</h2>
-        <p style="text-align: center; margin-bottom: 40px;">Маленькие помощники, которые всегда под рукой — дома, в дороге, на холодильнике</p>
+        <p style="text-align:center;margin-bottom:40px;">Маленькие помощники, которые всегда под рукой — дома, в дороге, на холодильнике</p>
         <div class="hand-luggage-grid">
+
             <!-- Товар: Наклейки «Фразы дня» -->
             <div class="product-card" data-product="Наклейки «Фразы дня»" id="product-stickers">
                 <div class="product-slider-container">
@@ -945,7 +290,7 @@
                 <button class="btn-ticket" onclick="openOrderModal('Наклейки «Фразы дня»')">Оформить заказ</button>
             </div>
 
-            <!-- Товар: Первые слова (6 карточек из чек-листа) -->
+            <!-- Товар: Первые слова -->
             <div class="product-card" data-product="Первые слова" id="product-first-words">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-first-words">
@@ -962,15 +307,17 @@
                 <button class="btn-ticket" onclick="openOrderModal('Первые слова')">Оформить заказ</button>
             </div>
 
-            <!-- Товар: Базовый набор карточек «Английский с пелёнок» (ДВЕ ВЕРСИИ) -->
+            <!-- ★★★ Товар: Базовый набор карточек ★★★ -->
             <div class="product-card" data-product="Базовый набор карточек «Английский с пелёнок»" id="product-cards">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-cards">
-                        <!-- НОВОЕ ФОТО (ПЕРВОЕ) -->
-                        <img src="images/product-cards-0.jpg" alt="Карточки 0">
-                        <!-- СТАРЫЕ ФОТО (2-е и 3-е) -->
-                        <img src="images/product-cards-1.jpg" alt="Карточки 1">
-                        <img src="images/product-cards-2.jpg" alt="Карточки 2">
+                        <img src="images/product-cards-0.jpg" alt="Карточки 0" class="card-photo regular-photo">
+                        <img src="images/product-cards-3.jpg" alt="Карточки 3" class="card-photo regular-photo">
+                        <img src="images/product-cards-1.jpg" alt="Карточки 1" class="card-photo regular-photo">
+                        <img src="images/product-cards-2.jpg" alt="Карточки 2" class="card-photo regular-photo">
+                        <img src="images/product-cards-masha-1.jpg" alt="Маша и Медведь 1" class="card-photo masha-photo" style="display:none;">
+                        <img src="images/product-cards-masha-2.jpg" alt="Маша и Медведь 2" class="card-photo masha-photo" style="display:none;">
+                        <img src="images/product-cards-masha-3.jpg" alt="Маша и Медведь 3" class="card-photo masha-photo" style="display:none;">
                     </div>
                     <button class="product-slider-btn prev" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
                     <button class="product-slider-btn next" data-slider="track-cards"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
@@ -979,50 +326,93 @@
                 <h3>🃏 Базовый набор карточек «Английский с пелёнок»</h3>
                 <p>60 карточек (39 слов + 21 фраза) для малышей до 3 лет и их мам</p>
 
-                <!-- ВЫБОР ВЕРСИИ (PDF или физический набор) -->
-                <div class="version-toggle">
+                <div class="version-toggle" id="cardThemeToggle">
+                    <label class="toggle-btn active" id="label-regular">
+                        <input type="radio" name="cardTheme" value="regular" checked> ⭐ Основная версия
+                    </label>
+                    <label class="toggle-btn" id="label-masha">
+                        <input type="radio" name="cardTheme" value="masha"> 🐻 Маша и Медведь
+                    </label>
+                </div>
+
+                <div class="version-toggle" id="cardFormatToggle">
                     <label class="toggle-btn active" id="label-pdf">
-                        <input type="radio" name="cardVersion" value="pdf" checked> 📄 Электронная версия
+                        <input type="radio" name="cardVersion" value="pdf" checked> 📄 Электронная версия (PDF)
                     </label>
                     <label class="toggle-btn" id="label-physical">
                         <input type="radio" name="cardVersion" value="physical"> 🚚 Готовый набор
                     </label>
                 </div>
 
-                <!-- ЦЕНА (меняется через JS) -->
                 <div class="price" id="cardPrice">790 ₽</div>
-
-                <!-- ОПИСАНИЕ ПОД ЦЕНОЙ (меняется через JS) -->
-                <div class="product-desc-small" id="cardDescription">
-                    PDF-файл + видео с произношением + транскрипции
-                </div>
+                <div class="product-desc-small" id="cardDescription">PDF-файл + видео с произношением + транскрипции</div>
 
                 <a href="#" class="details-link" onclick="openProductModal('productCardsModal'); return false;">Подробнее</a><br>
                 <button class="btn-ticket" id="orderButton" onclick="openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ НАБОРА С ПОДРОБНЫМ ОПИСАНИЕМ -->
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ КАРТОЧЕК ★★★ -->
             <div id="productCardsModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productCardsModal')">&times;</span>
-                    <h3>🃏 Базовый набор карточек «Английский с пелёнок»</h3>
+                    <h3 id="modalCardsTitle">🃏 Базовый набор карточек «Английский с пелёнок»</h3>
 
-                    <!-- ВИДЕО (вставлена твоя ссылка) -->
-                    <div style="margin: 16px 0; border-radius: 16px; overflow: hidden;">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                            <iframe src="https://rutube.ru/embed/01ee792689219d735f0109b4d35c07a5/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px;"></iframe>
+                    <div class="version-toggle" id="modalCardThemeToggle">
+                        <label class="toggle-btn active" id="modal-label-regular">
+                            <input type="radio" name="modalCardTheme" value="regular" checked> ⭐ Основная версия
+                        </label>
+                        <label class="toggle-btn" id="modal-label-masha">
+                            <input type="radio" name="modalCardTheme" value="masha"> 🐻 Маша и Медведь
+                        </label>
+                    </div>
+
+                    <div class="version-toggle" id="modalCardFormatToggle">
+                        <label class="toggle-btn active" id="modal-label-pdf">
+                            <input type="radio" name="modalCardVersion" value="pdf" checked> 📄 Электронная версия (PDF)
+                        </label>
+                        <label class="toggle-btn" id="modal-label-physical">
+                            <input type="radio" name="modalCardVersion" value="physical"> 🚚 Готовый набор
+                        </label>
+                    </div>
+
+                    <div id="modalVideoRegular" style="margin:16px 0;border-radius:16px;overflow:hidden;">
+                        <div style="position:relative;padding-bottom:56.25%;height:0;">
+                            <iframe src="https://rutube.ru/embed/01ee792689219d735f0109b4d35c07a5/" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
                         </div>
                     </div>
 
-                    <!-- ФОТО НАБОРА -->
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
-                        <img src="images/product-cards-0.jpg" alt="Карточки" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
-                        <img src="images/product-cards-1.jpg" alt="Карточки" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
-                        <img src="images/product-cards-2.jpg" alt="Карточки" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
+                    <div id="modalVideoMasha" style="margin:16px 0;border-radius:16px;overflow:hidden;display:none;">
+                        <div style="position:relative;padding-bottom:56.25%;height:0;">
+                            <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ВИДЕО_МАША/" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
+                        </div>
                     </div>
 
-                    <!-- ОПИСАНИЕ -->
-                    <div style="text-align: left;">
+                    <div id="modalPhotosRegular">
+                        <div class="modal-slider-container">
+                            <div class="modal-slider-track" id="modal-track-regular">
+                                <img src="images/product-cards-0.jpg" alt="Карточки 0">
+                                <img src="images/product-cards-3.jpg" alt="Карточки 3">
+                                <img src="images/product-cards-1.jpg" alt="Карточки 1">
+                                <img src="images/product-cards-2.jpg" alt="Карточки 2">
+                            </div>
+                            <button class="modal-slider-btn prev" onclick="slideModal('modal-track-regular', -1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                            <button class="modal-slider-btn next" onclick="slideModal('modal-track-regular', 1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                        </div>
+                    </div>
+
+                    <div id="modalPhotosMasha" style="display:none;">
+                        <div class="modal-slider-container">
+                            <div class="modal-slider-track" id="modal-track-masha">
+                                <img src="images/product-cards-masha-1.jpg" alt="Маша и Медведь 1">
+                                <img src="images/product-cards-masha-2.jpg" alt="Маша и Медведь 2">
+                                <img src="images/product-cards-masha-3.jpg" alt="Маша и Медведь 3">
+                            </div>
+                            <button class="modal-slider-btn prev" onclick="slideModal('modal-track-masha', -1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                            <button class="modal-slider-btn next" onclick="slideModal('modal-track-masha', 1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                        </div>
+                    </div>
+
+                    <div style="text-align:left;" id="modalCardDescription">
                         <p><strong>Что входит в набор:</strong></p>
                         <ul>
                             <li><strong>PDF-файл</strong> — 60 карточек для печати (39 слов + 21 бытовая фраза)</li>
@@ -1030,22 +420,15 @@
                             <li><strong>Транскрипции на русском языке</strong> — легко читать даже без знания английского</li>
                             <li><strong>Инструкция по произношению</strong> сложных звуков (межзубные [θ], [ð])</li>
                         </ul>
-
-                        <p style="margin-top: 16px;"><strong>🎯 Для кого:</strong></p>
+                        <p style="margin-top:16px;"><strong>🎯 Для кого:</strong></p>
                         <ul>
                             <li>👶 Для детей до 3 лет</li>
                             <li>👩‍👧 Для мам, которые хотят учить английский с малышом с пелёнок</li>
                             <li>🗣️ Для родителей, которые сами не уверены в своём произношении</li>
                         </ul>
-
-                        <p style="margin-top: 16px;"><strong>📦 Как получить доступ:</strong><br>
-                        После оплаты вы получаете доступ к закрытому чату ВКонтакте, где закреплены PDF-файл и видео. Всё можно скачать на телефон или компьютер и начинать заниматься уже сегодня.</p>
-
-                        <hr style="margin: 16px 0; border: 1px dashed #E67E22;">
-
-                        <p><strong>✨ Хотите получить уже готовые, заламинированные карточки?</strong><br>
-                        Если у вас нет времени печатать, вырезать и ламинировать — мы можем сделать всё за вас!</p>
-
+                        <p style="margin-top:16px;"><strong>📦 Как получить доступ:</strong><br>После оплаты вы получаете доступ к закрытому чату ВКонтакте, где закреплены PDF-файл и видео. Всё можно скачать на телефон или компьютер и начинать заниматься уже сегодня.</p>
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+                        <p><strong>✨ Хотите получить уже готовые, заламинированные карточки?</strong><br>Если у вас нет времени печатать, вырезать и ламинировать — мы можем сделать всё за вас!</p>
                         <p><strong>Что вы получите за доплату:</strong></p>
                         <ul>
                             <li>✅ 60 готовых карточек на плотной глянцевой бумаге</li>
@@ -1053,21 +436,17 @@
                             <li>✅ Аккуратно вырезаны и упакованы</li>
                             <li>✅ PDF-файл и видео с произношением — в подарок</li>
                         </ul>
-
-                        <p style="margin-top: 12px;"><strong>💰 Стоимость готового набора:</strong> +700 ₽ к стоимости PDF<br>
-                        <strong>Итоговая цена:</strong> 1 490 ₽ (вместе с PDF и видео)</p>
-
-                        <p style="margin-top: 10px;">🚚 Доставка по всей России. Почта России или СДЭК (на ваш выбор).<br>
-                        Стоимость доставки оплачивается отдельно.</p>
+                        <p style="margin-top:12px;"><strong>💰 Стоимость готового набора:</strong> +700 ₽ к стоимости PDF<br><strong>Итоговая цена:</strong> 1 490 ₽ (вместе с PDF и видео)</p>
+                        <p style="margin-top:10px;">🚚 Доставка по всей России. Почта России или СДЭК (на ваш выбор).<br>Стоимость доставки оплачивается отдельно.</p>
                     </div>
 
-                    <div class="order-buttons" style="margin-top: 20px;">
+                    <div class="order-buttons" style="margin-top:20px;">
                         <button class="btn-ticket" onclick="closeModal('productCardsModal'); openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Товар: Набор «Old MacDonald's Farm» (ВМЕСТО МАГНИТ-ПЛАНЕРА) -->
+            <!-- Товар: Набор «Old MacDonald's Farm» -->
             <div class="product-card" data-product="Набор «Old MacDonald's Farm»" id="product-farm">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-farm">
@@ -1078,12 +457,10 @@
                     <button class="product-slider-btn prev" data-slider="track-farm"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
                     <button class="product-slider-btn next" data-slider="track-farm"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
                 </div>
-
                 <h3>🐮 Набор «Old MacDonald's Farm»</h3>
                 <p>🐮 Первые животные, их звуки, простые действия и любимые песенки — всё в одной игре на ферме.</p>
 
-                <!-- ВЫБОР ФОРМАТА -->
-                <div class="version-toggle">
+                <div class="version-toggle" id="farmFormatToggle">
                     <label class="toggle-btn active" id="label-farm-pdf">
                         <input type="radio" name="farmVersion" value="pdf" checked> 📄 Электронная версия (PDF)
                     </label>
@@ -1095,43 +472,30 @@
                     </label>
                 </div>
 
-                <!-- ЦЕНА (меняется через JS) -->
                 <div class="price" id="farmPrice">990 ₽</div>
-
-                <!-- ОПИСАНИЕ ПОД ЦЕНОЙ (меняется через JS) -->
-                <div class="product-desc-small" id="farmDescription">
-                    PDF-файл: поле с тенями + животные + инструкция для родителей + QR-код с песенками + раскраска
-                </div>
+                <div class="product-desc-small" id="farmDescription">PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска</div>
 
                 <a href="#" class="details-link" onclick="openProductModal('productFarmModal'); return false;">Подробнее</a><br>
                 <button class="btn-ticket" id="orderButtonFarm" onclick="openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ НАБОРА «OLD MACDONALD'S FARM» -->
+            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФЕРМЫ -->
             <div id="productFarmModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productFarmModal')">&times;</span>
                     <h3>🐮 Набор «Old MacDonald's Farm»</h3>
-
-                    <!-- ВИДЕО -->
-                    <div style="margin: 16px 0; border-radius: 16px; overflow: hidden;">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                            <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ВИДЕО_ПРО_ФЕРМУ/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px;"></iframe>
+                    <div style="margin:16px 0;border-radius:16px;overflow:hidden;">
+                        <div style="position:relative;padding-bottom:56.25%;height:0;">
+                            <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ВИДЕО_ПРО_ФЕРМУ/" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
                         </div>
                     </div>
-
-                    <!-- ФОТО НАБОРА -->
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
-                        <img src="images/product-farm-1.jpg" alt="Ферма 1" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
-                        <img src="images/product-farm-2.jpg" alt="Ферма 2" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
-                        <img src="images/product-farm-3.jpg" alt="Ферма 3" style="flex: 1; min-width: 120px; border-radius: 16px; border: 1px solid #E67E22;">
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+                        <img src="images/product-farm-1.jpg" alt="Ферма 1" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                        <img src="images/product-farm-2.jpg" alt="Ферма 2" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                        <img src="images/product-farm-3.jpg" alt="Ферма 3" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
                     </div>
-
-                    <!-- ОПИСАНИЕ С ПЕРЕКЛЮЧАТЕЛЕМ -->
-                    <div style="text-align: left;">
-
-                        <!-- ВЫБОР ФОРМАТА В МОДАЛКЕ -->
-                        <div class="version-toggle" style="margin-bottom: 16px;">
+                    <div style="text-align:left;">
+                        <div class="version-toggle" id="modalFarmFormatToggle" style="margin-bottom:16px;">
                             <label class="toggle-btn active" id="modal-label-farm-pdf">
                                 <input type="radio" name="modalFarmVersion" value="pdf" checked> 📄 PDF
                             </label>
@@ -1142,8 +506,6 @@
                                 <input type="radio" name="modalFarmVersion" value="puzzle"> 🧩 Пазл
                             </label>
                         </div>
-
-                        <!-- 📄 ЭЛЕКТРОННАЯ ВЕРСИЯ (PDF) -->
                         <div id="modalFarmDescPdf">
                             <p><strong>📄 Электронная версия (PDF)</strong></p>
                             <ul>
@@ -1154,11 +516,9 @@
                                 <li>Раскраска «Ферма» (10 страниц)</li>
                                 <li>Транскрипции на русском языке для всех слов и фраз</li>
                             </ul>
-                            <p style="font-weight: 700; color: #E67E22; margin-top: 12px;">Цена: 990 ₽</p>
+                            <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 990 ₽</p>
                         </div>
-
-                        <!-- 🚚 ЛАМИНИРОВАННЫЙ НАБОР -->
-                        <div id="modalFarmDescLaminated" style="display: none;">
+                        <div id="modalFarmDescLaminated" style="display:none;">
                             <p><strong>🚚 Готовый ламинированный набор</strong></p>
                             <ul>
                                 <li>✅ Всё, что в PDF-версии</li>
@@ -1167,11 +527,9 @@
                                 <li>✅ Запасные липучки в комплекте</li>
                                 <li>✅ PDF-файл, QR-код и раскраска — в подарок</li>
                             </ul>
-                            <p style="font-weight: 700; color: #E67E22; margin-top: 12px;">Цена: 1 990 ₽</p>
+                            <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 1 990 ₽</p>
                         </div>
-
-                        <!-- 🧩 ИГРА-ПАЗЛ -->
-                        <div id="modalFarmDescPuzzle" style="display: none;">
+                        <div id="modalFarmDescPuzzle" style="display:none;">
                             <p><strong>🧩 Игра-пазл</strong></p>
                             <ul>
                                 <li>✅ Игровое поле с вырезанными отверстиями под 5 животных</li>
@@ -1182,19 +540,13 @@
                                 <li>✅ Запасные липучки в комплекте</li>
                                 <li>✅ PDF-файл, QR-код и раскраска — в подарок</li>
                             </ul>
-                            <p style="font-weight: 700; color: #E67E22; margin-top: 12px;">Цена: 2 490 ₽</p>
+                            <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 2 490 ₽</p>
                         </div>
-
-                        <hr style="margin: 16px 0; border: 1px dashed #E67E22;">
-
-                        <p><strong>📦 Доставка</strong><br>
-                        Для физических наборов (ламинированный и пазл) — доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
-
-                        <p><strong>🎁 Подарок ко всем наборам</strong><br>
-                        При покупке любого физического формата вы получаете PDF-версию, QR-код с песенками и раскраску в подарок.</p>
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+                        <p><strong>📦 Доставка</strong><br>Для физических наборов (ламинированный и пазл) — доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
+                        <p><strong>🎁 Подарок ко всем наборам</strong><br>При покупке любого физического формата вы получаете PDF-версию, QR-код с песенками и раскраску в подарок.</p>
                     </div>
-
-                    <div class="order-buttons" style="margin-top: 20px;">
+                    <div class="order-buttons" style="margin-top:20px;">
                         <button class="btn-ticket" onclick="closeModal('productFarmModal'); openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
                     </div>
                 </div>
@@ -1214,29 +566,69 @@
                 <h3>📄 Печатный чек-лист</h3>
                 <p>Бесплатный чек-лист в печатном виде</p>
                 <div class="price">490 ₽</div>
+                <a href="#" class="details-link" onclick="openProductModal('productChecklistModal'); return false;">Подробнее</a><br>
                 <button class="btn-ticket" onclick="openOrderModal('Печатный чек-лист')">Оформить заказ</button>
             </div>
+
+            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПЕЧАТНОГО ЧЕК-ЛИСТА -->
+            <div id="productChecklistModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal('productChecklistModal')">&times;</span>
+                    <h3>📄 Печатный чек-лист</h3>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+                        <img src="images/print-checklist-1.jpg" alt="Чек-лист 1" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                        <img src="images/print-checklist-2.jpg" alt="Чек-лист 2" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                        <img src="images/print-checklist-3.jpg" alt="Чек-лист 3" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                    </div>
+                    <div style="text-align:left;">
+                        <p><strong>Что это:</strong></p>
+                        <ul>
+                            <li>Тот самый бесплатный чек-лист «Первые 5 шагов к английским словам»</li>
+                            <li>33 страницы первых слов, разбор важных тем и первых карточек для практики</li>
+                            <li>Видео с произношением</li>
+                            <li>Мультики и песни для развития речи</li>
+                        </ul>
+                        <p style="margin-top:16px;"><strong>🎯 Для кого:</strong></p>
+                        <ul>
+                            <li>👶 Для детей от 0 до 3 лет</li>
+                            <li>👩‍👧 Для мам, которые хотят начать заниматься английским с малышом</li>
+                            <li>🗣️ Для тех, кто хочет получить готовый материал без необходимости печатать самостоятельно</li>
+                        </ul>
+                        <p style="margin-top:16px;"><strong>📦 Что вы получите:</strong></p>
+                        <ul>
+                            <li>✅ Чек-лист в печатном виде — уже готовый, на плотной бумаге</li>
+                            <li>✅ Заламинированные страницы — не рвутся и не мнутся</li>
+                            <li>✅ Аккуратно упаковано для отправки</li>
+                            <li>✅ PDF-версия чек-листа — в подарок</li>
+                            <li>✅ Ссылка на видео с произношением</li>
+                        </ul>
+                        <p style="margin-top:12px;"><strong>💰 Цена:</strong> 490 ₽</p>
+                        <p style="margin-top:10px;">🚚 Доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
+                    </div>
+                    <div class="order-buttons" style="margin-top:20px;">
+                        <button class="btn-ticket" onclick="closeModal('productChecklistModal'); openOrderModal('Печатный чек-лист')">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- 8 окно: Остались вопросы? (белый) -->
-<section style="background: white;">
+<!-- 8 окно: Остались вопросы? -->
+<section style="background:#fff;">
     <div class="container">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center; background: white; border-radius: 48px; padding: 48px; border: 2px solid #E67E22;">
-            <h2 style="margin-bottom: 16px;">Остались вопросы? Свяжитесь с нами</h2>
-            <div class="contact-buttons" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; margin: 30px 0;">
+        <div style="max-width:800px;margin:0 auto;text-align:center;background:#fff;border-radius:48px;padding:48px;border:2px solid #E67E22;">
+            <h2 style="margin-bottom:16px;">Остались вопросы? Свяжитесь с нами</h2>
+            <div class="contact-buttons" style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;align-items:center;margin:30px 0;">
                 <a href="https://vk.me/public221397766" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
                 <span class="or-text">или</span>
                 <a href="https://t.me/lingua_journey" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
             </div>
-            <p style="margin: 20px 0;">Или оставьте нам ваше имя и почту — мы свяжемся с вами</p>
-            
-            <!-- Яндекс Форма -->
+            <p style="margin:20px 0;">Или оставьте нам ваше имя и почту — мы свяжемся с вами</p>
             <script src="https://forms.yandex.ru/_static/embed.js"></script>
             <iframe src="https://forms.yandex.ru/u/6a2c50945056906567d116f5?iframe=1" frameborder="0" name="ya-form-6a2c50945056906567d116f5" width="650" style="max-width:100%;"></iframe>
-            
-            <p style="font-size: 0.85rem; margin-top: 24px;">Отвечаем в течение суток</p>
+            <p style="font-size:0.85rem;margin-top:24px;">Отвечаем в течение суток</p>
         </div>
     </div>
 </section>
@@ -1256,16 +648,12 @@
     </div>
 </footer>
 
-<!-- Модальное окно для оплаты ТАРИФОВ (с кодовым словом) -->
+<!-- Модальные окна -->
 <div id="paymentModal" class="modal">
-    <div class="modal-content" style="max-width: 500px;">
+    <div class="modal-content" style="max-width:500px;">
         <span class="close-modal" onclick="closePaymentModal()">&times;</span>
         <h3>💳 Оплата</h3>
-        <div class="payment-modal-text">
-            Напишите нам кодовое слово
-            <span class="code-word" id="codeWordDisplay">НАЗВАНИЕ ТАРИФА</span>
-            и мы вышлем реквизиты для оплаты.
-        </div>
+        <div class="payment-modal-text">Напишите нам кодовое слово <span class="code-word" id="codeWordDisplay">НАЗВАНИЕ ТАРИФА</span> и мы вышлем реквизиты для оплаты.</div>
         <div class="order-buttons">
             <a href="#" id="paymentVkLink" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
             <a href="#" id="paymentTgLink" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
@@ -1273,14 +661,11 @@
     </div>
 </div>
 
-<!-- Модальное окно для заказа ТОВАРОВ -->
 <div id="orderModal" class="modal">
-    <div class="modal-content" style="max-width: 450px;">
+    <div class="modal-content" style="max-width:450px;">
         <span class="close-modal" onclick="closeOrderModal()">&times;</span>
         <h3 id="orderProductTitle">Оформление заказа</h3>
-        <div class="order-modal-text" id="orderModalText">
-            Выберите удобный способ связи:
-        </div>
+        <div class="order-modal-text" id="orderModalText">Выберите удобный способ связи:</div>
         <div class="order-buttons">
             <a href="#" id="orderVkLink" target="_blank" class="btn-ticket btn-vk">Во ВКонтакте</a>
             <a href="#" id="orderTgLink" target="_blank" class="btn-ticket btn-telegram">В Telegram</a>
@@ -1288,7 +673,7 @@
     </div>
 </div>
 
-<!-- МОДАЛЬНЫЕ ОКНА "ЧТО ВНУТРИ" ДЛЯ ТАРИФОВ -->
+<!-- Тарифы модалки -->
 <div id="modal-subscribe" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-subscribe')">&times;</span><h3>💼 Чемодан</h3><ul><li>Еженедельные материалы для Baby Journey и Kid's Journey</li><li>Материалы для печати (карточки, планы, расписания)</li><li>Онлайн-игры и интерактивные упражнения</li><li>Материалы для вашего английского (A1–B1)</li><li>Чат единомышленников во ВКонтакте</li><li>Доступ ко всем предыдущим публикациям сразу после подписки</li></ul><div class="order-buttons"><button class="btn-ticket" onclick="closeModal('modal-subscribe'); openPaymentModal('ЧЕМОДАН')">Оформить подписку</button></div></div></div>
 
 <div id="modal-basic" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-basic')">&times;</span><h3>🎒 Попутчик</h3><div class="product-slider-container"><div class="product-slider-track" id="track-basic-modal"><img src="images/basic-1.jpg" alt="Попутчик 1"><img src="images/basic-2.jpg" alt="Попутчик 2"><img src="images/basic-3.jpg" alt="Попутчик 3"></div><button class="product-slider-btn prev" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-basic-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Базовый набор. Всё необходимое для самого первого шага детально и по порядку.</div><div class="section-title">Что внутри:</div><ul><li>PDF-гайд «Baby English»</li><li>50 слов, 21 фраза, 10 бытовых сценариев</li><li>Аудио-файлы с медленным произношением</li><li>Плейлист из 10 песен с пояснениями к движениям и словам</li></ul><button class="btn-ticket" onclick="closeModal('modal-basic'); openPaymentModal('ПОПУТЧИК')">Перейти к оплате</button></div></div>
@@ -1300,381 +685,538 @@
 <div id="modal-author" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-author')">&times;</span><h3>👩‍🏫 Автор</h3><div class="product-slider-container"><div class="product-slider-track" id="track-author-modal"><img src="images/author-1.jpg" alt="Автор 1"><img src="images/author-2.jpg" alt="Автор 2"><img src="images/author-3.jpg" alt="Автор 3"></div><button class="product-slider-btn prev" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button><button class="product-slider-btn next" data-slider="track-author-modal"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button></div><div class="tariff-desc">Всё из «Наставника» + доп. материалы + личная поддержка автора образовательных программ.</div><div class="section-title">Что добавляется:</div><ul><li>Личная обратная связь в чате 4 недели</li><li>3 видеоконсультации в течение 1.5 лет</li><li>Разбор двух ваших видео</li><li>Полный доступ ко всем разборам нераскрытых тем</li><li>Полные материалы для вашего английского (A1–B1)</li><li>Доступ к эксклюзивной библиотеке (шаблоны игр, вебинары, чек-листы)</li><li>Расширенный модуль по билингвизму для детей 2–4 лет</li></ul><button class="btn-ticket" onclick="closeModal('modal-author'); openPaymentModal('АВТОР')">Перейти к оплате</button></div></div>
 
 <script>
+    // ============================================================
+    // ОБНОВЛЕНИЕ ДАТ СКИДОК
+    // ============================================================
     function updateDiscountDates() {
-        const today = new Date();
-        const future = new Date(today);
+        var today = new Date();
+        var future = new Date(today);
         future.setDate(today.getDate() + 2);
-        const day = String(future.getDate()).padStart(2, '0');
-        const month = String(future.getMonth() + 1).padStart(2, '0');
-        const dateStr = `${day}.${month}`;
-        const guideElem = document.getElementById('discount-guide');
-        const proElem = document.getElementById('discount-pro');
-        if (guideElem) guideElem.innerHTML = `скидка до ${dateStr}`;
-        if (proElem) proElem.innerHTML = `скидка до ${dateStr}`;
+        var day = String(future.getDate()).padStart(2, '0');
+        var month = String(future.getMonth() + 1).padStart(2, '0');
+        var dateStr = day + '.' + month;
+        var guideElem = document.getElementById('discount-guide');
+        var proElem = document.getElementById('discount-pro');
+        if (guideElem) guideElem.innerHTML = 'скидка до ' + dateStr;
+        if (proElem) proElem.innerHTML = 'скидка до ' + dateStr;
     }
     updateDiscountDates();
 
-    // Прогресс-бар
+    // ============================================================
+    // ПРОГРЕСС-БАР И СКРОЛЛ
+    // ============================================================
     window.addEventListener('scroll', function() {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
         document.getElementById('scrollProgress').style.width = scrolled + '%';
     });
 
-    // Сохранение позиции скролла
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('beforeunload', function() {
         localStorage.setItem('scrollPos', window.scrollY);
     });
-    window.addEventListener('load', () => {
-        const savedPos = localStorage.getItem('scrollPos');
+    window.addEventListener('load', function() {
+        var savedPos = localStorage.getItem('scrollPos');
         if (savedPos) {
             window.scrollTo(0, parseInt(savedPos));
             localStorage.removeItem('scrollPos');
         }
     });
 
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
+    var scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function() {
         if (window.scrollY > 600) scrollTopBtn.classList.add('show');
         else scrollTopBtn.classList.remove('show');
     });
-    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-    // Слайдер для чек-листа
-    const track = document.getElementById('checklistSlider');
-    const slides = track ? Array.from(track.children) : [];
-    const prevBtn = document.getElementById('sliderPrev');
-    const nextBtn = document.getElementById('sliderNext');
-    let currentIndex = 0;
+    // ============================================================
+    // СЛАЙДЕР ДЛЯ ЧЕК-ЛИСТА
+    // ============================================================
+    var track = document.getElementById('checklistSlider');
+    var slides = track ? Array.from(track.children) : [];
+    var prevBtn = document.getElementById('sliderPrev');
+    var nextBtn = document.getElementById('sliderNext');
+    var currentIndex = 0;
     function updateSlider() {
         if (!track || slides.length === 0) return;
-        const slideWidth = slides[0].clientWidth;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        var slideWidth = slides[0].clientWidth;
+        track.style.transform = 'translateX(-' + currentIndex * slideWidth + 'px)';
     }
     if (prevBtn && nextBtn && slides.length > 0) {
-        nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateSlider(); });
-        prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlider(); });
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        });
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        });
         window.addEventListener('resize', updateSlider);
         setTimeout(updateSlider, 100);
     }
 
-    // Функции для модальных окон
+    // ============================================================
+    // МОДАЛЬНЫЕ ОКНА
+    // ============================================================
     function openModal(modalId) {
-        const modal = document.getElementById(modalId);
+        var modal = document.getElementById(modalId);
         if (modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
     }
-
     function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
+        var modal = document.getElementById(modalId);
         if (modal) {
             modal.classList.remove('show');
             document.body.style.overflow = '';
         }
     }
-
-    // Инициализация слайдеров в модалках
-    function initModalSliders() {
-        document.querySelectorAll('.product-slider-container').forEach(container => {
-            const trackElem = container.querySelector('.product-slider-track');
-            if (!trackElem) return;
-            const slides = Array.from(trackElem.children);
-            const prevBtn = container.querySelector('.prev');
-            const nextBtn = container.querySelector('.next');
-            let current = 0;
-            function updateSlide() {
-                const slideWidth = slides[0]?.clientWidth || 0;
-                trackElem.style.transform = `translateX(-${current * slideWidth}px)`;
-            }
-            if (prevBtn) prevBtn.addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; updateSlide(); });
-            if (nextBtn) nextBtn.addEventListener('click', () => { current = (current + 1) % slides.length; updateSlide(); });
-            window.addEventListener('resize', updateSlide);
-            setTimeout(updateSlide, 100);
-        });
-    }
-    initModalSliders();
-
-    // Функция для открытия модального окна товара (для "Подробнее")
     function openProductModal(modalId) {
-        const modal = document.getElementById(modalId);
+        var modal = document.getElementById(modalId);
         if (modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         }
     }
 
+    // ============================================================
+    // СЛАЙДЕР В МОДАЛКЕ
+    // ============================================================
+    function slideModal(trackId, direction) {
+        var track = document.getElementById(trackId);
+        if (!track) return;
+        var slides = Array.from(track.children);
+        var total = slides.length;
+        var current = parseInt(track.dataset.current || '0');
+        current = (current + direction + total) % total;
+        track.dataset.current = current;
+        var slideWidth = slides[0].clientWidth;
+        track.style.transform = 'translateX(-' + current * slideWidth + 'px)';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.modal-slider-track').forEach(function(t) {
+            t.dataset.current = '0';
+            setTimeout(function() {
+                var slides = Array.from(t.children);
+                if (slides.length > 0) {
+                    var slideWidth = slides[0].clientWidth;
+                    t.style.transform = 'translateX(0px)';
+                }
+            }, 100);
+        });
+    });
+
+    // ============================================================
+    // СЛАЙДЕРЫ В ТОВАРАХ
+    // ============================================================
+    function initProductSliders() {
+        document.querySelectorAll('.product-slider-container').forEach(function(container) {
+            var trackElem = container.querySelector('.product-slider-track');
+            if (!trackElem) return;
+            var slides = Array.from(trackElem.children);
+            var prevBtn = container.querySelector('.prev');
+            var nextBtn = container.querySelector('.next');
+            var current = 0;
+            function updateSlide() {
+                var slideWidth = slides[0]?.clientWidth || 0;
+                trackElem.style.transform = 'translateX(-' + current * slideWidth + 'px)';
+            }
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    current = (current - 1 + slides.length) % slides.length;
+                    updateSlide();
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    current = (current + 1) % slides.length;
+                    updateSlide();
+                });
+            }
+            window.addEventListener('resize', updateSlide);
+            setTimeout(updateSlide, 100);
+        });
+    }
+    initProductSliders();
+
+    // ============================================================
+    // FULLSCREEN СЛАЙДЕР
+    // ============================================================
     function openFullscreenSlider(productId) {
-        const container = document.querySelector(`#${productId} .product-slider-track`);
+        var container = document.querySelector('#' + productId + ' .product-slider-track');
         if (!container) return;
-        const images = Array.from(container.querySelectorAll('img')).map(img => img.src);
-        let idx = 0;
-        const modal = document.createElement('div');
+        var images = Array.from(container.querySelectorAll('img')).map(function(img) { return img.src; });
+        var idx = 0;
+        var modal = document.createElement('div');
         modal.className = 'fullscreen-modal';
-        modal.innerHTML = `<div class="fullscreen-close">&times;</div><div class="fullscreen-prev">‹</div><div class="fullscreen-next">›</div><div class="fullscreen-slider"><img src="${images[0]}" alt="Фото"></div>`;
+        modal.innerHTML = '<div class="fullscreen-close">&times;</div><div class="fullscreen-prev">‹</div><div class="fullscreen-next">›</div><div class="fullscreen-slider"><img src="' + images[0] + '" alt="Фото"></div>';
         document.body.appendChild(modal);
-        setTimeout(() => modal.classList.add('show'), 10);
-        const imgEl = modal.querySelector('.fullscreen-slider img');
-        const update = () => { imgEl.src = images[idx]; };
-        modal.querySelector('.fullscreen-close').onclick = () => {
+        setTimeout(function() { modal.classList.add('show'); }, 10);
+        var imgEl = modal.querySelector('.fullscreen-slider img');
+        function update() { imgEl.src = images[idx]; }
+        modal.querySelector('.fullscreen-close').onclick = function() {
             modal.classList.remove('show');
-            setTimeout(() => modal.remove(), 300);
+            setTimeout(function() { modal.remove(); }, 300);
         };
-        modal.querySelector('.fullscreen-prev').onclick = () => {
+        modal.querySelector('.fullscreen-prev').onclick = function() {
             idx = (idx - 1 + images.length) % images.length;
             update();
         };
-        modal.querySelector('.fullscreen-next').onclick = () => {
+        modal.querySelector('.fullscreen-next').onclick = function() {
             idx = (idx + 1) % images.length;
             update();
         };
-        modal.onclick = (e) => {
+        modal.onclick = function(e) {
             if (e.target === modal) {
                 modal.classList.remove('show');
-                setTimeout(() => modal.remove(), 300);
+                setTimeout(function() { modal.remove(); }, 300);
             }
         };
     }
-    document.querySelectorAll('.product-card .product-slider-track img').forEach(img => {
-        const productId = img.closest('.product-card')?.id;
+    document.querySelectorAll('.product-card .product-slider-track img').forEach(function(img) {
+        var productId = img.closest('.product-card')?.id;
         if (productId) {
             img.style.cursor = 'pointer';
-            img.addEventListener('click', () => openFullscreenSlider(productId));
+            img.addEventListener('click', function() { openFullscreenSlider(productId); });
         }
     });
 
-    // Функция для открытия модального окна оплаты ТАРИФОВ (с кодовым словом)
+    // ============================================================
+    // ОПЛАТА И ЗАКАЗЫ
+    // ============================================================
     function openPaymentModal(codeWord) {
-        const modal = document.getElementById('paymentModal');
+        var modal = document.getElementById('paymentModal');
         document.getElementById('codeWordDisplay').textContent = codeWord;
-        
-        const message = encodeURIComponent(`Здравствуйте! Хочу оплатить "${codeWord}".`);
-        document.getElementById('paymentVkLink').href = `https://vk.me/public221397766?text=${message}`;
-        document.getElementById('paymentTgLink').href = `https://t.me/lingua_journey?text=${message}`;
-        
+        var message = encodeURIComponent('Здравствуйте! Хочу оплатить "' + codeWord + '".');
+        document.getElementById('paymentVkLink').href = 'https://vk.me/public221397766?text=' + message;
+        document.getElementById('paymentTgLink').href = 'https://t.me/lingua_journey?text=' + message;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
-    
     function closePaymentModal() {
-        const modal = document.getElementById('paymentModal');
+        var modal = document.getElementById('paymentModal');
         modal.classList.remove('show');
         document.body.style.overflow = '';
     }
-
-    // Функция для открытия модального окна заказа ТОВАРОВ (без кодовой фразы)
     function openOrderModal(productName) {
-        const modal = document.getElementById('orderModal');
-        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
+        var modal = document.getElementById('orderModal');
+        document.getElementById('orderProductTitle').innerText = 'Оформление заказа: ' + productName;
         document.getElementById('orderModalText').innerHTML = 'Выберите удобный способ связи:';
-        
-        const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}".`);
-        document.getElementById('orderVkLink').href = `https://vk.me/public221397766?text=${msg}`;
-        document.getElementById('orderTgLink').href = `https://t.me/lingua_journey?text=${msg}`;
-        
+        var msg = encodeURIComponent('Здравствуйте! Хочу оформить заказ на "' + productName + '".');
+        document.getElementById('orderVkLink').href = 'https://vk.me/public221397766?text=' + msg;
+        document.getElementById('orderTgLink').href = 'https://t.me/lingua_journey?text=' + msg;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
-
-    // Функция для открытия модального окна заказа ТОВАРОВ с кодовой фразой (для набора)
     function openOrderModalWithCode(productName, codeWord) {
-        const modal = document.getElementById('orderModal');
-        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
-        document.getElementById('orderModalText').innerHTML = `
-            Напишите нам кодовую фразу <strong>«${codeWord}»</strong>, и мы свяжемся с вами.
-        `;
-        
-        const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}". Кодовая фраза: "${codeWord}".`);
-        document.getElementById('orderVkLink').href = `https://vk.me/public221397766?text=${msg}`;
-        document.getElementById('orderTgLink').href = `https://t.me/lingua_journey?text=${msg}`;
-        
+        var modal = document.getElementById('orderModal');
+        document.getElementById('orderProductTitle').innerText = 'Оформление заказа: ' + productName;
+        document.getElementById('orderModalText').innerHTML = 'Напишите нам кодовую фразу <strong>«' + codeWord + '»</strong>, и мы свяжемся с вами.';
+        var msg = encodeURIComponent('Здравствуйте! Хочу оформить заказ на "' + productName + '". Кодовая фраза: "' + codeWord + '".');
+        document.getElementById('orderVkLink').href = 'https://vk.me/public221397766?text=' + msg;
+        document.getElementById('orderTgLink').href = 'https://t.me/lingua_journey?text=' + msg;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
-    
     function closeOrderModal() {
-        const modal = document.getElementById('orderModal');
+        var modal = document.getElementById('orderModal');
         modal.classList.remove('show');
         document.body.style.overflow = '';
     }
 
-    // ПЕРЕКЛЮЧЕНИЕ МЕЖДУ PDF И ФИЗИЧЕСКИМ НАБОРОМ ДЛЯ КАРТОЧЕК
-    document.addEventListener('DOMContentLoaded', function() {
-        const pdfRadio = document.querySelector('input[name="cardVersion"][value="pdf"]');
-        const physicalRadio = document.querySelector('input[name="cardVersion"][value="physical"]');
-        const priceEl = document.getElementById('cardPrice');
-        const descEl = document.getElementById('cardDescription');
-        const orderBtn = document.getElementById('orderButton');
-        const labelPdf = document.getElementById('label-pdf');
-        const labelPhysical = document.getElementById('label-physical');
-
-        function updateCard() {
-            if (pdfRadio.checked) {
-                priceEl.textContent = '790 ₽';
-                descEl.textContent = 'PDF-файл + видео с произношением + транскрипции';
-                orderBtn.textContent = 'Оформить заказ';
-                orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
-                labelPdf.classList.add('active');
-                labelPhysical.classList.remove('active');
-            } else if (physicalRadio.checked) {
-                priceEl.textContent = '1 490 ₽';
-                descEl.textContent = 'Готовые заламинированные карточки с доставкой + PDF + видео в подарок';
-                orderBtn.textContent = 'Оформить заказ';
-                orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
-                labelPhysical.classList.add('active');
-                labelPdf.classList.remove('active');
-            }
+    // ============================================================
+    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ КАРТОЧЕК — ИСПРАВЛЕННАЯ ВЕРСИЯ ★★★
+    // ============================================================
+    (function() {
+        // Ждём загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCardToggles);
+        } else {
+            initCardToggles();
         }
 
-        pdfRadio.addEventListener('change', updateCard);
-        physicalRadio.addEventListener('change', updateCard);
-        updateCard();
-    });
+        function initCardToggles() {
+            console.log('🔄 Инициализация переключателей для карточек...');
 
-    // ПЕРЕКЛЮЧЕНИЕ ФОРМАТОВ ДЛЯ НАБОРА «OLD MACDONALD'S FARM»
-    document.addEventListener('DOMContentLoaded', function() {
-        const pdfRadio = document.querySelector('input[name="farmVersion"][value="pdf"]');
-        const laminatedRadio = document.querySelector('input[name="farmVersion"][value="laminated"]');
-        const puzzleRadio = document.querySelector('input[name="farmVersion"][value="puzzle"]');
-        const priceEl = document.getElementById('farmPrice');
-        const descEl = document.getElementById('farmDescription');
-        const labelPdf = document.getElementById('label-farm-pdf');
-        const labelLaminated = document.getElementById('label-farm-laminated');
-        const labelPuzzle = document.getElementById('label-farm-puzzle');
-
-        function updateFarm() {
-            if (pdfRadio.checked) {
-                priceEl.textContent = '990 ₽';
-                descEl.textContent = 'PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска';
-                labelPdf.classList.add('active');
-                labelLaminated.classList.remove('active');
-                labelPuzzle.classList.remove('active');
-            } else if (laminatedRadio.checked) {
-                priceEl.textContent = '1 990 ₽';
-                descEl.textContent = 'Готовый ламинированный набор с липучками + PDF + QR-код + раскраска в подарок';
-                labelLaminated.classList.add('active');
-                labelPdf.classList.remove('active');
-                labelPuzzle.classList.remove('active');
-            } else if (puzzleRadio.checked) {
-                priceEl.textContent = '2 490 ₽';
-                descEl.textContent = 'Игра-пазл с отверстиями + липучки + PDF + QR-код + раскраска в подарок';
-                labelPuzzle.classList.add('active');
-                labelPdf.classList.remove('active');
-                labelLaminated.classList.remove('active');
-            }
-        }
-
-        if (pdfRadio) pdfRadio.addEventListener('change', updateFarm);
-        if (laminatedRadio) laminatedRadio.addEventListener('change', updateFarm);
-        if (puzzleRadio) puzzleRadio.addEventListener('change', updateFarm);
-        updateFarm();
-    });
-
-    // ПЕРЕКЛЮЧЕНИЕ ОПИСАНИЙ В МОДАЛКЕ ФЕРМЫ
-    document.addEventListener('DOMContentLoaded', function() {
-        const pdfRadio = document.querySelector('input[name="farmVersion"][value="pdf"]');
-        const laminatedRadio = document.querySelector('input[name="farmVersion"][value="laminated"]');
-        const puzzleRadio = document.querySelector('input[name="farmVersion"][value="puzzle"]');
-        const modalPdfRadio = document.querySelector('input[name="modalFarmVersion"][value="pdf"]');
-        const modalLaminatedRadio = document.querySelector('input[name="modalFarmVersion"][value="laminated"]');
-        const modalPuzzleRadio = document.querySelector('input[name="modalFarmVersion"][value="puzzle"]');
-
-        function updateFarmModal() {
-            const descPdf = document.getElementById('modalFarmDescPdf');
-            const descLam = document.getElementById('modalFarmDescLaminated');
-            const descPuz = document.getElementById('modalFarmDescPuzzle');
-            const labelPdf = document.getElementById('modal-label-farm-pdf');
-            const labelLam = document.getElementById('modal-label-farm-laminated');
-            const labelPuz = document.getElementById('modal-label-farm-puzzle');
+            // === ЭЛЕМЕНТЫ ===
+            // Основная карточка
+            var regularRadio = document.querySelector('input[name="cardTheme"][value="regular"]');
+            var mashaRadio = document.querySelector('input[name="cardTheme"][value="masha"]');
+            var pdfRadio = document.querySelector('input[name="cardVersion"][value="pdf"]');
+            var physicalRadio = document.querySelector('input[name="cardVersion"][value="physical"]');
             
-            // Определяем, какая версия выбрана (сначала смотрим на модальные радио-кнопки)
-            let selectedValue = 'pdf';
-            if (modalLaminatedRadio && modalLaminatedRadio.checked) selectedValue = 'laminated';
-            else if (modalPuzzleRadio && modalPuzzleRadio.checked) selectedValue = 'puzzle';
-            else if (modalPdfRadio && modalPdfRadio.checked) selectedValue = 'pdf';
+            // Модалка
+            var modalRegularRadio = document.querySelector('input[name="modalCardTheme"][value="regular"]');
+            var modalMashaRadio = document.querySelector('input[name="modalCardTheme"][value="masha"]');
+            var modalPdfRadio = document.querySelector('input[name="modalCardVersion"][value="pdf"]');
+            var modalPhysicalRadio = document.querySelector('input[name="modalCardVersion"][value="physical"]');
             
-            // Если в модалке ничего не выбрано, берём из основной секции
-            if (!modalPdfRadio && !modalLaminatedRadio && !modalPuzzleRadio) {
-                if (laminatedRadio && laminatedRadio.checked) selectedValue = 'laminated';
-                else if (puzzleRadio && puzzleRadio.checked) selectedValue = 'puzzle';
-                else selectedValue = 'pdf';
-            }
+            // Фото
+            var regularPhotos = document.querySelectorAll('.regular-photo');
+            var mashaPhotos = document.querySelectorAll('.masha-photo');
             
-            // Обновляем отображение описаний
-            if (descPdf) descPdf.style.display = selectedValue === 'pdf' ? 'block' : 'none';
-            if (descLam) descLam.style.display = selectedValue === 'laminated' ? 'block' : 'none';
-            if (descPuz) descPuz.style.display = selectedValue === 'puzzle' ? 'block' : 'none';
+            // Видео и фото в модалке
+            var modalVideoRegular = document.getElementById('modalVideoRegular');
+            var modalVideoMasha = document.getElementById('modalVideoMasha');
+            var modalPhotosRegular = document.getElementById('modalPhotosRegular');
+            var modalPhotosMasha = document.getElementById('modalPhotosMasha');
+            var modalTitle = document.getElementById('modalCardsTitle');
             
-            // Обновляем классы кнопок в модалке
-            if (labelPdf) labelPdf.classList.toggle('active', selectedValue === 'pdf');
-            if (labelLam) labelLam.classList.toggle('active', selectedValue === 'laminated');
-            if (labelPuz) labelPuz.classList.toggle('active', selectedValue === 'puzzle');
-        }
+            // Цена и описание
+            var cardPrice = document.getElementById('cardPrice');
+            var cardDesc = document.getElementById('cardDescription');
+            var orderBtn = document.getElementById('orderButton');
 
-        // Синхронизация между основной секцией и модалкой
-        function syncFarmVersions() {
-            const mainPdf = document.querySelector('input[name="farmVersion"][value="pdf"]');
-            const mainLam = document.querySelector('input[name="farmVersion"][value="laminated"]');
-            const mainPuz = document.querySelector('input[name="farmVersion"][value="puzzle"]');
-            
-            const modalPdf = document.querySelector('input[name="modalFarmVersion"][value="pdf"]');
-            const modalLam = document.querySelector('input[name="modalFarmVersion"][value="laminated"]');
-            const modalPuz = document.querySelector('input[name="modalFarmVersion"][value="puzzle"]');
-            
-            let value = 'pdf';
-            if (mainLam && mainLam.checked) value = 'laminated';
-            else if (mainPuz && mainPuz.checked) value = 'puzzle';
-            
-            if (modalPdf) modalPdf.checked = value === 'pdf';
-            if (modalLam) modalLam.checked = value === 'laminated';
-            if (modalPuz) modalPuz.checked = value === 'puzzle';
-            
-            updateFarmModal();
-        }
+            // Кнопки (для активных классов)
+            var labelRegular = document.getElementById('label-regular');
+            var labelMasha = document.getElementById('label-masha');
+            var labelPdf = document.getElementById('label-pdf');
+            var labelPhysical = document.getElementById('label-physical');
+            var modalLabelRegular = document.getElementById('modal-label-regular');
+            var modalLabelMasha = document.getElementById('modal-label-masha');
+            var modalLabelPdf = document.getElementById('modal-label-pdf');
+            var modalLabelPhysical = document.getElementById('modal-label-physical');
 
-        // Слушаем изменения в основной секции
-        if (pdfRadio) pdfRadio.addEventListener('change', syncFarmVersions);
-        if (laminatedRadio) laminatedRadio.addEventListener('change', syncFarmVersions);
-        if (puzzleRadio) puzzleRadio.addEventListener('change', syncFarmVersions);
-
-        // Слушаем изменения в модалке
-        if (modalPdfRadio) modalPdfRadio.addEventListener('change', updateFarmModal);
-        if (modalLaminatedRadio) modalLaminatedRadio.addEventListener('change', updateFarmModal);
-        if (modalPuzzleRadio) modalPuzzleRadio.addEventListener('change', updateFarmModal);
-
-        // При открытии модалки синхронизируем
-        const farmModal = document.getElementById('productFarmModal');
-        if (farmModal) {
-            const observer = new MutationObserver(() => {
-                if (farmModal.classList.contains('show')) {
-                    syncFarmVersions();
+            // === ФУНКЦИЯ ОБНОВЛЕНИЯ UI ===
+            function updateUI() {
+                // 1. ВЕРСИЯ (основная / Маша и Медведь)
+                var isMasha = mashaRadio ? mashaRadio.checked : false;
+                
+                // Фото в слайдере
+                regularPhotos.forEach(function(el) {
+                    el.style.display = isMasha ? 'none' : 'block';
+                });
+                mashaPhotos.forEach(function(el) {
+                    el.style.display = isMasha ? 'block' : 'none';
+                });
+                
+                // Видео в модалке
+                if (modalVideoRegular) modalVideoRegular.style.display = isMasha ? 'none' : 'block';
+                if (modalVideoMasha) modalVideoMasha.style.display = isMasha ? 'block' : 'none';
+                
+                // Фото в модалке
+                if (modalPhotosRegular) modalPhotosRegular.style.display = isMasha ? 'none' : 'block';
+                if (modalPhotosMasha) modalPhotosMasha.style.display = isMasha ? 'block' : 'none';
+                
+                // Заголовок модалки
+                if (modalTitle) {
+                    modalTitle.textContent = isMasha 
+                        ? '🃏 Базовый набор карточек «Английский с пелёнок» — версия «Маша и Медведь»'
+                        : '🃏 Базовый набор карточек «Английский с пелёнок»';
                 }
-            });
-            observer.observe(farmModal, { attributes: true, attributeFilter: ['class'] });
+                
+                // Активные кнопки версии
+                if (labelRegular) labelRegular.classList.toggle('active', !isMasha);
+                if (labelMasha) labelMasha.classList.toggle('active', isMasha);
+                if (modalLabelRegular) modalLabelRegular.classList.toggle('active', !isMasha);
+                if (modalLabelMasha) modalLabelMasha.classList.toggle('active', isMasha);
+
+                // 2. ФОРМАТ (PDF / физический)
+                var isPhysical = physicalRadio ? physicalRadio.checked : false;
+                
+                if (isPhysical) {
+                    if (cardPrice) cardPrice.textContent = '1 490 ₽';
+                    if (cardDesc) cardDesc.textContent = 'Готовые заламинированные карточки с доставкой + PDF + видео в подарок';
+                    if (orderBtn) {
+                        orderBtn.textContent = 'Оформить заказ';
+                        orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
+                    }
+                    if (labelPdf) labelPdf.classList.remove('active');
+                    if (labelPhysical) labelPhysical.classList.add('active');
+                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
+                    if (modalLabelPhysical) modalLabelPhysical.classList.add('active');
+                } else {
+                    if (cardPrice) cardPrice.textContent = '790 ₽';
+                    if (cardDesc) cardDesc.textContent = 'PDF-файл + видео с произношением + транскрипции';
+                    if (orderBtn) {
+                        orderBtn.textContent = 'Оформить заказ';
+                        orderBtn.setAttribute('onclick', "openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')");
+                    }
+                    if (labelPdf) labelPdf.classList.add('active');
+                    if (labelPhysical) labelPhysical.classList.remove('active');
+                    if (modalLabelPdf) modalLabelPdf.classList.add('active');
+                    if (modalLabelPhysical) modalLabelPhysical.classList.remove('active');
+                }
+            }
+
+            // === ФУНКЦИЯ СИНХРОНИЗАЦИИ ===
+            function syncAll() {
+                // Синхронизируем радио-кнопки основной карточки и модалки
+                if (regularRadio && modalRegularRadio) {
+                    modalRegularRadio.checked = regularRadio.checked;
+                }
+                if (mashaRadio && modalMashaRadio) {
+                    modalMashaRadio.checked = mashaRadio.checked;
+                }
+                if (pdfRadio && modalPdfRadio) {
+                    modalPdfRadio.checked = pdfRadio.checked;
+                }
+                if (physicalRadio && modalPhysicalRadio) {
+                    modalPhysicalRadio.checked = physicalRadio.checked;
+                }
+                updateUI();
+            }
+
+            // === НАВЕШИВАЕМ СОБЫТИЯ ===
+            // Основная карточка
+            if (regularRadio) regularRadio.addEventListener('change', syncAll);
+            if (mashaRadio) mashaRadio.addEventListener('change', syncAll);
+            if (pdfRadio) pdfRadio.addEventListener('change', syncAll);
+            if (physicalRadio) physicalRadio.addEventListener('change', syncAll);
+            
+            // Модалка
+            if (modalRegularRadio) modalRegularRadio.addEventListener('change', syncAll);
+            if (modalMashaRadio) modalMashaRadio.addEventListener('change', syncAll);
+            if (modalPdfRadio) modalPdfRadio.addEventListener('change', syncAll);
+            if (modalPhysicalRadio) modalPhysicalRadio.addEventListener('change', syncAll);
+
+            // === СИНХРОНИЗАЦИЯ ПРИ ОТКРЫТИИ МОДАЛКИ ===
+            var cardsModal = document.getElementById('productCardsModal');
+            if (cardsModal) {
+                var observer = new MutationObserver(function() {
+                    if (cardsModal.classList.contains('show')) {
+                        syncAll();
+                    }
+                });
+                observer.observe(cardsModal, { attributes: true, attributeFilter: ['class'] });
+            }
+
+            // Первоначальная синхронизация
+            setTimeout(syncAll, 200);
+            console.log('✅ Переключатели для карточек инициализированы');
+        }
+    })();
+
+    // ============================================================
+    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ ФЕРМЫ ★★★
+    // ============================================================
+    (function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initFarmToggles);
+        } else {
+            initFarmToggles();
         }
 
-        // Первоначальная синхронизация
-        setTimeout(syncFarmVersions, 100);
-    });
+        function initFarmToggles() {
+            console.log('🔄 Инициализация переключателей для фермы...');
 
-    // Закрытие модалок по клику вне окна
+            var pdfRadio = document.querySelector('input[name="farmVersion"][value="pdf"]');
+            var laminatedRadio = document.querySelector('input[name="farmVersion"][value="laminated"]');
+            var puzzleRadio = document.querySelector('input[name="farmVersion"][value="puzzle"]');
+            var modalPdfRadio = document.querySelector('input[name="modalFarmVersion"][value="pdf"]');
+            var modalLaminatedRadio = document.querySelector('input[name="modalFarmVersion"][value="laminated"]');
+            var modalPuzzleRadio = document.querySelector('input[name="modalFarmVersion"][value="puzzle"]');
+            
+            var priceEl = document.getElementById('farmPrice');
+            var descEl = document.getElementById('farmDescription');
+            var descPdf = document.getElementById('modalFarmDescPdf');
+            var descLam = document.getElementById('modalFarmDescLaminated');
+            var descPuz = document.getElementById('modalFarmDescPuzzle');
+            var labelPdf = document.getElementById('label-farm-pdf');
+            var labelLaminated = document.getElementById('label-farm-laminated');
+            var labelPuzzle = document.getElementById('label-farm-puzzle');
+            var modalLabelPdf = document.getElementById('modal-label-farm-pdf');
+            var modalLabelLaminated = document.getElementById('modal-label-farm-laminated');
+            var modalLabelPuzzle = document.getElementById('modal-label-farm-puzzle');
+
+            function updateUI() {
+                var isPdf = pdfRadio ? pdfRadio.checked : true;
+                var isLaminated = laminatedRadio ? laminatedRadio.checked : false;
+                var isPuzzle = puzzleRadio ? puzzleRadio.checked : false;
+                
+                if (isPdf) {
+                    if (priceEl) priceEl.textContent = '990 ₽';
+                    if (descEl) descEl.textContent = 'PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска';
+                    if (descPdf) descPdf.style.display = 'block';
+                    if (descLam) descLam.style.display = 'none';
+                    if (descPuz) descPuz.style.display = 'none';
+                    if (labelPdf) labelPdf.classList.add('active');
+                    if (labelLaminated) labelLaminated.classList.remove('active');
+                    if (labelPuzzle) labelPuzzle.classList.remove('active');
+                    if (modalLabelPdf) modalLabelPdf.classList.add('active');
+                    if (modalLabelLaminated) modalLabelLaminated.classList.remove('active');
+                    if (modalLabelPuzzle) modalLabelPuzzle.classList.remove('active');
+                } else if (isLaminated) {
+                    if (priceEl) priceEl.textContent = '1 990 ₽';
+                    if (descEl) descEl.textContent = 'Готовый ламинированный набор с липучками + PDF + QR-код + раскраска в подарок';
+                    if (descPdf) descPdf.style.display = 'none';
+                    if (descLam) descLam.style.display = 'block';
+                    if (descPuz) descPuz.style.display = 'none';
+                    if (labelPdf) labelPdf.classList.remove('active');
+                    if (labelLaminated) labelLaminated.classList.add('active');
+                    if (labelPuzzle) labelPuzzle.classList.remove('active');
+                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
+                    if (modalLabelLaminated) modalLabelLaminated.classList.add('active');
+                    if (modalLabelPuzzle) modalLabelPuzzle.classList.remove('active');
+                } else if (isPuzzle) {
+                    if (priceEl) priceEl.textContent = '2 490 ₽';
+                    if (descEl) descEl.textContent = 'Игра-пазл с отверстиями + липучки + PDF + QR-код + раскраска в подарок';
+                    if (descPdf) descPdf.style.display = 'none';
+                    if (descLam) descLam.style.display = 'none';
+                    if (descPuz) descPuz.style.display = 'block';
+                    if (labelPdf) labelPdf.classList.remove('active');
+                    if (labelLaminated) labelLaminated.classList.remove('active');
+                    if (labelPuzzle) labelPuzzle.classList.add('active');
+                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
+                    if (modalLabelLaminated) modalLabelLaminated.classList.remove('active');
+                    if (modalLabelPuzzle) modalLabelPuzzle.classList.add('active');
+                }
+            }
+
+            function syncFarm() {
+                if (pdfRadio && modalPdfRadio) modalPdfRadio.checked = pdfRadio.checked;
+                if (laminatedRadio && modalLaminatedRadio) modalLaminatedRadio.checked = laminatedRadio.checked;
+                if (puzzleRadio && modalPuzzleRadio) modalPuzzleRadio.checked = puzzleRadio.checked;
+                updateUI();
+            }
+
+            if (pdfRadio) pdfRadio.addEventListener('change', syncFarm);
+            if (laminatedRadio) laminatedRadio.addEventListener('change', syncFarm);
+            if (puzzleRadio) puzzleRadio.addEventListener('change', syncFarm);
+            if (modalPdfRadio) modalPdfRadio.addEventListener('change', syncFarm);
+            if (modalLaminatedRadio) modalLaminatedRadio.addEventListener('change', syncFarm);
+            if (modalPuzzleRadio) modalPuzzleRadio.addEventListener('change', syncFarm);
+
+            var farmModal = document.getElementById('productFarmModal');
+            if (farmModal) {
+                var observer = new MutationObserver(function() {
+                    if (farmModal.classList.contains('show')) {
+                        syncFarm();
+                    }
+                });
+                observer.observe(farmModal, { attributes: true, attributeFilter: ['class'] });
+            }
+
+            setTimeout(syncFarm, 200);
+            console.log('✅ Переключатели для фермы инициализированы');
+        }
+    })();
+
+    // ============================================================
+    // ЗАКРЫТИЕ МОДАЛОК ПО КЛИКУ ВНЕ ОКНА
+    // ============================================================
     window.onclick = function(event) {
-        const paymentModal = document.getElementById('paymentModal');
-        const orderModal = document.getElementById('orderModal');
-        const productModal = document.getElementById('productCardsModal');
-        const productFarmModal = document.getElementById('productFarmModal');
-        const subscribeModal = document.getElementById('modal-subscribe');
-        const basicModal = document.getElementById('modal-basic');
-        const guideModal = document.getElementById('modal-guide');
-        const proModal = document.getElementById('modal-pro');
-        const authorModal = document.getElementById('modal-author');
+        var paymentModal = document.getElementById('paymentModal');
+        var orderModal = document.getElementById('orderModal');
+        var productModal = document.getElementById('productCardsModal');
+        var productFarmModal = document.getElementById('productFarmModal');
+        var productChecklistModal = document.getElementById('productChecklistModal');
+        var subscribeModal = document.getElementById('modal-subscribe');
+        var basicModal = document.getElementById('modal-basic');
+        var guideModal = document.getElementById('modal-guide');
+        var proModal = document.getElementById('modal-pro');
+        var authorModal = document.getElementById('modal-author');
         
         if (event.target === paymentModal) closePaymentModal();
         if (event.target === orderModal) closeOrderModal();
         if (event.target === productModal) closeModal('productCardsModal');
         if (event.target === productFarmModal) closeModal('productFarmModal');
+        if (event.target === productChecklistModal) closeModal('productChecklistModal');
         if (event.target === subscribeModal) closeModal('modal-subscribe');
         if (event.target === basicModal) closeModal('modal-basic');
         if (event.target === guideModal) closeModal('modal-guide');
@@ -1682,7 +1224,9 @@
         if (event.target === authorModal) closeModal('modal-author');
     };
 
-    // Экспорт в глобальную область
+    // ============================================================
+    // ЭКСПОРТ
+    // ============================================================
     window.openPaymentModal = openPaymentModal;
     window.closePaymentModal = closePaymentModal;
     window.openOrderModal = openOrderModal;
@@ -1691,6 +1235,7 @@
     window.openProductModal = openProductModal;
     window.openModal = openModal;
     window.closeModal = closeModal;
+    window.slideModal = slideModal;
 </script>
 
 </body>
