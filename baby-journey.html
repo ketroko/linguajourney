@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ===== ВСЕ СТИЛИ ===== */
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
         body{font-family:'Open Sans',sans-serif;background:#F9FCB8;color:#1f2937;line-height:1.5}
@@ -162,7 +161,6 @@
 </head>
 <body>
 
-<!-- ===== ВСЯ РАЗМЕТКА ===== -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <div class="back-home" onclick="window.location.href='index.html'">
@@ -197,7 +195,7 @@
     </div>
 </div>
 
-<!-- 2 окно: Для кого этот курс -->
+<!-- 2 окно -->
 <section style="background:#fff;">
     <div class="container">
         <h2>✨ Для кого этот курс</h2>
@@ -209,7 +207,7 @@
     </div>
 </section>
 
-<!-- 3 окно: Почему билингвизм с рождения -->
+<!-- 3 окно -->
 <section class="peach-bg">
     <div class="container">
         <h2>🌟 Почему билингвизм с рождения</h2>
@@ -221,7 +219,7 @@
     </div>
 </section>
 
-<!-- 4 окно: О Baby Journey -->
+<!-- 4 окно -->
 <section style="background:#fff;">
     <div class="container">
         <h2>🎥 О Baby Journey</h2>
@@ -307,7 +305,7 @@
                 <button class="btn-ticket" onclick="openOrderModal('Первые слова')">Оформить заказ</button>
             </div>
 
-            <!-- ★★★ Товар: Базовый набор карточек ★★★ -->
+            <!-- Товар: Базовый набор карточек -->
             <div class="product-card" data-product="Базовый набор карточек «Английский с пелёнок»" id="product-cards">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-cards">
@@ -351,29 +349,11 @@
                 <button class="btn-ticket" id="orderButton" onclick="openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
             </div>
 
-            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ КАРТОЧЕК ★★★ -->
+            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ КАРТОЧЕК (без переключателей) -->
             <div id="productCardsModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productCardsModal')">&times;</span>
                     <h3 id="modalCardsTitle">🃏 Базовый набор карточек «Английский с пелёнок»</h3>
-
-                    <div class="version-toggle" id="modalCardThemeToggle">
-                        <label class="toggle-btn active" id="modal-label-regular">
-                            <input type="radio" name="modalCardTheme" value="regular" checked> ⭐ Основная версия
-                        </label>
-                        <label class="toggle-btn" id="modal-label-masha">
-                            <input type="radio" name="modalCardTheme" value="masha"> 🐻 Маша и Медведь
-                        </label>
-                    </div>
-
-                    <div class="version-toggle" id="modalCardFormatToggle">
-                        <label class="toggle-btn active" id="modal-label-pdf">
-                            <input type="radio" name="modalCardVersion" value="pdf" checked> 📄 Электронная версия (PDF)
-                        </label>
-                        <label class="toggle-btn" id="modal-label-physical">
-                            <input type="radio" name="modalCardVersion" value="physical"> 🚚 Готовый набор
-                        </label>
-                    </div>
 
                     <div id="modalVideoRegular" style="margin:16px 0;border-radius:16px;overflow:hidden;">
                         <div style="position:relative;padding-bottom:56.25%;height:0;">
@@ -446,7 +426,7 @@
                 </div>
             </div>
 
-            <!-- Товар: Набор «Old MacDonald's Farm» -->
+            <!-- ★★★ Товар: Набор «Old MacDonald's Farm» (переключатели только в карточке) ★★★ -->
             <div class="product-card" data-product="Набор «Old MacDonald's Farm»" id="product-farm">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-farm">
@@ -460,6 +440,7 @@
                 <h3>🐮 Набор «Old MacDonald's Farm»</h3>
                 <p>🐮 Первые животные, их звуки, простые действия и любимые песенки — всё в одной игре на ферме.</p>
 
+                <!-- ★★★ ПЕРЕКЛЮЧАТЕЛИ ТОЛЬКО ЗДЕСЬ ★★★ -->
                 <div class="version-toggle" id="farmFormatToggle">
                     <label class="toggle-btn active" id="label-farm-pdf">
                         <input type="radio" name="farmVersion" value="pdf" checked> 📄 Электронная версия (PDF)
@@ -479,33 +460,27 @@
                 <button class="btn-ticket" id="orderButtonFarm" onclick="openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФЕРМЫ -->
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ ФЕРМЫ (БЕЗ ПЕРЕКЛЮЧАТЕЛЕЙ) ★★★ -->
             <div id="productFarmModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productFarmModal')">&times;</span>
                     <h3>🐮 Набор «Old MacDonald's Farm»</h3>
+
                     <div style="margin:16px 0;border-radius:16px;overflow:hidden;">
                         <div style="position:relative;padding-bottom:56.25%;height:0;">
                             <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ВИДЕО_ПРО_ФЕРМУ/" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;"></iframe>
                         </div>
                     </div>
+
                     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
                         <img src="images/product-farm-1.jpg" alt="Ферма 1" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
                         <img src="images/product-farm-2.jpg" alt="Ферма 2" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
                         <img src="images/product-farm-3.jpg" alt="Ферма 3" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
                     </div>
+
                     <div style="text-align:left;">
-                        <div class="version-toggle" id="modalFarmFormatToggle" style="margin-bottom:16px;">
-                            <label class="toggle-btn active" id="modal-label-farm-pdf">
-                                <input type="radio" name="modalFarmVersion" value="pdf" checked> 📄 PDF
-                            </label>
-                            <label class="toggle-btn" id="modal-label-farm-laminated">
-                                <input type="radio" name="modalFarmVersion" value="laminated"> 🚚 Ламинированный
-                            </label>
-                            <label class="toggle-btn" id="modal-label-farm-puzzle">
-                                <input type="radio" name="modalFarmVersion" value="puzzle"> 🧩 Пазл
-                            </label>
-                        </div>
+
+                        <!-- ★★★ ВСЕ ТРИ ОПИСАНИЯ, НО ВИДНО ТОЛЬКО ОДНО (В ЗАВИСИМОСТИ ОТ ВЫБРАННОГО ФОРМАТА) ★★★ -->
                         <div id="modalFarmDescPdf">
                             <p><strong>📄 Электронная версия (PDF)</strong></p>
                             <ul>
@@ -518,6 +493,7 @@
                             </ul>
                             <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 990 ₽</p>
                         </div>
+
                         <div id="modalFarmDescLaminated" style="display:none;">
                             <p><strong>🚚 Готовый ламинированный набор</strong></p>
                             <ul>
@@ -529,6 +505,7 @@
                             </ul>
                             <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 1 990 ₽</p>
                         </div>
+
                         <div id="modalFarmDescPuzzle" style="display:none;">
                             <p><strong>🧩 Игра-пазл</strong></p>
                             <ul>
@@ -542,10 +519,13 @@
                             </ul>
                             <p style="font-weight:700;color:#E67E22;margin-top:12px;">Цена: 2 490 ₽</p>
                         </div>
+
                         <hr style="margin:16px 0;border:1px dashed #E67E22;">
+
                         <p><strong>📦 Доставка</strong><br>Для физических наборов (ламинированный и пазл) — доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
                         <p><strong>🎁 Подарок ко всем наборам</strong><br>При покупке любого физического формата вы получаете PDF-версию, QR-код с песенками и раскраску в подарок.</p>
                     </div>
+
                     <div class="order-buttons" style="margin-top:20px;">
                         <button class="btn-ticket" onclick="closeModal('productFarmModal'); openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
                     </div>
@@ -615,7 +595,7 @@
     </div>
 </section>
 
-<!-- 8 окно: Остались вопросы? -->
+<!-- 8 окно -->
 <section style="background:#fff;">
     <div class="container">
         <div style="max-width:800px;margin:0 auto;text-align:center;background:#fff;border-radius:48px;padding:48px;border:2px solid #E67E22;">
@@ -930,10 +910,9 @@
     }
 
     // ============================================================
-    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ КАРТОЧЕК — ИСПРАВЛЕННАЯ ВЕРСИЯ ★★★
+    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ КАРТОЧЕК ★★★
     // ============================================================
     (function() {
-        // Ждём загрузки DOM
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initCardToggles);
         } else {
@@ -943,51 +922,32 @@
         function initCardToggles() {
             console.log('🔄 Инициализация переключателей для карточек...');
 
-            // === ЭЛЕМЕНТЫ ===
-            // Основная карточка
             var regularRadio = document.querySelector('input[name="cardTheme"][value="regular"]');
             var mashaRadio = document.querySelector('input[name="cardTheme"][value="masha"]');
             var pdfRadio = document.querySelector('input[name="cardVersion"][value="pdf"]');
             var physicalRadio = document.querySelector('input[name="cardVersion"][value="physical"]');
             
-            // Модалка
-            var modalRegularRadio = document.querySelector('input[name="modalCardTheme"][value="regular"]');
-            var modalMashaRadio = document.querySelector('input[name="modalCardTheme"][value="masha"]');
-            var modalPdfRadio = document.querySelector('input[name="modalCardVersion"][value="pdf"]');
-            var modalPhysicalRadio = document.querySelector('input[name="modalCardVersion"][value="physical"]');
-            
-            // Фото
             var regularPhotos = document.querySelectorAll('.regular-photo');
             var mashaPhotos = document.querySelectorAll('.masha-photo');
             
-            // Видео и фото в модалке
             var modalVideoRegular = document.getElementById('modalVideoRegular');
             var modalVideoMasha = document.getElementById('modalVideoMasha');
             var modalPhotosRegular = document.getElementById('modalPhotosRegular');
             var modalPhotosMasha = document.getElementById('modalPhotosMasha');
             var modalTitle = document.getElementById('modalCardsTitle');
             
-            // Цена и описание
             var cardPrice = document.getElementById('cardPrice');
             var cardDesc = document.getElementById('cardDescription');
             var orderBtn = document.getElementById('orderButton');
 
-            // Кнопки (для активных классов)
             var labelRegular = document.getElementById('label-regular');
             var labelMasha = document.getElementById('label-masha');
             var labelPdf = document.getElementById('label-pdf');
             var labelPhysical = document.getElementById('label-physical');
-            var modalLabelRegular = document.getElementById('modal-label-regular');
-            var modalLabelMasha = document.getElementById('modal-label-masha');
-            var modalLabelPdf = document.getElementById('modal-label-pdf');
-            var modalLabelPhysical = document.getElementById('modal-label-physical');
 
-            // === ФУНКЦИЯ ОБНОВЛЕНИЯ UI ===
             function updateUI() {
-                // 1. ВЕРСИЯ (основная / Маша и Медведь)
                 var isMasha = mashaRadio ? mashaRadio.checked : false;
                 
-                // Фото в слайдере
                 regularPhotos.forEach(function(el) {
                     el.style.display = isMasha ? 'none' : 'block';
                 });
@@ -995,28 +955,21 @@
                     el.style.display = isMasha ? 'block' : 'none';
                 });
                 
-                // Видео в модалке
                 if (modalVideoRegular) modalVideoRegular.style.display = isMasha ? 'none' : 'block';
                 if (modalVideoMasha) modalVideoMasha.style.display = isMasha ? 'block' : 'none';
                 
-                // Фото в модалке
                 if (modalPhotosRegular) modalPhotosRegular.style.display = isMasha ? 'none' : 'block';
                 if (modalPhotosMasha) modalPhotosMasha.style.display = isMasha ? 'block' : 'none';
                 
-                // Заголовок модалки
                 if (modalTitle) {
                     modalTitle.textContent = isMasha 
                         ? '🃏 Базовый набор карточек «Английский с пелёнок» — версия «Маша и Медведь»'
                         : '🃏 Базовый набор карточек «Английский с пелёнок»';
                 }
                 
-                // Активные кнопки версии
                 if (labelRegular) labelRegular.classList.toggle('active', !isMasha);
                 if (labelMasha) labelMasha.classList.toggle('active', isMasha);
-                if (modalLabelRegular) modalLabelRegular.classList.toggle('active', !isMasha);
-                if (modalLabelMasha) modalLabelMasha.classList.toggle('active', isMasha);
 
-                // 2. ФОРМАТ (PDF / физический)
                 var isPhysical = physicalRadio ? physicalRadio.checked : false;
                 
                 if (isPhysical) {
@@ -1028,8 +981,6 @@
                     }
                     if (labelPdf) labelPdf.classList.remove('active');
                     if (labelPhysical) labelPhysical.classList.add('active');
-                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
-                    if (modalLabelPhysical) modalLabelPhysical.classList.add('active');
                 } else {
                     if (cardPrice) cardPrice.textContent = '790 ₽';
                     if (cardDesc) cardDesc.textContent = 'PDF-файл + видео с произношением + транскрипции';
@@ -1039,43 +990,18 @@
                     }
                     if (labelPdf) labelPdf.classList.add('active');
                     if (labelPhysical) labelPhysical.classList.remove('active');
-                    if (modalLabelPdf) modalLabelPdf.classList.add('active');
-                    if (modalLabelPhysical) modalLabelPhysical.classList.remove('active');
                 }
             }
 
-            // === ФУНКЦИЯ СИНХРОНИЗАЦИИ ===
             function syncAll() {
-                // Синхронизируем радио-кнопки основной карточки и модалки
-                if (regularRadio && modalRegularRadio) {
-                    modalRegularRadio.checked = regularRadio.checked;
-                }
-                if (mashaRadio && modalMashaRadio) {
-                    modalMashaRadio.checked = mashaRadio.checked;
-                }
-                if (pdfRadio && modalPdfRadio) {
-                    modalPdfRadio.checked = pdfRadio.checked;
-                }
-                if (physicalRadio && modalPhysicalRadio) {
-                    modalPhysicalRadio.checked = physicalRadio.checked;
-                }
                 updateUI();
             }
 
-            // === НАВЕШИВАЕМ СОБЫТИЯ ===
-            // Основная карточка
             if (regularRadio) regularRadio.addEventListener('change', syncAll);
             if (mashaRadio) mashaRadio.addEventListener('change', syncAll);
             if (pdfRadio) pdfRadio.addEventListener('change', syncAll);
             if (physicalRadio) physicalRadio.addEventListener('change', syncAll);
-            
-            // Модалка
-            if (modalRegularRadio) modalRegularRadio.addEventListener('change', syncAll);
-            if (modalMashaRadio) modalMashaRadio.addEventListener('change', syncAll);
-            if (modalPdfRadio) modalPdfRadio.addEventListener('change', syncAll);
-            if (modalPhysicalRadio) modalPhysicalRadio.addEventListener('change', syncAll);
 
-            // === СИНХРОНИЗАЦИЯ ПРИ ОТКРЫТИИ МОДАЛКИ ===
             var cardsModal = document.getElementById('productCardsModal');
             if (cardsModal) {
                 var observer = new MutationObserver(function() {
@@ -1086,14 +1012,13 @@
                 observer.observe(cardsModal, { attributes: true, attributeFilter: ['class'] });
             }
 
-            // Первоначальная синхронизация
             setTimeout(syncAll, 200);
             console.log('✅ Переключатели для карточек инициализированы');
         }
     })();
 
     // ============================================================
-    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ ФЕРМЫ ★★★
+    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ ФЕРМЫ (ТОЛЬКО В КАРТОЧКЕ) ★★★
     // ============================================================
     (function() {
         if (document.readyState === 'loading') {
@@ -1108,80 +1033,71 @@
             var pdfRadio = document.querySelector('input[name="farmVersion"][value="pdf"]');
             var laminatedRadio = document.querySelector('input[name="farmVersion"][value="laminated"]');
             var puzzleRadio = document.querySelector('input[name="farmVersion"][value="puzzle"]');
-            var modalPdfRadio = document.querySelector('input[name="modalFarmVersion"][value="pdf"]');
-            var modalLaminatedRadio = document.querySelector('input[name="modalFarmVersion"][value="laminated"]');
-            var modalPuzzleRadio = document.querySelector('input[name="modalFarmVersion"][value="puzzle"]');
             
-            var priceEl = document.getElementById('farmPrice');
-            var descEl = document.getElementById('farmDescription');
-            var descPdf = document.getElementById('modalFarmDescPdf');
-            var descLam = document.getElementById('modalFarmDescLaminated');
-            var descPuz = document.getElementById('modalFarmDescPuzzle');
             var labelPdf = document.getElementById('label-farm-pdf');
             var labelLaminated = document.getElementById('label-farm-laminated');
             var labelPuzzle = document.getElementById('label-farm-puzzle');
-            var modalLabelPdf = document.getElementById('modal-label-farm-pdf');
-            var modalLabelLaminated = document.getElementById('modal-label-farm-laminated');
-            var modalLabelPuzzle = document.getElementById('modal-label-farm-puzzle');
+            
+            // Описания в модалке
+            var descPdf = document.getElementById('modalFarmDescPdf');
+            var descLam = document.getElementById('modalFarmDescLaminated');
+            var descPuz = document.getElementById('modalFarmDescPuzzle');
+            
+            // Цена и описание в карточке
+            var priceEl = document.getElementById('farmPrice');
+            var descEl = document.getElementById('farmDescription');
 
             function updateUI() {
                 var isPdf = pdfRadio ? pdfRadio.checked : true;
                 var isLaminated = laminatedRadio ? laminatedRadio.checked : false;
                 var isPuzzle = puzzleRadio ? puzzleRadio.checked : false;
                 
+                // Обновляем карточку
                 if (isPdf) {
                     if (priceEl) priceEl.textContent = '990 ₽';
                     if (descEl) descEl.textContent = 'PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска';
-                    if (descPdf) descPdf.style.display = 'block';
-                    if (descLam) descLam.style.display = 'none';
-                    if (descPuz) descPuz.style.display = 'none';
                     if (labelPdf) labelPdf.classList.add('active');
                     if (labelLaminated) labelLaminated.classList.remove('active');
                     if (labelPuzzle) labelPuzzle.classList.remove('active');
-                    if (modalLabelPdf) modalLabelPdf.classList.add('active');
-                    if (modalLabelLaminated) modalLabelLaminated.classList.remove('active');
-                    if (modalLabelPuzzle) modalLabelPuzzle.classList.remove('active');
                 } else if (isLaminated) {
                     if (priceEl) priceEl.textContent = '1 990 ₽';
                     if (descEl) descEl.textContent = 'Готовый ламинированный набор с липучками + PDF + QR-код + раскраска в подарок';
-                    if (descPdf) descPdf.style.display = 'none';
-                    if (descLam) descLam.style.display = 'block';
-                    if (descPuz) descPuz.style.display = 'none';
                     if (labelPdf) labelPdf.classList.remove('active');
                     if (labelLaminated) labelLaminated.classList.add('active');
                     if (labelPuzzle) labelPuzzle.classList.remove('active');
-                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
-                    if (modalLabelLaminated) modalLabelLaminated.classList.add('active');
-                    if (modalLabelPuzzle) modalLabelPuzzle.classList.remove('active');
                 } else if (isPuzzle) {
                     if (priceEl) priceEl.textContent = '2 490 ₽';
                     if (descEl) descEl.textContent = 'Игра-пазл с отверстиями + липучки + PDF + QR-код + раскраска в подарок';
-                    if (descPdf) descPdf.style.display = 'none';
-                    if (descLam) descLam.style.display = 'none';
-                    if (descPuz) descPuz.style.display = 'block';
                     if (labelPdf) labelPdf.classList.remove('active');
                     if (labelLaminated) labelLaminated.classList.remove('active');
                     if (labelPuzzle) labelPuzzle.classList.add('active');
-                    if (modalLabelPdf) modalLabelPdf.classList.remove('active');
-                    if (modalLabelLaminated) modalLabelLaminated.classList.remove('active');
-                    if (modalLabelPuzzle) modalLabelPuzzle.classList.add('active');
+                }
+                
+                // Обновляем модалку (описания)
+                if (isPdf) {
+                    if (descPdf) descPdf.style.display = 'block';
+                    if (descLam) descLam.style.display = 'none';
+                    if (descPuz) descPuz.style.display = 'none';
+                } else if (isLaminated) {
+                    if (descPdf) descPdf.style.display = 'none';
+                    if (descLam) descLam.style.display = 'block';
+                    if (descPuz) descPuz.style.display = 'none';
+                } else if (isPuzzle) {
+                    if (descPdf) descPdf.style.display = 'none';
+                    if (descLam) descLam.style.display = 'none';
+                    if (descPuz) descPuz.style.display = 'block';
                 }
             }
 
             function syncFarm() {
-                if (pdfRadio && modalPdfRadio) modalPdfRadio.checked = pdfRadio.checked;
-                if (laminatedRadio && modalLaminatedRadio) modalLaminatedRadio.checked = laminatedRadio.checked;
-                if (puzzleRadio && modalPuzzleRadio) modalPuzzleRadio.checked = puzzleRadio.checked;
                 updateUI();
             }
 
             if (pdfRadio) pdfRadio.addEventListener('change', syncFarm);
             if (laminatedRadio) laminatedRadio.addEventListener('change', syncFarm);
             if (puzzleRadio) puzzleRadio.addEventListener('change', syncFarm);
-            if (modalPdfRadio) modalPdfRadio.addEventListener('change', syncFarm);
-            if (modalLaminatedRadio) modalLaminatedRadio.addEventListener('change', syncFarm);
-            if (modalPuzzleRadio) modalPuzzleRadio.addEventListener('change', syncFarm);
 
+            // Синхронизация при открытии модалки
             var farmModal = document.getElementById('productFarmModal');
             if (farmModal) {
                 var observer = new MutationObserver(function() {
