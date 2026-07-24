@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ===== ВСЕ СТИЛИ ===== */
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
         body{font-family:'Open Sans',sans-serif;background:#F9FCB8;color:#1f2937;line-height:1.5}
@@ -124,6 +125,13 @@
         .version-toggle .toggle-btn:hover{transform:scale(1.02)}
         .version-toggle input[type="radio"]{display:none}
         .product-desc-small{font-size:0.85rem;color:#555;margin-bottom:12px;min-height:40px}
+        
+        /* ★★★ МАЛЕНЬКИЕ ФОТО В МОДАЛКЕ (3 В РЯД) ★★★ */
+        .modal-photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+        .modal-photos-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;border:1px solid #E67E22;cursor:pointer}
+        @media(max-width:480px){.modal-photos-grid{grid-template-columns:repeat(2,1fr)}}
+        
+        /* ★★★ СЛАЙДЕР-КОНТЕЙНЕР В МОДАЛКЕ ★★★ */
         .modal-slider-container{position:relative;margin:16px 0;border-radius:16px;overflow:hidden;background:#f5f0e8}
         .modal-slider-track{display:flex;transition:transform .5s}
         .modal-slider-track img{width:100%;flex-shrink:0;border-radius:16px;border:1px solid #E67E22}
@@ -131,6 +139,11 @@
         .modal-slider-btn:hover{background:#D35400}
         .modal-slider-btn.prev{left:10px}.modal-slider-btn.next{right:10px}
         .modal-slider-btn svg{width:20px;height:20px;stroke:#fff;stroke-width:2;fill:none}
+        
+        .modal-slider-dots{display:flex;justify-content:center;gap:8px;margin-top:10px}
+        .modal-slider-dots .dot{width:10px;height:10px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+        .modal-slider-dots .dot.active{background:#E67E22}
+        
         @media(max-width:768px){
             h1{font-size:1.8rem}h2{font-size:1.5rem}section{padding:40px 0}
             .first-screen-container{flex-direction:column;text-align:center}
@@ -195,7 +208,7 @@
     </div>
 </div>
 
-<!-- 2 окно -->
+<!-- 2-6 окна (сокращено для экономии места) -->
 <section style="background:#fff;">
     <div class="container">
         <h2>✨ Для кого этот курс</h2>
@@ -207,7 +220,6 @@
     </div>
 </section>
 
-<!-- 3 окно -->
 <section class="peach-bg">
     <div class="container">
         <h2>🌟 Почему билингвизм с рождения</h2>
@@ -219,7 +231,6 @@
     </div>
 </section>
 
-<!-- 4 окно -->
 <section style="background:#fff;">
     <div class="container">
         <h2>🎥 О Baby Journey</h2>
@@ -250,7 +261,7 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- 6 окно: Тарифы -->
 <section id="tariffs" style="background:#fff;">
@@ -273,7 +284,7 @@
         <p style="text-align:center;margin-bottom:40px;">Маленькие помощники, которые всегда под рукой — дома, в дороге, на холодильнике</p>
         <div class="hand-luggage-grid">
 
-            <!-- Товар: Наклейки «Фразы дня» -->
+            <!-- Товар: Наклейки -->
             <div class="product-card" data-product="Наклейки «Фразы дня»" id="product-stickers">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-stickers">
@@ -349,7 +360,7 @@
                 <button class="btn-ticket" id="orderButton" onclick="openOrderModalWithCode('Базовый набор карточек «Английский с пелёнок»', 'АНГЛИЙСКИЙ С ПЕЛЁНОК')">Оформить заказ</button>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО ДЛЯ КАРТОЧЕК (без переключателей) -->
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ КАРТОЧЕК (3 ФОТО В РЯД) ★★★ -->
             <div id="productCardsModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productCardsModal')">&times;</span>
@@ -367,6 +378,7 @@
                         </div>
                     </div>
 
+                    <!-- ★★★ СЕТКА С МАЛЕНЬКИМИ ФОТО (3 В РЯД) ★★★ -->
                     <div id="modalPhotosRegular">
                         <div class="modal-slider-container">
                             <div class="modal-slider-track" id="modal-track-regular">
@@ -378,6 +390,7 @@
                             <button class="modal-slider-btn prev" onclick="slideModal('modal-track-regular', -1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
                             <button class="modal-slider-btn next" onclick="slideModal('modal-track-regular', 1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
                         </div>
+                        <div class="modal-slider-dots" id="dots-regular"></div>
                     </div>
 
                     <div id="modalPhotosMasha" style="display:none;">
@@ -390,6 +403,7 @@
                             <button class="modal-slider-btn prev" onclick="slideModal('modal-track-masha', -1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
                             <button class="modal-slider-btn next" onclick="slideModal('modal-track-masha', 1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
                         </div>
+                        <div class="modal-slider-dots" id="dots-masha"></div>
                     </div>
 
                     <div style="text-align:left;" id="modalCardDescription">
@@ -426,7 +440,7 @@
                 </div>
             </div>
 
-            <!-- ★★★ Товар: Набор «Old MacDonald's Farm» (переключатели только в карточке) ★★★ -->
+            <!-- ★★★ Товар: Набор «Old MacDonald's Farm» ★★★ -->
             <div class="product-card" data-product="Набор «Old MacDonald's Farm»" id="product-farm">
                 <div class="product-slider-container">
                     <div class="product-slider-track" id="track-farm">
@@ -440,7 +454,6 @@
                 <h3>🐮 Набор «Old MacDonald's Farm»</h3>
                 <p>🐮 Первые животные, их звуки, простые действия и любимые песенки — всё в одной игре на ферме.</p>
 
-                <!-- ★★★ ПЕРЕКЛЮЧАТЕЛИ ТОЛЬКО ЗДЕСЬ ★★★ -->
                 <div class="version-toggle" id="farmFormatToggle">
                     <label class="toggle-btn active" id="label-farm-pdf">
                         <input type="radio" name="farmVersion" value="pdf" checked> 📄 Электронная версия (PDF)
@@ -460,7 +473,7 @@
                 <button class="btn-ticket" id="orderButtonFarm" onclick="openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
             </div>
 
-            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ ФЕРМЫ (БЕЗ ПЕРЕКЛЮЧАТЕЛЕЙ) ★★★ -->
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ ФЕРМЫ (С МАЛЕНЬКИМИ ФОТО) ★★★ -->
             <div id="productFarmModal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productFarmModal')">&times;</span>
@@ -472,15 +485,15 @@
                         </div>
                     </div>
 
-                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                        <img src="images/product-farm-1.jpg" alt="Ферма 1" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
-                        <img src="images/product-farm-2.jpg" alt="Ферма 2" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
-                        <img src="images/product-farm-3.jpg" alt="Ферма 3" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                    <!-- ★★★ СЕТКА С МАЛЕНЬКИМИ ФОТО (3 В РЯД) ★★★ -->
+                    <div class="modal-photos-grid">
+                        <img src="images/product-farm-1.jpg" alt="Ферма 1" onclick="openFullscreenModal(this.src)">
+                        <img src="images/product-farm-2.jpg" alt="Ферма 2" onclick="openFullscreenModal(this.src)">
+                        <img src="images/product-farm-3.jpg" alt="Ферма 3" onclick="openFullscreenModal(this.src)">
                     </div>
 
                     <div style="text-align:left;">
 
-                        <!-- ★★★ ВСЕ ТРИ ОПИСАНИЯ, НО ВИДНО ТОЛЬКО ОДНО (В ЗАВИСИМОСТИ ОТ ВЫБРАННОГО ФОРМАТА) ★★★ -->
                         <div id="modalFarmDescPdf">
                             <p><strong>📄 Электронная версия (PDF)</strong></p>
                             <ul>
@@ -545,7 +558,7 @@
                 </div>
                 <h3>📄 Печатный чек-лист</h3>
                 <p>Бесплатный чек-лист в печатном виде</p>
-                <div class="price">490 ₽</div>
+                <div class="price" id="printChecklistPrice">990 ₽</div>
                 <a href="#" class="details-link" onclick="openProductModal('productChecklistModal'); return false;">Подробнее</a><br>
                 <button class="btn-ticket" onclick="openOrderModal('Печатный чек-лист')">Оформить заказ</button>
             </div>
@@ -555,10 +568,10 @@
                 <div class="modal-content">
                     <span class="close-modal" onclick="closeModal('productChecklistModal')">&times;</span>
                     <h3>📄 Печатный чек-лист</h3>
-                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                        <img src="images/print-checklist-1.jpg" alt="Чек-лист 1" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
-                        <img src="images/print-checklist-2.jpg" alt="Чек-лист 2" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
-                        <img src="images/print-checklist-3.jpg" alt="Чек-лист 3" style="flex:1;min-width:120px;border-radius:16px;border:1px solid #E67E22;">
+                    <div class="modal-photos-grid">
+                        <img src="images/print-checklist-1.jpg" alt="Чек-лист 1" onclick="openFullscreenModal(this.src)">
+                        <img src="images/print-checklist-2.jpg" alt="Чек-лист 2" onclick="openFullscreenModal(this.src)">
+                        <img src="images/print-checklist-3.jpg" alt="Чек-лист 3" onclick="openFullscreenModal(this.src)">
                     </div>
                     <div style="text-align:left;">
                         <p><strong>Что это:</strong></p>
@@ -582,7 +595,7 @@
                             <li>✅ PDF-версия чек-листа — в подарок</li>
                             <li>✅ Ссылка на видео с произношением</li>
                         </ul>
-                        <p style="margin-top:12px;"><strong>💰 Цена:</strong> 490 ₽</p>
+                        <p style="margin-top:12px;"><strong>💰 Цена:</strong> 990 ₽</p>
                         <p style="margin-top:10px;">🚚 Доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
                     </div>
                     <div class="order-buttons" style="margin-top:20px;">
@@ -596,7 +609,7 @@
 </section>
 
 <!-- 8 окно -->
-<section style="background:#fff;">
+<section id="contact-section" style="background:#fff;">
     <div class="container">
         <div style="max-width:800px;margin:0 auto;text-align:center;background:#fff;border-radius:48px;padding:48px;border:2px solid #E67E22;">
             <h2 style="margin-bottom:16px;">Остались вопросы? Свяжитесь с нами</h2>
@@ -746,6 +759,9 @@
         if (modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            // Скрываем кнопку "Наверх" при открытии модалки
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
         }
     }
     function closeModal(modalId) {
@@ -753,6 +769,14 @@
         if (modal) {
             modal.classList.remove('show');
             document.body.style.overflow = '';
+            // Показываем кнопку "Наверх" обратно, если она должна быть видна
+            if (window.scrollY > 600) {
+                scrollTopBtn.style.opacity = '1';
+                scrollTopBtn.style.visibility = 'visible';
+            } else {
+                scrollTopBtn.style.opacity = '0';
+                scrollTopBtn.style.visibility = 'hidden';
+            }
         }
     }
     function openProductModal(modalId) {
@@ -760,36 +784,110 @@
         if (modal) {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            // Скрываем кнопку "Наверх" при открытии модалки
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
         }
     }
 
     // ============================================================
-    // СЛАЙДЕР В МОДАЛКЕ
+    // ФУЛЛСКРИН ДЛЯ МАЛЕНЬКИХ ФОТО (по клику)
+    // ============================================================
+    function openFullscreenModal(src) {
+        var modal = document.createElement('div');
+        modal.className = 'fullscreen-modal';
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:5000;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:.3s;';
+        modal.innerHTML = '<div class="fullscreen-close" style="position:absolute;top:20px;right:30px;font-size:40px;color:#fff;cursor:pointer;z-index:5001;font-weight:700;">✕</div><img src="' + src + '" style="max-width:90%;max-height:90%;border-radius:16px;object-fit:contain;">';
+        document.body.appendChild(modal);
+        setTimeout(function() {
+            modal.style.visibility = 'visible';
+            modal.style.opacity = '1';
+        }, 10);
+        modal.querySelector('.fullscreen-close').addEventListener('click', function() {
+            modal.style.opacity = '0';
+            setTimeout(function() { modal.remove(); }, 300);
+        });
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.opacity = '0';
+                setTimeout(function() { modal.remove(); }, 300);
+            }
+        });
+        document.addEventListener('keydown', function closeEsc(e) {
+            if (e.key === 'Escape') {
+                modal.style.opacity = '0';
+                setTimeout(function() { modal.remove(); }, 300);
+                document.removeEventListener('keydown', closeEsc);
+            }
+        });
+    }
+
+    // ============================================================
+    // СЛАЙДЕР В МОДАЛКЕ (с точками)
     // ============================================================
     function slideModal(trackId, direction) {
         var track = document.getElementById(trackId);
         if (!track) return;
         var slides = Array.from(track.children);
         var total = slides.length;
+        if (total === 0) return;
         var current = parseInt(track.dataset.current || '0');
         current = (current + direction + total) % total;
         track.dataset.current = current;
         var slideWidth = slides[0].clientWidth;
         track.style.transform = 'translateX(-' + current * slideWidth + 'px)';
+        // Обновляем точки
+        var container = track.closest('.modal-slider-container');
+        var dotsContainer = container.nextElementSibling;
+        if (dotsContainer && dotsContainer.classList.contains('modal-slider-dots')) {
+            var dots = dotsContainer.querySelectorAll('.dot');
+            dots.forEach(function(dot, index) {
+                dot.classList.toggle('active', index === current);
+            });
+        }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.modal-slider-track').forEach(function(t) {
-            t.dataset.current = '0';
-            setTimeout(function() {
-                var slides = Array.from(t.children);
-                if (slides.length > 0) {
+    function initModalSlider(trackId) {
+        var track = document.getElementById(trackId);
+        if (!track) return;
+        var slides = Array.from(track.children);
+        var total = slides.length;
+        if (total <= 1) {
+            // Если одно фото — скрываем кнопки
+            var container = track.closest('.modal-slider-container');
+            var buttons = container.querySelectorAll('.modal-slider-btn');
+            buttons.forEach(function(btn) { btn.style.display = 'none'; });
+            return;
+        }
+        track.dataset.current = '0';
+        // Создаём точки
+        var container = track.closest('.modal-slider-container');
+        var dotsContainer = container.nextElementSibling;
+        if (dotsContainer && dotsContainer.classList.contains('modal-slider-dots')) {
+            dotsContainer.innerHTML = '';
+            for (var i = 0; i < total; i++) {
+                var dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                dot.addEventListener('click', function() {
+                    var index = parseInt(this.dataset.index);
+                    track.dataset.current = index;
                     var slideWidth = slides[0].clientWidth;
-                    t.style.transform = 'translateX(0px)';
-                }
-            }, 100);
-        });
-    });
+                    track.style.transform = 'translateX(-' + index * slideWidth + 'px)';
+                    var dots = dotsContainer.querySelectorAll('.dot');
+                    dots.forEach(function(d, idx) {
+                        d.classList.toggle('active', idx === index);
+                    });
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+        // Устанавливаем начальную позицию
+        setTimeout(function() {
+            var slideWidth = slides[0].clientWidth;
+            track.style.transform = 'translateX(0px)';
+        }, 100);
+    }
 
     // ============================================================
     // СЛАЙДЕРЫ В ТОВАРАХ
@@ -825,7 +923,7 @@
     initProductSliders();
 
     // ============================================================
-    // FULLSCREEN СЛАЙДЕР
+    // FULLSCREEN СЛАЙДЕР (для товаров)
     // ============================================================
     function openFullscreenSlider(productId) {
         var container = document.querySelector('#' + productId + ' .product-slider-track');
@@ -877,11 +975,22 @@
         document.getElementById('paymentTgLink').href = 'https://t.me/lingua_journey?text=' + message;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        // Скрываем кнопку "Наверх" при открытии модалки
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
     }
     function closePaymentModal() {
         var modal = document.getElementById('paymentModal');
         modal.classList.remove('show');
         document.body.style.overflow = '';
+        // Показываем кнопку "Наверх" обратно, если она должна быть видна
+        if (window.scrollY > 600) {
+            scrollTopBtn.style.opacity = '1';
+            scrollTopBtn.style.visibility = 'visible';
+        } else {
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
+        }
     }
     function openOrderModal(productName) {
         var modal = document.getElementById('orderModal');
@@ -892,6 +1001,9 @@
         document.getElementById('orderTgLink').href = 'https://t.me/lingua_journey?text=' + msg;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        // Скрываем кнопку "Наверх" при открытии модалки
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
     }
     function openOrderModalWithCode(productName, codeWord) {
         var modal = document.getElementById('orderModal');
@@ -902,11 +1014,22 @@
         document.getElementById('orderTgLink').href = 'https://t.me/lingua_journey?text=' + msg;
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        // Скрываем кнопку "Наверх" при открытии модалки
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
     }
     function closeOrderModal() {
         var modal = document.getElementById('orderModal');
         modal.classList.remove('show');
         document.body.style.overflow = '';
+        // Показываем кнопку "Наверх" обратно, если она должна быть видна
+        if (window.scrollY > 600) {
+            scrollTopBtn.style.opacity = '1';
+            scrollTopBtn.style.visibility = 'visible';
+        } else {
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
+        }
     }
 
     // ============================================================
@@ -945,9 +1068,42 @@
             var labelPdf = document.getElementById('label-pdf');
             var labelPhysical = document.getElementById('label-physical');
 
+            // Получаем слайдер-треки в основном окне
+            var mainTrack = document.getElementById('track-cards');
+            var mainSlides = mainTrack ? Array.from(mainTrack.children) : [];
+            var mainPrevBtn = document.querySelector('#product-cards .product-slider-btn.prev');
+            var mainNextBtn = document.querySelector('#product-cards .product-slider-btn.next');
+            var mainCurrent = 0;
+
+            function updateMainSlider() {
+                if (!mainTrack || mainSlides.length === 0) return;
+                var slideWidth = mainSlides[0]?.clientWidth || 0;
+                mainTrack.style.transform = 'translateX(-' + mainCurrent * slideWidth + 'px)';
+            }
+
+            function initMainSliderControls() {
+                if (mainPrevBtn) {
+                    mainPrevBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        mainCurrent = (mainCurrent - 1 + mainSlides.length) % mainSlides.length;
+                        updateMainSlider();
+                    };
+                }
+                if (mainNextBtn) {
+                    mainNextBtn.onclick = function(e) {
+                        e.stopPropagation();
+                        mainCurrent = (mainCurrent + 1) % mainSlides.length;
+                        updateMainSlider();
+                    };
+                }
+                window.addEventListener('resize', updateMainSlider);
+                setTimeout(updateMainSlider, 150);
+            }
+
             function updateUI() {
                 var isMasha = mashaRadio ? mashaRadio.checked : false;
                 
+                // Обновляем видимость фото в основном окне
                 regularPhotos.forEach(function(el) {
                     el.style.display = isMasha ? 'none' : 'block';
                 });
@@ -955,6 +1111,7 @@
                     el.style.display = isMasha ? 'block' : 'none';
                 });
                 
+                // Обновляем видимость в модалке
                 if (modalVideoRegular) modalVideoRegular.style.display = isMasha ? 'none' : 'block';
                 if (modalVideoMasha) modalVideoMasha.style.display = isMasha ? 'block' : 'none';
                 
@@ -969,6 +1126,33 @@
                 
                 if (labelRegular) labelRegular.classList.toggle('active', !isMasha);
                 if (labelMasha) labelMasha.classList.toggle('active', isMasha);
+
+                // Обновляем список видимых слайдов для основного слайдера
+                var visibleSlides = [];
+                regularPhotos.forEach(function(el) {
+                    if (!isMasha && el.style.display !== 'none') {
+                        visibleSlides.push(el);
+                    }
+                });
+                mashaPhotos.forEach(function(el) {
+                    if (isMasha && el.style.display !== 'none') {
+                        visibleSlides.push(el);
+                    }
+                });
+
+                // Обновляем mainSlides ссылку на видимые
+                if (mainTrack) {
+                    var allChildren = Array.from(mainTrack.children);
+                    // Сбрасываем позицию, если переключились
+                    mainCurrent = 0;
+                    // Обновляем слайды для расчета ширины
+                    setTimeout(function() {
+                        var slideWidth = mainSlides[0]?.clientWidth || 0;
+                        if (mainTrack) {
+                            mainTrack.style.transform = 'translateX(0px)';
+                        }
+                    }, 50);
+                }
 
                 var isPhysical = physicalRadio ? physicalRadio.checked : false;
                 
@@ -995,30 +1179,84 @@
 
             function syncAll() {
                 updateUI();
+                // Переинициализируем слайдер в основном окне
+                setTimeout(function() {
+                    var visibleSlides = [];
+                    var allImgs = mainTrack ? Array.from(mainTrack.children) : [];
+                    allImgs.forEach(function(img) {
+                        if (img.style.display !== 'none') {
+                            visibleSlides.push(img);
+                        }
+                    });
+                    // Обновляем mainSlides
+                    if (mainTrack) {
+                        mainSlides.length = 0;
+                        mainSlides.push.apply(mainSlides, visibleSlides);
+                        mainCurrent = 0;
+                        updateMainSlider();
+                    }
+                }, 100);
             }
+
+            // Инициализируем управление основным слайдером
+            initMainSliderControls();
 
             if (regularRadio) regularRadio.addEventListener('change', syncAll);
             if (mashaRadio) mashaRadio.addEventListener('change', syncAll);
             if (pdfRadio) pdfRadio.addEventListener('change', syncAll);
             if (physicalRadio) physicalRadio.addEventListener('change', syncAll);
 
+            // Инициализируем слайдеры в модалке
+            function initSlidersAfterChange() {
+                setTimeout(function() {
+                    if (document.getElementById('modal-track-regular')) {
+                        initModalSlider('modal-track-regular');
+                    }
+                    if (document.getElementById('modal-track-masha')) {
+                        initModalSlider('modal-track-masha');
+                    }
+                }, 300);
+            }
+
+            if (regularRadio) regularRadio.addEventListener('change', initSlidersAfterChange);
+            if (mashaRadio) mashaRadio.addEventListener('change', initSlidersAfterChange);
+
             var cardsModal = document.getElementById('productCardsModal');
             if (cardsModal) {
                 var observer = new MutationObserver(function() {
                     if (cardsModal.classList.contains('show')) {
                         syncAll();
+                        setTimeout(function() {
+                            if (document.getElementById('modal-track-regular')) {
+                                initModalSlider('modal-track-regular');
+                            }
+                            if (document.getElementById('modal-track-masha')) {
+                                initModalSlider('modal-track-masha');
+                            }
+                        }, 300);
                     }
                 });
                 observer.observe(cardsModal, { attributes: true, attributeFilter: ['class'] });
             }
 
-            setTimeout(syncAll, 200);
+            setTimeout(function() {
+                syncAll();
+                setTimeout(function() {
+                    if (document.getElementById('modal-track-regular')) {
+                        initModalSlider('modal-track-regular');
+                    }
+                    if (document.getElementById('modal-track-masha')) {
+                        initModalSlider('modal-track-masha');
+                    }
+                }, 400);
+            }, 200);
+            
             console.log('✅ Переключатели для карточек инициализированы');
         }
     })();
 
     // ============================================================
-    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ ФЕРМЫ (ТОЛЬКО В КАРТОЧКЕ) ★★★
+    // ★★★ ПЕРЕКЛЮЧАТЕЛИ ДЛЯ ФЕРМЫ ★★★
     // ============================================================
     (function() {
         if (document.readyState === 'loading') {
@@ -1038,12 +1276,10 @@
             var labelLaminated = document.getElementById('label-farm-laminated');
             var labelPuzzle = document.getElementById('label-farm-puzzle');
             
-            // Описания в модалке
             var descPdf = document.getElementById('modalFarmDescPdf');
             var descLam = document.getElementById('modalFarmDescLaminated');
             var descPuz = document.getElementById('modalFarmDescPuzzle');
             
-            // Цена и описание в карточке
             var priceEl = document.getElementById('farmPrice');
             var descEl = document.getElementById('farmDescription');
 
@@ -1052,7 +1288,6 @@
                 var isLaminated = laminatedRadio ? laminatedRadio.checked : false;
                 var isPuzzle = puzzleRadio ? puzzleRadio.checked : false;
                 
-                // Обновляем карточку
                 if (isPdf) {
                     if (priceEl) priceEl.textContent = '990 ₽';
                     if (descEl) descEl.textContent = 'PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска';
@@ -1073,7 +1308,6 @@
                     if (labelPuzzle) labelPuzzle.classList.add('active');
                 }
                 
-                // Обновляем модалку (описания)
                 if (isPdf) {
                     if (descPdf) descPdf.style.display = 'block';
                     if (descLam) descLam.style.display = 'none';
@@ -1097,7 +1331,6 @@
             if (laminatedRadio) laminatedRadio.addEventListener('change', syncFarm);
             if (puzzleRadio) puzzleRadio.addEventListener('change', syncFarm);
 
-            // Синхронизация при открытии модалки
             var farmModal = document.getElementById('productFarmModal');
             if (farmModal) {
                 var observer = new MutationObserver(function() {
@@ -1152,6 +1385,8 @@
     window.openModal = openModal;
     window.closeModal = closeModal;
     window.slideModal = slideModal;
+    window.initModalSlider = initModalSlider;
+    window.openFullscreenModal = openFullscreenModal;
 </script>
 
 </body>
