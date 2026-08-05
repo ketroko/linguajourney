@@ -484,7 +484,7 @@
                 </div>
 
                 <div class="price" id="farmPrice">790 ₽</div>
-                <div class="product-desc-small" id="farmDescription">PDF-файл: поле с тенями + животные + инструкция + QR-код + раскраска</div>
+                <div class="product-desc-small" id="farmDescription">PDF-файл: поле с местами для животных + карточки + инструкция с 9 играми + QR-код + раскраска</div>
 
                 <a href="#" class="details-link" onclick="openProductModal('productFarmModal'); return false;">Подробнее</a><br>
                 <button class="btn-ticket" id="orderButtonFarm" onclick="openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
@@ -558,6 +558,211 @@
 
                     <div class="order-buttons" style="margin-top:20px;">
                         <button class="btn-ticket" onclick="closeModal('productFarmModal'); openOrderModalWithCode('Набор «Old MacDonald\'s Farm»', 'ФЕРМА')">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ★★★ Товар: My First English with Kikoriki: Starter ★★★ -->
+            <div class="product-card" data-product="My First English with Kikoriki: Starter" id="product-kikoriki-starter">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-kikoriki-starter">
+                        <img src="images/kikoriki-starter-1.jpg" alt="Kikoriki Starter 1">
+                        <img src="images/kikoriki-starter-2.jpg" alt="Kikoriki Starter 2">
+                        <img src="images/kikoriki-starter-3.jpg" alt="Kikoriki Starter 3">
+                        <img src="images/kikoriki-starter-4.jpg" alt="Kikoriki Starter 4">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-kikoriki-starter"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-kikoriki-starter"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+
+                <h3>🐻 My First English with Kikoriki: Starter</h3>
+                <p>Первый английский с любимыми героями!</p>
+
+                <div class="version-toggle" id="kikorikiStarterToggle">
+                    <label class="toggle-btn active" id="label-starter-pdf">
+                        <input type="radio" name="kikorikiStarterVersion" value="pdf" checked> 📄 Электронная версия (PDF)
+                    </label>
+                    <label class="toggle-btn" id="label-starter-physical">
+                        <input type="radio" name="kikorikiStarterVersion" value="physical"> 🚚 Готовый набор
+                    </label>
+                </div>
+
+                <div class="price" id="kikorikiStarterPrice">990 ₽</div>
+                <div class="product-desc-small" id="kikorikiStarterDescription">47 страниц: алфавит, цвета, цифры + руководство для родителей в подарок</div>
+
+                <a href="#" class="details-link" onclick="openProductModal('productKikorikiStarterModal'); return false;">Подробнее</a><br>
+                <button class="btn-ticket" onclick="openOrderModalWithCode('My First English with Kikoriki: Starter', 'KIKORIKI STARTER')">Оформить заказ</button>
+            </div>
+
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ STARTER ★★★ -->
+            <div id="productKikorikiStarterModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal('productKikorikiStarterModal')">&times;</span>
+                    <h3>🐻 My First English with Kikoriki: Starter</h3>
+
+                    <div class="modal-photos-grid">
+                        <img src="images/kikoriki-starter-1.jpg" alt="Kikoriki Starter 1" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-starter-2.jpg" alt="Kikoriki Starter 2" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-starter-3.jpg" alt="Kikoriki Starter 3" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-starter-4.jpg" alt="Kikoriki Starter 4" onclick="openFullscreenModal(this.src)">
+                    </div>
+
+                    <div style="text-align:left;">
+                        <p><strong>Первый английский с любимыми героями!</strong></p>
+                        <p>Вместе с полюбившимися героями Kikoriki (Смешарики) малыш выучит алфавит, цвета и цифры. Всё в игровой форме, с яркими иллюстрациями, заданиями на развитие мелкой моторики и возможностью адаптировать программу под разный возраст ребёнка.</p>
+
+                        <p style="margin-top:16px;"><strong>🎯 Для кого:</strong></p>
+                        <ul>
+                            <li>👶 Для детей от 1 до 7 лет</li>
+                            <li>🌟 Первые шаги в билингвизм</li>
+                            <li>👩‍👧 Для родителей, которые хотят заниматься с ребёнком в игре</li>
+                        </ul>
+
+                        <p style="margin-top:16px;"><strong>🧩 Что входит в Starter Pack:</strong></p>
+                        <ul>
+                            <li><strong>My First ABC Book with Kikoriki</strong> — 40 страниц<br>Алфавит с играми, героями, упражнениями на развитие мелкой моторики, с возможностью стирать и использовать страницы сколько угодно раз.</li>
+                            <li><strong>Colours</strong> — 3 страницы<br>Изучаем цвета.</li>
+                            <li><strong>Numbers 1–10</strong> — 4 страницы<br>Счёт от 1 до 10 с игровыми заданиями.</li>
+                        </ul>
+                        <p style="margin-top:12px;"><strong>🎁 Руководство для родителей в подарок</strong></p>
+                        <p><strong>Итого: 47 страниц материалов.</strong></p>
+
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+
+                        <p><strong>✨ Выбирайте свой формат:</strong></p>
+                        <p><strong>📄 Электронная версия (PDF) — 990 ₽</strong></p>
+                        <ul>
+                            <li>✅ Мгновенный доступ на почту после оплаты</li>
+                            <li>✅ Печатайте столько раз, сколько нужно</li>
+                        </ul>
+
+                        <p><strong>🚚 Готовый ламинированный набор — 2 490 ₽</strong></p>
+                        <ul>
+                            <li>✅ Всё напечатано на плотной бумаге</li>
+                            <li>✅ Заламинировано — не рвётся и не мнётся</li>
+                            <li>✅ Все детали вырезаны вручную</li>
+                            <li>✅ Можно сразу играть</li>
+                            <li>✅ Липучки в комплекте</li>
+                            <li>✅ Доставка по всей России</li>
+                        </ul>
+
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+
+                        <p><strong>📦 Доставка</strong><br>
+                        Электронная версия: высылается на указанную почту сразу после оплаты.<br>
+                        Готовый набор: доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
+
+                        <p style="margin-top:16px;font-style:italic;color:#888;">🌟 Играйте, учитесь и растите билингвальными вместе с Lingua Journey!</p>
+                    </div>
+
+                    <div class="order-buttons" style="margin-top:20px;">
+                        <button class="btn-ticket" onclick="closeModal('productKikorikiStarterModal'); openOrderModalWithCode('My First English with Kikoriki: Starter', 'KIKORIKI STARTER')">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ★★★ Товар: My First English with Kikoriki: Mega Pack ★★★ -->
+            <div class="product-card" data-product="My First English with Kikoriki: Mega Pack" id="product-kikoriki-mega">
+                <div class="product-slider-container">
+                    <div class="product-slider-track" id="track-kikoriki-mega">
+                        <img src="images/kikoriki-mega-1.jpg" alt="Kikoriki Mega 1">
+                        <img src="images/kikoriki-mega-2.jpg" alt="Kikoriki Mega 2">
+                        <img src="images/kikoriki-mega-3.jpg" alt="Kikoriki Mega 3">
+                        <img src="images/kikoriki-mega-4.jpg" alt="Kikoriki Mega 4">
+                    </div>
+                    <button class="product-slider-btn prev" data-slider="track-kikoriki-mega"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button class="product-slider-btn next" data-slider="track-kikoriki-mega"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+
+                <h3>🐻 My First English with Kikoriki: Mega Pack</h3>
+                <p>Всё для комплексного развития на годы вперёд!</p>
+
+                <div class="version-toggle" id="kikorikiMegaToggle">
+                    <label class="toggle-btn active" id="label-mega-pdf">
+                        <input type="radio" name="kikorikiMegaVersion" value="pdf" checked> 📄 Электронная версия (PDF)
+                    </label>
+                    <label class="toggle-btn" id="label-mega-physical">
+                        <input type="radio" name="kikorikiMegaVersion" value="physical"> 🚚 Готовый набор
+                    </label>
+                </div>
+
+                <div class="price" id="kikorikiMegaPrice">1 590 ₽</div>
+                <div class="product-desc-small" id="kikorikiMegaDescription">87 страниц: 9 файлов + руководство для родителей в подарок</div>
+
+                <a href="#" class="details-link" onclick="openProductModal('productKikorikiMegaModal'); return false;">Подробнее</a><br>
+                <button class="btn-ticket" onclick="openOrderModalWithCode('My First English with Kikoriki: Mega Pack', 'KIKORIKI MEGA')">Оформить заказ</button>
+            </div>
+
+            <!-- ★★★ МОДАЛЬНОЕ ОКНО ДЛЯ MEGA PACK ★★★ -->
+            <div id="productKikorikiMegaModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal('productKikorikiMegaModal')">&times;</span>
+                    <h3>🐻 My First English with Kikoriki: Mega Pack</h3>
+
+                    <div class="modal-photos-grid">
+                        <img src="images/kikoriki-mega-1.jpg" alt="Kikoriki Mega 1" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-mega-2.jpg" alt="Kikoriki Mega 2" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-mega-3.jpg" alt="Kikoriki Mega 3" onclick="openFullscreenModal(this.src)">
+                        <img src="images/kikoriki-mega-4.jpg" alt="Kikoriki Mega 4" onclick="openFullscreenModal(this.src)">
+                    </div>
+
+                    <div style="text-align:left;">
+                        <p><strong>Всё для комплексного развития на годы вперёд!</strong></p>
+                        <p>Полный набор материалов с любимыми героями Kikoriki (Смешарики)! Алфавит, цифры, цвета, времена года, распорядок дня, игры, раскраски и поделки — 9 файлов, 87 страниц для занятий с детьми от 1 до 7 лет. Всё в игровой форме, с заданиями на развитие мелкой моторики и возможностью адаптировать программу под разный возраст ребёнка. Руководство для родителей — в подарок!</p>
+
+                        <p style="margin-top:16px;"><strong>🎯 Для кого:</strong></p>
+                        <ul>
+                            <li>👶 Для детей от 1 до 7 лет</li>
+                            <li>🌟 Для билингвального развития с самого раннего возраста</li>
+                            <li>👩‍👧 Для родителей, которые хотят заниматься с ребёнком в игре</li>
+                        </ul>
+
+                        <p style="margin-top:16px;"><strong>🧩 Что входит в Mega Pack:</strong></p>
+                        <ul>
+                            <li><strong>My First ABC Book with Kikoriki</strong> — 40 страниц<br>Алфавит с играми, героями, упражнениями на развитие мелкой моторики, с возможностью стирать и использовать страницы сколько угодно раз.</li>
+                            <li><strong>Colours</strong> — 3 страницы<br>Изучаем цвета.</li>
+                            <li><strong>Numbers 1–10</strong> — 4 страницы<br>Счёт от 1 до 10 с игровыми заданиями.</li>
+                            <li><strong>Chamomile Valley</strong> — 3 страницы<br>Знакомство с героями, простые действия и описания.</li>
+                            <li><strong>Colouring Pages</strong> — 17 страниц<br>Раскраски с героями для развития моторики и творчества.</li>
+                            <li><strong>My Daily Routine</strong> — 3 страницы<br>Распорядок дня: учим глаголы и первые фразы.</li>
+                            <li><strong>Seasons</strong> — 5 страниц<br>Времена года и их атрибуты (с чем ассоциируется лето, осень, зима, весна).</li>
+                            <li><strong>Whose House Is This?</strong> — 7 страниц<br>Игра «Чей домик?» — развиваем память и внимание.</li>
+                            <li><strong>Поделки из бумаги</strong> — 5 страниц<br>Создаём героев своими руками!</li>
+                        </ul>
+                        <p style="margin-top:12px;"><strong>🎁 Руководство для родителей в подарок</strong></p>
+                        <p><strong>Итого: 87 страниц материалов.</strong></p>
+
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+
+                        <p><strong>✨ Выбирайте свой формат:</strong></p>
+                        <p><strong>📄 Электронная версия (PDF) — 1 590 ₽</strong></p>
+                        <ul>
+                            <li>✅ Все 9 файлов</li>
+                            <li>✅ Мгновенный доступ на почту после оплаты</li>
+                            <li>✅ Печатайте столько раз, сколько нужно</li>
+                        </ul>
+
+                        <p><strong>🚚 Готовый ламинированный набор — 3 990 ₽</strong></p>
+                        <ul>
+                            <li>✅ 65 страниц напечатано на плотной бумаге и заламинировано</li>
+                            <li>✅ Остальные страницы (раскраски и поделки) тоже напечатаны — ламинация для них не требуется</li>
+                            <li>✅ Все детали вырезаны вручную</li>
+                            <li>✅ Можно сразу играть</li>
+                            <li>✅ Липучки в комплекте</li>
+                            <li>✅ Доставка по всей России</li>
+                        </ul>
+
+                        <hr style="margin:16px 0;border:1px dashed #E67E22;">
+
+                        <p><strong>📦 Доставка</strong><br>
+                        Электронная версия: высылается на указанную почту сразу после оплаты.<br>
+                        Готовый набор: доставка по всей России. Почта России или СДЭК (на ваш выбор). Стоимость доставки оплачивается отдельно.</p>
+
+                        <p style="margin-top:16px;font-style:italic;color:#888;">🌟 Играйте, учитесь и растите билингвальными вместе с Lingua Journey!</p>
+                    </div>
+
+                    <div class="order-buttons" style="margin-top:20px;">
+                        <button class="btn-ticket" onclick="closeModal('productKikorikiMegaModal'); openOrderModalWithCode('My First English with Kikoriki: Mega Pack', 'KIKORIKI MEGA')">Оформить заказ</button>
                     </div>
                 </div>
             </div>
@@ -1339,6 +1544,104 @@
     })();
 
     // ============================================================
+    // ПЕРЕКЛЮЧАТЕЛИ ДЛЯ KIKORIKI STARTER
+    // ============================================================
+    (function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initKikorikiStarterToggles);
+        } else {
+            initKikorikiStarterToggles();
+        }
+
+        function initKikorikiStarterToggles() {
+            console.log('🔄 Инициализация переключателей для Kikoriki Starter...');
+
+            var pdfRadio = document.querySelector('input[name="kikorikiStarterVersion"][value="pdf"]');
+            var physicalRadio = document.querySelector('input[name="kikorikiStarterVersion"][value="physical"]');
+            
+            var priceEl = document.getElementById('kikorikiStarterPrice');
+            var descEl = document.getElementById('kikorikiStarterDescription');
+            var labelPdf = document.getElementById('label-starter-pdf');
+            var labelPhysical = document.getElementById('label-starter-physical');
+
+            function updateUI() {
+                var isPhysical = physicalRadio ? physicalRadio.checked : false;
+                
+                if (isPhysical) {
+                    if (priceEl) priceEl.textContent = '2 490 ₽';
+                    if (descEl) descEl.textContent = '47 страниц напечатано, заламинировано и вырезано + руководство для родителей';
+                    if (labelPdf) labelPdf.classList.remove('active');
+                    if (labelPhysical) labelPhysical.classList.add('active');
+                } else {
+                    if (priceEl) priceEl.textContent = '990 ₽';
+                    if (descEl) descEl.textContent = '47 страниц: алфавит, цвета, цифры + руководство для родителей в подарок';
+                    if (labelPdf) labelPdf.classList.add('active');
+                    if (labelPhysical) labelPhysical.classList.remove('active');
+                }
+            }
+
+            function syncStarter() {
+                updateUI();
+            }
+
+            if (pdfRadio) pdfRadio.addEventListener('change', syncStarter);
+            if (physicalRadio) physicalRadio.addEventListener('change', syncStarter);
+
+            setTimeout(syncStarter, 200);
+            console.log('✅ Переключатели для Kikoriki Starter инициализированы');
+        }
+    })();
+
+    // ============================================================
+    // ПЕРЕКЛЮЧАТЕЛИ ДЛЯ KIKORIKI MEGA
+    // ============================================================
+    (function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initKikorikiMegaToggles);
+        } else {
+            initKikorikiMegaToggles();
+        }
+
+        function initKikorikiMegaToggles() {
+            console.log('🔄 Инициализация переключателей для Kikoriki Mega...');
+
+            var pdfRadio = document.querySelector('input[name="kikorikiMegaVersion"][value="pdf"]');
+            var physicalRadio = document.querySelector('input[name="kikorikiMegaVersion"][value="physical"]');
+            
+            var priceEl = document.getElementById('kikorikiMegaPrice');
+            var descEl = document.getElementById('kikorikiMegaDescription');
+            var labelPdf = document.getElementById('label-mega-pdf');
+            var labelPhysical = document.getElementById('label-mega-physical');
+
+            function updateUI() {
+                var isPhysical = physicalRadio ? physicalRadio.checked : false;
+                
+                if (isPhysical) {
+                    if (priceEl) priceEl.textContent = '3 990 ₽';
+                    if (descEl) descEl.textContent = '65 страниц ламинации + раскраски и поделки напечатаны + руководство для родителей';
+                    if (labelPdf) labelPdf.classList.remove('active');
+                    if (labelPhysical) labelPhysical.classList.add('active');
+                } else {
+                    if (priceEl) priceEl.textContent = '1 590 ₽';
+                    if (descEl) descEl.textContent = '87 страниц: 9 файлов + руководство для родителей в подарок';
+                    if (labelPdf) labelPdf.classList.add('active');
+                    if (labelPhysical) labelPhysical.classList.remove('active');
+                }
+            }
+
+            function syncMega() {
+                updateUI();
+            }
+
+            if (pdfRadio) pdfRadio.addEventListener('change', syncMega);
+            if (physicalRadio) physicalRadio.addEventListener('change', syncMega);
+
+            setTimeout(syncMega, 200);
+            console.log('✅ Переключатели для Kikoriki Mega инициализированы');
+        }
+    })();
+
+    // ============================================================
     // ЗАКРЫТИЕ МОДАЛОК ПО КЛИКУ ВНЕ ОКНА
     // ============================================================
     window.onclick = function(event) {
@@ -1346,6 +1649,8 @@
         var orderModal = document.getElementById('orderModal');
         var productModal = document.getElementById('productCardsModal');
         var productFarmModal = document.getElementById('productFarmModal');
+        var productKikorikiStarterModal = document.getElementById('productKikorikiStarterModal');
+        var productKikorikiMegaModal = document.getElementById('productKikorikiMegaModal');
         var productChecklistModal = document.getElementById('productChecklistModal');
         var subscribeModal = document.getElementById('modal-subscribe');
         var basicModal = document.getElementById('modal-basic');
@@ -1357,6 +1662,8 @@
         if (event.target === orderModal) closeOrderModal();
         if (event.target === productModal) closeModal('productCardsModal');
         if (event.target === productFarmModal) closeModal('productFarmModal');
+        if (event.target === productKikorikiStarterModal) closeModal('productKikorikiStarterModal');
+        if (event.target === productKikorikiMegaModal) closeModal('productKikorikiMegaModal');
         if (event.target === productChecklistModal) closeModal('productChecklistModal');
         if (event.target === subscribeModal) closeModal('modal-subscribe');
         if (event.target === basicModal) closeModal('modal-basic');
