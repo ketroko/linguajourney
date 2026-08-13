@@ -31,6 +31,13 @@
             transition: 0.2s; cursor: pointer;
         }
         .sticky-nav a:hover { background: #E67E22; color: white; }
+        /* Цвета кнопок в sticky-nav */
+        .sticky-nav a.lingua-materials { border-color: #CC0000; color: #CC0000; }
+        .sticky-nav a.lingua-materials:hover { background: #CC0000; color: white; }
+        .sticky-nav a.proedworks { border-color: #5B2D8E; color: #5B2D8E; }
+        .sticky-nav a.proedworks:hover { background: #5B2D8E; color: white; }
+        .sticky-nav a.partners { border-color: #1A5F7A; color: #1A5F7A; }
+        .sticky-nav a.partners:hover { background: #1A5F7A; color: white; }
 
         .scroll-hint {
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -120,6 +127,13 @@
             transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer;
         }
         .category-tag:hover { background: #E67E22; color: white; border-color: white; }
+        /* Цвета кнопок в category-tag */
+        .category-tag.lingua-materials { border-color: #CC0000; color: #CC0000; }
+        .category-tag.lingua-materials:hover { background: #CC0000; color: white; border-color: #CC0000; }
+        .category-tag.proedworks { border-color: #5B2D8E; color: #5B2D8E; }
+        .category-tag.proedworks:hover { background: #5B2D8E; color: white; border-color: #5B2D8E; }
+        .category-tag.partners { border-color: #1A5F7A; color: #1A5F7A; }
+        .category-tag.partners:hover { background: #1A5F7A; color: white; border-color: #1A5F7A; }
 
         /* ГЛАВНАЯ СЕТКА КАРТОЧЕК */
         .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
@@ -132,7 +146,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
         }
         .category-card-compact .card-icon { font-size: 3rem; margin-bottom: 12px; transition: 0.3s; line-height: 1; }
-        .category-card-compact .card-icon img { width: 120px; height: 120px; border-radius: 24px; object-fit: cover; }
+        .category-card-compact .card-icon img { width: 140px; height: 140px; border-radius: 24px; object-fit: cover; }
         .category-card-compact .card-title { font-size: 1.3rem; font-weight: 700; color: #2c3e50; transition: 0.3s; }
         .category-card-compact .card-subtitle { font-size: 0.9rem; color: #5D8EBD; font-weight: 500; transition: 0.3s; }
         .category-card-compact .card-hover-content {
@@ -148,6 +162,10 @@
             transition: 0.2s; border: 1px solid #F7FF5B;
         }
         .category-card-compact .card-hover-content .btn-small:hover { background: #F7FF5B; color: #1f2937; border-color: #E67E22; }
+        /* Цвета рамок карточек в "Помогаем учить" */
+        .category-card-compact.lingua-materials-card { border-color: #CC0000; }
+        .category-card-compact.proedworks-card { border-color: #5B2D8E; }
+        .category-card-compact.partners-card { border-color: #1A5F7A; }
 
         @media (hover: hover) {
             .category-card-compact:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
@@ -170,7 +188,7 @@
             .category-card-compact:hover .card-title,
             .category-card-compact:hover .card-subtitle { opacity: 1 !important; visibility: visible !important; }
             .category-card-compact .card-hover-content .btn-small { font-size: 0.7rem; padding: 6px 16px; }
-            .category-card-compact .card-icon img { width: 80px; height: 80px; border-radius: 16px; }
+            .category-card-compact .card-icon img { width: 100px; height: 100px; border-radius: 16px; }
             .inspiration-image img { max-width: 100%; }
         }
         @media (max-width: 480px) { .category-grid { grid-template-columns: 1fr; gap: 16px; } }
@@ -307,8 +325,9 @@
         <a onclick="document.getElementById('category-grid').scrollIntoView({behavior:'smooth'})">Маршруты</a>
         <a onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'})">Отзывы</a>
         <a onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Контакты</a>
-        <a href="proedworks.html">ProEdWorks</a>
-        <a href="partners.html">Партнёрам</a>
+        <a href="lingua-materials.html" class="lingua-materials">🎓 Lingua Materials</a>
+        <a href="proedworks.html" class="proedworks">🛠️ ProEdWorks</a>
+        <a href="partners.html" class="partners">🤝 Партнёрам</a>
     </div>
 </div>
 
@@ -328,8 +347,9 @@
                 <a onclick="document.getElementById('category-grid').scrollIntoView({behavior:'smooth'})" class="category-tag">🧳 Маршруты</a>
                 <a onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'})" class="category-tag">⭐ Отзывы</a>
                 <a onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" class="category-tag">📬 Контакты</a>
-                <a href="proedworks.html" class="category-tag">🛠️ ProEdWorks</a>
-                <a href="partners.html" class="category-tag">🤝 Партнёрам</a>
+                <a href="lingua-materials.html" class="category-tag lingua-materials">🎓 Lingua Materials</a>
+                <a href="proedworks.html" class="category-tag proedworks">🛠️ ProEdWorks</a>
+                <a href="partners.html" class="category-tag partners">🤝 Партнёрам</a>
             </div>
         </div>
         <div class="first-screen-image">
@@ -598,7 +618,7 @@
             <div class="category-grid">
 
                 <!-- Lingua Materials -->
-                <div class="category-card-compact" style="border-color: #CC0000;">
+                <div class="category-card-compact lingua-materials-card">
                     <div class="card-icon"><img src="images/books-stack.jpeg" alt="Lingua Materials"></div>
                     <div class="card-title">Lingua Materials</div>
                     <div class="card-subtitle">Для преподавателей</div>
@@ -609,8 +629,8 @@
                 </div>
 
                 <!-- ProEdWorks -->
-                <div class="category-card-compact" style="border-color: #5B2D8E;">
-                    <div class="card-icon" style="font-size: 3rem; line-height: 1;">🛠️</div>
+                <div class="category-card-compact proedworks-card">
+                    <div class="card-icon"><img src="images/proedworks-placeholder.jpg" alt="ProEdWorks" style="width:140px; height:140px; border-radius:24px; object-fit:cover;"></div>
                     <div class="card-title">ProEdWorks</div>
                     <div class="card-subtitle">Для образовательных организаций, офисов и кабинетов</div>
                     <div class="card-hover-content">
@@ -620,8 +640,8 @@
                 </div>
 
                 <!-- Партнёрам -->
-                <div class="category-card-compact" style="border-color: #1A5F7A;">
-                    <div class="card-icon" style="font-size: 3rem; line-height: 1;">🤝</div>
+                <div class="category-card-compact partners-card">
+                    <div class="card-icon"><img src="images/partners-placeholder.jpg" alt="Партнёрам" style="width:140px; height:140px; border-radius:24px; object-fit:cover;"></div>
                     <div class="card-title">Партнёрам</div>
                     <div class="card-subtitle">Разные форматы сотрудничества</div>
                     <div class="card-hover-content">
@@ -652,6 +672,7 @@
                     </a>
                 </div>
                 <p style="font-size: 0.85rem; margin-top: 24px;">Отвечаем в течение суток.</p>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 4px;">📧 <a href="mailto:linguajourney@yandex.ru" style="color: #E67E22; text-decoration: none;">linguajourney@yandex.ru</a></p>
             </div>
         </div>
     </section>
