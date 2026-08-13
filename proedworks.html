@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProEdWorks — Оснащение и решения для образования</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: #F3EEFA; color: #1f2937; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background: #F3EEFA;
+            padding: 16px 0;
+            border-bottom: 3px solid #5B2D8E;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* ===== СТРЕЛКА НА ГЛАВНУЮ (уголок) ===== */
+        .header-left .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            color: #5B2D8E;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 300;
+            transition: 0.2s;
+            line-height: 1;
+        }
+        .header-left .back-link:hover {
+            color: #E67E22;
+            transform: translateX(-3px);
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+        .header-center .logo-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #5B2D8E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        .header-center .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .header-center .brand .name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #5B2D8E;
+        }
+        .header-center .brand .tagline {
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-right .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #5B2D8E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #5B2D8E;
+            text-decoration: none;
+        }
+        .header-right .social-icon img { width: 20px; height: 20px; object-fit: contain; }
+        .header-right .social-icon:hover { background: #5B2D8E; color: white; }
+
+        /* ===== ОСНОВНОЙ БЛОК ===== */
+        .page-block {
+            background: white;
+            border-radius: 48px;
+            padding: 40px 36px;
+            border: 2px solid #5B2D8E;
+            box-shadow: 0 12px 28px rgba(91, 45, 142, 0.08);
+            margin: 32px 0 60px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .page-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #5B2D8E;
+            margin-bottom: 4px;
+        }
+        .page-title .desc {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .page-title .desc strong { color: #5B2D8E; }
+
+        /* ===== ТАБЫ ===== */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .tab-btn {
+            background: #F3EEFA;
+            border: 2px solid #5B2D8E;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn:hover { background: #5B2D8E; color: white; }
+        .tab-btn.active { background: #5B2D8E; color: white; }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        .tab-content h2 {
+            font-size: 1.6rem;
+            color: #5B2D8E;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .tab-content .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 28px;
+            font-size: 1rem;
+        }
+
+        /* ===== ФИЛЬТРЫ (как на lingua-materials) ===== */
+        .filter-section {
+            background: #F3EEFA;
+            border-radius: 32px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            border: 1px solid #d4c4e8;
+            position: relative;
+        }
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 16px;
+            margin-bottom: 12px;
+        }
+        .filter-row:last-child { margin-bottom: 0; }
+        .filter-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #5B2D8E;
+            min-width: 100px;
+        }
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 8px;
+        }
+        .filter-tag {
+            background: white;
+            border: 1px solid #d4c4e8;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Open Sans', sans-serif;
+            user-select: none;
+        }
+        .filter-tag:hover { background: #5B2D8E; color: white; border-color: #5B2D8E; }
+        .filter-tag.active { background: #5B2D8E; color: white; border-color: #5B2D8E; }
+        .filter-tag.all-tag { background: transparent; border-color: #ccc; color: #999; }
+        .filter-tag.all-tag.active { background: #5B2D8E; color: white; border-color: #5B2D8E; }
+
+        .filter-reset {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #999;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: underline;
+            transition: 0.2s;
+        }
+        .filter-reset:hover { color: #E67E22; }
+
+        /* ===== КАРТОЧКИ ТОВАРОВ ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .product-card {
+            background: #FEF9E6;
+            border-radius: 24px;
+            padding: 20px 16px 20px;
+            border: 1px solid #E67E22;
+            text-align: center;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(91, 45, 142, 0.08); }
+        .product-card .prod-img {
+            width: 100%;
+            height: 160px;
+            background: #F3EEFA;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: #5B2D8E;
+            border: 1px solid #d4c4e8;
+            object-fit: cover;
+        }
+        .product-card .prod-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        .product-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+        .product-card .prod-price {
+            font-weight: 700;
+            color: #5B2D8E;
+            font-size: 1rem;
+            margin: 6px 0 12px;
+        }
+
+        .btn-detail {
+            background: transparent;
+            border: 2px solid #5B2D8E;
+            color: #5B2D8E;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Open Sans', sans-serif;
+            margin-top: auto;
+            align-self: center;
+        }
+        .btn-detail:hover { background: #5B2D8E; color: white; }
+
+        /* ===== НЕТ ТОВАРОВ ===== */
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            background: #F3EEFA;
+            border-radius: 32px;
+            border: 2px dashed #5B2D8E;
+        }
+        .no-products h3 {
+            font-size: 1.3rem;
+            color: #5B2D8E;
+            margin-bottom: 8px;
+        }
+        .no-products p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+        .no-products .yandex-form-placeholder {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid #d4c4e8;
+            margin: 16px auto;
+            max-width: 100%;
+            min-height: 120px;
+        }
+        .no-products .yandex-form-placeholder iframe {
+            width: 100%;
+            min-height: 400px;
+            border: none;
+            border-radius: 20px;
+            background: white;
+        }
+        .no-products .or-line {
+            font-size: 0.9rem;
+            color: #888;
+            margin: 12px 0 8px;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #888;
+            transition: 0.2s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        .modal-close:hover { color: #E67E22; }
+        .modal-content .modal-img {
+            width: 100%;
+            height: 200px;
+            background: #F3EEFA;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #5B2D8E;
+            border: 1px solid #d4c4e8;
+            margin-bottom: 16px;
+            object-fit: cover;
+        }
+        .modal-content .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+        .modal-content .modal-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; margin-bottom: 4px; }
+        .modal-content .modal-price { font-weight: 700; color: #5B2D8E; font-size: 1.2rem; margin-bottom: 12px; }
+        .modal-content .modal-desc { color: #555; font-size: 0.95rem; margin-bottom: 16px; }
+        .modal-content .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .modal-content .modal-tags span {
+            background: #F3EEFA;
+            border: 1px solid #d4c4e8;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #555;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background: #5B2D8E;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Open Sans', sans-serif;
+            width: 100%;
+        }
+        .btn-order:hover { background: #E67E22; transform: translateY(-2px); }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА ===== */
+        .modal-order-options {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .modal-order-options a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #F3EEFA;
+            border: 2px solid #5B2D8E;
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: 0.2s;
+        }
+        .modal-order-options a:hover { background: #5B2D8E; color: white; }
+        .modal-order-options a img { width: 24px; height: 24px; }
+
+        /* ===== ПОДВКЛАДКИ В ПОДАРОЧНЫХ НАБОРАХ ===== */
+        .sub-filter-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .sub-filter-btn {
+            background: #F3EEFA;
+            border: 2px solid #5B2D8E;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .sub-filter-btn.active { background: #5B2D8E; color: white; }
+        .sub-filter-btn:hover { background: #5B2D8E; color: white; }
+
+        .sub-content { display: none; animation: fadeIn 0.3s ease; }
+        .sub-content.active { display: block; }
+        .sub-content .section-title { font-size: 1.1rem; font-weight: 700; color: #5B2D8E; text-align: center; margin-bottom: 4px; }
+        .sub-content .section-desc { text-align: center; color: #666; font-size: 0.95rem; margin-bottom: 20px; }
+
+        .city-line {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin: 16px 0 8px;
+        }
+
+        /* ===== ИНДИВИДУАЛЬНЫЙ ЗАКАЗ ===== */
+        .custom-block {
+            margin-top: 32px;
+            background: #F3EEFA;
+            padding: 28px 24px;
+            border-radius: 32px;
+            text-align: center;
+            border: 2px dashed #5B2D8E;
+        }
+        .custom-block h4 { font-size: 1.2rem; color: #5B2D8E; margin-bottom: 8px; }
+        .custom-block p { color: #555; font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+
+        .btn {
+            display: inline-block;
+            background: #5B2D8E;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: 0.2s;
+            border: 1px solid #F7FF5B;
+            margin-top: 16px;
+        }
+        .btn:hover { background: #F7FF5B; color: #1f2937; border-color: #5B2D8E; transform: translateY(-2px); }
+
+        /* ===== КОНТАКТЫ ВНИЗУ ===== */
+        .contacts-bottom {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: #F3EEFA;
+            border-radius: 24px;
+            text-align: center;
+        }
+        .contacts-bottom .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+        .contacts-bottom .social-row .s-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #5B2D8E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .contacts-bottom .social-row .s-icon img { width: 22px; height: 22px; object-fit: contain; }
+        .contacts-bottom .social-row .s-icon:hover { background: #5B2D8E; }
+        .contacts-bottom a { color: #5B2D8E; text-decoration: none; font-weight: 600; }
+        .contacts-bottom a:hover { text-decoration: underline; }
+
+        footer {
+            background: #F3EEFA;
+            text-align: center;
+            padding: 24px 0;
+            border-top: 3px dotted #5B2D8E;
+            color: #5D8EBD;
+            margin-top: auto;
+        }
+        footer a { color: #5D8EBD; text-decoration: none; }
+        footer a:hover { color: #5B2D8E; }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 768px) {
+            .page-block { padding: 24px 16px; }
+            .header-center .brand .name { font-size: 1rem; }
+            .header-center .logo-circle { width: 36px; height: 36px; font-size: 1rem; }
+            .filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
+            .filter-label { min-width: auto; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .tab-btn { padding: 8px 16px; font-size: 0.85rem; flex: 1; justify-content: center; }
+            .sub-filter-btn { padding: 8px 16px; font-size: 0.85rem; flex: 1; justify-content: center; }
+            .filter-reset { position: static; text-align: right; margin-top: 8px; }
+            .modal-content { padding: 28px 20px; }
+            .no-products .yandex-form-placeholder iframe { min-height: 500px; }
+        }
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
+            .tab-btn { min-width: 100%; }
+            .sub-filter-btn { min-width: 100%; }
+            .header-center .brand .name { font-size: 0.9rem; }
+            .header-center .logo-circle { width: 30px; height: 30px; font-size: 0.9rem; }
+            .header-center .brand .tagline { font-size: 0.6rem; }
+            .no-products .yandex-form-placeholder iframe { min-height: 550px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container">
+        <div class="header-left">
+            <a href="/" class="back-link">‹</a>
+        </div>
+        <div class="header-center">
+            <div class="logo-circle">P</div>
+            <div class="brand">
+                <span class="name">ProEdWorks</span>
+                <span class="tagline">Оснащение и решения для образования</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="social-icon"><img src="images/tg-icon.png" alt="Telegram"></div>
+            <div class="social-icon"><img src="images/vk-icon.png" alt="VK"></div>
+        </div>
+    </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<section>
+    <div class="container">
+        <div class="page-block">
+
+            <!-- ЗАГОЛОВОК С ОПИСАНИЕМ -->
+            <div class="page-title">
+                <h1>ProEdWorks</h1>
+                <p class="desc">
+                    Всё для школ, детских садов и частных центров: 
+                    <strong>образовательная продукция</strong>, 
+                    <strong>подарочные наборы</strong> и 
+                    <strong>мебель с оснащением</strong>.
+                </p>
+            </div>
+
+            <!-- ===== ВКЛАДКИ ===== -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="tab1">🎓 Образовательная продукция</button>
+                <button class="tab-btn" data-tab="tab2">🎁 Подарочные наборы</button>
+                <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- ===== ВКЛАДКА 1: ОБРАЗОВАТЕЛЬНАЯ ПРОДУКЦИЯ ===== -->
+            <!-- ========================================================== -->
+            <div class="tab-content active" id="tab1">
+                <h2>Образовательная продукция</h2>
+                <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
+
+                <!-- ФИЛЬТРЫ -->
+                <div class="filter-section" id="filterSection">
+                    <div class="filter-row">
+                        <span class="filter-label">Возраст</span>
+                        <div class="filter-tags" data-category="age">
+                            <span class="filter-tag all-tag active">Все</span>
+                            <span class="filter-tag">Дошкольникам</span>
+                            <span class="filter-tag">Школьникам</span>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-label">Организация</span>
+                        <div class="filter-tags" data-category="org">
+                            <span class="filter-tag all-tag active">Все</span>
+                            <span class="filter-tag">Детский сад</span>
+                            <span class="filter-tag">Образовательный центр</span>
+                            <span class="filter-tag">Языковая школа</span>
+                            <span class="filter-tag">Офис</span>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-label">Предмет</span>
+                        <div class="filter-tags" data-category="subject">
+                            <span class="filter-tag all-tag active">Все</span>
+                            <span class="filter-tag">Русский язык</span>
+                            <span class="filter-tag">Английский язык</span>
+                            <span class="filter-tag">Китайский язык</span>
+                            <span class="filter-tag">Немецкий язык</span>
+                            <span class="filter-tag">Испанский язык</span>
+                            <span class="filter-tag">Французский язык</span>
+                            <span class="filter-tag">Математика</span>
+                            <span class="filter-tag">Информатика</span>
+                            <span class="filter-tag">Физика</span>
+                            <span class="filter-tag">Химия</span>
+                            <span class="filter-tag">Биология</span>
+                            <span class="filter-tag">География</span>
+                            <span class="filter-tag">Литература</span>
+                            <span class="filter-tag">История</span>
+                            <span class="filter-tag">Музыка</span>
+                            <span class="filter-tag">Психология</span>
+                            <span class="filter-tag">Мотивация</span>
+                            <span class="filter-tag">Юмор</span>
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-label">Тип</span>
+                        <div class="filter-tags" data-category="type">
+                            <span class="filter-tag all-tag active">Все</span>
+                            <span class="filter-tag">Плакаты</span>
+                            <span class="filter-tag">Панно</span>
+                            <span class="filter-tag">Игрушки</span>
+                            <span class="filter-tag">Игры</span>
+                        </div>
+                    </div>
+                    <button class="filter-reset" id="resetFilters">Сбросить фильтры</button>
+                </div>
+
+                <!-- КАРТОЧКИ ТОВАРОВ -->
+                <div class="grid" id="productGrid"></div>
+
+                <!-- ИНДИВИДУАЛЬНЫЙ ЗАКАЗ -->
+                <div class="custom-block">
+                    <h4>✏️ Индивидуальные заказы</h4>
+                    <p>
+                        Нужно что-то особенное? Разработаем и изготовим под ваш запрос — 
+                        от дизайн-проекта до готового изделия.
+                    </p>
+                    <a href="#" class="btn" id="customOrderBtn">Оформить заказ</a>
+                </div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- ===== ВКЛАДКА 2: ПОДАРОЧНЫЕ НАБОРЫ ===== -->
+            <!-- ========================================================== -->
+            <div class="tab-content" id="tab2">
+                <h2>Подарочные наборы</h2>
+                <p class="subtitle">Готовые комплекты для тёплых поздравлений</p>
+
+                <div class="sub-filter-btns">
+                    <button class="sub-filter-btn active" data-sub="sub1">🎒 Для учителей</button>
+                    <button class="sub-filter-btn" data-sub="sub2">🏢 Для организаций</button>
+                </div>
+
+                <div class="sub-content active" id="sub1">
+                    <div class="section-title">Новинки на 1 сентября! 🎉</div>
+                    <div class="section-desc">
+                        Вы родитель, ученик или класс, который хочет отблагодарить любимого преподавателя за вложенный труд и заботу, а также поздравить с праздником. Мы предлагаем готовые подарочные наборы для учителей.
+                    </div>
+                    <div class="grid" id="giftGrid1"></div>
+                    <div class="city-line">
+                        🚚 Собираем и доставляем заказы в Москве, Санкт-Петербурге, Новосибирске и Красноярске. Доставка на назначенный адрес, день и время.
+                    </div>
+                    <div style="text-align: center; margin-top: 12px;">
+                        <a href="#" class="btn">Собрать заказ</a>
+                    </div>
+                </div>
+
+                <div class="sub-content" id="sub2">
+                    <div class="section-title">🎉 Новинки на 1 сентября!</div>
+                    <div class="section-desc">
+                        Вы образовательный центр, учреждение, детский сад, компания, преподаватель или репетитор, который хочет поздравить сотрудников, родителей или обучающихся. Мы предлагаем подарочные наборы для любых поводов.
+                    </div>
+                    <div class="grid" id="giftGrid2"></div>
+                    <div class="city-line">
+                        🚚 Собираем заказы от поштучных наборов до больших партий. Доставка в Москве, Санкт-Петербурге, Новосибирске и Красноярске.
+                    </div>
+                    <div style="text-align: center; margin-top: 12px;">
+                        <a href="#" class="btn">Собрать заказ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- ===== ВКЛАДКА 3: МЕБЕЛЬ И ОСНАЩЕНИЕ ===== -->
+            <!-- ========================================================== -->
+            <div class="tab-content" id="tab3">
+                <h2>Мебель и оснащение</h2>
+                <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
+
+                <div class="grid" id="furnitureGrid"></div>
+
+                <div style="margin-top: 28px; background: #F3EEFA; padding: 24px; border-radius: 24px; text-align: center; border: 2px solid #5B2D8E;">
+                    <p style="font-size: 0.95rem; color: #333; font-weight: 600;">
+                        ⚡ Сравните параметры
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-top: 12px; font-size: 0.9rem;">
+                        <div>
+                            <strong style="color: #5B2D8E;">🇷🇺 Россия</strong><br>
+                            Срок: 3–14 дней<br>
+                            Сертификаты: ГОСТ, СанПиН<br>
+                            Мин. заказ: от 1 шт.
+                        </div>
+                        <div>
+                            <strong style="color: #5B2D8E;">🌏 Китай</strong><br>
+                            Срок: 30–60 дней<br>
+                            Сертификаты: по запросу<br>
+                            Мин. заказ: под заказ
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 24px;">
+                    <a href="#" class="btn">Подобрать оснащение</a>
+                </div>
+            </div>
+
+            <!-- ===== КОНТАКТЫ ВНИЗУ ===== -->
+            <div class="contacts-bottom">
+                <div class="social-row">
+                    <div class="s-icon"><img src="images/tg-icon.png" alt="Telegram"></div>
+                    <div class="s-icon"><img src="images/vk-icon.png" alt="VK"></div>
+                </div>
+                <p>📧 <a href="mailto:proedworks@yandex.ru">proedworks@yandex.ru</a></p>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 4px;">Ответим на вопросы, поможем подобрать решение</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 <a href="/">ProEdWorks</a> — оснащение и решения для образования</p>
+    </div>
+</footer>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== -->
+<div class="modal-overlay" id="productModal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-img" id="modalImg">🧩</div>
+        <div class="modal-title" id="modalTitle">Название товара</div>
+        <div class="modal-price" id="modalPrice">1 000 ₽</div>
+        <div class="modal-desc" id="modalDesc">Описание товара</div>
+        <div class="modal-tags" id="modalTags"></div>
+        <button class="btn-order" id="modalOrderBtn">Заказать</button>
+    </div>
+</div>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА ===== -->
+<div class="modal-overlay" id="orderModal">
+    <div class="modal-content">
+        <button class="modal-close" id="orderModalClose">&times;</button>
+        <h3 style="text-align: center; margin-bottom: 16px; color: #5B2D8E;">Выберите способ заказа</h3>
+        <div class="modal-order-options">
+            <a href="#" id="orderTgLink"><img src="images/tg-icon.png" alt="Telegram"> Telegram</a>
+            <a href="#" id="orderVkLink"><img src="images/vk-icon.png" alt="VK"> ВКонтакте</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://forms.yandex.ru/_static/embed.js"></script>
+<script>
+    // ===== ДАННЫЕ ТОВАРОВ =====
+    const products = [
+        // Образовательная продукция
+        { id: 1, name: 'Плакат «Английский алфавит»', price: '450 ₽', desc: 'Яркий плакат с транскрипцией и примерами слов.', tags: ['Английский язык', 'Плакаты', 'Школьникам', 'Языковая школа'], emoji: '🌍', img: '' },
+        { id: 2, name: 'Плакат «Таблица умножения»', price: '350 ₽', desc: 'С подсказками и примерами.', tags: ['Математика', 'Плакаты', 'Школьникам', 'Детский сад'], emoji: '🧮', img: '' },
+        { id: 3, name: 'Панно «Времена года»', price: '1 200 ₽', desc: 'Красивое панно для оформления кабинета.', tags: ['Декор', 'Панно', 'Дошкольникам', 'Детский сад'], emoji: '🎨', img: '' },
+        { id: 4, name: 'Игра «Мемори. Животные»', price: '650 ₽', desc: 'Развивает память, внимание и речь. 20 пар карточек.', tags: ['Игры', 'Дошкольникам', 'Детский сад', 'Психология'], emoji: '🧩', img: '' },
+        { id: 5, name: 'Набор карточек «Русский язык»', price: '490 ₽', desc: 'Правила в картинках. Компактный набор.', tags: ['Русский язык', 'Игры', 'Школьникам', 'Образовательный центр'], emoji: '📚', img: '' },
+        { id: 6, name: 'Игрушка «Эко-сад»', price: '780 ₽', desc: 'Набор для выращивания микрозелени.', tags: ['Игрушки', 'Дошкольникам', 'Мотивация', 'Детский сад'], emoji: '🌱', img: '' },
+        // Подарочные наборы — Для учителей
+        { id: 7, name: 'Набор «Благодарность»', price: '890 ₽', desc: 'Открытка, сувенир и коробка конфет.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '🌸', img: '' },
+        { id: 8, name: 'Набор «Творчество»', price: '1 200 ₽', desc: 'Блокнот, ручки, стикеры и открытка.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '🎨', img: '' },
+        { id: 9, name: 'Набор «Уют»', price: '650 ₽', desc: 'Кружка, чай и открытка.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '☕', img: '' },
+        // Подарочные наборы — Для организаций
+        { id: 10, name: 'Корпоративный набор', price: 'от 1 500 ₽', desc: 'Брендированные сувениры и сладости.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '🎁', img: '' },
+        { id: 11, name: 'Набор «Достижение»', price: 'от 2 200 ₽', desc: 'Грамоты, значки, подарки.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '🏆', img: '' },
+        { id: 12, name: 'Индивидуальный заказ', price: 'по запросу', desc: 'Соберём под ваш бюджет.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '📦', img: '' },
+        // Мебель и оснащение
+        { id: 13, name: 'Парта ученическая', price: 'от 4 500 ₽', desc: 'Регулируемая по высоте.', tags: ['Мебель', 'Россия', 'Школьникам'], emoji: '🪑', img: '' },
+        { id: 14, name: 'Стул регулируемый', price: 'от 2 200 ₽', desc: 'Эргономичный стул.', tags: ['Мебель', 'Россия', 'Школьникам'], emoji: '🪑', img: '' },
+        { id: 15, name: 'Шкаф для документов', price: 'от 12 000 ₽', desc: 'Металлический шкаф с замком.', tags: ['Мебель', 'Китай', 'Офис'], emoji: '🗄️', img: '' },
+        { id: 16, name: 'Стеллаж библиотечный', price: 'от 8 500 ₽', desc: 'Разборный стеллаж на 5 полок.', tags: ['Мебель', 'Россия', 'Образовательный центр'], emoji: '📚', img: '' },
+        { id: 17, name: 'Доска магнитно-маркерная', price: 'от 5 800 ₽', desc: '120×90 см, с креплениями.', tags: ['Оснащение', 'Китай', 'Образовательный центр'], emoji: '📋', img: '' },
+        { id: 18, name: 'Комплексная поставка', price: 'по запросу', desc: 'Оснащение класса под ключ.', tags: ['Мебель', 'Оснащение', 'Под заказ', 'Образовательный центр'], emoji: '🏗️', img: '' }
+    ];
+
+    // ===== ОТРИСОВКА КАРТОЧЕК =====
+    function renderProducts(containerId, productList) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        if (productList.length === 0) {
+            container.innerHTML = `
+                <div class="no-products">
+                    <h3>🤷 Ничего не найдено</h3>
+                    <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
+                    <div class="yandex-form-placeholder">
+                        <iframe src="https://forms.yandex.ru/cloud/6a7e358b02848f6b91df8944?iframe=1" 
+                                frameborder="0" 
+                                name="ya-form-6a7e358b02848f6b91df8944" 
+                                style="width:100%; min-height:400px; border: none; border-radius: 20px; background: white;">
+                        </iframe>
+                    </div>
+                    <div class="or-line">или</div>
+                    <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
+                    <a href="#" class="btn" style="margin-top: 12px;">Оформить заказ</a>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = productList.map(p => `
+            <div class="product-card" data-id="${p.id}">
+                <div class="prod-img">${p.emoji}</div>
+                <h4>${p.name}</h4>
+                <div class="prod-price">${p.price}</div>
+                <button class="btn-detail" data-id="${p.id}">Подробнее</button>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('.btn-detail').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                openProductModal(id);
+            });
+        });
+    }
+
+    // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
+    function openProductModal(id) {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        document.getElementById('modalImg').textContent = product.emoji;
+        document.getElementById('modalTitle').textContent = product.name;
+        document.getElementById('modalPrice').textContent = product.price;
+        document.getElementById('modalDesc').textContent = product.desc;
+        document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
+        document.getElementById('modalOrderBtn').dataset.productId = id;
+        document.getElementById('productModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ===== ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН =====
+    document.getElementById('modalClose').addEventListener('click', function() {
+        document.getElementById('productModal').classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    document.getElementById('modalOrderBtn').addEventListener('click', function() {
+        document.getElementById('productModal').classList.remove('active');
+        document.getElementById('orderModal').classList.add('active');
+    });
+    document.getElementById('orderModalClose').addEventListener('click', function() {
+        document.getElementById('orderModal').classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // ===== ФИЛЬТРЫ =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Устанавливаем активную вкладку по умолчанию (первая)
+        if (tabBtns.length > 0) {
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            tabBtns[0].classList.add('active');
+            tabContents.forEach(content => content.classList.remove('active'));
+            const firstTab = document.getElementById(tabBtns[0].dataset.tab);
+            if (firstTab) firstTab.classList.add('active');
+        }
+
+        // Вешаем обработчики на все кнопки вкладок
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                tabContents.forEach(content => content.classList.remove('active'));
+                const target = document.getElementById(this.dataset.tab);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // Подвкладки в "Подарочные наборы"
+        const subBtns = document.querySelectorAll('.sub-filter-btn');
+        const subContents = {
+            sub1: document.getElementById('sub1'),
+            sub2: document.getElementById('sub2')
+        };
+
+        subBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                subBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                Object.keys(subContents).forEach(key => {
+                    if (subContents[key]) {
+                        subContents[key].classList.toggle('active', key === this.dataset.sub);
+                    }
+                });
+            });
+        });
+
+        // Фильтры на вкладке "Образовательная продукция"
+        const educationalProducts = products.filter(p => 
+            !p.tags.includes('Подарочные наборы') && !p.tags.includes('Мебель') && !p.tags.includes('Оснащение')
+        );
+        const giftProducts1 = products.filter(p => p.tags.includes('Подарочные наборы') && p.tags.includes('Для учителей'));
+        const giftProducts2 = products.filter(p => p.tags.includes('Подарочные наборы') && p.tags.includes('Для организаций'));
+        const furnitureProducts = products.filter(p => p.tags.includes('Мебель') || p.tags.includes('Оснащение'));
+
+        renderProducts('productGrid', educationalProducts);
+        renderProducts('giftGrid1', giftProducts1);
+        renderProducts('giftGrid2', giftProducts2);
+        renderProducts('furnitureGrid', furnitureProducts);
+
+        // Обработчики фильтров
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const parent = this.closest('.filter-tags');
+                const allTag = parent.querySelector('.all-tag');
+
+                if (this.classList.contains('all-tag')) {
+                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    applyFilters();
+                    return;
+                }
+
+                this.classList.toggle('active');
+                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
+                    .some(t => t.classList.contains('active'));
+
+                if (hasActiveNonAll) {
+                    allTag.classList.remove('active');
+                } else {
+                    allTag.classList.add('active');
+                }
+                applyFilters();
+            });
+        });
+
+        document.getElementById('resetFilters').addEventListener('click', function() {
+            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.all-tag').forEach(t => t.classList.add('active'));
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const activeFilters = { age: [], org: [], subject: [], type: [] };
+            document.querySelectorAll('.filter-tags').forEach(group => {
+                const category = group.dataset.category;
+                const activeTags = [];
+                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
+                    activeTags.push(t.textContent.trim());
+                });
+                if (category === 'age') activeFilters.age = activeTags;
+                else if (category === 'org') activeFilters.org = activeTags;
+                else if (category === 'subject') activeFilters.subject = activeTags;
+                else if (category === 'type') activeFilters.type = activeTags;
+            });
+
+            const filtered = products.filter(p => {
+                if (p.tags.includes('Подарочные наборы') || p.tags.includes('Мебель') || p.tags.includes('Оснащение')) {
+                    return false;
+                }
+                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(t));
+                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters.subject.includes(t));
+                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type.includes(t));
+                return matchesAge && matchesOrg && matchesSubject && matchesType;
+            });
+            renderProducts('productGrid', filtered);
+        }
+    });
+</script>
+</body>
+</html>
