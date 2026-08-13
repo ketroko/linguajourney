@@ -7,39 +7,14 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; background: #F9FCB8; color: #1f2937; line-height: 1.5; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: #F9FCB8;
-            color: #1f2937;
-            line-height: 1.5;
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: #E67E22;
-            z-index: 1001;
-            transition: width 0.1s;
-        }
+        .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #E67E22; z-index: 1001; transition: width 0.1s; }
 
         .sticky-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: fixed; top: 0; left: 0; width: 100%;
             background: rgba(249, 252, 184, 0.92);
             backdrop-filter: blur(8px);
             z-index: 1000;
@@ -48,1034 +23,255 @@
             transform: translateY(-100%);
             transition: transform 0.35s ease;
         }
-        .sticky-nav.show {
-            transform: translateY(0);
-        }
-        .sticky-nav .container {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+        .sticky-nav.show { transform: translateY(0); }
+        .sticky-nav .container { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .sticky-nav a {
-            background: white;
-            border-radius: 40px;
-            padding: 8px 18px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-            text-decoration: none;
-            border: 1px solid #E67E22;
-            transition: 0.2s;
+            background: white; border-radius: 40px; padding: 8px 18px; font-size: 0.8rem;
+            font-weight: 600; color: #2c3e50; text-decoration: none; border: 1px solid #E67E22;
+            transition: 0.2s; cursor: pointer;
         }
-        .sticky-nav a:hover {
-            background: #E67E22;
-            color: white;
-        }
+        .sticky-nav a:hover { background: #E67E22; color: white; }
 
         .scroll-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(230, 126, 34, 0.7);
-            border-radius: 50%;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
-            z-index: 10;
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            animation: bounce 2s infinite; cursor: pointer; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(230, 126, 34, 0.7); border-radius: 50%; backdrop-filter: blur(4px);
+            transition: 0.2s; z-index: 10;
         }
-        .scroll-hint:hover {
-            background: #E67E22;
-            transform: translateX(-50%) scale(1.05);
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-        .scroll-hint svg {
-            width: 24px;
-            height: 24px;
-            stroke: #1f2937;
-            stroke-width: 2;
-            fill: none;
-        }
+        .scroll-hint:hover { background: #E67E22; transform: translateX(-50%) scale(1.05); }
+        @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+        .scroll-hint svg { width: 24px; height: 24px; stroke: #1f2937; stroke-width: 2; fill: none; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        section {
-            padding: 60px 0;
-            position: relative;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 60px 0; position: relative; }
 
         h2 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 32px;
-            font-weight: 700;
-            color: #2c3e50;
-            position: relative;
-            z-index: 2;
+            font-size: 2rem; text-align: center; margin-bottom: 32px;
+            font-weight: 700; color: #2c3e50; position: relative; z-index: 2;
         }
-        h2:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: #E67E22;
-            margin: 12px auto 0;
-            border-radius: 2px;
-        }
+        h2:after { content: ''; display: block; width: 80px; height: 3px; background: #E67E22; margin: 12px auto 0; border-radius: 2px; }
 
-        .left-underline {
-            text-align: left !important;
-        }
-        .left-underline:after {
-            margin: 12px 0 0 0;
-        }
+        .left-underline { text-align: left !important; }
+        .left-underline:after { margin: 12px 0 0 0; }
 
         .btn-ticket {
-            display: inline-block;
-            background: #E67E22;
-            padding: 12px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            border-radius: 16px;
-            transition: 0.2s;
-            border: 1px solid #F7FF5B;
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.03);
+            display: inline-block; background: #E67E22; padding: 12px 28px; font-size: 1rem;
+            font-weight: 600; color: white; text-decoration: none; border-radius: 16px;
+            transition: 0.2s; border: 1px solid #F7FF5B; box-shadow: 2px 2px 0 rgba(0,0,0,0.03);
         }
-        .btn-ticket:hover {
-            background: #F7FF5B;
-            transform: translateY(-2px);
-            border-color: #E67E22;
-        }
+        .btn-ticket:hover { background: #F7FF5B; transform: translateY(-2px); border-color: #E67E22; }
 
         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: #E67E22;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            cursor: pointer;
-            border: none;
+            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px;
+            background: #E67E22; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            transition: 0.3s; opacity: 0; visibility: hidden; z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); cursor: pointer; border: none;
         }
-        .scroll-top:hover {
-            background: #F7FF5B;
-            transform: translateY(-4px);
-        }
-        .scroll-top svg {
-            width: 24px;
-            height: 24px;
-            stroke: #1f2937;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .scroll-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .scroll-top:hover { background: #F7FF5B; transform: translateY(-4px); }
+        .scroll-top svg { width: 24px; height: 24px; stroke: #1f2937; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .scroll-top.show { opacity: 1; visibility: visible; }
 
         .operator-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
-            z-index: 1000;
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            cursor: pointer; z-index: 1000;
         }
-        .operator-btn .operator-avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: 0.2s;
-        }
-        .operator-btn .operator-avatar:hover {
-            transform: scale(1.05);
-        }
+        .operator-btn .operator-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s; }
+        .operator-btn .operator-avatar:hover { transform: scale(1.05); }
         .operator-social {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
+            position: absolute; bottom: 70px; right: 0; display: flex; flex-direction: column;
+            gap: 10px; opacity: 0; visibility: hidden; transition: 0.3s ease;
         }
-        .operator-btn:hover .operator-social {
-            opacity: 1;
-            visibility: visible;
-        }
-        .operator-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: 0.2s;
-        }
-        .operator-social a:hover {
-            transform: scale(1.1);
-        }
-        .operator-social img {
-            width: 28px;
-            height: 28px;
-        }
+        .operator-btn:hover .operator-social { opacity: 1; visibility: visible; }
+        .operator-social a { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: white; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s; }
+        .operator-social a:hover { transform: scale(1.1); }
+        .operator-social img { width: 28px; height: 28px; }
 
-        /* Плашка "Сайт в разработке" */
         .dev-badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 20;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 10px 18px;
-            border-radius: 40px;
-            border: 1px solid #F7FF5B;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            max-width: 280px;
-            line-height: 1.3;
-            text-align: left;
-            pointer-events: none;
+            position: absolute; top: 20px; left: 20px; z-index: 20;
+            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px); color: #fff;
+            font-size: 0.75rem; font-weight: 600; padding: 10px 18px; border-radius: 40px;
+            border: 1px solid #F7FF5B; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            max-width: 280px; line-height: 1.3; text-align: left; pointer-events: none;
         }
-        .dev-badge span {
-            display: block;
-            font-size: 0.6rem;
-            font-weight: 400;
-            opacity: 0.8;
-            margin-top: 2px;
-        }
+        .dev-badge span { display: block; font-size: 0.6rem; font-weight: 400; opacity: 0.8; margin-top: 2px; }
         @media (max-width: 600px) {
-            .dev-badge {
-                font-size: 0.6rem;
-                padding: 6px 12px;
-                max-width: 200px;
-                top: 10px;
-                left: 10px;
-            }
-            .dev-badge span {
-                font-size: 0.5rem;
-            }
+            .dev-badge { font-size: 0.6rem; padding: 6px 12px; max-width: 200px; top: 10px; left: 10px; }
+            .dev-badge span { font-size: 0.5rem; }
         }
 
-        .first-screen {
-            padding: 40px 0 20px;
-            position: relative;
-            background: #F9FCB8;
-            overflow: hidden;
-        }
-        .first-screen-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .first-screen .container {
-            position: relative;
-            z-index: 2;
-        }
-        .first-screen-container {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .first-screen-text {
-            flex: 1;
-            min-width: 280px;
-        }
-        .first-screen-image {
-            flex: 1;
-            min-width: 280px;
-        }
-        .image-wrapper {
-            border-radius: 32px;
-            overflow: hidden;
-            background: #fff2df;
-            border: 2px solid #E67E22;
-            transition: 0.2s;
-        }
-        .image-wrapper:hover {
-            border-color: #F7FF5B;
-            transform: translateY(-4px);
-        }
-        .hero-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-        .logo-placeholder {
-            width: 60px;
-            height: 60px;
-            background: #fff2df;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .logo-text {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #2c3e50;
-            line-height: 1.2;
-        }
-        .logo-text span {
-            font-weight: 400;
-            font-size: 1rem;
-            color: #5D8EBD;
-            display: block;
-        }
+        .first-screen { padding: 40px 0 20px; position: relative; background: #F9FCB8; overflow: hidden; }
+        .first-screen-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/bg-decor.png'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.15; pointer-events: none; z-index: 1; }
+        .first-screen .container { position: relative; z-index: 2; }
+        .first-screen-container { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .first-screen-text { flex: 1; min-width: 280px; }
+        .first-screen-image { flex: 1; min-width: 280px; }
+        .image-wrapper { border-radius: 32px; overflow: hidden; background: #fff2df; border: 2px solid #E67E22; transition: 0.2s; }
+        .image-wrapper:hover { border-color: #F7FF5B; transform: translateY(-4px); }
+        .hero-image { width: 100%; height: auto; display: block; }
+        .logo-area { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 8px; }
+        .logo-placeholder { width: 60px; height: 60px; background: #fff2df; border-radius: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; }
+        .logo-text { font-size: 2rem; font-weight: 800; color: #2c3e50; line-height: 1.2; }
+        .logo-text span { font-weight: 400; font-size: 1rem; color: #5D8EBD; display: block; }
         .category-tag {
-            background: white;
-            border-radius: 60px;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #2c3e50;
-            border: 1px solid #E67E22;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
+            background: white; border-radius: 60px; padding: 10px 20px; font-size: 0.9rem;
+            font-weight: 600; color: #2c3e50; border: 1px solid #E67E22;
+            transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer;
         }
-        .category-tag:hover {
-            background: #E67E22;
-            color: white;
-            border-color: white;
-        }
+        .category-tag:hover { background: #E67E22; color: white; border-color: white; }
 
-        .category-card {
-            background: white;
-            border-radius: 48px;
-            padding: 36px;
-            transition: 0.2s;
-            overflow: auto;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            border: 2px solid #E67E22;
-            position: relative;
-            z-index: 2;
-        }
-        .category-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 32px rgba(0,0,0,0.08);
-        }
-        .category-card .image-float {
-            float: right;
-            width: 360px;
-            margin: 0 0 20px 30px;
-            border-radius: 28px;
-            overflow: hidden;
-            background: #fff2df;
-        }
-        .category-card .image-float img {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: contain;
-            display: block;
-        }
-        .full-width-block {
-            clear: both;
-        }
-        .feature-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-        .feature-list li {
-            margin-bottom: 12px;
-            padding-left: 32px;
-            position: relative;
-        }
-        .feature-list li:before {
-            content: "✈️";
-            color: #E67E22;
-            font-weight: bold;
-            font-size: 1.1rem;
-            position: absolute;
-            left: 0;
-            top: -1px;
-        }
+        /* ГЛАВНАЯ СЕТКА КАРТОЧЕК */
+        .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
 
-        .card-button-spacing {
-            margin-top: 24px;
+        .category-card-compact {
+            background: white; border-radius: 32px; border: 2px solid #E67E22;
+            padding: 30px 24px 24px; text-align: center; transition: all 0.3s ease;
+            position: relative; overflow: hidden; cursor: default; min-height: 180px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
         }
+        .category-card-compact .card-icon { font-size: 3rem; margin-bottom: 12px; transition: 0.3s; line-height: 1; }
+        .category-card-compact .card-icon img { width: 60px; height: 60px; border-radius: 16px; object-fit: cover; }
+        .category-card-compact .card-title { font-size: 1.3rem; font-weight: 700; color: #2c3e50; transition: 0.3s; }
+        .category-card-compact .card-subtitle { font-size: 0.9rem; color: #5D8EBD; font-weight: 500; transition: 0.3s; }
+        .category-card-compact .card-hover-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 30px 24px; background: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease; border-radius: 32px;
+        }
+        .category-card-compact .card-hover-content .card-desc { font-size: 0.9rem; color: #555; margin-bottom: 16px; line-height: 1.4; }
+        .category-card-compact .card-hover-content .btn-small {
+            display: inline-block; background: #E67E22; padding: 8px 20px; font-size: 0.8rem;
+            font-weight: 600; color: white; text-decoration: none; border-radius: 40px;
+            transition: 0.2s; border: 1px solid #F7FF5B;
+        }
+        .category-card-compact .card-hover-content .btn-small:hover { background: #F7FF5B; color: #1f2937; border-color: #E67E22; }
 
-        .material-list {
-            list-style: none;
-            margin: 20px 0;
-        }
-        .material-list li {
-            margin-bottom: 12px;
-            padding-left: 32px;
-            position: relative;
-        }
-        .material-list li:before {
-            content: "🎓";
-            font-size: 1.1rem;
-            position: absolute;
-            left: 0;
-            top: -1px;
-        }
-
-        .about-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            border: 2px solid #E67E22;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 2;
-        }
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            align-items: center;
-        }
-        .about-image {
-            flex: 1.2;
-            text-align: center;
-        }
-        .about-image img {
-            width: 100%;
-            max-width: 340px;
-            border-radius: 32px;
-            border: 2px solid #E67E22;
-        }
-        .about-text {
-            flex: 1.8;
-        }
-        .values {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0 0;
-        }
-        .value-item {
-            background: #FEF9E6;
-            padding: 16px;
-            border-radius: 24px;
-            flex: 1;
-            min-width: 140px;
-            text-align: center;
-            font-weight: 600;
-            border: 1px solid #E67E22;
-        }
-
-        .firstscreen-bg-section {
-            position: relative;
-            overflow: hidden;
-        }
-        .firstscreen-bg-section .firstscreen-bg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .firstscreen-bg-section .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .honest-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            border: 2px solid #E67E22;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 2;
-        }
-        .honest-text {
-            width: 100%;
-        }
-        .honest-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin: 30px 0 20px;
-        }
-        .honest-card {
-            flex: 1;
-            min-width: 200px;
-            aspect-ratio: 1 / 1;
-            border-radius: 32px;
-            position: relative;
-            overflow: hidden;
-            cursor: default;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .honest-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.3s;
-        }
-        .honest-card .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            transition: background 0.3s ease;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        .honest-card .card-overlay span {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
         @media (hover: hover) {
-            .honest-card:hover img {
-                transform: scale(1.05);
-            }
-            .honest-card:hover .card-overlay {
-                background: rgba(0, 0, 0, 0.7);
-            }
-            .honest-card:hover .card-overlay span {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .category-card-compact:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.1); }
+            .category-card-compact:hover .card-icon,
+            .category-card-compact:hover .card-title,
+            .category-card-compact:hover .card-subtitle { opacity: 0; visibility: hidden; }
+            .category-card-compact:hover .card-hover-content { opacity: 1; visibility: visible; }
+        }
+
+        @media (max-width: 768px) {
+            .category-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .category-card-compact { min-height: 140px; padding: 20px 16px; }
+            .category-card-compact .card-hover-content { position: static; opacity: 1; visibility: visible; padding: 0; margin-top: 8px; background: transparent; }
+            .category-card-compact .card-hover-content .card-desc { font-size: 0.8rem; margin-bottom: 8px; }
+            .category-card-compact .card-icon,
+            .category-card-compact .card-title,
+            .category-card-compact .card-subtitle { opacity: 1 !important; visibility: visible !important; }
+            .category-card-compact:hover { transform: none; box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
+            .category-card-compact:hover .card-icon,
+            .category-card-compact:hover .card-title,
+            .category-card-compact:hover .card-subtitle { opacity: 1 !important; visibility: visible !important; }
+            .category-card-compact .card-hover-content .btn-small { font-size: 0.7rem; padding: 6px 16px; }
+        }
+        @media (max-width: 480px) { .category-grid { grid-template-columns: 1fr; gap: 16px; } }
+
+        /* ОБЩИЕ БЛОКИ */
+        .about-block { background: white; border-radius: 48px; padding: 48px; border: 2px solid #E67E22; box-shadow: 0 12px 28px rgba(0,0,0,0.05); position: relative; z-index: 2; }
+        .about-content { display: flex; flex-wrap: wrap; gap: 50px; align-items: center; }
+        .about-image { flex: 1.2; text-align: center; }
+        .about-image img { width: 100%; max-width: 340px; border-radius: 32px; border: 2px solid #E67E22; }
+        .about-text { flex: 1.8; }
+        .values { display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 0 0; }
+        .value-item { background: #FEF9E6; padding: 16px; border-radius: 24px; flex: 1; min-width: 140px; text-align: center; font-weight: 600; border: 1px solid #E67E22; }
+
+        .firstscreen-bg-section { position: relative; overflow: hidden; }
+        .firstscreen-bg-section .firstscreen-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/bg-decor.png'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.15; pointer-events: none; z-index: 1; }
+        .firstscreen-bg-section .container { position: relative; z-index: 2; }
+
+        .honest-block { background: white; border-radius: 48px; padding: 48px; border: 2px solid #E67E22; box-shadow: 0 12px 28px rgba(0,0,0,0.05); position: relative; z-index: 2; }
+        .honest-text { width: 100%; }
+        .honest-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin: 30px 0 20px; }
+        .honest-card { flex: 1; min-width: 200px; aspect-ratio: 1 / 1; border-radius: 32px; position: relative; overflow: hidden; cursor: default; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .honest-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .honest-card .card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; transition: background 0.3s ease; color: white; font-weight: 600; font-size: 1rem; }
+        .honest-card .card-overlay span { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease; }
+        @media (hover: hover) {
+            .honest-card:hover img { transform: scale(1.05); }
+            .honest-card:hover .card-overlay { background: rgba(0,0,0,0.7); }
+            .honest-card:hover .card-overlay span { opacity: 1; transform: translateY(0); }
         }
         @media (hover: none) {
-            .honest-card .card-overlay {
-                background: rgba(0, 0, 0, 0.7);
-            }
-            .honest-card .card-overlay span {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .honest-card .card-overlay { background: rgba(0,0,0,0.7); }
+            .honest-card .card-overlay span { opacity: 1; transform: translateY(0); }
         }
 
-        .diagnostic-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            border: 2px solid #E67E22;
-            position: relative;
-            z-index: 2;
-        }
-        .diagnostic-list {
-            max-width: 800px;
-            margin: 0 auto;
-            list-style: none;
-            padding: 0;
-        }
-        .diagnostic-list li {
-            margin-bottom: 16px;
-            padding-left: 28px;
-            position: relative;
-            font-weight: 500;
-        }
-        .diagnostic-list li:before {
-            content: "✈️";
-            position: absolute;
-            left: -4px;
-            top: 0;
-            color: #E67E22;
-        }
-        .highlight {
-            color: #E67E22;
-            font-weight: 700;
-        }
+        .diagnostic-block { background: white; border-radius: 48px; padding: 48px; box-shadow: 0 12px 28px rgba(0,0,0,0.05); border: 2px solid #E67E22; position: relative; z-index: 2; }
+        .diagnostic-list { max-width: 800px; margin: 0 auto; list-style: none; padding: 0; }
+        .diagnostic-list li { margin-bottom: 16px; padding-left: 28px; position: relative; font-weight: 500; }
+        .diagnostic-list li:before { content: "✈️"; position: absolute; left: -4px; top: 0; color: #E67E22; }
+        .highlight { color: #E67E22; font-weight: 700; }
 
-        .how-section {
-            background: #F9FCB8;
-            position: relative;
-            overflow: hidden;
-        }
-        .how-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.12;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .how-section .container {
-            position: relative;
-            z-index: 2;
-        }
-        .how-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            border: 2px solid #E67E22;
-        }
-        .how-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            margin: 40px 0 30px;
-        }
-        .how-step {
-            flex: 1;
-            min-width: 200px;
-            background: linear-gradient(135deg, #F7FF5B 0%, #F9FCB8 100%);
-            padding: 32px 20px;
-            border-radius: 32px;
-            border-bottom: 5px solid #E67E22;
-            text-align: center;
-        }
-        .how-step strong {
-            font-size: 2.4rem;
-            color: #5D8EBD;
-            display: block;
-            margin-bottom: 16px;
-        }
+        .how-section { background: #F9FCB8; position: relative; overflow: hidden; }
+        .how-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/bg-decor.png'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.12; pointer-events: none; z-index: 1; }
+        .how-section .container { position: relative; z-index: 2; }
+        .how-block { background: white; border-radius: 48px; padding: 48px; box-shadow: 0 12px 28px rgba(0,0,0,0.05); border: 2px solid #E67E22; }
+        .how-steps { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin: 40px 0 30px; }
+        .how-step { flex: 1; min-width: 200px; background: linear-gradient(135deg, #F7FF5B 0%, #F9FCB8 100%); padding: 32px 20px; border-radius: 32px; border-bottom: 5px solid #E67E22; text-align: center; }
+        .how-step strong { font-size: 2.4rem; color: #5D8EBD; display: block; margin-bottom: 16px; }
 
-        .testimonials-section {
-            background: white;
-            overflow: hidden;
-        }
-        .testimonials-slider-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 60px;
-        }
-        .testimonials-wrapper {
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .testimonials-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            gap: 30px;
-        }
-        .testimonial-card {
-            background: #FEF9E6;
-            border-radius: 32px;
-            padding: 28px;
-            flex: 0 0 calc(33.333% - 20px);
-            min-width: 0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            text-align: center;
-            border: 1px solid #E67E22;
-        }
-        .testimonial-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            object-fit: cover;
-            border: 2px solid #E67E22;
-        }
-        .testimonial-name {
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .testimonial-text {
-            font-style: italic;
-            font-size: 0.9rem;
-            margin: 12px 0 8px;
-            line-height: 1.4;
-        }
-        .testimonial-date {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 8px;
-        }
+        .testimonials-section { background: white; overflow: hidden; }
+        .testimonials-slider-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 0 60px; }
+        .testimonials-wrapper { overflow: hidden; margin: 0 auto; }
+        .testimonials-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); gap: 30px; }
+        .testimonial-card { background: #FEF9E6; border-radius: 32px; padding: 28px; flex: 0 0 calc(33.333% - 20px); min-width: 0; box-shadow: 0 8px 20px rgba(0,0,0,0.05); text-align: center; border: 1px solid #E67E22; }
+        .testimonial-avatar { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover; border: 2px solid #E67E22; }
+        .testimonial-name { font-weight: 700; margin-bottom: 8px; }
+        .testimonial-text { font-style: italic; font-size: 0.9rem; margin: 12px 0 8px; line-height: 1.4; }
+        .testimonial-date { font-size: 0.7rem; color: #888; margin-top: 8px; }
         .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #E67E22;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: absolute; top: 50%; transform: translateY(-50%); background: #E67E22; border: none;
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; transition: 0.2s; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .slider-btn:hover {
-            background: #D35400;
-            transform: translateY(-50%) scale(1.05);
-        }
-        .slider-btn.prev {
-            left: 0;
-        }
-        .slider-btn.next {
-            right: 0;
-        }
-        .slider-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
+        .slider-btn:hover { background: #D35400; transform: translateY(-50%) scale(1.05); }
+        .slider-btn.prev { left: 0; }
+        .slider-btn.next { right: 0; }
+        .slider-btn svg { width: 24px; height: 24px; stroke: white; stroke-width: 2; fill: none; }
 
-        .shelves-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            text-align: center;
-            border: 2px solid #E67E22;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-        }
-        .video-container {
-            margin: 30px 0;
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 32px;
-        }
-        .shelves-description {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
+        .shelves-block { background: white; border-radius: 48px; padding: 48px; text-align: center; border: 2px solid #E67E22; box-shadow: 0 12px 28px rgba(0,0,0,0.05); }
+        .shelves-description { font-size: 1.1rem; margin-bottom: 20px; }
 
-        .team-section {
-            background: white;
-        }
-        .team-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-        .team-card {
-            text-align: center;
-            max-width: 280px;
-        }
-        .team-photo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #E67E22;
-            margin-bottom: 16px;
-        }
-        .team-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .team-role {
-            color: #E67E22;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
+        .team-section { background: white; }
+        .team-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-top: 40px; }
+        .team-card { text-align: center; max-width: 280px; }
+        .team-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid #E67E22; margin-bottom: 16px; }
+        .team-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+        .team-role { color: #E67E22; font-weight: 600; margin-bottom: 12px; }
 
-        .inspiration-section {
-            background: #F9FCB8;
-            position: relative;
-            overflow: hidden;
-        }
-        .inspiration-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/bg-decor.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.12;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .inspiration-section .container {
-            position: relative;
-            z-index: 2;
-        }
-        .inspiration-block {
-            background: white;
-            border-radius: 48px;
-            padding: 48px;
-            text-align: center;
-            border: 2px solid #E67E22;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 2;
-        }
-        .inspiration-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .inspiration-quote {
-            font-size: 1.3rem;
-            font-style: italic;
-            color: #2c3e50;
-            margin: 30px 0;
-            line-height: 1.4;
-        }
-        .inspiration-author {
-            font-weight: 600;
-            color: #E67E22;
-            margin-top: 20px;
-        }
-        .inspiration-image {
-            margin-top: 30px;
-        }
-        .inspiration-image img {
-            max-width: 100%;
-            border-radius: 32px;
-            border: 2px solid #E67E22;
-        }
+        .inspiration-section { background: #F9FCB8; position: relative; overflow: hidden; }
+        .inspiration-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/bg-decor.png'); background-size: cover; background-position: center; background-repeat: no-repeat; opacity: 0.12; pointer-events: none; z-index: 1; }
+        .inspiration-section .container { position: relative; z-index: 2; }
+        .inspiration-block { background: white; border-radius: 48px; padding: 48px; text-align: center; border: 2px solid #E67E22; box-shadow: 0 12px 28px rgba(0,0,0,0.05); position: relative; z-index: 2; }
+        .inspiration-content { max-width: 700px; margin: 0 auto; }
+        .inspiration-quote { font-size: 1.3rem; font-style: italic; color: #2c3e50; margin: 30px 0; line-height: 1.4; }
+        .inspiration-author { font-weight: 600; color: #E67E22; margin-top: 20px; }
+        .inspiration-image { margin-top: 30px; }
+        .inspiration-image img { max-width: 100%; border-radius: 32px; border: 2px solid #E67E22; }
 
-        .divider-section {
-            background: white;
-            padding: 20px 0;
-            position: relative;
-            overflow: visible;
-        }
-        .divider-arrow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .divider-arrow .arrow-down {
-            width: 40px;
-            height: 40px;
-            background: #E67E22;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            animation: dividerBounce 2s infinite;
-            transition: 0.2s;
-        }
-        .divider-arrow .arrow-down:hover {
-            background: #D35400;
-            transform: scale(1.05);
-        }
-        .divider-arrow svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        @keyframes dividerBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin: 20px 0 16px; position: relative; }
+        .social-icons a { display: inline-block; transition: transform 0.2s; position: relative; }
+        .social-icons a:hover { transform: translateY(-3px); }
+        .social-icons img { width: 32px; height: 32px; }
+        .insta-with-star { position: relative; }
+        .insta-with-star .star { position: absolute; top: -5px; right: -8px; font-size: 0.7rem; color: #E67E22; font-weight: bold; }
+        .social-warning { text-align: center; font-size: 0.6rem; color: #8fc5e8; margin-top: 12px; margin-bottom: 16px; }
 
-        .peach-section {
-            background: #FEF9E6;
-            position: relative;
-            overflow: hidden;
-        }
-        .peach-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/peach-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .peach-section .container {
-            position: relative;
-            z-index: 2;
-        }
+        footer { background: #F9FCB8; text-align: center; padding: 36px 0; margin-top: 0; border-top: 3px dotted #E67E22; color: #5D8EBD; }
 
-        .lingua-section {
-            background: #FE918C;
-            position: relative;
-            overflow: hidden;
-        }
-        .lingua-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/lingua-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .lingua-section .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0 16px;
-            position: relative;
-        }
-        .social-icons a {
-            display: inline-block;
-            transition: transform 0.2s;
-            position: relative;
-        }
-        .social-icons a:hover {
-            transform: translateY(-3px);
-        }
-        .social-icons img {
-            width: 32px;
-            height: 32px;
-        }
-        .insta-with-star {
-            position: relative;
-        }
-        .insta-with-star .star {
-            position: absolute;
-            top: -5px;
-            right: -8px;
-            font-size: 0.7rem;
-            color: #E67E22;
-            font-weight: bold;
-        }
-        .footer-social-title {
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #5D8EBD;
-            margin-bottom: 12px;
-        }
-        .social-warning {
-            text-align: center;
-            font-size: 0.6rem;
-            color: #8fc5e8;
-            margin-top: 12px;
-            margin-bottom: 16px;
-        }
-
-        footer {
-            background: #F9FCB8;
-            text-align: center;
-            padding: 36px 0;
-            margin-top: 0;
-            border-top: 3px dotted #E67E22;
-            color: #5D8EBD;
-        }
-
-        @media (max-width: 900px) {
-            .testimonial-card {
-                flex: 0 0 calc(50% - 15px);
-            }
-        }
+        @media (max-width: 900px) { .testimonial-card { flex: 0 0 calc(50% - 15px); } }
         @media (max-width: 768px) {
             h2 { font-size: 1.6rem; }
             section { padding: 40px 0; }
             .first-screen-container { flex-direction: column; text-align: center; }
             .logo-area { justify-content: center; }
-            .category-card .image-float {
-                float: none;
-                width: 100%;
-                margin: 0 0 20px 0;
-            }
-            .category-card .image-float img {
-                height: auto;
-                max-height: 280px;
-            }
             .about-content { flex-direction: column; text-align: center; }
             .inspiration-content { flex-direction: column; }
             .sticky-nav a { padding: 6px 10px; font-size: 0.65rem; }
@@ -1088,11 +284,7 @@
             .honest-grid { flex-direction: column; }
             .honest-card { min-width: auto; }
         }
-        @media (max-width: 600px) {
-            .testimonial-card {
-                flex: 0 0 100%;
-            }
-        }
+        @media (max-width: 600px) { .testimonial-card { flex: 0 0 100%; } }
     </style>
 </head>
 <body>
@@ -1101,69 +293,51 @@
 
 <div class="sticky-nav" id="stickyNav">
     <div class="container">
-        <a href="#about">О нас</a>
-        <a href="#baby-journey">Baby Journey</a>
-        <a href="#kids-journey">Kid’s Journey</a>
-        <a href="#school-journey">School Journey</a>
-        <a href="#english-journey">English Journey</a>
-        <a href="#lingua-materials">Lingua Materials</a>
-        <a href="#testimonials">Отзывы</a>
+        <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">О нас</a>
+        <a onclick="document.getElementById('category-grid').scrollIntoView({behavior:'smooth'})">Маршруты</a>
+        <a onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'})">Отзывы</a>
+        <a onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Контакты</a>
+        <a href="master.html">ProEdWorks</a>
+        <a href="partners.html">Партнёрам</a>
     </div>
 </div>
 
-<!-- 1 ЭКРАН -->
+<!-- ПЕРВЫЙ ЭКРАН -->
 <div class="first-screen">
     <div class="first-screen-bg"></div>
-    
-    <!-- ПЛАШКА "САЙТ В РАЗРАБОТКЕ" -->
-    <div class="dev-badge">
-        🛠️ Сайт в разработке
-        <span>Добавляются новые разделы, товары и услуги</span>
-    </div>
-
+    <div class="dev-badge">🛠️ Сайт в разработке<span>Добавляются новые разделы, товары и услуги</span></div>
     <div class="container first-screen-container">
         <div class="first-screen-text">
             <div class="logo-area">
-                <div class="logo-placeholder">
-                    <img src="images/logo.png" alt="Логотип Lingua Journey" class="logo-img">
-                </div>
+                <div class="logo-placeholder"><img src="images/logo.png" alt="Логотип Lingua Journey" class="logo-img"></div>
                 <div class="logo-text">Lingua Journey <span>— академия системного билингвального обучения</span></div>
             </div>
             <p style="font-weight: 600; margin: 24px 0 12px 0; font-size: 1.3rem;">Подберём курс или гайд под ваш запрос:</p>
             <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-                <a href="#about" class="category-tag">📖 О нас</a>
-                <a href="#baby-journey" class="category-tag">🧳 мама + малыш</a>
-                <a href="#kids-journey" class="category-tag">🗺️ дошкольникам</a>
-                <a href="#school-journey" class="category-tag">📚 школьникам</a>
-                <a href="#english-journey" class="category-tag">🌍 взрослым</a>
-                <a href="#lingua-materials" class="category-tag">🎓 преподавателям</a>
-                <a href="#testimonials" class="category-tag">⭐ Отзывы</a>
+                <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" class="category-tag">📖 О нас</a>
+                <a onclick="document.getElementById('category-grid').scrollIntoView({behavior:'smooth'})" class="category-tag">🧳 Маршруты</a>
+                <a onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'})" class="category-tag">⭐ Отзывы</a>
+                <a onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" class="category-tag">📬 Контакты</a>
+                <a href="master.html" class="category-tag">🛠️ ProEdWorks</a>
+                <a href="partners.html" class="category-tag">🤝 Партнёрам</a>
             </div>
         </div>
         <div class="first-screen-image">
-            <div class="image-wrapper">
-                <img src="images/my-photo.jpeg" alt="Кэтэлина Андреевна" class="hero-image">
-            </div>
+            <div class="image-wrapper"><img src="images/my-photo.jpeg" alt="Кэтэлина Андреевна" class="hero-image"></div>
         </div>
     </div>
-    <div class="scroll-hint" id="scrollHint">
-        <svg viewBox="0 0 24 24" stroke="currentColor">
-            <path d="M12 19V5M5 12l7 7 7-7" />
-        </svg>
-    </div>
+    <div class="scroll-hint" id="scrollHint"><svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 19V5M5 12l7 7 7-7"/></svg></div>
 </div>
 
 <main>
 
-    <!-- 2 ЭКРАН - О Lingua Journey -->
+    <!-- О НАС -->
     <section id="about" style="background: white; padding: 60px 0;">
         <div class="container">
             <div class="about-block">
                 <h2>О Lingua Journey</h2>
                 <div class="about-content">
-                    <div class="about-image">
-                        <img src="images/my-photo-2.jpeg" alt="Кэтэлина Андреевна">
-                    </div>
+                    <div class="about-image"><img src="images/my-photo-2.jpeg" alt="Кэтэлина Андреевна"></div>
                     <div class="about-text">
                         <p style="font-size: 1.2rem; margin-bottom: 20px;"><strong>Lingua Journey — система, которая работает.</strong></p>
                         <p>Мы создаём билингвальную среду, где английский становится естественной частью жизни — без стресса, скуки и выгорания. Наша миссия: дать понятный маршрут каждому — маме с малышом, школьнику, взрослому или преподавателю.</p>
@@ -1179,7 +353,7 @@
         </div>
     </section>
 
-    <!-- 3 ЭКРАН - Давайте честно -->
+    <!-- ДАВАЙТЕ ЧЕСТНО -->
     <div class="firstscreen-bg-section" style="padding: 60px 0;">
         <div class="firstscreen-bg-layer"></div>
         <div class="container">
@@ -1207,7 +381,7 @@
         </div>
     </div>
 
-    <!-- 4 ЭКРАН - Вам подойдёт -->
+    <!-- ВАМ ПОДОЙДЁТ -->
     <section style="background: white; padding: 60px 0;">
         <div class="container">
             <div class="diagnostic-block">
@@ -1224,7 +398,7 @@
         </div>
     </section>
 
-    <!-- 5 ЭКРАН - Как мы помогаем -->
+    <!-- КАК МЫ ПОМОГАЕМ -->
     <section class="how-section" style="padding: 60px 0;">
         <div class="how-bg"></div>
         <div class="container">
@@ -1241,22 +415,20 @@
         </div>
     </section>
 
-    <!-- 6 ЭКРАН - Отзывы -->
+    <!-- ОТЗЫВЫ -->
     <section id="testimonials" class="testimonials-section" style="padding: 60px 0;">
         <div class="container">
             <h2>Почему <span class="highlight">Lingua Journey</span> выбирают уже 8 лет</h2>
             <div class="testimonials-slider-container">
                 <button class="slider-btn prev" id="prevBtn">
-                    <svg viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M15 18l-6-6 6-6" />
-                    </svg>
+                    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
                 <div class="testimonials-wrapper">
                     <div class="testimonials-track" id="testimonialsTrack">
                         <div class="testimonial-card">
                             <img src="images/testimonial-1.jpg" alt="Елена" class="testimonial-avatar">
                             <div class="testimonial-name">Елена, мама в декрете</div>
-                            <div class="testimonial-text">«Очень полный и подробный курс, особенно для начинающих. Всё описано доступным языком. В год и 2 месяца уже были первые слова и на русском, и на английском! А главное, я сама много что вспомнила, легко на деле выучила и привила полезную привычку. Идём по курсу дальше.»</div>
+                            <div class="testimonial-text">«Очень полный и подробный курс, особенно для начинающих. Всё описано доступным языком. В год и 2 месяца уже были первые слова и на русском, и на английском!»</div>
                             <div class="testimonial-date">14 апреля 2026</div>
                         </div>
                         <div class="testimonial-card">
@@ -1274,39 +446,31 @@
                         <div class="testimonial-card">
                             <img src="images/testimonial-4.jpg" alt="Илья" class="testimonial-avatar">
                             <div class="testimonial-name">Илья, ученик</div>
-                            <div class="testimonial-text">«Очень удобно, что можно проходить темы и выполнять задания в удобное для меня время. Нет точного графика по типу "2 урока в неделю в 18:00". Удобно совмещать с работой. Вижу успехи. Был в первом путешествии — меня поняли, когда говорил.»</div>
+                            <div class="testimonial-text">«Очень удобно, что можно проходить темы и выполнять задания в удобное для меня время. Был в первом путешествии — меня поняли, когда говорил.»</div>
                             <div class="testimonial-date">2 ноября 2025</div>
                         </div>
                     </div>
                 </div>
                 <button class="slider-btn next" id="nextBtn">
-                    <svg viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M9 18l6-6-6-6" />
-                    </svg>
+                    <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- 7 ЭКРАН - Всё разложено по полочкам (ВИДЕО ЗАКОММЕНТИРОВАНО) -->
+    <!-- ВСЁ РАЗЛОЖЕНО ПО ПОЛОЧКАМ -->
     <div class="firstscreen-bg-section" style="padding: 60px 0;">
         <div class="firstscreen-bg-layer"></div>
         <div class="container">
             <div class="shelves-block">
                 <h2>Всё разложено по полочкам</h2>
                 <p class="shelves-description">О том, как проходит обучение на курсах — в нашем видео</p>
-                <!-- ВИДЕО ВРЕМЕННО УБРАНО (сохранено для возврата) -->
-                <!--
-                <div class="video-container">
-                    <iframe src="https://rutube.ru/embed/ЗАМЕНИ_НА_ССЫЛКУ_ТВОЕГО_ВИДЕО/" frameborder="0" allowfullscreen></iframe>
-                </div>
-                -->
                 <p style="font-style: italic; color: #888; margin: 20px 0;">🎬 Видео скоро появится — следите за обновлениями!</p>
             </div>
         </div>
     </div>
 
-    <!-- 8 ЭКРАН - Наша команда -->
+    <!-- НАША КОМАНДА -->
     <section class="team-section" style="padding: 60px 0;">
         <div class="container">
             <h2>Наша команда</h2>
@@ -1326,11 +490,16 @@
                     <div class="team-name">Милана Сергеевна</div>
                     <div class="team-role">Менеджер-администратор</div>
                 </div>
+                <div class="team-card">
+                    <img src="images/team-aleksandr.jpg" alt="Александр Андреевич" class="team-photo">
+                    <div class="team-name">Александр Андреевич</div>
+                    <div class="team-role">Руководитель производственного направления</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 9 ЭКРАН - Карта языкового пути -->
+    <!-- КАРТА ЯЗЫКОВОГО ПУТИ -->
     <div class="inspiration-section" style="padding: 60px 0;">
         <div class="inspiration-bg"></div>
         <div class="container">
@@ -1349,177 +518,111 @@
         </div>
     </div>
 
-    <!-- Белая разделительная полоса со стрелкой -->
-    <div class="divider-section" id="dividerSection">
-        <div class="container divider-arrow">
-            <div class="arrow-down" id="dividerArrowBtn">
-                <svg viewBox="0 0 24 24" stroke="currentColor">
-                    <path d="M12 5v14M5 12l7 7 7-7" />
-                </svg>
-            </div>
-        </div>
-    </div>
-
-    <!-- 10 ЭКРАН - Baby Journey -->
-    <div class="peach-section" id="baby-journey" style="padding: 60px 0 80px 0;">
-        <div class="peach-bg"></div>
+    <!-- ВЫБЕРИТЕ СВОЙ МАРШРУТ -->
+    <section id="category-grid" style="background: white; padding: 60px 0;">
         <div class="container">
-            <div class="category-card">
-                <div class="image-float">
-                    <img src="images/mom-baby.jpeg" alt="Фото мамы с малышом">
-                </div>
-                <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; color: #5D8EBD;">🧳 Baby Journey</h3>
-                <p style="font-style: italic; margin-bottom: 16px;">Для мам и их малышей от 0 до 3 лет</p>
-                <p>Вы учите английский вместе с ребёнком — и отправляетесь в большое языковое путешествие. Собирайте чемодан первых фраз, игр и ритуалов, создавая билингвальную среду дома с первых лет жизни.</p>
-                <ul class="feature-list">
-                    <li>Бесплатный чек-лист для занятых родителей</li>
-                    <li>Готовые фразы и игры на каждый день</li>
-                    <li>Аудио и видео с произношением</li>
-                    <li>Организованные гайды, карточки, понятные сценарии для быта</li>
-                    <li>Сообщество единомышленников</li>
-                    <li>Поддержка и обратная связь</li>
-                </ul>
-                <div class="full-width-block card-button-spacing">
-                    <p style="font-style: italic; margin: 16px 0;">📌 Подробный список — внутри этого раздела.</p>
-                    <p><strong>Мы даём готовые фразы, подсказки и поддержку — шаг за шагом.</strong></p>
-                    <div class="button-row">
-                        <a href="baby-journey.html" class="btn-ticket">Начать путешествие</a>
+            <h2>Выберите свой маршрут</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 20px;">Наведите на карточку, чтобы узнать подробнее</p>
+
+            <div class="category-grid">
+
+                <!-- Baby Journey -->
+                <div class="category-card-compact">
+                    <div class="card-icon"><img src="images/mom-baby.jpeg" alt="Baby Journey"></div>
+                    <div class="card-title">Baby Journey</div>
+                    <div class="card-subtitle">0–3 года</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Для мам и малышей. Первые фразы, игры и ритуалы на английском с рождения.</div>
+                        <a href="baby-journey.html" class="btn-small">Начать путешествие →</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- 11 ЭКРАН - Kid's Journey -->
-    <section id="kids-journey" style="background: white; padding: 60px 0;">
-        <div class="container">
-            <div class="category-card">
-                <div class="image-float">
-                    <img src="images/kids-playing.jpeg" alt="Фото играющих детей">
-                </div>
-                <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; color: #5D8EBD;">🗺️ Kid’s Journey</h3>
-                <p style="font-style: italic; margin-bottom: 16px;">Для детей от 3 до 6 лет и их родителей</p>
-                <p>Путешествие в английский через игру, истории и живое общение. Ребёнок не заметит, как начнёт понимать и говорить. Каждый день — новые открытия без давления и скуки!</p>
-                <p style="font-style: italic; margin: 8px 0 16px;">✨ Подходит и для тех, кто только начинает путь, и для тех, кто переходит с наших тарифов Baby Journey.</p>
-                <ul class="feature-list">
-                    <li>Бесплатный стартовый набор: первые диалоги и игры</li>
-                    <li>Короткие сюжетные занятия (5–10 минут) без подготовки</li>
-                    <li>Аудиосказки и понятные мультики</li>
-                    <li>Рабочие листы, карточки, сценарии для повседневных ситуаций</li>
-                    <li>Сообщество родителей-единомышленников</li>
-                    <li>Поддержка и обратная связь</li>
-                </ul>
-                <div class="full-width-block card-button-spacing">
-                    <p style="font-style: italic; margin: 16px 0;">📌 Подробный список — внутри этого раздела.</p>
-                    <p>Вы можете заниматься вместе с ребёнком по готовым материалам. А если чувствуете, что пора пробовать новое — рядом уже короткие онлайн-занятия для тех, кто готов к диалогу с преподавателем.</p>
-                    <p><strong>Мы даём готовые фразы, подсказки и поддержку — шаг за шагом.</strong></p>
-                    <div class="button-row">
-                        <a href="kids-journey.html" class="btn-ticket">Начать путешествие</a>
+                <!-- Kid's Journey -->
+                <div class="category-card-compact">
+                    <div class="card-icon"><img src="images/kids-playing.jpeg" alt="Kid's Journey"></div>
+                    <div class="card-title">Kid's Journey</div>
+                    <div class="card-subtitle">3–6 лет</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Английский через игру, истории и живое общение. Без скуки и давления.</div>
+                        <a href="kids-journey.html" class="btn-small">Начать путешествие →</a>
                     </div>
                 </div>
+
+                <!-- School Journey -->
+                <div class="category-card-compact">
+                    <div class="card-icon"><img src="images/teen-studying.jpeg" alt="School Journey"></div>
+                    <div class="card-title">School Journey</div>
+                    <div class="card-subtitle">7–17 лет</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Помогаем разобраться со школьной программой, закрыть пробелы и полюбить английский.</div>
+                        <a href="school-journey.html" class="btn-small">Начать путешествие →</a>
+                    </div>
+                </div>
+
+                <!-- English Journey -->
+                <div class="category-card-compact">
+                    <div class="card-icon"><img src="images/adult-laptop.jpeg" alt="English Journey"></div>
+                    <div class="card-title">English Journey</div>
+                    <div class="card-subtitle">Для взрослых</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Английский для жизни, работы и путешествий. Понятно, без воды и с поддержкой.</div>
+                        <a href="english-journey.html" class="btn-small">Начать путешествие →</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- 12 ЭКРАН - School Journey -->
-    <div class="peach-section" id="school-journey" style="padding: 60px 0 80px 0;">
-        <div class="peach-bg"></div>
+    <!-- ПОМОГАЕМ УЧИТЬ -->
+    <section style="background: #F9FCB8; padding: 60px 0;" id="help-teach">
         <div class="container">
-            <div class="category-card">
-                <div class="image-float">
-                    <img src="images/teen-studying.jpeg" alt="Фото подростка">
-                </div>
-                <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; color: #5D8EBD;">📚 School Journey</h3>
-                <p style="font-style: italic; margin-bottom: 16px;">Для детей 7–17 лет и их родителей</p>
-                <p>Ваш маршрут в школьном английском: от непонимания к уверенности. Разбираем грамматику просто и понятно, закрываем пробелы, готовимся к контрольным и экзаменам. Помогаем идти в ногу со школой.</p>
-                <p style="font-style: italic; margin: 8px 0 16px;">✨ Подходит и для тех, кто только начинает системно заниматься, и для тех, кто переходит с наших тарифов Kid’s Journey.</p>
-                <ul class="feature-list">
-                    <li>Объяснение грамматики простым языком</li>
-                    <li>Видеоуроки и рабочие листы по каждой теме</li>
-                    <li>Тренажёр чтения и аудирования</li>
-                    <li>Разбор типичных школьных ошибок</li>
-                    <li>Диагностика пробелов и персональный маршрут по классам</li>
-                    <li>Занятия с преподавателями (индивидуально или в мини-группах)</li>
-                    <li>Поддержка и ответы на вопросы</li>
-                </ul>
-                <div class="full-width-block card-button-spacing">
-                    <p style="font-style: italic; margin: 16px 0;">📌 Подробный список — внутри этого раздела.</p>
-                    <p><strong>Понятный маршрут, регулярные занятия и поддержка — и прогресс становится неизбежным.</strong></p>
-                    <div class="button-row">
-                        <a href="school-journey.html" class="btn-ticket">Начать путешествие</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <h2 style="color: #2c3e50;">🤝 Помогаем учить</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: #555; font-size: 1.1rem;">
+                Инструменты и решения для тех, кто создаёт образование
+            </p>
 
-    <!-- 13 ЭКРАН - English Journey -->
-    <section id="english-journey" style="background: white; padding: 60px 0;">
-        <div class="container">
-            <div class="category-card">
-                <div class="image-float">
-                    <img src="images/adult-laptop.jpeg" alt="Фото взрослого">
-                </div>
-                <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; color: #5D8EBD;">🌍 English Journey</h3>
-                <p style="font-style: italic; margin-bottom: 16px;">Для взрослых, которые хотят наконец заговорить на английском</p>
-                <p>Английский для настоящей жизни. Чтобы в путешествиях вы чувствовали себя уверенно, на работе — свободно, а в разговоре — естественно. С понятными объяснениями и регулярной практикой.</p>
-                <ul class="feature-list">
-                    <li>Тестирование уровня и персональный маршрут</li>
-                    <li>Простые объяснения грамматики — без заумных терминов</li>
-                    <li>Разговорные темы и лексика для работы и путешествий</li>
-                    <li>Аудио и видео с носителями (с субтитрами и разбором)</li>
-                    <li>Тренажёр произношения и понимания на слух</li>
-                    <li>Индивидуальные занятия с преподавателем</li>
-                    <li>Занятия в мини-группах</li>
-                    <li>Записи уроков — можно смотреть в любое время</li>
-                    <li>Ежедневные короткие задания — чтобы язык вошёл в привычку</li>
-                    <li>Поддержка и обратная связь</li>
-                </ul>
-                <div class="full-width-block">
-                    <p style="font-style: italic; margin: 16px 0;">📌 Подробный список — внутри этого раздела.</p>
-                    <div style="margin: 16px 0; font-style: italic;">
-                        «Границы моего языка означают границы моего мира»
-                        <br>— Людвиг Витгенштейн
-                    </div>
-                    <div class="button-row">
-                        <a href="english-journey.html" class="btn-ticket">Начать путешествие</a>
+            <div class="category-grid">
+
+                <!-- Lingua Materials -->
+                <div class="category-card-compact" style="border-color: #CC0000;">
+                    <div class="card-icon"><img src="images/books-stack.jpeg" alt="Lingua Materials"></div>
+                    <div class="card-title">Lingua Materials</div>
+                    <div class="card-subtitle">Для преподавателей</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Готовые материалы, игры, рабочие листы — чтобы сэкономить время на подготовку к урокам.</div>
+                        <a href="lingua-materials.html" class="btn-small">Подробнее →</a>
                     </div>
                 </div>
+
+                <!-- ProEdWorks -->
+                <div class="category-card-compact" style="border-color: #5B2D8E;">
+                    <div class="card-icon" style="font-size: 3rem; line-height: 1;">🛠️</div>
+                    <div class="card-title">ProEdWorks</div>
+                    <div class="card-subtitle">Для образовательных организаций, офисов и кабинетов</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Разработка и производство декора, подбор и поставка мебели и оснащения под ключ.</div>
+                        <a href="master.html" class="btn-small">Подробнее →</a>
+                    </div>
+                </div>
+
+                <!-- Партнёрам -->
+                <div class="category-card-compact" style="border-color: #1A5F7A;">
+                    <div class="card-icon" style="font-size: 3rem; line-height: 1;">🤝</div>
+                    <div class="card-title">Партнёрам</div>
+                    <div class="card-subtitle">Разные форматы сотрудничества</div>
+                    <div class="card-hover-content">
+                        <div class="card-desc">Производство на заказ, гибкие условия, открыты к рассмотрению любых форматов партнёрства.</div>
+                        <a href="partners.html" class="btn-small">Подробнее →</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- 14 ЭКРАН - Lingua Materials -->
-    <section class="lingua-section" id="lingua-materials" style="padding: 60px 0;">
-        <div class="lingua-bg"></div>
-        <div class="container">
-            <div class="category-card" style="border: 2px solid #E67E22;">
-                <div class="image-float">
-                    <img src="images/books-stack.jpeg" alt="Стопка книг">
-                </div>
-                <h3 style="font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; color: #CC0000;">🎓 Lingua Materials</h3>
-                <p style="font-style: italic; margin-bottom: 16px;">Для преподавателей английского и репетиторов</p>
-                <p>Бесплатные учебники, литература и полезные материалы — в моём Telegram-канале и группе ВКонтакте. Для тех, кто хочет сэкономить время на подготовку, — готовые разработки для уроков.</p>
-                <ul class="material-list">
-                    <li>Бесплатный доступ к Telegram-каналу и группе ВКонтакте с учебной литературой и материалами (регулярное обновление)</li>
-                    <li>Готовые интерактивные игры</li>
-                    <li>Рабочие листы на широкий список тем</li>
-                    <li>Методические материалы</li>
-                    <li>Стратегии продвижения и привлечения учеников в репетиторстве</li>
-                </ul>
-                <div class="full-width-block card-button-spacing">
-                    <p style="font-style: italic; margin: 16px 0; color: #CC0000;">📌 Полный перечень материалов — на странице раздела.</p>
-                    <p><strong style="color: #CC0000;">Практичные решения для ваших занятий — скачивайте и применяйте.</strong></p>
-                    <div class="button-row">
-                        <a href="lingua-materials.html" class="btn-ticket">Перейти в каталог материалов →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 15 ЭКРАН - Бесплатная консультация -->
-    <section style="background: white; padding: 60px 0;">
+    <!-- БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ (КОНТАКТЫ) -->
+    <section id="contacts" style="background: white; padding: 60px 0;">
         <div class="container">
             <div class="diagnostic-block" style="max-width: 800px; margin: 0 auto; text-align: center;">
                 <h2 style="margin-bottom: 16px;">Не знаете, с чего начать?</h2>
@@ -1539,6 +642,7 @@
             </div>
         </div>
     </section>
+
 </main>
 
 <footer>
@@ -1603,13 +707,6 @@
     if (scrollHint) {
         scrollHint.addEventListener('click', function() {
             document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    var dividerArrowBtn = document.getElementById('dividerArrowBtn');
-    if (dividerArrowBtn) {
-        dividerArrowBtn.addEventListener('click', function() {
-            document.getElementById('baby-journey').scrollIntoView({ behavior: 'smooth' });
         });
     }
 
