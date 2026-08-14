@@ -183,7 +183,7 @@
             font-size: 1rem;
         }
 
-        /* ===== ФИЛЬТРЫ (столбиками, с прокруткой) ===== */
+        /* ===== ФИЛЬТРЫ ===== */
         .filter-section {
             background: #F8F4FC;
             border-radius: 32px;
@@ -208,31 +208,15 @@
             letter-spacing: 0.3px;
             flex-shrink: 0;
         }
-        /* Контейнер с тегами — вертикально и с прокруткой */
         .filter-tags {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            max-height: 180px;
-            overflow-y: auto;
-            padding-right: 6px;
-        }
-        /* Стилизация скролла */
-        .filter-tags::-webkit-scrollbar {
-            width: 5px;
-        }
-        .filter-tags::-webkit-scrollbar-track {
-            background: #E8E0F2;
-            border-radius: 10px;
-        }
-        .filter-tags::-webkit-scrollbar-thumb {
-            background: #5B2D8E;
-            border-radius: 10px;
         }
         .filter-tag {
             background: white;
             border: 1px solid #D4C4E8;
-            padding: 5px 14px;
+            padding: 4px 14px;
             border-radius: 30px;
             font-size: 0.78rem;
             font-weight: 500;
@@ -241,8 +225,10 @@
             transition: 0.2s;
             font-family: 'Open Sans', sans-serif;
             user-select: none;
+            display: inline-block;
+            width: auto;
+            align-self: flex-start;
             text-align: left;
-            width: 100%;
         }
         .filter-tag:hover {
             background: #E8E0F2;
@@ -263,25 +249,21 @@
             color: white;
             border-color: #5B2D8E;
         }
-
-        .filter-other-row {
-            margin-top: 16px;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            flex-wrap: wrap;
+        .filter-group.scrollable .filter-tags {
+            max-height: 160px;
+            overflow-y: auto;
+            padding-right: 6px;
         }
-        .filter-other-row .filter-label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #5B2D8E;
-            min-width: 80px;
-            letter-spacing: 0.3px;
-            padding-top: 5px;
+        .filter-group.scrollable .filter-tags::-webkit-scrollbar {
+            width: 5px;
         }
-        .filter-other-row .filter-tags {
-            max-height: 100px;
-            flex: 1;
+        .filter-group.scrollable .filter-tags::-webkit-scrollbar-track {
+            background: #E8E0F2;
+            border-radius: 10px;
+        }
+        .filter-group.scrollable .filter-tags::-webkit-scrollbar-thumb {
+            background: #5B2D8E;
+            border-radius: 10px;
         }
 
         .filter-bottom {
@@ -630,8 +612,7 @@
             .modal-content { padding: 28px 20px; }
             .no-products .yandex-form-placeholder iframe { min-height: 500px; }
             .header-left .back-link { width: 38px; height: 38px; font-size: 1.3rem; }
-            .filter-other-row { flex-direction: column; align-items: stretch; gap: 8px; }
-            .filter-tags { max-height: 120px; }
+            .filter-tag { padding: 3px 12px; font-size: 0.7rem; }
         }
         @media (max-width: 480px) {
             .filter-grid { grid-template-columns: 1fr; }
@@ -690,18 +671,14 @@
                 <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 1: ОБРАЗОВАТЕЛЬНАЯ ПРОДУКЦИЯ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content active" id="tab1">
                 <h2>Образовательная продукция</h2>
                 <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
 
-                <!-- ФИЛЬТРЫ (столбиками, с прокруткой) -->
+                <!-- ФИЛЬТРЫ -->
                 <div class="filter-section">
                     <div class="filter-grid">
-
-                        <!-- 📌 Формат -->
                         <div class="filter-group">
                             <div class="filter-label">📌 Формат</div>
                             <div class="filter-tags" data-category="type">
@@ -712,8 +689,6 @@
                                 <span class="filter-tag">Игры</span>
                             </div>
                         </div>
-
-                        <!-- 📌 Возраст -->
                         <div class="filter-group">
                             <div class="filter-label">📌 Возраст</div>
                             <div class="filter-tags" data-category="age">
@@ -722,8 +697,6 @@
                                 <span class="filter-tag">Школьникам</span>
                             </div>
                         </div>
-
-                        <!-- 📌 Организация -->
                         <div class="filter-group">
                             <div class="filter-label">📌 Организация</div>
                             <div class="filter-tags" data-category="org">
@@ -734,9 +707,7 @@
                                 <span class="filter-tag">Офис</span>
                             </div>
                         </div>
-
-                        <!-- 📌 Предмет (с прокруткой) -->
-                        <div class="filter-group">
+                        <div class="filter-group scrollable">
                             <div class="filter-label">📌 Предмет</div>
                             <div class="filter-tags" data-category="subject">
                                 <span class="filter-tag all-tag active">Все</span>
@@ -760,19 +731,19 @@
                                 <span class="filter-tag">Юмор</span>
                             </div>
                         </div>
-
                     </div>
-
-                    <!-- Другое — отдельно, на всю ширину -->
-                    <div class="filter-other-row">
-                        <span class="filter-label">📌 Другое</span>
-                        <div class="filter-tags" data-category="other">
-                            <span class="filter-tag all-tag active">Все</span>
-                            <span class="filter-tag">Ремонт</span>
-                            <span class="filter-tag">Рабочее место</span>
+                    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #d4c4e8;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 20px 40px;">
+                            <div class="filter-group" style="flex: 1; min-width: 120px;">
+                                <div class="filter-label">📌 Другое</div>
+                                <div class="filter-tags" data-category="other">
+                                    <span class="filter-tag all-tag active">Все</span>
+                                    <span class="filter-tag">Ремонт</span>
+                                    <span class="filter-tag">Рабочее место</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                     <div class="filter-bottom">
                         <button class="filter-reset-btn" id="resetFilters">Сбросить фильтры</button>
                     </div>
@@ -780,6 +751,55 @@
 
                 <!-- КАРТОЧКИ ТОВАРОВ -->
                 <div class="grid" id="productGrid"></div>
+
+                <!-- ===== НАШЕ ПРОИЗВОДСТВО ===== -->
+                <div style="margin-top: 48px; padding-top: 32px; border-top: 2px solid #E8E0F2;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #5B2D8E; text-align: center; margin-bottom: 8px;">🏭 Наше производство</h3>
+                    <p style="text-align: center; color: #666; max-width: 700px; margin: 0 auto 28px; font-size: 0.95rem; line-height: 1.5;">
+                        Изделия производятся на собственном оборудовании
+                    </p>
+
+                    <!-- Карусель с вертикальными фото -->
+                    <div style="position: relative; overflow: hidden; border-radius: 24px; border: 1px solid #D4C4E8; background: #F3EEFA; max-width: 700px; margin: 0 auto;" id="productionCarousel">
+                        <div style="display: flex; transition: transform 0.5s ease;" id="carouselTrack">
+                            <div style="min-width: 100%; padding: 20px; text-align: center;">
+                                <div style="background: #E8E0F2; height: 350px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #888; border: 2px dashed #5B2D8E; flex-direction: column; gap: 8px;">
+                                    <span style="font-size: 2rem;">🖨️</span>
+                                    <span>Фото производства (лазерный станок)</span>
+                                </div>
+                            </div>
+                            <div style="min-width: 100%; padding: 20px; text-align: center;">
+                                <div style="background: #E8E0F2; height: 350px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #888; border: 2px dashed #5B2D8E; flex-direction: column; gap: 8px;">
+                                    <span style="font-size: 2rem;">🔧</span>
+                                    <span>Фото производства (ЧПУ-станок)</span>
+                                </div>
+                            </div>
+                            <div style="min-width: 100%; padding: 20px; text-align: center;">
+                                <div style="background: #E8E0F2; height: 350px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #888; border: 2px dashed #5B2D8E; flex-direction: column; gap: 8px;">
+                                    <span style="font-size: 2rem;">📐</span>
+                                    <span>Фото производства (лазерная гравировка)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Кнопки навигации -->
+                        <button onclick="moveCarousel(-1)" style="position: absolute; top: 50%; left: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">‹</button>
+                        <button onclick="moveCarousel(1)" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">›</button>
+                        <!-- Индикаторы -->
+                        <div style="display: flex; justify-content: center; gap: 8px; padding-bottom: 16px;" id="carouselDots">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #5B2D8E; cursor: pointer; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4C4E8; cursor: pointer; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4C4E8; cursor: pointer; display: inline-block;"></span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; margin-top: 16px;">
+                        <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">Лазерные станки</span>
+                        <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">ЧПУ-станки</span>
+                        <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">3D-принтеры</span>
+                        <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">УФ-принтеры</span>
+                        <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">Ламинаторы</span>
+                    </div>
+                </div>
 
                 <!-- ИНДИВИДУАЛЬНЫЙ ЗАКАЗ -->
                 <div class="custom-block">
@@ -792,9 +812,7 @@
                 </div>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 2: ПОДАРОЧНЫЕ НАБОРЫ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content" id="tab2">
                 <h2>Подарочные наборы</h2>
                 <p class="subtitle">Готовые комплекты для тёплых поздравлений</p>
@@ -833,9 +851,7 @@
                 </div>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 3: МЕБЕЛЬ И ОСНАЩЕНИЕ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content" id="tab3">
                 <h2>Мебель и оснащение</h2>
                 <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
@@ -936,89 +952,51 @@
         { id: 18, name: 'Комплексная поставка', price: 'по запросу', desc: 'Оснащение класса под ключ.', tags: ['Мебель', 'Оснащение', 'Под заказ', 'Образовательный центр'], emoji: '🏗️' }
     ];
 
-    // ===== ОТРИСОВКА КАРТОЧЕК =====
-    function renderProducts(containerId, productList) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+    // ===== КАРУСЕЛЬ =====
+    let currentSlide = 0;
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('#carouselDots span');
+    const totalSlides = 3;
 
-        if (productList.length === 0) {
-            container.innerHTML = `
-                <div class="no-products">
-                    <h3>🤷 Ничего не найдено</h3>
-                    <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
-                    <div class="yandex-form-placeholder">
-                        <iframe src="https://forms.yandex.ru/cloud/6a7e358b02848f6b91df8944?iframe=1" 
-                                frameborder="0" 
-                                name="ya-form-6a7e358b02848f6b91df8944" 
-                                style="width:100%; min-height:400px; border: none; border-radius: 20px; background: white;">
-                        </iframe>
-                    </div>
-                    <div class="or-line">или</div>
-                    <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
-                    <a href="#" class="btn" style="margin-top: 12px;">Оформить заказ</a>
-                </div>
-            `;
-            return;
-        }
+    window.moveCarousel = function(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    };
 
-        container.innerHTML = productList.map(p => `
-            <div class="product-card" data-id="${p.id}">
-                <div class="prod-img">${p.emoji}</div>
-                <h4>${p.name}</h4>
-                <div class="prod-price">${p.price}</div>
-                <button class="btn-detail" data-id="${p.id}">Подробнее</button>
-            </div>
-        `).join('');
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
 
-        container.querySelectorAll('.btn-detail').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                openProductModal(id);
-            });
+    function updateCarousel() {
+        if (!track) return;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.style.background = i === currentSlide ? '#5B2D8E' : '#D4C4E8';
         });
     }
 
-    // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
-    function openProductModal(id) {
-        const product = products.find(p => p.id === id);
-        if (!product) return;
-        document.getElementById('modalImg').textContent = product.emoji;
-        document.getElementById('modalTitle').textContent = product.name;
-        document.getElementById('modalPrice').textContent = product.price;
-        document.getElementById('modalDesc').textContent = product.desc;
-        document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
-        document.getElementById('modalOrderBtn').dataset.productId = id;
-        document.getElementById('productModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    document.getElementById('modalClose').addEventListener('click', function() {
-        document.getElementById('productModal').classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    document.getElementById('productModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    document.getElementById('modalOrderBtn').addEventListener('click', function() {
-        document.getElementById('productModal').classList.remove('active');
-        document.getElementById('orderModal').classList.add('active');
-    });
-    document.getElementById('orderModalClose').addEventListener('click', function() {
-        document.getElementById('orderModal').classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    document.getElementById('orderModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-
-    // ===== ФИЛЬТРЫ =====
     document.addEventListener('DOMContentLoaded', function() {
+        if (track && dots.length > 0) {
+            updateCarousel();
+
+            let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+
+            const carouselContainer = document.getElementById('productionCarousel');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+                carouselContainer.addEventListener('mouseleave', () => {
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+                });
+            }
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => goToSlide(i));
+            });
+        }
+
+        // ===== ФИЛЬТРЫ И ТАБЫ =====
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -1128,6 +1106,85 @@
                 return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
             });
             renderProducts('productGrid', filtered);
+        }
+    });
+
+    function renderProducts(containerId, productList) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        if (productList.length === 0) {
+            container.innerHTML = `
+                <div class="no-products">
+                    <h3>🤷 Ничего не найдено</h3>
+                    <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
+                    <div class="yandex-form-placeholder">
+                        <iframe src="https://forms.yandex.ru/cloud/6a7e358b02848f6b91df8944?iframe=1" 
+                                frameborder="0" 
+                                name="ya-form-6a7e358b02848f6b91df8944" 
+                                style="width:100%; min-height:400px; border: none; border-radius: 20px; background: white;">
+                        </iframe>
+                    </div>
+                    <div class="or-line">или</div>
+                    <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
+                    <a href="#" class="btn" style="margin-top: 12px;">Оформить заказ</a>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = productList.map(p => `
+            <div class="product-card" data-id="${p.id}">
+                <div class="prod-img">${p.emoji}</div>
+                <h4>${p.name}</h4>
+                <div class="prod-price">${p.price}</div>
+                <button class="btn-detail" data-id="${p.id}">Подробнее</button>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('.btn-detail').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                openProductModal(id);
+            });
+        });
+    }
+
+    function openProductModal(id) {
+        const product = products.find(p => p.id === id);
+        if (!product) return;
+        document.getElementById('modalImg').textContent = product.emoji;
+        document.getElementById('modalTitle').textContent = product.name;
+        document.getElementById('modalPrice').textContent = product.price;
+        document.getElementById('modalDesc').textContent = product.desc;
+        document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
+        document.getElementById('modalOrderBtn').dataset.productId = id;
+        document.getElementById('productModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', function() {
+        document.getElementById('productModal').classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    document.getElementById('modalOrderBtn').addEventListener('click', function() {
+        document.getElementById('productModal').classList.remove('active');
+        document.getElementById('orderModal').classList.add('active');
+    });
+    document.getElementById('orderModalClose').addEventListener('click', function() {
+        document.getElementById('orderModal').classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+            document.body.style.overflow = '';
         }
     });
 </script>
