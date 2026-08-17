@@ -326,6 +326,7 @@
             color: #5B2D8E;
             border: 1px solid #d4c4e8;
             object-fit: cover;
+            overflow: hidden;
         }
         .product-card .prod-img img {
             width: 100%;
@@ -402,7 +403,7 @@
             margin: 12px 0 8px;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        /* ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -443,22 +444,22 @@
         }
         .modal-close:hover { color: #E67E22; }
         .modal-content .modal-img {
-            width: 100%;
-            height: 200px;
             background: #F3EEFA;
-            border-radius: 24px;
+            border-radius: 16px;
+            border: 1px solid #d4c4e8;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: #5B2D8E;
-            border: 1px solid #d4c4e8;
-            margin-bottom: 16px;
+        }
+        .modal-content .modal-img img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
-        .modal-content .modal-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; }
+        .modal-content .modal-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; margin-top: 8px; }
         .modal-content .modal-price { font-weight: 700; color: #5B2D8E; font-size: 1.2rem; margin: 4px 0 12px; }
-        .modal-content .modal-desc { color: #555; font-size: 0.95rem; margin-bottom: 16px; }
+        .modal-content .modal-desc { color: #555; font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; white-space: pre-line; }
         .modal-content .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
         .modal-content .modal-tags span {
             background: #F3EEFA;
@@ -506,32 +507,6 @@
         .modal-order-options a:hover { background: #5B2D8E; color: white; }
         .modal-order-options a img { width: 24px; height: 24px; }
 
-        .sub-filter-btns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-        .sub-filter-btn {
-            background: #F3EEFA;
-            border: 2px solid #5B2D8E;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #2c3e50;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .sub-filter-btn.active { background: #5B2D8E; color: white; }
-        .sub-filter-btn:hover { background: #5B2D8E; color: white; }
-
-        .sub-content { display: none; animation: fadeIn 0.3s ease; }
-        .sub-content.active { display: block; }
-        .sub-content .section-title { font-size: 1.1rem; font-weight: 700; color: #5B2D8E; text-align: center; margin-bottom: 4px; }
-        .sub-content .section-desc { text-align: center; color: #666; font-size: 0.95rem; margin-bottom: 20px; }
         .city-line { text-align: center; font-size: 0.8rem; color: #888; margin: 16px 0 8px; }
 
         .custom-block {
@@ -608,17 +583,16 @@
             .header-center .logo-circle { width: 36px; height: 36px; font-size: 1rem; }
             .grid { grid-template-columns: 1fr 1fr; gap: 16px; }
             .tab-btn { padding: 8px 16px; font-size: 0.85rem; flex: 1; justify-content: center; }
-            .sub-filter-btn { padding: 8px 16px; font-size: 0.85rem; flex: 1; justify-content: center; }
             .modal-content { padding: 28px 20px; }
             .no-products .yandex-form-placeholder iframe { min-height: 500px; }
             .header-left .back-link { width: 38px; height: 38px; font-size: 1.3rem; }
             .filter-tag { padding: 3px 12px; font-size: 0.7rem; }
+            .modal-content .modal-img { height: 120px; }
         }
         @media (max-width: 480px) {
             .filter-grid { grid-template-columns: 1fr; }
             .grid { grid-template-columns: 1fr; }
             .tab-btn { min-width: 100%; }
-            .sub-filter-btn { min-width: 100%; }
             .header-center .brand .name { font-size: 0.9rem; }
             .header-center .logo-circle { width: 30px; height: 30px; font-size: 0.9rem; }
             .header-center .brand .tagline { font-size: 0.6rem; }
@@ -673,7 +647,9 @@
                 <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
             </div>
 
+            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 1: ОБРАЗОВАТЕЛЬНАЯ ПРОДУКЦИЯ ===== -->
+            <!-- ========================================================== -->
             <div class="tab-content active" id="tab1">
                 <h2>Образовательная продукция</h2>
                 <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
@@ -689,6 +665,7 @@
                                 <span class="filter-tag">Панно</span>
                                 <span class="filter-tag">Игрушки</span>
                                 <span class="filter-tag">Игры</span>
+                                <span class="filter-tag">Декор</span>
                             </div>
                         </div>
                         <div class="filter-group">
@@ -761,7 +738,6 @@
                         Изделия производятся на собственном оборудовании
                     </p>
 
-                    <!-- Карусель с вертикальными фото (без обрезки) -->
                     <div style="position: relative; overflow: hidden; border-radius: 24px; border: 1px solid #D4C4E8; background: #F3EEFA; max-width: 700px; margin: 0 auto;" id="productionCarousel">
                         <div style="display: flex; transition: transform 0.5s ease;" id="carouselTrack">
                             <div style="min-width: 100%; padding: 20px; text-align: center; box-sizing: border-box;">
@@ -774,10 +750,8 @@
                                 <img src="images/production-3.jpg" alt="Производство ProEdWorks" style="width:100%; height:450px; object-fit:contain; border-radius:16px; background:#F3EEFA; display:block;">
                             </div>
                         </div>
-                        <!-- Кнопки навигации -->
                         <button onclick="moveCarousel(-1)" style="position: absolute; top: 50%; left: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">‹</button>
                         <button onclick="moveCarousel(1)" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">›</button>
-                        <!-- Индикаторы -->
                         <div style="display: flex; justify-content: center; gap: 8px; padding-bottom: 16px;" id="carouselDots">
                             <span style="width: 10px; height: 10px; border-radius: 50%; background: #5B2D8E; cursor: pointer; display: inline-block;"></span>
                             <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4C4E8; cursor: pointer; display: inline-block;"></span>
@@ -805,51 +779,80 @@
                 </div>
             </div>
 
+            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 2: ПОДАРОЧНЫЕ НАБОРЫ ===== -->
+            <!-- ========================================================== -->
             <div class="tab-content" id="tab2">
                 <h2>Подарочные наборы</h2>
-                <p class="subtitle">Готовые комплекты для тёплых поздравлений</p>
+                <p class="subtitle">Готовые комплекты для тёплых поздравлений. Скоро в продаже!</p>
 
-                <div class="sub-filter-btns">
-                    <button class="sub-filter-btn active" data-sub="sub1">🎒 Для учителей</button>
-                    <button class="sub-filter-btn" data-sub="sub2">🏢 Для организаций</button>
+                <!-- ФИЛЬТРЫ ДЛЯ ПОДАРОЧНЫХ НАБОРОВ -->
+                <div class="filter-section">
+                    <div class="filter-grid">
+                        <div class="filter-group scrollable">
+                            <div class="filter-label">📌 Праздник</div>
+                            <div class="filter-tags" data-category="gift-holiday">
+                                <span class="filter-tag all-tag active">Все</span>
+                                <span class="filter-tag">1 сентября</span>
+                                <span class="filter-tag">День учителя</span>
+                                <span class="filter-tag">Новый год</span>
+                                <span class="filter-tag">День рождения</span>
+                                <span class="filter-tag">8 марта</span>
+                                <span class="filter-tag">23 февраля</span>
+                                <span class="filter-tag">14 февраля</span>
+                                <span class="filter-tag">Выпускной</span>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <div class="filter-label">📌 Пол</div>
+                            <div class="filter-tags" data-category="gift-gender">
+                                <span class="filter-tag all-tag active">Все</span>
+                                <span class="filter-tag">Мужчинам</span>
+                                <span class="filter-tag">Женщинам</span>
+                                <span class="filter-tag">Мальчикам</span>
+                                <span class="filter-tag">Девочкам</span>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <div class="filter-label">📌 Роль</div>
+                            <div class="filter-tags" data-category="gift-role">
+                                <span class="filter-tag all-tag active">Все</span>
+                                <span class="filter-tag">Ученикам</span>
+                                <span class="filter-tag">Учителям</span>
+                                <span class="filter-tag">Руководителям</span>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="filter-bottom">
+                        <button class="filter-reset-btn" id="resetGiftFilters">Сбросить фильтры</button>
+                    </div>
                 </div>
 
-                <div class="sub-content active" id="sub1">
-                    <div class="section-title">Новинки на 1 сентября! 🎉</div>
-                    <div class="section-desc">
-                        Вы родитель, ученик или класс, который хочет отблагодарить любимого преподавателя за вложенный труд и заботу, а также поздравить с праздником. Мы предлагаем готовые подарочные наборы для учителей.
-                    </div>
-                    <div class="grid" id="giftGrid1"></div>
-                    <div class="city-line">
-                        🚚 Собираем и доставляем заказы в Москве, Санкт-Петербурге, Новосибирске и Красноярске. Доставка на назначенный адрес, день и время.
-                    </div>
-                    <div style="text-align: center; margin-top: 12px;">
-                        <a href="#" class="btn">Собрать заказ</a>
-                    </div>
-                </div>
+                <!-- КАРТОЧКИ ТОВАРОВ (ЗАГЛУШКИ) -->
+                <div class="grid" id="giftGrid"></div>
 
-                <div class="sub-content" id="sub2">
-                    <div class="section-title">🎉 Новинки на 1 сентября!</div>
-                    <div class="section-desc">
-                        Вы образовательный центр, учреждение, детский сад, компания, преподаватель или репетитор, который хочет поздравить сотрудников, родителей или обучающихся. Мы предлагаем подарочные наборы для любых поводов.
-                    </div>
-                    <div class="grid" id="giftGrid2"></div>
-                    <div class="city-line">
-                        🚚 Собираем заказы от поштучных наборов до больших партий. Доставка в Москве, Санкт-Петербурге, Новосибирске и Красноярске.
-                    </div>
-                    <div style="text-align: center; margin-top: 12px;">
-                        <a href="#" class="btn">Собрать заказ</a>
-                    </div>
+                <!-- БЛОК С ЗАЯВКОЙ -->
+                <div class="custom-block" style="margin-top: 32px; background: #F3EEFA; padding: 28px 24px; border-radius: 32px; text-align: center; border: 2px dashed #5B2D8E;">
+                    <h4 style="font-size: 1.2rem; color: #5B2D8E; margin-bottom: 8px;">🎁 Скоро здесь появятся готовые подарочные наборы!</h4>
+                    <p style="color: #555; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">
+                        А пока вы можете оставить заявку — мы свяжемся с вами, когда наборы будут готовы, и поможем подобрать идеальный вариант для любого праздника.
+                    </p>
+                    <a href="#" class="btn" style="margin-top: 16px;">Оставить заявку</a>
                 </div>
             </div>
 
+            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 3: МЕБЕЛЬ И ОСНАЩЕНИЕ ===== -->
+            <!-- ========================================================== -->
             <div class="tab-content" id="tab3">
                 <h2>Мебель и оснащение</h2>
                 <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
 
-                <div class="grid" id="furnitureGrid"></div>
+                <div style="text-align: center; padding: 60px 20px; background: #F3EEFA; border-radius: 32px; border: 2px dashed #5B2D8E;">
+                    <h3 style="font-size: 1.5rem; color: #5B2D8E; margin-bottom: 8px;">🪑 Ждём поставок!</h3>
+                    <p style="color: #666; font-size: 1rem; max-width: 500px; margin: 0 auto;">Следите за обновлениями — скоро здесь появится мебель и оснащение для ваших классов и кабинетов.</p>
+                </div>
 
                 <div style="margin-top: 28px; background: #F3EEFA; padding: 24px; border-radius: 24px; text-align: center; border: 2px solid #5B2D8E;">
                     <p style="font-size: 0.95rem; color: #333; font-weight: 600;">
@@ -900,7 +903,14 @@
 <div class="modal-overlay" id="productModal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">&times;</button>
-        <div class="modal-img" id="modalImg">🧩</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+            <div class="modal-img" id="modalImg1" style="height: 180px;">
+                <img src="" alt="">
+            </div>
+            <div class="modal-img" id="modalImg2" style="height: 180px;">
+                <img src="" alt="">
+            </div>
+        </div>
         <div class="modal-title" id="modalTitle">Название товара</div>
         <div class="modal-price" id="modalPrice">1 000 ₽</div>
         <div class="modal-desc" id="modalDesc">Описание товара</div>
@@ -913,7 +923,10 @@
 <div class="modal-overlay" id="orderModal">
     <div class="modal-content">
         <button class="modal-close" id="orderModalClose">&times;</button>
-        <h3 style="text-align: center; margin-bottom: 16px; color: #5B2D8E;">Выберите способ заказа</h3>
+        <h3 style="text-align: center; margin-bottom: 8px; color: #5B2D8E;">Выберите способ заказа</h3>
+        <p style="text-align: center; color: #888; font-size: 0.9rem; margin-bottom: 16px;">
+            В сообщении укажите: <strong id="orderProductName">Название товара</strong>
+        </p>
         <div class="modal-order-options">
             <a href="#" id="orderTgLink"><img src="images/tg-icon.png" alt="Telegram"> Telegram</a>
             <a href="#" id="orderVkLink"><img src="images/vk-icon.png" alt="VK"> ВКонтакте</a>
@@ -925,24 +938,76 @@
 <script>
     // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
-        { id: 1, name: 'Плакат «Английский алфавит»', price: '450 ₽', desc: 'Яркий плакат с транскрипцией и примерами слов.', tags: ['Английский язык', 'Плакаты', 'Школьникам', 'Языковая школа'], emoji: '🌍' },
-        { id: 2, name: 'Плакат «Таблица умножения»', price: '350 ₽', desc: 'С подсказками и примерами.', tags: ['Математика', 'Плакаты', 'Школьникам', 'Детский сад'], emoji: '🧮' },
-        { id: 3, name: 'Панно «Времена года»', price: '1 200 ₽', desc: 'Красивое панно для оформления кабинета.', tags: ['Декор', 'Панно', 'Дошкольникам', 'Детский сад'], emoji: '🎨' },
-        { id: 4, name: 'Игра «Мемори. Животные»', price: '650 ₽', desc: 'Развивает память, внимание и речь. 20 пар карточек.', tags: ['Игры', 'Дошкольникам', 'Детский сад', 'Психология'], emoji: '🧩' },
-        { id: 5, name: 'Набор карточек «Русский язык»', price: '490 ₽', desc: 'Правила в картинках. Компактный набор.', tags: ['Русский язык', 'Игры', 'Школьникам', 'Образовательный центр'], emoji: '📚' },
-        { id: 6, name: 'Игрушка «Эко-сад»', price: '780 ₽', desc: 'Набор для выращивания микрозелени.', tags: ['Игрушки', 'Дошкольникам', 'Мотивация', 'Детский сад'], emoji: '🌱' },
-        { id: 7, name: 'Набор «Благодарность»', price: '890 ₽', desc: 'Открытка, сувенир и коробка конфет.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '🌸' },
-        { id: 8, name: 'Набор «Творчество»', price: '1 200 ₽', desc: 'Блокнот, ручки, стикеры и открытка.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '🎨' },
-        { id: 9, name: 'Набор «Уют»', price: '650 ₽', desc: 'Кружка, чай и открытка.', tags: ['Подарочные наборы', 'Для учителей'], emoji: '☕' },
-        { id: 10, name: 'Корпоративный набор', price: 'от 1 500 ₽', desc: 'Брендированные сувениры и сладости.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '🎁' },
-        { id: 11, name: 'Набор «Достижение»', price: 'от 2 200 ₽', desc: 'Грамоты, значки, подарки.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '🏆' },
-        { id: 12, name: 'Индивидуальный заказ', price: 'по запросу', desc: 'Соберём под ваш бюджет.', tags: ['Подарочные наборы', 'Для организаций'], emoji: '📦' },
-        { id: 13, name: 'Парта ученическая', price: 'от 4 500 ₽', desc: 'Регулируемая по высоте.', tags: ['Мебель', 'Россия', 'Школьникам'], emoji: '🪑' },
-        { id: 14, name: 'Стул регулируемый', price: 'от 2 200 ₽', desc: 'Эргономичный стул.', tags: ['Мебель', 'Россия', 'Школьникам'], emoji: '🪑' },
-        { id: 15, name: 'Шкаф для документов', price: 'от 12 000 ₽', desc: 'Металлический шкаф с замком.', tags: ['Мебель', 'Китай', 'Офис'], emoji: '🗄️' },
-        { id: 16, name: 'Стеллаж библиотечный', price: 'от 8 500 ₽', desc: 'Разборный стеллаж на 5 полок.', tags: ['Мебель', 'Россия', 'Образовательный центр'], emoji: '📚' },
-        { id: 17, name: 'Доска магнитно-маркерная', price: 'от 5 800 ₽', desc: '120×90 см, с креплениями.', tags: ['Оснащение', 'Китай', 'Образовательный центр'], emoji: '📋' },
-        { id: 18, name: 'Комплексная поставка', price: 'по запросу', desc: 'Оснащение класса под ключ.', tags: ['Мебель', 'Оснащение', 'Под заказ', 'Образовательный центр'], emoji: '🏗️' }
+        // ===== СТАРЫЕ ТОВАРЫ =====
+        { id: 1, name: 'Плакат «Английский алфавит»', price: '450 ₽', desc: 'Яркий плакат с транскрипцией и примерами слов.', tags: ['Английский язык', 'Плакаты', 'Школьникам', 'Языковая школа'], emoji: '🌍', img1: '', img2: '' },
+        { id: 2, name: 'Плакат «Таблица умножения»', price: '350 ₽', desc: 'С подсказками и примерами.', tags: ['Математика', 'Плакаты', 'Школьникам', 'Детский сад'], emoji: '🧮', img1: '', img2: '' },
+        { id: 3, name: 'Панно «Времена года»', price: '1 200 ₽', desc: 'Красивое панно для оформления кабинета.', tags: ['Декор', 'Панно', 'Дошкольникам', 'Детский сад'], emoji: '🎨', img1: '', img2: '' },
+        { id: 4, name: 'Игра «Мемори. Животные»', price: '650 ₽', desc: 'Развивает память, внимание и речь. 20 пар карточек.', tags: ['Игры', 'Дошкольникам', 'Детский сад', 'Психология'], emoji: '🧩', img1: '', img2: '' },
+        { id: 5, name: 'Набор карточек «Русский язык»', price: '490 ₽', desc: 'Правила в картинках. Компактный набор.', tags: ['Русский язык', 'Игры', 'Школьникам', 'Образовательный центр'], emoji: '📚', img1: '', img2: '' },
+        { id: 6, name: 'Игрушка «Эко-сад»', price: '780 ₽', desc: 'Набор для выращивания микрозелени.', tags: ['Игрушки', 'Дошкольникам', 'Мотивация', 'Детский сад'], emoji: '🌱', img1: '', img2: '' },
+        // ===== НОВЫЕ ТОВАРЫ (ДЕКОР) =====
+        { 
+            id: 19, 
+            name: 'ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ', 
+            price: '1 990 ₽', 
+            desc: 'Декор "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🔤', 
+            img1: 'images/decor-english-1.jpg', 
+            img2: 'images/decor-english-2.jpg' 
+        },
+        { 
+            id: 20, 
+            name: 'ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ', 
+            price: '1 990 ₽', 
+            desc: 'Декор "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Физика', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '⚛️', 
+            img1: 'images/decor-physics-1.jpg', 
+            img2: 'images/decor-physics-2.jpg' 
+        },
+        { 
+            id: 21, 
+            name: 'МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ', 
+            price: '1 990 ₽', 
+            desc: 'Декор "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Математика', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '📐', 
+            img1: 'images/decor-math-1.jpg', 
+            img2: 'images/decor-math-2.jpg' 
+        },
+        { 
+            id: 22, 
+            name: 'РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ', 
+            price: '1 990 ₽', 
+            desc: 'Декор "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Русский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '📖', 
+            img1: 'images/decor-russian-1.jpg', 
+            img2: 'images/decor-russian-2.jpg' 
+        },
+        { 
+            id: 23, 
+            name: 'ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ', 
+            price: '1 990 ₽', 
+            desc: 'Декор "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'История', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🏛️', 
+            img1: 'images/decor-history-1.jpg', 
+            img2: 'images/decor-history-2.jpg' 
+        }
+    ];
+
+    // ===== ДАННЫЕ ДЛЯ ПОДАРОЧНЫХ НАБОРОВ (ЗАГЛУШКИ) =====
+    const giftProducts = [
+        { id: 101, name: 'Набор к 1 сентября', desc: 'Скоро в продаже!', price: '—', tags: ['1 сентября', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎒' },
+        { id: 102, name: 'Набор ко Дню учителя', desc: 'Скоро в продаже!', price: '—', tags: ['День учителя', 'Учителям', 'Женщинам', 'Мужчинам'], emoji: '🍎' },
+        { id: 103, name: 'Новогодний набор', desc: 'Скоро в продаже!', price: '—', tags: ['Новый год', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎄' },
+        { id: 104, name: 'Набор на День рождения', desc: 'Скоро в продаже!', price: '—', tags: ['День рождения', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎂' },
+        { id: 105, name: 'Набор к 8 марта', desc: 'Скоро в продаже!', price: '—', tags: ['8 марта', 'Женщинам', 'Девочкам', 'Учителям'], emoji: '🌷' },
+        { id: 106, name: 'Набор к 23 февраля', desc: 'Скоро в продаже!', price: '—', tags: ['23 февраля', 'Мужчинам', 'Мальчикам', 'Ученикам'], emoji: '⭐' },
+        { id: 107, name: 'Набор к 14 февраля', desc: 'Скоро в продаже!', price: '—', tags: ['14 февраля', 'Ученикам', 'Девочкам', 'Мальчикам'], emoji: '❤️' },
+        { id: 108, name: 'Набор на Выпускной', desc: 'Скоро в продаже!', price: '—', tags: ['Выпускной', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎓' }
     ];
 
     // ===== КАРУСЕЛЬ =====
@@ -969,139 +1034,7 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        if (track && dots.length > 0) {
-            updateCarousel();
-
-            let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
-
-            const carouselContainer = document.getElementById('productionCarousel');
-            if (carouselContainer) {
-                carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
-                carouselContainer.addEventListener('mouseleave', () => {
-                    clearInterval(autoSlide);
-                    autoSlide = setInterval(() => window.moveCarousel(1), 4000);
-                });
-            }
-
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => goToSlide(i));
-            });
-        }
-
-        // ===== ФИЛЬТРЫ И ТАБЫ =====
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        if (tabBtns.length > 0) {
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            tabBtns[0].classList.add('active');
-            tabContents.forEach(content => content.classList.remove('active'));
-            const firstTab = document.getElementById(tabBtns[0].dataset.tab);
-            if (firstTab) firstTab.classList.add('active');
-        }
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                tabContents.forEach(content => content.classList.remove('active'));
-                const target = document.getElementById(this.dataset.tab);
-                if (target) target.classList.add('active');
-            });
-        });
-
-        const subBtns = document.querySelectorAll('.sub-filter-btn');
-        const subContents = {
-            sub1: document.getElementById('sub1'),
-            sub2: document.getElementById('sub2')
-        };
-
-        subBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                subBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                Object.keys(subContents).forEach(key => {
-                    if (subContents[key]) {
-                        subContents[key].classList.toggle('active', key === this.dataset.sub);
-                    }
-                });
-            });
-        });
-
-        const educationalProducts = products.filter(p => 
-            !p.tags.includes('Подарочные наборы') && !p.tags.includes('Мебель') && !p.tags.includes('Оснащение')
-        );
-        const giftProducts1 = products.filter(p => p.tags.includes('Подарочные наборы') && p.tags.includes('Для учителей'));
-        const giftProducts2 = products.filter(p => p.tags.includes('Подарочные наборы') && p.tags.includes('Для организаций'));
-        const furnitureProducts = products.filter(p => p.tags.includes('Мебель') || p.tags.includes('Оснащение'));
-
-        renderProducts('productGrid', educationalProducts);
-        renderProducts('giftGrid1', giftProducts1);
-        renderProducts('giftGrid2', giftProducts2);
-        renderProducts('furnitureGrid', furnitureProducts);
-
-        document.querySelectorAll('.filter-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                const parent = this.closest('.filter-tags');
-                const allTag = parent.querySelector('.all-tag');
-
-                if (this.classList.contains('all-tag')) {
-                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    applyFilters();
-                    return;
-                }
-
-                this.classList.toggle('active');
-                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
-                    .some(t => t.classList.contains('active'));
-
-                if (hasActiveNonAll) {
-                    allTag.classList.remove('active');
-                } else {
-                    allTag.classList.add('active');
-                }
-                applyFilters();
-            });
-        });
-
-        document.getElementById('resetFilters').addEventListener('click', function() {
-            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.all-tag').forEach(t => t.classList.add('active'));
-            applyFilters();
-        });
-
-        function applyFilters() {
-            const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
-            document.querySelectorAll('.filter-tags').forEach(group => {
-                const category = group.dataset.category;
-                const activeTags = [];
-                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
-                    activeTags.push(t.textContent.trim());
-                });
-                if (category === 'type') activeFilters.type = activeTags;
-                else if (category === 'age') activeFilters.age = activeTags;
-                else if (category === 'org') activeFilters.org = activeTags;
-                else if (category === 'subject') activeFilters.subject = activeTags;
-                else if (category === 'other') activeFilters.other = activeTags;
-            });
-
-            const filtered = products.filter(p => {
-                if (p.tags.includes('Подарочные наборы') || p.tags.includes('Мебель') || p.tags.includes('Оснащение')) {
-                    return false;
-                }
-                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type.includes(t));
-                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(t));
-                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(t));
-                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters.subject.includes(t));
-                const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other.includes(t));
-                return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
-            });
-            renderProducts('productGrid', filtered);
-        }
-    });
-
+    // ===== ОТРИСОВКА КАРТОЧЕК =====
     function renderProducts(containerId, productList) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -1128,7 +1061,9 @@
 
         container.innerHTML = productList.map(p => `
             <div class="product-card" data-id="${p.id}">
-                <div class="prod-img">${p.emoji}</div>
+                <div class="prod-img">
+                    <img src="${p.img1 || 'images/placeholder.jpg'}" alt="${p.name}" onerror="this.src='images/placeholder.jpg'">
+                </div>
                 <h4>${p.name}</h4>
                 <div class="prod-price">${p.price}</div>
                 <button class="btn-detail" data-id="${p.id}">Подробнее</button>
@@ -1143,15 +1078,60 @@
         });
     }
 
+    // ===== ОТРИСОВКА ПОДАРОЧНЫХ НАБОРОВ =====
+    function renderGiftProducts(containerId, productList) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = productList.map(p => `
+            <div class="product-card" data-id="${p.id}" style="border-color: #D4C4E8;">
+                <div class="prod-img" style="background: #F3EEFA; font-size: 3.5rem; color: #5B2D8E;">
+                    ${p.emoji}
+                </div>
+                <h4>${p.name}</h4>
+                <div class="prod-price" style="color: #999; font-weight: 400;">${p.price}</div>
+                <div style="font-size: 0.8rem; color: #888; margin: 8px 0 12px;">${p.desc}</div>
+                <button class="btn-detail" style="border-color: #5B2D8E; color: #5B2D8E;" data-id="${p.id}" data-type="gift">Подробнее</button>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('.btn-detail').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.dataset.id);
+                const product = giftProducts.find(p => p.id === id);
+                if (!product) return;
+                
+                // Показываем модалку с информацией о наборе
+                document.getElementById('modalImg1').innerHTML = `<span style="font-size: 3rem;">${product.emoji}</span>`;
+                document.getElementById('modalImg2').innerHTML = `<span style="font-size: 2rem; color: #5B2D8E;">🎁</span>`;
+                document.getElementById('modalTitle').textContent = product.name;
+                document.getElementById('modalPrice').textContent = 'Скоро в продаже';
+                document.getElementById('modalDesc').textContent = 'Набор появится в нашем каталоге к этому празднику. Оставьте заявку, и мы сообщим вам о выходе набора и поможем с выбором.';
+                document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
+                document.getElementById('modalOrderBtn').dataset.productId = id;
+                document.getElementById('modalOrderBtn').dataset.type = 'gift';
+                document.getElementById('productModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
     function openProductModal(id) {
         const product = products.find(p => p.id === id);
         if (!product) return;
-        document.getElementById('modalImg').textContent = product.emoji;
+        
+        const img1 = document.querySelector('#modalImg1 img');
+        const img2 = document.querySelector('#modalImg2 img');
+        if (img1) img1.src = product.img1 || 'images/placeholder.jpg';
+        if (img2) img2.src = product.img2 || 'images/placeholder.jpg';
+        
         document.getElementById('modalTitle').textContent = product.name;
         document.getElementById('modalPrice').textContent = product.price;
-        document.getElementById('modalDesc').textContent = product.desc;
+        document.getElementById('modalDesc').innerHTML = product.desc.replace(/\n/g, '<br>');
         document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
         document.getElementById('modalOrderBtn').dataset.productId = id;
+        document.getElementById('modalOrderBtn').dataset.type = 'product';
         document.getElementById('productModal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -1166,10 +1146,26 @@
             document.body.style.overflow = '';
         }
     });
+
+    // ===== ЗАКАЗ =====
     document.getElementById('modalOrderBtn').addEventListener('click', function() {
+        const productId = parseInt(this.dataset.productId);
+        const type = this.dataset.type;
+        let productName = '';
+        
+        if (type === 'gift') {
+            const product = giftProducts.find(p => p.id === productId);
+            if (product) productName = product.name;
+        } else {
+            const product = products.find(p => p.id === productId);
+            if (product) productName = product.name;
+        }
+        
+        document.getElementById('orderProductName').textContent = productName || 'Товар';
         document.getElementById('productModal').classList.remove('active');
         document.getElementById('orderModal').classList.add('active');
     });
+
     document.getElementById('orderModalClose').addEventListener('click', function() {
         document.getElementById('orderModal').classList.remove('active');
         document.body.style.overflow = '';
@@ -1178,6 +1174,172 @@
         if (e.target === this) {
             this.classList.remove('active');
             document.body.style.overflow = '';
+        }
+    });
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Карусель
+        if (track && dots.length > 0) {
+            updateCarousel();
+            let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+            const carouselContainer = document.getElementById('productionCarousel');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+                carouselContainer.addEventListener('mouseleave', () => {
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+                });
+            }
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => goToSlide(i));
+            });
+        }
+
+        // ===== ТАБЫ =====
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        if (tabBtns.length > 0) {
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            tabBtns[0].classList.add('active');
+            tabContents.forEach(content => content.classList.remove('active'));
+            const firstTab = document.getElementById(tabBtns[0].dataset.tab);
+            if (firstTab) firstTab.classList.add('active');
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                tabContents.forEach(content => content.classList.remove('active'));
+                const target = document.getElementById(this.dataset.tab);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ===== ФИЛЬТРЫ ДЛЯ ОБРАЗОВАТЕЛЬНОЙ ПРОДУКЦИИ =====
+        const educationalProducts = products.filter(p => 
+            !p.tags.includes('Подарочные наборы') && !p.tags.includes('Мебель') && !p.tags.includes('Оснащение')
+        );
+        
+        renderProducts('productGrid', educationalProducts);
+
+        document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const parent = this.closest('.filter-tags');
+                const allTag = parent.querySelector('.all-tag');
+
+                if (this.classList.contains('all-tag')) {
+                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    applyFilters();
+                    return;
+                }
+
+                this.classList.toggle('active');
+                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
+                    .some(t => t.classList.contains('active'));
+
+                if (hasActiveNonAll) {
+                    allTag.classList.remove('active');
+                } else {
+                    allTag.classList.add('active');
+                }
+                applyFilters();
+            });
+        });
+
+        document.getElementById('resetFilters').addEventListener('click', function() {
+            document.querySelectorAll('#tab1 .filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#tab1 .all-tag').forEach(t => t.classList.add('active'));
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
+            document.querySelectorAll('#tab1 .filter-tags').forEach(group => {
+                const category = group.dataset.category;
+                const activeTags = [];
+                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
+                    activeTags.push(t.textContent.trim());
+                });
+                if (category === 'type') activeFilters.type = activeTags;
+                else if (category === 'age') activeFilters.age = activeTags;
+                else if (category === 'org') activeFilters.org = activeTags;
+                else if (category === 'subject') activeFilters.subject = activeTags;
+                else if (category === 'other') activeFilters.other = activeTags;
+            });
+
+            const filtered = products.filter(p => {
+                if (p.tags.includes('Подарочные наборы') || p.tags.includes('Мебель') || p.tags.includes('Оснащение')) {
+                    return false;
+                }
+                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type.includes(t));
+                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(t));
+                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters.subject.includes(t));
+                const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other.includes(t));
+                return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
+            });
+            renderProducts('productGrid', filtered);
+        }
+
+        // ===== ПОДАРОЧНЫЕ НАБОРЫ =====
+        renderGiftProducts('giftGrid', giftProducts);
+
+        // Фильтры для подарков
+        document.querySelectorAll('#tab2 .filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const parent = this.closest('.filter-tags');
+                const allTag = parent.querySelector('.all-tag');
+
+                if (this.classList.contains('all-tag')) {
+                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    applyGiftFilters();
+                    return;
+                }
+
+                this.classList.toggle('active');
+                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
+                    .some(t => t.classList.contains('active'));
+
+                if (hasActiveNonAll) {
+                    allTag.classList.remove('active');
+                } else {
+                    allTag.classList.add('active');
+                }
+                applyGiftFilters();
+            });
+        });
+
+        document.getElementById('resetGiftFilters').addEventListener('click', function() {
+            document.querySelectorAll('#tab2 .filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#tab2 .all-tag').forEach(t => t.classList.add('active'));
+            applyGiftFilters();
+        });
+
+        function applyGiftFilters() {
+            const activeFilters = { holiday: [], gender: [], role: [] };
+            document.querySelectorAll('#tab2 .filter-tags').forEach(group => {
+                const category = group.dataset.category;
+                const activeTags = [];
+                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
+                    activeTags.push(t.textContent.trim());
+                });
+                if (category === 'gift-holiday') activeFilters.holiday = activeTags;
+                else if (category === 'gift-gender') activeFilters.gender = activeTags;
+                else if (category === 'gift-role') activeFilters.role = activeTags;
+            });
+
+            const filtered = giftProducts.filter(p => {
+                const matchesHoliday = activeFilters.holiday.length === 0 || p.tags.some(t => activeFilters.holiday.includes(t));
+                const matchesGender = activeFilters.gender.length === 0 || p.tags.some(t => activeFilters.gender.includes(t));
+                const matchesRole = activeFilters.role.length === 0 || p.tags.some(t => activeFilters.role.includes(t));
+                return matchesHoliday && matchesGender && matchesRole;
+            });
+            renderGiftProducts('giftGrid', filtered);
         }
     });
 </script>
