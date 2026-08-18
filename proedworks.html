@@ -328,21 +328,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed #d4c4e8;
+            border: 1px solid #d4c4e8;
             overflow: hidden;
             position: relative;
-        }
-        .product-card .prod-img .placeholder-label {
-            position: absolute;
-            bottom: 8px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-weight: 400;
-            pointer-events: none;
-            z-index: 2;
         }
         .product-card .prod-img img {
             width: 100%;
@@ -501,18 +489,7 @@
             justify-content: center;
             background: #F3EEFA;
             position: relative;
-            border: 2px dashed #d4c4e8;
-        }
-        .modal-carousel-slide .slide-label {
-            position: absolute;
-            bottom: 8px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 10px;
-            border-radius: 12px;
-            pointer-events: none;
-            z-index: 2;
+            border: 1px solid #d4c4e8;
         }
         .modal-carousel-slide .no-image {
             display: flex;
@@ -781,20 +758,9 @@
             justify-content: center;
             height: 450px;
             background: #F3EEFA;
-            border: 2px dashed #d4c4e8;
+            border: 1px solid #d4c4e8;
             color: #999;
             position: relative;
-        }
-        .production-carousel .slide .slide-label {
-            position: absolute;
-            bottom: 20px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            font-size: 0.8rem;
-            padding: 4px 16px;
-            border-radius: 20px;
-            pointer-events: none;
-            z-index: 2;
         }
         .production-carousel .slide .no-image {
             display: flex;
@@ -1088,21 +1054,18 @@
                                         <span>🏭</span>
                                         <span>Лазерная резка</span>
                                     </div>
-                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                                 <div class="slide">
                                     <div class="no-image">
                                         <span>⚙️</span>
                                         <span>ЧПУ-станки</span>
                                     </div>
-                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                                 <div class="slide">
                                     <div class="no-image">
                                         <span>🖨️</span>
                                         <span>3D-печать</span>
                                     </div>
-                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                             </div>
                             <button class="prod-arrow prev" onclick="moveCarousel(-1)">‹</button>
@@ -1225,9 +1188,7 @@
     </div>
 
     <script>
-        // ===== ТОВАРЫ С ПОДДЕРЖКОЙ РЕАЛЬНЫХ ФОТО =====
-        // Для добавления фото, замените строки-заглушки на:
-        // 'images/название_файла.jpg', 'images/файл2.jpg', 'images/файл3.jpg'
+        // ===== ТОВАРЫ =====
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1393,15 +1354,14 @@
                 const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
                 let imageHtml;
                 if (firstImage && firstImage.startsWith('images/')) {
-                    imageHtml = `<img src="${firstImage}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Фото товара</span></div>'">`;
+                    imageHtml = `<img src="${firstImage}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Нет фото</span></div>'">`;
                 } else {
-                    imageHtml = `<div class="no-image"><span>🖼️</span><span>Фото товара</span></div>`;
+                    imageHtml = `<div class="no-image"><span>🖼️</span><span>Нет фото</span></div>`;
                 }
                 return `
                     <div class="product-card" data-id="${p.id}">
                         <div class="prod-img">
                             ${imageHtml}
-                            <span class="placeholder-label">📷 Добавьте фото</span>
                         </div>
                         <h4>${p.name}</h4>
                         <div class="prod-price">${p.price}</div>
@@ -1439,7 +1399,6 @@
                 return `
                     <div class="modal-carousel-slide">
                         ${content}
-                        <span class="slide-label">📷 Добавьте фото</span>
                     </div>
                 `;
             }).join('');
