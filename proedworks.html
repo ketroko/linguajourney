@@ -412,79 +412,28 @@
             font-size: 0.95rem;
             margin-bottom: 16px;
         }
-        .no-products .request-form {
+        .no-products .request-block {
             background: white;
             border-radius: 24px;
             padding: 24px;
             border: 1px solid #d4c4e8;
             margin: 16px auto;
             max-width: 480px;
-            text-align: left;
         }
-        .no-products .request-form h4 {
+        .no-products .request-block h4 {
             color: #5B2D8E;
             margin-bottom: 8px;
             font-size: 1.1rem;
         }
-        .no-products .request-form p {
+        .no-products .request-block p {
             font-size: 0.9rem;
             color: #555;
             margin-bottom: 12px;
-        }
-        .no-products .request-form .btn {
-            display: inline-block;
-            background: #5B2D8E;
-            padding: 10px 24px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            border-radius: 40px;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .no-products .request-form .btn:hover {
-            background: #E67E22;
-            transform: translateY(-2px);
         }
         .no-products .or-line {
             font-size: 0.9rem;
             color: #888;
             margin: 12px 0 8px;
-        }
-        /* Форма Яндекса — загружается по клику */
-        .yandex-form-wrapper {
-            display: none;
-            margin-top: 12px;
-        }
-        .yandex-form-wrapper iframe {
-            width: 100%;
-            min-height: 450px;
-            border: none;
-            border-radius: 20px;
-            background: white;
-        }
-        .yandex-form-wrapper.active {
-            display: block;
-        }
-        .show-form-btn {
-            background: #5B2D8E;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: 'Open Sans', sans-serif;
-            transition: 0.2s;
-            margin-top: 8px;
-        }
-        .show-form-btn:hover {
-            background: #E67E22;
-            transform: translateY(-2px);
         }
 
         /* ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== */
@@ -1294,19 +1243,10 @@
                         <div class="no-products">
                             <h3>🤷 Ничего не найдено</h3>
                             <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
-                            <div class="request-form">
-                                <h4>📝 Оставить заявку</h4>
-                                <p>Напишите нам в VK, и мы подберём нужный товар или сделаем его под заказ.</p>
+                            <div class="request-block">
+                                <h4>💬 Напишите нам в VK</h4>
+                                <p>Опишите, что вам нужно, и мы подберём или изготовим товар под ваш запрос.</p>
                                 <a href="https://vk.me/proedworks" target="_blank" class="btn">Написать в VK</a>
-                                <br><br>
-                                <button class="show-form-btn" onclick="loadYandexForm()">📋 Или заполнить форму</button>
-                                <div class="yandex-form-wrapper" id="yandexFormWrapper">
-                                    <iframe src="https://forms.yandex.ru/cloud/6a7e358b02848f6b91df8944?iframe=1" 
-                                            frameborder="0" 
-                                            name="ya-form-6a7e358b02848f6b91df8944"
-                                            style="width:100%; min-height:450px; border: none; border-radius: 20px; background: white;">
-                                    </iframe>
-                                </div>
                             </div>
                             <div class="or-line">или</div>
                             <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
@@ -1334,14 +1274,6 @@
                 });
             });
         }
-
-        // ===== ЗАГРУЗКА ФОРМЫ ПО КЛИКУ =====
-        window.loadYandexForm = function() {
-            const wrapper = document.getElementById('yandexFormWrapper');
-            if (wrapper) {
-                wrapper.classList.toggle('active');
-            }
-        };
 
         // ===== МОДАЛЬНАЯ КАРУСЕЛЬ =====
         let modalCarouselIndex = 0;
