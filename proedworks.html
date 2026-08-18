@@ -438,21 +438,76 @@
             line-height: 1;
         }
         .modal-close:hover { color: #E67E22; }
-        .modal-content .modal-img {
-            background: #F3EEFA;
+        
+        /* Карусель в модальном окне */
+        .modal-carousel {
+            position: relative;
+            overflow: hidden;
             border-radius: 16px;
             border: 1px solid #d4c4e8;
-            overflow: hidden;
+            background: #F3EEFA;
+            margin-bottom: 12px;
+        }
+        .modal-carousel-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+        .modal-carousel-slide {
+            min-width: 100%;
+            aspect-ratio: 4 / 3;
             display: flex;
             align-items: center;
             justify-content: center;
-            aspect-ratio: 4 / 3;
+            background: #F3EEFA;
         }
-        .modal-content .modal-img img {
+        .modal-carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
+        .modal-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(91, 45, 142, 0.8);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-carousel-btn:hover {
+            background: #5B2D8E;
+        }
+        .modal-carousel-btn.prev { left: 8px; }
+        .modal-carousel-btn.next { right: 8px; }
+        .modal-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 0 4px;
+        }
+        .modal-carousel-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D4C4E8;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .modal-carousel-dots span.active-dot {
+            background: #5B2D8E;
+        }
+
         .modal-content .modal-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; margin-top: 8px; }
         .modal-content .modal-price { font-weight: 700; color: #5B2D8E; font-size: 1.2rem; margin: 4px 0 12px; }
         .modal-content .modal-desc { color: #555; font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5; white-space: pre-line; }
@@ -587,7 +642,6 @@
             .no-products .yandex-form-placeholder iframe { min-height: 500px; }
             .header-left .back-link { width: 38px; height: 38px; font-size: 1.3rem; }
             .filter-tag { padding: 3px 12px; font-size: 0.7rem; }
-            .modal-content .modal-img { height: 120px; }
         }
         @media (max-width: 480px) {
             .filter-grid { grid-template-columns: 1fr; }
@@ -774,7 +828,7 @@
                         Нужно что-то особенное? Разработаем и изготовим под ваш запрос — 
                         от дизайн-проекта до готового изделия.
                     </p>
-                    <a href="https://vk.me/proedworks" target="_blank" class="btn" id="customOrderBtn">Оформить заказ</a>
+                    <a href="https://vk.ru/proedworks" target="_blank" class="btn" id="customOrderBtn">Оформить заказ</a>
                 </div>
             </div>
 
@@ -845,21 +899,18 @@
     </div>
 </footer>
 
-<!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА (с деталями) ===== -->
+<!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА (с каруселью) ===== -->
 <div class="modal-overlay" id="productModal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">&times;</button>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-            <div class="modal-img" id="modalImg1" style="height: 160px;">
-                <img src="" alt="">
+        <div class="modal-carousel" id="modalCarousel">
+            <div class="modal-carousel-track" id="modalCarouselTrack">
+                <!-- слайды будут вставлены через JS -->
             </div>
-            <div class="modal-img" id="modalImg2" style="height: 160px;">
-                <img src="" alt="">
-            </div>
-            <div class="modal-img" id="modalImg3" style="height: 160px;">
-                <img src="" alt="">
-            </div>
+            <button class="modal-carousel-btn prev" id="modalCarouselPrev">‹</button>
+            <button class="modal-carousel-btn next" id="modalCarouselNext">›</button>
         </div>
+        <div class="modal-carousel-dots" id="modalCarouselDots"></div>
         <div class="modal-title" id="modalTitle">Название товара</div>
         <div class="modal-price" id="modalPrice">990 ₽</div>
         <div class="modal-desc" id="modalDesc">Описание товара</div>
@@ -868,7 +919,7 @@
     </div>
 </div>
 
-<!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА (с ВК) ===== -->
+<!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА ===== -->
 <div class="modal-overlay" id="orderModal">
     <div class="modal-content">
         <button class="modal-close" id="orderModalClose">&times;</button>
@@ -884,21 +935,16 @@
     </div>
 </div>
 
-<script src="https://forms.yandex.ru/_static/embed.js"></script>
 <script>
     // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
-        // ===== ГИРЛЯНДЫ-РАСТЯЖКИ =====
         { 
             id: 101, 
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"', 
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-vanechkin-1.jpg', 
-            img2: 'images/garland-vanechkin-2.jpg',
-            img3: 'images/garland-vanechkin-3.jpg'
+            images: ['images/garland-vanechkin-1.jpg', 'images/garland-vanechkin-2.jpg', 'images/garland-vanechkin-3.jpg']
         },
         { 
             id: 102, 
@@ -906,10 +952,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "DO YOU SPEAK ENGLISH?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-doyouspeak-1.jpg', 
-            img2: 'images/garland-doyouspeak-2.jpg',
-            img3: 'images/garland-doyouspeak-3.jpg'
+            images: ['images/garland-doyouspeak-1.jpg', 'images/garland-doyouspeak-2.jpg', 'images/garland-doyouspeak-3.jpg']
         },
         { 
             id: 103, 
@@ -917,10 +960,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "GOOD VIBES ONLY"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт', 'Психология'], 
-            emoji: '🎈', 
-            img1: 'images/garland-goodvibes-1.jpg', 
-            img2: 'images/garland-goodvibes-2.jpg',
-            img3: 'images/garland-goodvibes-3.jpg'
+            images: ['images/garland-goodvibes-1.jpg', 'images/garland-goodvibes-2.jpg', 'images/garland-goodvibes-3.jpg']
         },
         { 
             id: 104, 
@@ -928,10 +968,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-znanie-1.jpg', 
-            img2: 'images/garland-znanie-2.jpg',
-            img3: 'images/garland-znanie-3.jpg'
+            images: ['images/garland-znanie-1.jpg', 'images/garland-znanie-2.jpg', 'images/garland-znanie-3.jpg']
         },
         { 
             id: 105, 
@@ -939,10 +976,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Биология', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-biology-1.jpg', 
-            img2: 'images/garland-biology-2.jpg',
-            img3: 'images/garland-biology-3.jpg'
+            images: ['images/garland-biology-1.jpg', 'images/garland-biology-2.jpg', 'images/garland-biology-3.jpg']
         },
         { 
             id: 106, 
@@ -950,10 +984,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Химия', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-chemistry-1.jpg', 
-            img2: 'images/garland-chemistry-2.jpg',
-            img3: 'images/garland-chemistry-3.jpg'
+            images: ['images/garland-chemistry-1.jpg', 'images/garland-chemistry-2.jpg', 'images/garland-chemistry-3.jpg']
         },
         { 
             id: 107, 
@@ -961,10 +992,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Математика', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-math-1.jpg', 
-            img2: 'images/garland-math-2.jpg',
-            img3: 'images/garland-math-3.jpg'
+            images: ['images/garland-math-1.jpg', 'images/garland-math-2.jpg', 'images/garland-math-3.jpg']
         },
         { 
             id: 108, 
@@ -972,10 +1000,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Русский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-russian-1.jpg', 
-            img2: 'images/garland-russian-2.jpg',
-            img3: 'images/garland-russian-3.jpg'
+            images: ['images/garland-russian-1.jpg', 'images/garland-russian-2.jpg', 'images/garland-russian-3.jpg']
         },
         { 
             id: 109, 
@@ -983,10 +1008,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Французский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-french-1.jpg', 
-            img2: 'images/garland-french-2.jpg',
-            img3: 'images/garland-french-3.jpg'
+            images: ['images/garland-french-1.jpg', 'images/garland-french-2.jpg', 'images/garland-french-3.jpg']
         },
         { 
             id: 110, 
@@ -994,10 +1016,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Китайский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-chinese-1.jpg', 
-            img2: 'images/garland-chinese-2.jpg',
-            img3: 'images/garland-chinese-3.jpg'
+            images: ['images/garland-chinese-1.jpg', 'images/garland-chinese-2.jpg', 'images/garland-chinese-3.jpg']
         },
         { 
             id: 111, 
@@ -1005,10 +1024,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'История', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-history-1.jpg', 
-            img2: 'images/garland-history-2.jpg',
-            img3: 'images/garland-history-3.jpg'
+            images: ['images/garland-history-1.jpg', 'images/garland-history-2.jpg', 'images/garland-history-3.jpg']
         },
         { 
             id: 112, 
@@ -1016,10 +1032,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Физика', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-physics-1.jpg', 
-            img2: 'images/garland-physics-2.jpg',
-            img3: 'images/garland-physics-3.jpg'
+            images: ['images/garland-physics-1.jpg', 'images/garland-physics-2.jpg', 'images/garland-physics-3.jpg']
         },
         { 
             id: 113, 
@@ -1027,10 +1040,7 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-english-1.jpg', 
-            img2: 'images/garland-english-2.jpg',
-            img3: 'images/garland-english-3.jpg'
+            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
         },
         { 
             id: 114, 
@@ -1038,14 +1048,11 @@
             price: '990 ₽', 
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🎈', 
-            img1: 'images/garland-english-1.jpg', 
-            img2: 'images/garland-english-2.jpg',
-            img3: 'images/garland-english-3.jpg'
+            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
         }
     ];
 
-    // ===== КАРУСЕЛЬ =====
+    // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
     let currentSlide = 0;
     const track = document.getElementById('carouselTrack');
     const dots = document.querySelectorAll('#carouselDots span');
@@ -1088,7 +1095,7 @@
                     </div>
                     <div class="or-line">или</div>
                     <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
-                    <a href="https://vk.me/proedworks" target="_blank" class="btn" style="margin-top: 12px;">Оформить заказ</a>
+                    <a href="https://vk.ru/proedworks" target="_blank" class="btn" style="margin-top: 12px;">Оформить заказ</a>
                 </div>
             `;
             return;
@@ -1097,7 +1104,7 @@
         container.innerHTML = productList.map(p => `
             <div class="product-card" data-id="${p.id}">
                 <div class="prod-img">
-                    <img src="${p.img1 || 'images/placeholder.jpg'}" alt="${p.name}" onerror="this.src='images/placeholder.jpg'">
+                    <img src="${p.images[0] || 'images/placeholder.jpg'}" alt="${p.name}" onerror="this.src='images/placeholder.jpg'">
                 </div>
                 <h4>${p.name}</h4>
                 <div class="prod-price">${p.price}</div>
@@ -1113,29 +1120,73 @@
         });
     }
 
+    // ===== МОДАЛЬНАЯ КАРУСЕЛЬ =====
+    let modalCarouselIndex = 0;
+    let currentModalImages = [];
+
+    function renderModalCarousel(images) {
+        const track = document.getElementById('modalCarouselTrack');
+        const dotsContainer = document.getElementById('modalCarouselDots');
+        if (!track) return;
+        
+        currentModalImages = images.length ? images : ['images/placeholder.jpg'];
+        track.innerHTML = currentModalImages.map(img => `
+            <div class="modal-carousel-slide">
+                <img src="${img}" alt="Фото товара" onerror="this.src='images/placeholder.jpg'">
+            </div>
+        `).join('');
+
+        dotsContainer.innerHTML = currentModalImages.map((_, i) => `
+            <span class="${i === 0 ? 'active-dot' : ''}" data-index="${i}"></span>
+        `).join('');
+
+        modalCarouselIndex = 0;
+        updateModalCarousel();
+
+        // События для точек
+        dotsContainer.querySelectorAll('span').forEach(dot => {
+            dot.addEventListener('click', function() {
+                modalCarouselIndex = parseInt(this.dataset.index);
+                updateModalCarousel();
+            });
+        });
+    }
+
+    function updateModalCarousel() {
+        const track = document.getElementById('modalCarouselTrack');
+        const dots = document.querySelectorAll('#modalCarouselDots span');
+        if (!track) return;
+        track.style.transform = `translateX(-${modalCarouselIndex * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active-dot', i === modalCarouselIndex);
+        });
+    }
+
+    function moveModalCarousel(direction) {
+        const total = currentModalImages.length;
+        if (total === 0) return;
+        modalCarouselIndex = (modalCarouselIndex + direction + total) % total;
+        updateModalCarousel();
+    }
+
     // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
     function openProductModal(id) {
         const product = products.find(p => p.id === id);
         if (!product) return;
-        
-        const img1 = document.querySelector('#modalImg1 img');
-        const img2 = document.querySelector('#modalImg2 img');
-        const img3 = document.querySelector('#modalImg3 img');
-        if (img1) img1.src = product.img1 || 'images/placeholder.jpg';
-        if (img2) img2.src = product.img2 || 'images/placeholder.jpg';
-        if (img3) img3.src = product.img3 || 'images/placeholder.jpg';
-        
+
         document.getElementById('modalTitle').textContent = product.name;
         document.getElementById('modalPrice').textContent = product.price;
         document.getElementById('modalDesc').innerHTML = product.desc.replace(/\n/g, '<br>');
         document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
-        
-        // Запоминаем ID товара для кнопки "Заказать"
         document.getElementById('modalOrderBtn').dataset.productId = id;
+
+        renderModalCarousel(product.images);
+
         document.getElementById('productModal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
+    // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
     document.getElementById('modalClose').addEventListener('click', function() {
         document.getElementById('productModal').classList.remove('active');
         document.body.style.overflow = '';
@@ -1147,23 +1198,29 @@
         }
     });
 
-    // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛЬНОМ ОКНЕ =====
+    // ===== КНОПКИ КАРУСЕЛИ В МОДАЛКЕ =====
+    document.getElementById('modalCarouselPrev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        moveModalCarousel(-1);
+    });
+    document.getElementById('modalCarouselNext').addEventListener('click', function(e) {
+        e.stopPropagation();
+        moveModalCarousel(1);
+    });
+
+    // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛКЕ =====
     document.getElementById('modalOrderBtn').addEventListener('click', function() {
         const productId = parseInt(this.dataset.productId);
         const product = products.find(p => p.id === productId);
         if (!product) return;
         
-        // Заполняем название товара в модалке выбора канала
         document.getElementById('orderProductName').textContent = product.name;
-        
-        // Настраиваем ссылку VK с сообщением
         const vkLink = document.getElementById('orderVkLink');
         if (vkLink) {
             const message = `Здравствуйте! Хочу оформить заказ на "${product.name}" за ${product.price}.`;
             vkLink.href = `https://vk.me/proedworks?text=${encodeURIComponent(message)}`;
         }
         
-        // Закрываем модалку товара и открываем модалку заказа
         document.getElementById('productModal').classList.remove('active');
         document.getElementById('orderModal').classList.add('active');
     });
@@ -1182,7 +1239,7 @@
 
     // ===== ИНИЦИАЛИЗАЦИЯ =====
     document.addEventListener('DOMContentLoaded', function() {
-        // Карусель
+        // Карусель производства
         if (track && dots.length > 0) {
             updateCarousel();
             let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
@@ -1203,14 +1260,6 @@
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
 
-        if (tabBtns.length > 0) {
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            tabBtns[0].classList.add('active');
-            tabContents.forEach(content => content.classList.remove('active'));
-            const firstTab = document.getElementById(tabBtns[0].dataset.tab);
-            if (firstTab) firstTab.classList.add('active');
-        }
-
         tabBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 tabBtns.forEach(b => b.classList.remove('active'));
@@ -1221,7 +1270,7 @@
             });
         });
 
-        // ===== ФИЛЬТРЫ ДЛЯ ОБРАЗОВАТЕЛЬНОЙ ПРОДУКЦИИ =====
+        // ===== ФИЛЬТРЫ =====
         renderProducts('productGrid', products);
 
         document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
