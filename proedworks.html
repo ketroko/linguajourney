@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProEdWorks — Оснащение и решения для образования</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
     <style>
         * {
             margin: 0;
@@ -12,7 +11,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
             background: #F3EEFA;
             color: #1f2937;
             line-height: 1.6;
@@ -23,10 +22,9 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
-        /* ===== ШАПКА ===== */
         header {
             background: #F3EEFA;
             padding: 16px 0;
@@ -47,24 +45,21 @@
             height: 44px;
             border-radius: 50%;
             background: #5B2D8E;
-            color: #D4C4E8;
+            color: white;
             text-decoration: none;
             font-size: 1.6rem;
             font-weight: 300;
             transition: 0.3s;
-            line-height: 1;
         }
         .header-left .back-link:hover {
             background: #7B4DAE;
-            transform: scale(1.05);
         }
         .header-center {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-align: center;
         }
-        .header-center .logo-circle {
+        .logo-circle {
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -77,28 +72,21 @@
             color: white;
             flex-shrink: 0;
         }
-        .header-center .brand {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.2;
-        }
-        .header-center .brand .name {
+        .brand .name {
             font-size: 1.4rem;
             font-weight: 800;
             color: #5B2D8E;
         }
-        .header-center .brand .tagline {
+        .brand .tagline {
             font-size: 0.75rem;
             color: #888;
-            font-weight: 500;
         }
         .header-right {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .header-right .social-icon {
+        .social-icon {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -108,18 +96,16 @@
             align-items: center;
             justify-content: center;
             transition: 0.2s;
-            cursor: pointer;
+            text-decoration: none;
+            color: #5B2D8E;
+            font-weight: 700;
+            font-size: 0.8rem;
         }
-        .header-right .social-icon img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-        .header-right .social-icon:hover {
+        .social-icon:hover {
             background: #5B2D8E;
+            color: white;
         }
 
-        /* ===== ОСНОВНОЙ БЛОК ===== */
         .page-block {
             background: white;
             border-radius: 48px;
@@ -127,6 +113,7 @@
             border: 2px solid #5B2D8E;
             box-shadow: 0 12px 28px rgba(91, 45, 142, 0.08);
             margin: 32px 0 60px;
+            flex: 1;
         }
         .page-title {
             text-align: center;
@@ -148,7 +135,6 @@
             color: #5B2D8E;
         }
 
-        /* ===== ТАБЫ ===== */
         .tabs {
             display: flex;
             flex-wrap: wrap;
@@ -167,9 +153,6 @@
             cursor: pointer;
             transition: 0.3s;
             font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         .tab-btn:hover {
             background: #5B2D8E;
@@ -211,7 +194,6 @@
             font-size: 1rem;
         }
 
-        /* ===== ФИЛЬТРЫ ===== */
         .filter-section {
             background: #F8F4FC;
             border-radius: 32px;
@@ -233,7 +215,6 @@
             font-size: 0.9rem;
             color: #5B2D8E;
             margin-bottom: 8px;
-            letter-spacing: 0.3px;
             flex-shrink: 0;
         }
         .filter-tags {
@@ -301,7 +282,6 @@
             padding-top: 16px;
         }
         .filter-reset-btn {
-            display: inline-block;
             background: transparent;
             border: 2px solid #5B2D8E;
             color: #5B2D8E;
@@ -317,10 +297,8 @@
             background: #5B2D8E;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(91, 45, 142, 0.2);
         }
 
-        /* ===== КАРТОЧКИ ТОВАРОВ ===== */
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -329,7 +307,7 @@
         .product-card {
             background: #FEF9E6;
             border-radius: 24px;
-            padding: 20px 16px 20px;
+            padding: 20px 16px;
             border: 1px solid #E67E22;
             text-align: center;
             transition: 0.3s;
@@ -350,10 +328,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
-            color: #5B2D8E;
-            border: 1px solid #d4c4e8;
+            font-size: 3rem;
+            color: #999;
+            border: 2px dashed #d4c4e8;
             overflow: hidden;
+            position: relative;
+        }
+        .product-card .prod-img .placeholder-label {
+            position: absolute;
+            bottom: 8px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 400;
         }
         .product-card .prod-img img {
             width: 100%;
@@ -392,7 +381,6 @@
             color: white;
         }
 
-        /* ===== НЕТ ТОВАРОВ ===== */
         .no-products {
             grid-column: 1 / -1;
             text-align: center;
@@ -411,31 +399,26 @@
             font-size: 0.95rem;
             margin-bottom: 16px;
         }
-        .no-products .request-block {
-            background: white;
-            border-radius: 24px;
-            padding: 24px;
-            border: 1px solid #d4c4e8;
-            margin: 16px auto;
-            max-width: 480px;
+        .no-products .btn {
+            display: inline-block;
+            background: #5B2D8E;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: 0.2s;
+            border: 1px solid #F7FF5B;
+            margin-top: 12px;
+            font-family: inherit;
+            cursor: pointer;
         }
-        .no-products .request-block h4 {
-            color: #5B2D8E;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        .no-products .request-block p {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 12px;
-        }
-        .no-products .or-line {
-            font-size: 0.9rem;
-            color: #888;
-            margin: 12px 0 8px;
+        .no-products .btn:hover {
+            background: #F7FF5B;
+            color: #1f2937;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -480,7 +463,6 @@
             color: #E67E22;
         }
 
-        /* Карусель в модальном окне */
         .modal-carousel {
             position: relative;
             overflow: hidden;
@@ -500,6 +482,19 @@
             align-items: center;
             justify-content: center;
             background: #F3EEFA;
+            font-size: 4rem;
+            color: #999;
+            border: 2px dashed #d4c4e8;
+            position: relative;
+        }
+        .modal-carousel-slide .slide-label {
+            position: absolute;
+            bottom: 8px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 10px;
+            border-radius: 12px;
         }
         .modal-carousel-slide img {
             width: 100%;
@@ -553,32 +548,32 @@
             background: #5B2D8E;
         }
 
-        .modal-content .modal-title {
+        .modal-title {
             font-size: 1.4rem;
             font-weight: 700;
             color: #2c3e50;
             margin-top: 8px;
         }
-        .modal-content .modal-price {
+        .modal-price {
             font-weight: 700;
             color: #5B2D8E;
             font-size: 1.2rem;
             margin: 4px 0 12px;
         }
-        .modal-content .modal-desc {
+        .modal-desc {
             color: #555;
             font-size: 0.95rem;
             margin-bottom: 16px;
             line-height: 1.5;
             white-space: pre-line;
         }
-        .modal-content .modal-tags {
+        .modal-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
             margin-bottom: 20px;
         }
-        .modal-content .modal-tags span {
+        .modal-tags span {
             background: #F3EEFA;
             border: 1px solid #d4c4e8;
             padding: 2px 12px;
@@ -627,11 +622,6 @@
         .modal-order-options a:hover {
             background: #3a5d82;
             border-color: #3a5d82;
-        }
-        .modal-order-options a img {
-            width: 24px;
-            height: 24px;
-            filter: brightness(0) invert(1);
         }
 
         .custom-block {
@@ -700,14 +690,13 @@
             justify-content: center;
             transition: 0.2s;
             cursor: pointer;
-        }
-        .contacts-bottom .social-row .s-icon img {
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
+            text-decoration: none;
+            color: #5B2D8E;
+            font-weight: 700;
         }
         .contacts-bottom .social-row .s-icon:hover {
             background: #5B2D8E;
+            color: white;
         }
         .contacts-bottom a {
             color: #5B2D8E;
@@ -716,6 +705,128 @@
         }
         .contacts-bottom a:hover {
             text-decoration: underline;
+        }
+
+        .production-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 2px solid #E8E0F2;
+        }
+        .production-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #5B2D8E;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .production-section .sub {
+            text-align: center;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 28px;
+            font-size: 0.95rem;
+        }
+        .production-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid #D4C4E8;
+            background: #F3EEFA;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .production-carousel .track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .production-carousel .slide {
+            min-width: 100%;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 450px;
+            background: #F3EEFA;
+            border: 2px dashed #d4c4e8;
+            color: #999;
+            position: relative;
+        }
+        .production-carousel .slide .slide-label {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+        .production-carousel .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 16px;
+            background: #F3EEFA;
+        }
+        .prod-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #5B2D8E;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .prod-arrow:hover {
+            background: #7B4DAE;
+        }
+        .prod-arrow.prev {
+            left: 12px;
+        }
+        .prod-arrow.next {
+            right: 12px;
+        }
+        .prod-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding-bottom: 16px;
+        }
+        .prod-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #D4C4E8;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .prod-dots span.active {
+            background: #5B2D8E;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 20px;
+            margin-top: 16px;
+        }
+        .tech-tags span {
+            background: #F3EEFA;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #555;
+            border: 1px solid #D4C4E8;
         }
 
         footer {
@@ -742,14 +853,6 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 16px;
             }
-            .header-center .brand .name {
-                font-size: 1rem;
-            }
-            .header-center .logo-circle {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
             .grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 16px;
@@ -763,14 +866,22 @@
             .modal-content {
                 padding: 28px 20px;
             }
+            .brand .name {
+                font-size: 1rem;
+            }
+            .logo-circle {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
             .header-left .back-link {
                 width: 38px;
                 height: 38px;
                 font-size: 1.3rem;
             }
-            .filter-tag {
-                padding: 3px 12px;
-                font-size: 0.7rem;
+            .production-carousel .slide {
+                height: 250px;
+                font-size: 3rem;
             }
         }
         @media (max-width: 480px) {
@@ -783,15 +894,15 @@
             .tab-btn {
                 min-width: 100%;
             }
-            .header-center .brand .name {
+            .brand .name {
                 font-size: 0.9rem;
             }
-            .header-center .logo-circle {
+            .logo-circle {
                 width: 30px;
                 height: 30px;
                 font-size: 0.9rem;
             }
-            .header-center .brand .tagline {
+            .brand .tagline {
                 font-size: 0.6rem;
             }
             .filter-bottom {
@@ -802,30 +913,24 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
     <header>
         <div class="container">
             <div class="header-left">
                 <a href="/" class="back-link">‹</a>
             </div>
             <div class="header-center">
-                <div class="logo-circle">
-                    <img src="images/proedworks-logo.png" alt="ProEdWorks" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
-                </div>
+                <div class="logo-circle">P</div>
                 <div class="brand">
                     <span class="name">ProEdWorks</span>
                     <span class="tagline">Оснащение и решения для образования</span>
                 </div>
             </div>
             <div class="header-right">
-                <a href="https://vk.me/proedworks" target="_blank" class="social-icon">
-                    <img src="images/vk-icon.png" alt="VK">
-                </a>
+                <a href="https://vk.me/proedworks" target="_blank" class="social-icon">VK</a>
             </div>
         </div>
     </header>
 
-    <!-- ===== MAIN ===== -->
     <section>
         <div class="container">
             <div class="page-block">
@@ -840,19 +945,17 @@
                     </p>
                 </div>
 
-                <!-- ===== ВКЛАДКИ ===== -->
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="tab1">🎓 Образовательная продукция</button>
                     <button class="tab-btn" data-tab="tab2">🎁 Подарочные наборы</button>
                     <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
                 </div>
 
-                <!-- ===== ВКЛАДКА 1: ОБРАЗОВАТЕЛЬНАЯ ПРОДУКЦИЯ ===== -->
+                <!-- ВКЛАДКА 1 -->
                 <div class="tab-content active" id="tab1">
                     <h2>Образовательная продукция</h2>
                     <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
 
-                    <!-- ФИЛЬТРЫ -->
                     <div class="filter-section">
                         <div class="filter-grid">
                             <div class="filter-group">
@@ -909,9 +1012,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #d4c4e8;">
-                            <div style="display: flex; flex-wrap: wrap; gap: 20px 40px;">
-                                <div class="filter-group" style="flex: 1; min-width: 120px;">
+                        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #d4c4e8;">
+                            <div style="display:flex;flex-wrap:wrap;gap:20px 40px;">
+                                <div class="filter-group" style="flex:1;min-width:120px;">
                                     <div class="filter-label">📌 Другое</div>
                                     <div class="filter-tags" data-category="other">
                                         <span class="filter-tag all-tag active">Все</span>
@@ -926,91 +1029,84 @@
                         </div>
                     </div>
 
-                    <!-- КАРТОЧКИ ТОВАРОВ -->
                     <div class="grid" id="productGrid"></div>
 
-                    <!-- ===== НАШЕ ПРОИЗВОДСТВО ===== -->
-                    <div style="margin-top: 48px; padding-top: 32px; border-top: 2px solid #E8E0F2;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #5B2D8E; text-align: center; margin-bottom: 8px;">🏭 Наше производство</h3>
-                        <p style="text-align: center; color: #666; max-width: 700px; margin: 0 auto 28px; font-size: 0.95rem; line-height: 1.5;">
-                            Изделия производятся на собственном оборудовании
-                        </p>
+                    <!-- ПРОИЗВОДСТВО -->
+                    <div class="production-section">
+                        <h3>🏭 Наше производство</h3>
+                        <p class="sub">Изделия производятся на собственном оборудовании</p>
 
-                        <div style="position: relative; overflow: hidden; border-radius: 24px; border: 1px solid #D4C4E8; background: #F3EEFA; max-width: 700px; margin: 0 auto;" id="productionCarousel">
-                            <div style="display: flex; transition: transform 0.5s ease;" id="carouselTrack">
-                                <div style="min-width: 100%; padding: 20px; text-align: center; box-sizing: border-box;">
-                                    <img src="images/production-1.jpg" alt="Производство ProEdWorks" style="width:100%; height:450px; object-fit:contain; border-radius:16px; background:#F3EEFA; display:block;">
+                        <div class="production-carousel" id="productionCarousel">
+                            <div class="track" id="carouselTrack">
+                                <div class="slide">
+                                    🏭
+                                    <span class="slide-label">Лазерная резка</span>
                                 </div>
-                                <div style="min-width: 100%; padding: 20px; text-align: center; box-sizing: border-box;">
-                                    <img src="images/production-2.jpg" alt="Производство ProEdWorks" style="width:100%; height:450px; object-fit:contain; border-radius:16px; background:#F3EEFA; display:block;">
+                                <div class="slide">
+                                    ⚙️
+                                    <span class="slide-label">ЧПУ-станки</span>
                                 </div>
-                                <div style="min-width: 100%; padding: 20px; text-align: center; box-sizing: border-box;">
-                                    <img src="images/production-3.jpg" alt="Производство ProEdWorks" style="width:100%; height:450px; object-fit:contain; border-radius:16px; background:#F3EEFA; display:block;">
+                                <div class="slide">
+                                    🖨️
+                                    <span class="slide-label">3D-печать</span>
                                 </div>
                             </div>
-                            <button onclick="moveCarousel(-1)" style="position: absolute; top: 50%; left: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">‹</button>
-                            <button onclick="moveCarousel(1)" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: #5B2D8E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; z-index: 10;">›</button>
-                            <div style="display: flex; justify-content: center; gap: 8px; padding-bottom: 16px;" id="carouselDots">
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #5B2D8E; cursor: pointer; display: inline-block;"></span>
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4C4E8; cursor: pointer; display: inline-block;"></span>
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #D4C4E8; cursor: pointer; display: inline-block;"></span>
+                            <button class="prod-arrow prev" onclick="moveCarousel(-1)">‹</button>
+                            <button class="prod-arrow next" onclick="moveCarousel(1)">›</button>
+                            <div class="prod-dots" id="carouselDots">
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
                             </div>
                         </div>
 
-                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; margin-top: 16px;">
-                            <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">Лазерные станки</span>
-                            <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">ЧПУ-станки</span>
-                            <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">3D-принтеры</span>
-                            <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">УФ-принтеры</span>
-                            <span style="background: #F3EEFA; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; color: #555; border: 1px solid #D4C4E8;">Ламинаторы</span>
+                        <div class="tech-tags">
+                            <span>Лазерные станки</span>
+                            <span>ЧПУ-станки</span>
+                            <span>3D-принтеры</span>
+                            <span>УФ-принтеры</span>
+                            <span>Ламинаторы</span>
                         </div>
                     </div>
 
-                    <!-- ИНДИВИДУАЛЬНЫЙ ЗАКАЗ -->
                     <div class="custom-block">
                         <h4>✏️ Индивидуальные заказы</h4>
-                        <p>
-                            Нужно что-то особенное? Разработаем и изготовим под ваш запрос —
-                            от дизайн-проекта до готового изделия.
-                        </p>
-                        <a href="https://vk.ru/proedworks" target="_blank" class="btn" id="customOrderBtn">Оформить заказ</a>
+                        <p>Нужно что-то особенное? Разработаем и изготовим под ваш запрос — от дизайн-проекта до готового изделия.</p>
+                        <a href="https://vk.ru/proedworks" target="_blank" class="btn">Оформить заказ</a>
                     </div>
                 </div>
 
-                <!-- ===== ВКЛАДКА 2: ПОДАРОЧНЫЕ НАБОРЫ ===== -->
+                <!-- ВКЛАДКА 2 -->
                 <div class="tab-content" id="tab2">
                     <h2>Подарочные наборы</h2>
                     <p class="subtitle">Готовые комплекты для тёплых поздравлений. Скоро в продаже!</p>
-
-                    <div style="text-align: center; padding: 60px 20px; background: #F3EEFA; border-radius: 32px; border: 2px dashed #5B2D8E;">
-                        <h3 style="font-size: 1.5rem; color: #5B2D8E; margin-bottom: 8px;">🎁 Ждём поставок!</h3>
-                        <p style="color: #666; font-size: 1rem; max-width: 500px; margin: 0 auto;">Следите за обновлениями — скоро здесь появятся готовые подарочные наборы для любых праздников.</p>
+                    <div style="text-align:center;padding:60px 20px;background:#F3EEFA;border-radius:32px;border:2px dashed #5B2D8E;">
+                        <h3 style="font-size:1.5rem;color:#5B2D8E;margin-bottom:8px;">🎁 Ждём поставок!</h3>
+                        <p style="color:#666;font-size:1rem;max-width:500px;margin:0 auto;">Следите за обновлениями — скоро здесь появятся готовые подарочные наборы для любых праздников.</p>
                     </div>
                 </div>
 
-                <!-- ===== ВКЛАДКА 3: МЕБЕЛЬ И ОСНАЩЕНИЕ ===== -->
+                <!-- ВКЛАДКА 3 -->
                 <div class="tab-content" id="tab3">
                     <h2>Мебель и оснащение</h2>
                     <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
 
-                    <div style="text-align: center; padding: 60px 20px; background: #F3EEFA; border-radius: 32px; border: 2px dashed #5B2D8E;">
-                        <h3 style="font-size: 1.5rem; color: #5B2D8E; margin-bottom: 8px;">🪑 Ждём поставок!</h3>
-                        <p style="color: #666; font-size: 1rem; max-width: 500px; margin: 0 auto;">Следите за обновлениями — скоро здесь появится мебель и оснащение для ваших классов и кабинетов.</p>
+                    <div style="text-align:center;padding:60px 20px;background:#F3EEFA;border-radius:32px;border:2px dashed #5B2D8E;">
+                        <h3 style="font-size:1.5rem;color:#5B2D8E;margin-bottom:8px;">🪑 Ждём поставок!</h3>
+                        <p style="color:#666;font-size:1rem;max-width:500px;margin:0 auto;">Следите за обновлениями — скоро здесь появится мебель и оснащение для ваших классов и кабинетов.</p>
                     </div>
 
-                    <div style="margin-top: 28px; background: #F3EEFA; padding: 24px; border-radius: 24px; text-align: center; border: 2px solid #5B2D8E;">
-                        <p style="font-size: 0.95rem; color: #333; font-weight: 600;">
-                            ⚡ Сравните параметры
-                        </p>
-                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-top: 12px; font-size: 0.9rem;">
+                    <div style="margin-top:28px;background:#F3EEFA;padding:24px;border-radius:24px;text-align:center;border:2px solid #5B2D8E;">
+                        <p style="font-size:0.95rem;color:#333;font-weight:600;">⚡ Сравните параметры</p>
+                        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:12px;font-size:0.9rem;">
                             <div>
-                                <strong style="color: #5B2D8E;">🇷🇺 Россия</strong><br>
+                                <strong style="color:#5B2D8E;">🇷🇺 Россия</strong><br>
                                 Срок: 3–14 дней<br>
                                 Сертификаты: ГОСТ, СанПиН<br>
                                 Мин. заказ: от 1 шт.
                             </div>
                             <div>
-                                <strong style="color: #5B2D8E;">🌏 Китай</strong><br>
+                                <strong style="color:#5B2D8E;">🌏 Китай</strong><br>
                                 Срок: 30–60 дней<br>
                                 Сертификаты: по запросу<br>
                                 Мин. заказ: под заказ
@@ -1018,20 +1114,18 @@
                         </div>
                     </div>
 
-                    <div style="text-align: center; margin-top: 24px;">
+                    <div style="text-align:center;margin-top:24px;">
                         <a href="https://vk.me/proedworks" target="_blank" class="btn">Подобрать оснащение</a>
                     </div>
                 </div>
 
-                <!-- ===== КОНТАКТЫ ВНИЗУ ===== -->
+                <!-- КОНТАКТЫ -->
                 <div class="contacts-bottom">
                     <div class="social-row">
-                        <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
-                            <img src="images/vk-icon.png" alt="VK">
-                        </a>
+                        <a href="https://vk.me/proedworks" target="_blank" class="s-icon">VK</a>
                     </div>
                     <p>📧 <a href="mailto:proedworks@mail.ru">proedworks@mail.ru</a></p>
-                    <p style="font-size: 0.85rem; color: #888; margin-top: 4px;">Ответим на вопросы, поможем подобрать решение</p>
+                    <p style="font-size:0.85rem;color:#888;margin-top:4px;">Ответим на вопросы, поможем подобрать решение</p>
                 </div>
 
             </div>
@@ -1044,14 +1138,12 @@
         </div>
     </footer>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА (с каруселью) ===== -->
+    <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
             <div class="modal-carousel" id="modalCarousel">
-                <div class="modal-carousel-track" id="modalCarouselTrack">
-                    <!-- слайды будут вставлены через JS -->
-                </div>
+                <div class="modal-carousel-track" id="modalCarouselTrack"></div>
                 <button class="modal-carousel-btn prev" id="modalCarouselPrev">‹</button>
                 <button class="modal-carousel-btn next" id="modalCarouselNext">›</button>
             </div>
@@ -1064,148 +1156,146 @@
         </div>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА ===== -->
+    <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">&times;</button>
-            <h3 style="text-align: center; margin-bottom: 8px; color: #5B2D8E;">Выберите способ заказа</h3>
-            <p style="text-align: center; color: #888; font-size: 0.9rem; margin-bottom: 16px;">
+            <h3 style="text-align:center;margin-bottom:8px;color:#5B2D8E;">Выберите способ заказа</h3>
+            <p style="text-align:center;color:#888;font-size:0.9rem;margin-bottom:16px;">
                 В сообщении укажите: <strong id="orderProductName">Название товара</strong>
             </p>
             <div class="modal-order-options">
-                <a href="#" id="orderVkLink" target="_blank" style="display: flex; align-items: center; gap: 10px; background: #4c75a3; border: 2px solid #4c75a3; padding: 12px 24px; border-radius: 40px; text-decoration: none; font-weight: 600; color: white; transition: 0.2s;">
-                    <img src="images/vk-icon.png" alt="VK" style="width:24px; height:24px; filter: brightness(0) invert(1);"> ВКонтакте
-                </a>
+                <a href="#" id="orderVkLink" target="_blank">ВКонтакте</a>
             </div>
         </div>
     </div>
 
     <script>
-        // ===== ДАННЫЕ ТОВАРОВ =====
+        // ===== ВСЕ ТОВАРЫ (14 штук) =====
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор',
-                'Мотивация', 'Ремонт'
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
+                'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-vanechkin-1.jpg', 'images/garland-vanechkin-2.jpg', 'images/garland-vanechkin-3.jpg']
+            images: ['🖼️', '🎯', '✨']
         }, {
             id: 102,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "DO YOU SPEAK ENGLISH?"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "DO YOU SPEAK ENGLISH?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор',
-                'Мотивация', 'Ремонт'
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "DO YOU SPEAK ENGLISH?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
+                'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-doyouspeak-1.jpg', 'images/garland-doyouspeak-2.jpg', 'images/garland-doyouspeak-3.jpg']
+            images: ['🖼️', '📚', '✨']
         }, {
             id: 103,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "GOOD VIBES ONLY"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "GOOD VIBES ONLY"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "GOOD VIBES ONLY"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт',
                 'Психология'
             ],
-            images: ['images/garland-goodvibes-1.jpg', 'images/garland-goodvibes-2.jpg', 'images/garland-goodvibes-3.jpg']
+            images: ['🖼️', '🌟', '✨']
         }, {
             id: 104,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ЗНАНИЯ ЭТО СИЛА"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт'],
-            images: ['images/garland-znanie-1.jpg', 'images/garland-znanie-2.jpg', 'images/garland-znanie-3.jpg']
+            images: ['🖼️', '💪', '🧠']
         }, {
             id: 105,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Биология', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-biology-1.jpg', 'images/garland-biology-2.jpg', 'images/garland-biology-3.jpg']
+            images: ['🖼️', '🧬', '🔬']
         }, {
             id: 106,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Химия', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-chemistry-1.jpg', 'images/garland-chemistry-2.jpg', 'images/garland-chemistry-3.jpg']
+            images: ['🖼️', '⚗️', '🧪']
         }, {
             id: 107,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Математика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-math-1.jpg', 'images/garland-math-2.jpg', 'images/garland-math-3.jpg']
+            images: ['🖼️', '📐', '➕']
         }, {
             id: 108,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Русский язык', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-russian-1.jpg', 'images/garland-russian-2.jpg', 'images/garland-russian-3.jpg']
+            images: ['🖼️', '🇷🇺', '📖']
         }, {
             id: 109,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Французский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-french-1.jpg', 'images/garland-french-2.jpg', 'images/garland-french-3.jpg']
+            images: ['🖼️', '🇫🇷', '🥐']
         }, {
             id: 110,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Китайский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-chinese-1.jpg', 'images/garland-chinese-2.jpg', 'images/garland-chinese-3.jpg']
+            images: ['🖼️', '🇨🇳', '🐉']
         }, {
             id: 111,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'История', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-history-1.jpg', 'images/garland-history-2.jpg', 'images/garland-history-3.jpg']
+            images: ['🖼️', '📜', '🏛️']
         }, {
             id: 112,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Физика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images/garland-physics-1.jpg', 'images/garland-physics-2.jpg', 'images/garland-physics-3.jpg']
+            images: ['🖼️', '⚡', '🚀']
         }, {
             id: 113,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
+            images: ['🖼️', '🇬🇧', '📚']
         }, {
             id: 114,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"',
             price: '990 ₽',
-            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.',
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
+            images: ['🖼️', '🇬🇧', '🎯']
         }];
 
         // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
@@ -1219,52 +1309,41 @@
             updateCarousel();
         };
 
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
         function updateCarousel() {
             if (!track) return;
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
             dots.forEach((dot, i) => {
-                dot.style.background = i === currentSlide ? '#5B2D8E' : '#D4C4E8';
+                dot.classList.toggle('active', i === currentSlide);
             });
         }
 
-        // ===== ОТРИСОВКА КАРТОЧЕК =====
+        // ===== ОТРИСОВКА ТОВАРОВ =====
         function renderProducts(containerId, productList) {
             const container = document.getElementById(containerId);
             if (!container) return;
 
             if (productList.length === 0) {
                 container.innerHTML = `
-                        <div class="no-products">
-                            <h3>🤷 Ничего не найдено</h3>
-                            <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
-                            <div class="request-block">
-                                <h4>💬 Напишите нам в VK</h4>
-                                <p>Опишите, что вам нужно, и мы подберём или изготовим товар под ваш запрос.</p>
-                                <a href="https://vk.me/proedworks" target="_blank" class="btn">Написать в VK</a>
-                            </div>
-                            <div class="or-line">или</div>
-                            <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
-                            <a href="https://vk.ru/proedworks" target="_blank" class="btn" style="margin-top: 12px;">Оформить заказ</a>
-                        </div>
-                    `;
+                    <div class="no-products">
+                        <h3>🤷 Ничего не найдено</h3>
+                        <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
+                        <a href="https://vk.me/proedworks" target="_blank" class="btn">Написать в VK</a>
+                    </div>
+                `;
                 return;
             }
 
             container.innerHTML = productList.map(p => `
-                    <div class="product-card" data-id="${p.id}">
-                        <div class="prod-img">
-                            <img src="${p.images[0] || 'images/placeholder.jpg'}" alt="${p.name}" onerror="this.src='images/placeholder.jpg'">
-                        </div>
-                        <h4>${p.name}</h4>
-                        <div class="prod-price">${p.price}</div>
-                        <button class="btn-detail" data-id="${p.id}">Подробнее</button>
+                <div class="product-card" data-id="${p.id}">
+                    <div class="prod-img">
+                        <span style="font-size:3rem;">${p.images[0]}</span>
+                        <span class="placeholder-label">📷 Фото товара</span>
                     </div>
-                `).join('');
+                    <h4>${p.name}</h4>
+                    <div class="prod-price">${p.price}</div>
+                    <button class="btn-detail" data-id="${p.id}">Подробнее</button>
+                </div>
+            `).join('');
 
             container.querySelectorAll('.btn-detail').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1283,16 +1362,17 @@
             const dotsContainer = document.getElementById('modalCarouselDots');
             if (!track) return;
 
-            currentModalImages = images.length ? images : ['images/placeholder.jpg'];
-            track.innerHTML = currentModalImages.map(img => `
-                    <div class="modal-carousel-slide">
-                        <img src="${img}" alt="Фото товара" onerror="this.src='images/placeholder.jpg'">
-                    </div>
-                `).join('');
+            currentModalImages = images.length ? images : ['📦'];
+            track.innerHTML = currentModalImages.map((img, idx) => `
+                <div class="modal-carousel-slide">
+                    <span style="font-size:4rem;">${img}</span>
+                    <span class="slide-label">📷 Фото ${idx + 1}</span>
+                </div>
+            `).join('');
 
             dotsContainer.innerHTML = currentModalImages.map((_, i) => `
-                    <span class="${i === 0 ? 'active-dot' : ''}" data-index="${i}"></span>
-                `).join('');
+                <span class="${i === 0 ? 'active-dot' : ''}" data-index="${i}"></span>
+            `).join('');
 
             modalCarouselIndex = 0;
             updateModalCarousel();
@@ -1322,24 +1402,23 @@
             updateModalCarousel();
         }
 
-        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
+        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
 
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalPrice').textContent = product.price;
-            document.getElementById('modalDesc').innerHTML = product.desc.replace(/\n/g, '<br>');
+            document.getElementById('modalDesc').textContent = product.desc;
             document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
             document.getElementById('modalOrderBtn').dataset.productId = id;
 
             renderModalCarousel(product.images);
-
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
+        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1351,7 +1430,6 @@
             }
         });
 
-        // ===== КНОПКИ КАРУСЕЛИ В МОДАЛКЕ =====
         document.getElementById('modalCarouselPrev').addEventListener('click', function(e) {
             e.stopPropagation();
             moveModalCarousel(-1);
@@ -1361,7 +1439,7 @@
             moveModalCarousel(1);
         });
 
-        // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛКЕ =====
+        // ===== КНОПКА "ЗАКАЗАТЬ" =====
         document.getElementById('modalOrderBtn').addEventListener('click', function() {
             const productId = parseInt(this.dataset.productId);
             const product = products.find(p => p.id === productId);
@@ -1370,15 +1448,13 @@
             document.getElementById('orderProductName').textContent = product.name;
             const vkLink = document.getElementById('orderVkLink');
             if (vkLink) {
-                const message = `Здравствуйте! Хочу оформить заказ на "${product.name}" за ${product.price}.`;
-                vkLink.href = `https://vk.me/proedworks?text=${encodeURIComponent(message)}`;
+                vkLink.href = `https://vk.me/proedworks?text=Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
             }
 
             document.getElementById('productModal').classList.remove('active');
             document.getElementById('orderModal').classList.add('active');
         });
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ЗАКАЗА =====
         document.getElementById('orderModalClose').addEventListener('click', function() {
             document.getElementById('orderModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1390,105 +1466,95 @@
             }
         });
 
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
-        document.addEventListener('DOMContentLoaded', function() {
-            // Карусель производства
-            if (track && dots.length > 0) {
-                updateCarousel();
-                let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
-                const carouselContainer = document.getElementById('productionCarousel');
-                if (carouselContainer) {
-                    carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
-                    carouselContainer.addEventListener('mouseleave', () => {
-                        clearInterval(autoSlide);
-                        autoSlide = setInterval(() => window.moveCarousel(1), 4000);
-                    });
-                }
-                dots.forEach((dot, i) => {
-                    dot.addEventListener('click', () => goToSlide(i));
+        // ===== ТАБЫ =====
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ===== ФИЛЬТРЫ =====
+        function applyFilters() {
+            const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
+            document.querySelectorAll('#tab1 .filter-tags').forEach(group => {
+                const category = group.dataset.category;
+                const activeTags = [];
+                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
+                    activeTags.push(t.textContent.trim());
                 });
-            }
+                if (category === 'type') activeFilters.type = activeTags;
+                else if (category === 'age') activeFilters.age = activeTags;
+                else if (category === 'org') activeFilters.org = activeTags;
+                else if (category === 'subject') activeFilters.subject = activeTags;
+                else if (category === 'other') activeFilters.other = activeTags;
+            });
 
-            // ===== ТАБЫ =====
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
+            const filtered = products.filter(p => {
+                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type
+                .includes(t));
+                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(
+                t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(
+                t));
+                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
+                    .subject.includes(t));
+                const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other
+                    .includes(t));
+                return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
+            });
+            renderProducts('productGrid', filtered);
+        }
 
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    tabBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const parent = this.closest('.filter-tags');
+                const allTag = parent.querySelector('.all-tag');
+
+                if (this.classList.contains('all-tag')) {
+                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    const target = document.getElementById(this.dataset.tab);
-                    if (target) target.classList.add('active');
-                });
-            });
-
-            // ===== ФИЛЬТРЫ =====
-            renderProducts('productGrid', products);
-
-            document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
-                tag.addEventListener('click', function() {
-                    const parent = this.closest('.filter-tags');
-                    const allTag = parent.querySelector('.all-tag');
-
-                    if (this.classList.contains('all-tag')) {
-                        parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
-                        applyFilters();
-                        return;
-                    }
-
-                    this.classList.toggle('active');
-                    const hasActiveNonAll = Array.from(parent.querySelectorAll(
-                        '.filter-tag:not(.all-tag)'))
-                        .some(t => t.classList.contains('active'));
-
-                    if (hasActiveNonAll) {
-                        allTag.classList.remove('active');
-                    } else {
-                        allTag.classList.add('active');
-                    }
                     applyFilters();
-                });
-            });
+                    return;
+                }
 
-            document.getElementById('resetFilters').addEventListener('click', function() {
-                document.querySelectorAll('#tab1 .filter-tag').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('#tab1 .all-tag').forEach(t => t.classList.add('active'));
+                this.classList.toggle('active');
+                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
+                    .some(t => t.classList.contains('active'));
+
+                if (hasActiveNonAll) {
+                    allTag.classList.remove('active');
+                } else {
+                    allTag.classList.add('active');
+                }
                 applyFilters();
             });
-
-            function applyFilters() {
-                const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
-                document.querySelectorAll('#tab1 .filter-tags').forEach(group => {
-                    const category = group.dataset.category;
-                    const activeTags = [];
-                    group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
-                        activeTags.push(t.textContent.trim());
-                    });
-                    if (category === 'type') activeFilters.type = activeTags;
-                    else if (category === 'age') activeFilters.age = activeTags;
-                    else if (category === 'org') activeFilters.org = activeTags;
-                    else if (category === 'subject') activeFilters.subject = activeTags;
-                    else if (category === 'other') activeFilters.other = activeTags;
-                });
-
-                const filtered = products.filter(p => {
-                    const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters
-                        .type.includes(t));
-                    const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age
-                        .includes(t));
-                    const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org
-                        .includes(t));
-                    const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
-                        .subject.includes(t));
-                    const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters
-                        .other.includes(t));
-                    return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
-                });
-                renderProducts('productGrid', filtered);
-            }
         });
+
+        document.getElementById('resetFilters').addEventListener('click', function() {
+            document.querySelectorAll('#tab1 .filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#tab1 .all-tag').forEach(t => t.classList.add('active'));
+            applyFilters();
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        renderProducts('productGrid', products);
+
+        // Карусель производства
+        if (track && dots.length > 0) {
+            updateCarousel();
+            let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+            const carouselContainer = document.getElementById('productionCarousel');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+                carouselContainer.addEventListener('mouseleave', () => {
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(() => window.moveCarousel(1), 4000);
+                });
+            }
+        }
     </script>
 </body>
 </html>
