@@ -102,13 +102,9 @@
             justify-content: center;
             transition: 0.2s;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #5B2D8E;
-            text-decoration: none;
         }
         .header-right .social-icon img { width: 20px; height: 20px; object-fit: contain; }
-        .header-right .social-icon:hover { background: #5B2D8E; color: white; }
+        .header-right .social-icon:hover { background: #5B2D8E; }
 
         /* ===== ОСНОВНОЙ БЛОК ===== */
         .page-block {
@@ -315,7 +311,7 @@
         }
         .product-card .prod-img {
             width: 100%;
-            height: 160px;
+            aspect-ratio: 4 / 3;
             background: #F3EEFA;
             border-radius: 16px;
             margin-bottom: 12px;
@@ -325,7 +321,6 @@
             font-size: 2.8rem;
             color: #5B2D8E;
             border: 1px solid #d4c4e8;
-            object-fit: cover;
             overflow: hidden;
         }
         .product-card .prod-img img {
@@ -451,6 +446,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            aspect-ratio: 4 / 3;
         }
         .modal-content .modal-img img {
             width: 100%;
@@ -495,17 +491,21 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #F3EEFA;
-            border: 2px solid #5B2D8E;
+            background: #4c75a3;
+            border: 2px solid #4c75a3;
             padding: 12px 24px;
             border-radius: 40px;
             text-decoration: none;
             font-weight: 600;
-            color: #2c3e50;
+            color: white;
             transition: 0.2s;
         }
-        .modal-order-options a:hover { background: #5B2D8E; color: white; }
-        .modal-order-options a img { width: 24px; height: 24px; }
+        .modal-order-options a:hover { background: #3a5d82; border-color: #3a5d82; }
+        .modal-order-options a img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
 
         .city-line { text-align: center; font-size: 0.8rem; color: #888; margin: 16px 0 8px; }
 
@@ -619,8 +619,9 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="social-icon"><img src="images/tg-icon.png" alt="Telegram"></div>
-            <div class="social-icon"><img src="images/vk-icon.png" alt="VK"></div>
+            <a href="https://vk.me/proedworks" target="_blank" class="social-icon">
+                <img src="images/vk-icon.png" alt="VK">
+            </a>
         </div>
     </div>
 </header>
@@ -647,9 +648,7 @@
                 <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 1: ОБРАЗОВАТЕЛЬНАЯ ПРОДУКЦИЯ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content active" id="tab1">
                 <h2>Образовательная продукция</h2>
                 <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
@@ -775,76 +774,22 @@
                         Нужно что-то особенное? Разработаем и изготовим под ваш запрос — 
                         от дизайн-проекта до готового изделия.
                     </p>
-                    <a href="#" class="btn" id="customOrderBtn">Оформить заказ</a>
+                    <a href="https://vk.me/proedworks" target="_blank" class="btn" id="customOrderBtn">Оформить заказ</a>
                 </div>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 2: ПОДАРОЧНЫЕ НАБОРЫ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content" id="tab2">
                 <h2>Подарочные наборы</h2>
                 <p class="subtitle">Готовые комплекты для тёплых поздравлений. Скоро в продаже!</p>
 
-                <!-- ФИЛЬТРЫ ДЛЯ ПОДАРОЧНЫХ НАБОРОВ -->
-                <div class="filter-section">
-                    <div class="filter-grid">
-                        <div class="filter-group scrollable">
-                            <div class="filter-label">📌 Праздник</div>
-                            <div class="filter-tags" data-category="gift-holiday">
-                                <span class="filter-tag all-tag active">Все</span>
-                                <span class="filter-tag">1 сентября</span>
-                                <span class="filter-tag">День учителя</span>
-                                <span class="filter-tag">Новый год</span>
-                                <span class="filter-tag">День рождения</span>
-                                <span class="filter-tag">8 марта</span>
-                                <span class="filter-tag">23 февраля</span>
-                                <span class="filter-tag">14 февраля</span>
-                                <span class="filter-tag">Выпускной</span>
-                            </div>
-                        </div>
-                        <div class="filter-group">
-                            <div class="filter-label">📌 Пол</div>
-                            <div class="filter-tags" data-category="gift-gender">
-                                <span class="filter-tag all-tag active">Все</span>
-                                <span class="filter-tag">Мужчинам</span>
-                                <span class="filter-tag">Женщинам</span>
-                                <span class="filter-tag">Мальчикам</span>
-                                <span class="filter-tag">Девочкам</span>
-                            </div>
-                        </div>
-                        <div class="filter-group">
-                            <div class="filter-label">📌 Роль</div>
-                            <div class="filter-tags" data-category="gift-role">
-                                <span class="filter-tag all-tag active">Все</span>
-                                <span class="filter-tag">Ученикам</span>
-                                <span class="filter-tag">Учителям</span>
-                                <span class="filter-tag">Руководителям</span>
-                            </div>
-                        </div>
-                        <div></div>
-                    </div>
-                    <div class="filter-bottom">
-                        <button class="filter-reset-btn" id="resetGiftFilters">Сбросить фильтры</button>
-                    </div>
-                </div>
-
-                <!-- КАРТОЧКИ ТОВАРОВ (ЗАГЛУШКИ) -->
-                <div class="grid" id="giftGrid"></div>
-
-                <!-- БЛОК С ЗАЯВКОЙ -->
-                <div class="custom-block" style="margin-top: 32px; background: #F3EEFA; padding: 28px 24px; border-radius: 32px; text-align: center; border: 2px dashed #5B2D8E;">
-                    <h4 style="font-size: 1.2rem; color: #5B2D8E; margin-bottom: 8px;">🎁 Скоро здесь появятся готовые подарочные наборы!</h4>
-                    <p style="color: #555; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">
-                        А пока вы можете оставить заявку — мы свяжемся с вами, когда наборы будут готовы, и поможем подобрать идеальный вариант для любого праздника.
-                    </p>
-                    <a href="#" class="btn" style="margin-top: 16px;">Оставить заявку</a>
+                <div style="text-align: center; padding: 60px 20px; background: #F3EEFA; border-radius: 32px; border: 2px dashed #5B2D8E;">
+                    <h3 style="font-size: 1.5rem; color: #5B2D8E; margin-bottom: 8px;">🎁 Ждём поставок!</h3>
+                    <p style="color: #666; font-size: 1rem; max-width: 500px; margin: 0 auto;">Следите за обновлениями — скоро здесь появятся готовые подарочные наборы для любых праздников.</p>
                 </div>
             </div>
 
-            <!-- ========================================================== -->
             <!-- ===== ВКЛАДКА 3: МЕБЕЛЬ И ОСНАЩЕНИЕ ===== -->
-            <!-- ========================================================== -->
             <div class="tab-content" id="tab3">
                 <h2>Мебель и оснащение</h2>
                 <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
@@ -875,17 +820,18 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 24px;">
-                    <a href="#" class="btn">Подобрать оснащение</a>
+                    <a href="https://vk.me/proedworks" target="_blank" class="btn">Подобрать оснащение</a>
                 </div>
             </div>
 
             <!-- ===== КОНТАКТЫ ВНИЗУ ===== -->
             <div class="contacts-bottom">
                 <div class="social-row">
-                    <div class="s-icon"><img src="images/tg-icon.png" alt="Telegram"></div>
-                    <div class="s-icon"><img src="images/vk-icon.png" alt="VK"></div>
+                    <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
+                        <img src="images/vk-icon.png" alt="VK">
+                    </a>
                 </div>
-                <p>📧 <a href="mailto:proedworks@yandex.ru">proedworks@yandex.ru</a></p>
+                <p>📧 <a href="mailto:proedworks@mail.ru">proedworks@mail.ru</a></p>
                 <p style="font-size: 0.85rem; color: #888; margin-top: 4px;">Ответим на вопросы, поможем подобрать решение</p>
             </div>
 
@@ -899,27 +845,30 @@
     </div>
 </footer>
 
-<!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА ===== -->
+<!-- ===== МОДАЛЬНОЕ ОКНО ТОВАРА (с деталями) ===== -->
 <div class="modal-overlay" id="productModal">
     <div class="modal-content">
         <button class="modal-close" id="modalClose">&times;</button>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-            <div class="modal-img" id="modalImg1" style="height: 180px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+            <div class="modal-img" id="modalImg1" style="height: 160px;">
                 <img src="" alt="">
             </div>
-            <div class="modal-img" id="modalImg2" style="height: 180px;">
+            <div class="modal-img" id="modalImg2" style="height: 160px;">
+                <img src="" alt="">
+            </div>
+            <div class="modal-img" id="modalImg3" style="height: 160px;">
                 <img src="" alt="">
             </div>
         </div>
         <div class="modal-title" id="modalTitle">Название товара</div>
-        <div class="modal-price" id="modalPrice">1 000 ₽</div>
+        <div class="modal-price" id="modalPrice">990 ₽</div>
         <div class="modal-desc" id="modalDesc">Описание товара</div>
         <div class="modal-tags" id="modalTags"></div>
         <button class="btn-order" id="modalOrderBtn">Заказать</button>
     </div>
 </div>
 
-<!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА ===== -->
+<!-- ===== МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА (с ВК) ===== -->
 <div class="modal-overlay" id="orderModal">
     <div class="modal-content">
         <button class="modal-close" id="orderModalClose">&times;</button>
@@ -928,8 +877,9 @@
             В сообщении укажите: <strong id="orderProductName">Название товара</strong>
         </p>
         <div class="modal-order-options">
-            <a href="#" id="orderTgLink"><img src="images/tg-icon.png" alt="Telegram"> Telegram</a>
-            <a href="#" id="orderVkLink"><img src="images/vk-icon.png" alt="VK"> ВКонтакте</a>
+            <a href="#" id="orderVkLink" target="_blank" style="display: flex; align-items: center; gap: 10px; background: #4c75a3; border: 2px solid #4c75a3; padding: 12px 24px; border-radius: 40px; text-decoration: none; font-weight: 600; color: white; transition: 0.2s;">
+                <img src="images/vk-icon.png" alt="VK" style="width:24px; height:24px; filter: brightness(0) invert(1);"> ВКонтакте
+            </a>
         </div>
     </div>
 </div>
@@ -938,76 +888,161 @@
 <script>
     // ===== ДАННЫЕ ТОВАРОВ =====
     const products = [
-        // ===== СТАРЫЕ ТОВАРЫ =====
-        { id: 1, name: 'Плакат «Английский алфавит»', price: '450 ₽', desc: 'Яркий плакат с транскрипцией и примерами слов.', tags: ['Английский язык', 'Плакаты', 'Школьникам', 'Языковая школа'], emoji: '🌍', img1: '', img2: '' },
-        { id: 2, name: 'Плакат «Таблица умножения»', price: '350 ₽', desc: 'С подсказками и примерами.', tags: ['Математика', 'Плакаты', 'Школьникам', 'Детский сад'], emoji: '🧮', img1: '', img2: '' },
-        { id: 3, name: 'Панно «Времена года»', price: '1 200 ₽', desc: 'Красивое панно для оформления кабинета.', tags: ['Декор', 'Панно', 'Дошкольникам', 'Детский сад'], emoji: '🎨', img1: '', img2: '' },
-        { id: 4, name: 'Игра «Мемори. Животные»', price: '650 ₽', desc: 'Развивает память, внимание и речь. 20 пар карточек.', tags: ['Игры', 'Дошкольникам', 'Детский сад', 'Психология'], emoji: '🧩', img1: '', img2: '' },
-        { id: 5, name: 'Набор карточек «Русский язык»', price: '490 ₽', desc: 'Правила в картинках. Компактный набор.', tags: ['Русский язык', 'Игры', 'Школьникам', 'Образовательный центр'], emoji: '📚', img1: '', img2: '' },
-        { id: 6, name: 'Игрушка «Эко-сад»', price: '780 ₽', desc: 'Набор для выращивания микрозелени.', tags: ['Игрушки', 'Дошкольникам', 'Мотивация', 'Детский сад'], emoji: '🌱', img1: '', img2: '' },
-        // ===== НОВЫЕ ТОВАРЫ (ДЕКОР) =====
+        // ===== ГИРЛЯНДЫ-РАСТЯЖКИ =====
         { 
-            id: 19, 
-            name: 'ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ', 
-            price: '1 990 ₽', 
-            desc: 'Декор "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
+            id: 101, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🔤', 
-            img1: 'images/decor-english-1.jpg', 
-            img2: 'images/decor-english-2.jpg' 
+            emoji: '🎈', 
+            img1: 'images/garland-vanechkin-1.jpg', 
+            img2: 'images/garland-vanechkin-2.jpg',
+            img3: 'images/garland-vanechkin-3.jpg'
         },
         { 
-            id: 20, 
-            name: 'ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ', 
-            price: '1 990 ₽', 
-            desc: 'Декор "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Физика', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '⚛️', 
-            img1: 'images/decor-physics-1.jpg', 
-            img2: 'images/decor-physics-2.jpg' 
+            id: 102, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "DO YOU SPEAK ENGLISH?"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "DO YOU SPEAK ENGLISH?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-doyouspeak-1.jpg', 
+            img2: 'images/garland-doyouspeak-2.jpg',
+            img3: 'images/garland-doyouspeak-3.jpg'
         },
         { 
-            id: 21, 
-            name: 'МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ', 
-            price: '1 990 ₽', 
-            desc: 'Декор "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Математика', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '📐', 
-            img1: 'images/decor-math-1.jpg', 
-            img2: 'images/decor-math-2.jpg' 
+            id: 103, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "GOOD VIBES ONLY"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "GOOD VIBES ONLY"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт', 'Психология'], 
+            emoji: '🎈', 
+            img1: 'images/garland-goodvibes-1.jpg', 
+            img2: 'images/garland-goodvibes-2.jpg',
+            img3: 'images/garland-goodvibes-3.jpg'
         },
         { 
-            id: 22, 
-            name: 'РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ', 
-            price: '1 990 ₽', 
-            desc: 'Декор "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Русский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '📖', 
-            img1: 'images/decor-russian-1.jpg', 
-            img2: 'images/decor-russian-2.jpg' 
+            id: 104, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ЗНАНИЯ ЭТО СИЛА"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-znanie-1.jpg', 
+            img2: 'images/garland-znanie-2.jpg',
+            img3: 'images/garland-znanie-3.jpg'
         },
         { 
-            id: 23, 
-            name: 'ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ', 
-            price: '1 990 ₽', 
-            desc: 'Декор "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ" 💫 Декор для вашего кабинета, офиса, рабочего пространства.\n⭐️ Изделие из черного АБС пластика.\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности).\n⭐️ Доставка по всей России (Почта России/СДЭК).', 
-            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'История', 'Юмор', 'Мотивация', 'Ремонт'], 
-            emoji: '🏛️', 
-            img1: 'images/decor-history-1.jpg', 
-            img2: 'images/decor-history-2.jpg' 
+            id: 105, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Биология', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-biology-1.jpg', 
+            img2: 'images/garland-biology-2.jpg',
+            img3: 'images/garland-biology-3.jpg'
+        },
+        { 
+            id: 106, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Химия', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-chemistry-1.jpg', 
+            img2: 'images/garland-chemistry-2.jpg',
+            img3: 'images/garland-chemistry-3.jpg'
+        },
+        { 
+            id: 107, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Математика', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-math-1.jpg', 
+            img2: 'images/garland-math-2.jpg',
+            img3: 'images/garland-math-3.jpg'
+        },
+        { 
+            id: 108, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Русский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-russian-1.jpg', 
+            img2: 'images/garland-russian-2.jpg',
+            img3: 'images/garland-russian-3.jpg'
+        },
+        { 
+            id: 109, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Французский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-french-1.jpg', 
+            img2: 'images/garland-french-2.jpg',
+            img3: 'images/garland-french-3.jpg'
+        },
+        { 
+            id: 110, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Китайский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-chinese-1.jpg', 
+            img2: 'images/garland-chinese-2.jpg',
+            img3: 'images/garland-chinese-3.jpg'
+        },
+        { 
+            id: 111, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'История', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-history-1.jpg', 
+            img2: 'images/garland-history-2.jpg',
+            img3: 'images/garland-history-3.jpg'
+        },
+        { 
+            id: 112, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Физика', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-physics-1.jpg', 
+            img2: 'images/garland-physics-2.jpg',
+            img3: 'images/garland-physics-3.jpg'
+        },
+        { 
+            id: 113, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-english-1.jpg', 
+            img2: 'images/garland-english-2.jpg',
+            img3: 'images/garland-english-3.jpg'
+        },
+        { 
+            id: 114, 
+            name: 'ГИРЛЯНДА-РАСТЯЖКА "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"', 
+            price: '990 ₽', 
+            desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления. Вешайте на стену, доску или окно. Подойдёт и для фото-зоны, и для повседневного интерьера.\n\n💰 Стоимость: 990 руб.\n\n🚚 Доставка по России (Почта России или СДЭК)\n\n📦 Надёжная упаковка — всё доезжает целым.', 
+            tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык', 'Юмор', 'Мотивация', 'Ремонт'], 
+            emoji: '🎈', 
+            img1: 'images/garland-english-1.jpg', 
+            img2: 'images/garland-english-2.jpg',
+            img3: 'images/garland-english-3.jpg'
         }
-    ];
-
-    // ===== ДАННЫЕ ДЛЯ ПОДАРОЧНЫХ НАБОРОВ (ЗАГЛУШКИ) =====
-    const giftProducts = [
-        { id: 101, name: 'Набор к 1 сентября', desc: 'Скоро в продаже!', price: '—', tags: ['1 сентября', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎒' },
-        { id: 102, name: 'Набор ко Дню учителя', desc: 'Скоро в продаже!', price: '—', tags: ['День учителя', 'Учителям', 'Женщинам', 'Мужчинам'], emoji: '🍎' },
-        { id: 103, name: 'Новогодний набор', desc: 'Скоро в продаже!', price: '—', tags: ['Новый год', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎄' },
-        { id: 104, name: 'Набор на День рождения', desc: 'Скоро в продаже!', price: '—', tags: ['День рождения', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎂' },
-        { id: 105, name: 'Набор к 8 марта', desc: 'Скоро в продаже!', price: '—', tags: ['8 марта', 'Женщинам', 'Девочкам', 'Учителям'], emoji: '🌷' },
-        { id: 106, name: 'Набор к 23 февраля', desc: 'Скоро в продаже!', price: '—', tags: ['23 февраля', 'Мужчинам', 'Мальчикам', 'Ученикам'], emoji: '⭐' },
-        { id: 107, name: 'Набор к 14 февраля', desc: 'Скоро в продаже!', price: '—', tags: ['14 февраля', 'Ученикам', 'Девочкам', 'Мальчикам'], emoji: '❤️' },
-        { id: 108, name: 'Набор на Выпускной', desc: 'Скоро в продаже!', price: '—', tags: ['Выпускной', 'Ученикам', 'Мальчикам', 'Девочкам'], emoji: '🎓' }
     ];
 
     // ===== КАРУСЕЛЬ =====
@@ -1053,7 +1088,7 @@
                     </div>
                     <div class="or-line">или</div>
                     <p style="font-weight: 600; color: #5B2D8E; font-size: 0.95rem;">Закажите необходимый товар у нас под заказ по индивидуальным меркам</p>
-                    <a href="#" class="btn" style="margin-top: 12px;">Оформить заказ</a>
+                    <a href="https://vk.me/proedworks" target="_blank" class="btn" style="margin-top: 12px;">Оформить заказ</a>
                 </div>
             `;
             return;
@@ -1078,44 +1113,6 @@
         });
     }
 
-    // ===== ОТРИСОВКА ПОДАРОЧНЫХ НАБОРОВ =====
-    function renderGiftProducts(containerId, productList) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-
-        container.innerHTML = productList.map(p => `
-            <div class="product-card" data-id="${p.id}" style="border-color: #D4C4E8;">
-                <div class="prod-img" style="background: #F3EEFA; font-size: 3.5rem; color: #5B2D8E;">
-                    ${p.emoji}
-                </div>
-                <h4>${p.name}</h4>
-                <div class="prod-price" style="color: #999; font-weight: 400;">${p.price}</div>
-                <div style="font-size: 0.8rem; color: #888; margin: 8px 0 12px;">${p.desc}</div>
-                <button class="btn-detail" style="border-color: #5B2D8E; color: #5B2D8E;" data-id="${p.id}" data-type="gift">Подробнее</button>
-            </div>
-        `).join('');
-
-        container.querySelectorAll('.btn-detail').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = parseInt(this.dataset.id);
-                const product = giftProducts.find(p => p.id === id);
-                if (!product) return;
-                
-                // Показываем модалку с информацией о наборе
-                document.getElementById('modalImg1').innerHTML = `<span style="font-size: 3rem;">${product.emoji}</span>`;
-                document.getElementById('modalImg2').innerHTML = `<span style="font-size: 2rem; color: #5B2D8E;">🎁</span>`;
-                document.getElementById('modalTitle').textContent = product.name;
-                document.getElementById('modalPrice').textContent = 'Скоро в продаже';
-                document.getElementById('modalDesc').textContent = 'Набор появится в нашем каталоге к этому празднику. Оставьте заявку, и мы сообщим вам о выходе набора и поможем с выбором.';
-                document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
-                document.getElementById('modalOrderBtn').dataset.productId = id;
-                document.getElementById('modalOrderBtn').dataset.type = 'gift';
-                document.getElementById('productModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-    }
-
     // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
     function openProductModal(id) {
         const product = products.find(p => p.id === id);
@@ -1123,15 +1120,18 @@
         
         const img1 = document.querySelector('#modalImg1 img');
         const img2 = document.querySelector('#modalImg2 img');
+        const img3 = document.querySelector('#modalImg3 img');
         if (img1) img1.src = product.img1 || 'images/placeholder.jpg';
         if (img2) img2.src = product.img2 || 'images/placeholder.jpg';
+        if (img3) img3.src = product.img3 || 'images/placeholder.jpg';
         
         document.getElementById('modalTitle').textContent = product.name;
         document.getElementById('modalPrice').textContent = product.price;
         document.getElementById('modalDesc').innerHTML = product.desc.replace(/\n/g, '<br>');
         document.getElementById('modalTags').innerHTML = product.tags.map(t => `<span>${t}</span>`).join('');
+        
+        // Запоминаем ID товара для кнопки "Заказать"
         document.getElementById('modalOrderBtn').dataset.productId = id;
-        document.getElementById('modalOrderBtn').dataset.type = 'product';
         document.getElementById('productModal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -1147,25 +1147,28 @@
         }
     });
 
-    // ===== ЗАКАЗ =====
+    // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛЬНОМ ОКНЕ =====
     document.getElementById('modalOrderBtn').addEventListener('click', function() {
         const productId = parseInt(this.dataset.productId);
-        const type = this.dataset.type;
-        let productName = '';
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
         
-        if (type === 'gift') {
-            const product = giftProducts.find(p => p.id === productId);
-            if (product) productName = product.name;
-        } else {
-            const product = products.find(p => p.id === productId);
-            if (product) productName = product.name;
+        // Заполняем название товара в модалке выбора канала
+        document.getElementById('orderProductName').textContent = product.name;
+        
+        // Настраиваем ссылку VK с сообщением
+        const vkLink = document.getElementById('orderVkLink');
+        if (vkLink) {
+            const message = `Здравствуйте! Хочу оформить заказ на "${product.name}" за ${product.price}.`;
+            vkLink.href = `https://vk.me/proedworks?text=${encodeURIComponent(message)}`;
         }
         
-        document.getElementById('orderProductName').textContent = productName || 'Товар';
+        // Закрываем модалку товара и открываем модалку заказа
         document.getElementById('productModal').classList.remove('active');
         document.getElementById('orderModal').classList.add('active');
     });
 
+    // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ЗАКАЗА =====
     document.getElementById('orderModalClose').addEventListener('click', function() {
         document.getElementById('orderModal').classList.remove('active');
         document.body.style.overflow = '';
@@ -1219,11 +1222,7 @@
         });
 
         // ===== ФИЛЬТРЫ ДЛЯ ОБРАЗОВАТЕЛЬНОЙ ПРОДУКЦИИ =====
-        const educationalProducts = products.filter(p => 
-            !p.tags.includes('Подарочные наборы') && !p.tags.includes('Мебель') && !p.tags.includes('Оснащение')
-        );
-        
-        renderProducts('productGrid', educationalProducts);
+        renderProducts('productGrid', products);
 
         document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
             tag.addEventListener('click', function() {
@@ -1272,9 +1271,6 @@
             });
 
             const filtered = products.filter(p => {
-                if (p.tags.includes('Подарочные наборы') || p.tags.includes('Мебель') || p.tags.includes('Оснащение')) {
-                    return false;
-                }
                 const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type.includes(t));
                 const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(t));
                 const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(t));
@@ -1283,63 +1279,6 @@
                 return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
             });
             renderProducts('productGrid', filtered);
-        }
-
-        // ===== ПОДАРОЧНЫЕ НАБОРЫ =====
-        renderGiftProducts('giftGrid', giftProducts);
-
-        // Фильтры для подарков
-        document.querySelectorAll('#tab2 .filter-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                const parent = this.closest('.filter-tags');
-                const allTag = parent.querySelector('.all-tag');
-
-                if (this.classList.contains('all-tag')) {
-                    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    applyGiftFilters();
-                    return;
-                }
-
-                this.classList.toggle('active');
-                const hasActiveNonAll = Array.from(parent.querySelectorAll('.filter-tag:not(.all-tag)'))
-                    .some(t => t.classList.contains('active'));
-
-                if (hasActiveNonAll) {
-                    allTag.classList.remove('active');
-                } else {
-                    allTag.classList.add('active');
-                }
-                applyGiftFilters();
-            });
-        });
-
-        document.getElementById('resetGiftFilters').addEventListener('click', function() {
-            document.querySelectorAll('#tab2 .filter-tag').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('#tab2 .all-tag').forEach(t => t.classList.add('active'));
-            applyGiftFilters();
-        });
-
-        function applyGiftFilters() {
-            const activeFilters = { holiday: [], gender: [], role: [] };
-            document.querySelectorAll('#tab2 .filter-tags').forEach(group => {
-                const category = group.dataset.category;
-                const activeTags = [];
-                group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
-                    activeTags.push(t.textContent.trim());
-                });
-                if (category === 'gift-holiday') activeFilters.holiday = activeTags;
-                else if (category === 'gift-gender') activeFilters.gender = activeTags;
-                else if (category === 'gift-role') activeFilters.role = activeTags;
-            });
-
-            const filtered = giftProducts.filter(p => {
-                const matchesHoliday = activeFilters.holiday.length === 0 || p.tags.some(t => activeFilters.holiday.includes(t));
-                const matchesGender = activeFilters.gender.length === 0 || p.tags.some(t => activeFilters.gender.includes(t));
-                const matchesRole = activeFilters.role.length === 0 || p.tags.some(t => activeFilters.role.includes(t));
-                return matchesHoliday && matchesGender && matchesRole;
-            });
-            renderGiftProducts('giftGrid', filtered);
         }
     });
 </script>
