@@ -328,8 +328,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: #999;
             border: 2px dashed #d4c4e8;
             overflow: hidden;
             position: relative;
@@ -337,18 +335,38 @@
         .product-card .prod-img .placeholder-label {
             position: absolute;
             bottom: 8px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             color: white;
             font-size: 0.6rem;
             padding: 2px 10px;
             border-radius: 12px;
             font-weight: 400;
+            pointer-events: none;
+            z-index: 2;
         }
         .product-card .prod-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 16px;
+            display: block;
+        }
+        .product-card .prod-img .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+        }
+        .product-card .prod-img .no-image span:first-child {
+            font-size: 2.5rem;
+        }
+        .product-card .prod-img .no-image span:last-child {
+            font-size: 0.65rem;
+            color: #aaa;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 12px;
+            border-radius: 10px;
         }
         .product-card h4 {
             font-size: 0.95rem;
@@ -482,19 +500,33 @@
             align-items: center;
             justify-content: center;
             background: #F3EEFA;
-            font-size: 4rem;
-            color: #999;
-            border: 2px dashed #d4c4e8;
             position: relative;
+            border: 2px dashed #d4c4e8;
         }
         .modal-carousel-slide .slide-label {
             position: absolute;
             bottom: 8px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             color: white;
             font-size: 0.6rem;
             padding: 2px 10px;
             border-radius: 12px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .modal-carousel-slide .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+        }
+        .modal-carousel-slide .no-image span:first-child {
+            font-size: 3rem;
+        }
+        .modal-carousel-slide .no-image span:last-child {
+            font-size: 0.7rem;
+            color: #aaa;
         }
         .modal-carousel-slide img {
             width: 100%;
@@ -744,7 +776,6 @@
             padding: 20px;
             text-align: center;
             box-sizing: border-box;
-            font-size: 6rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -757,11 +788,26 @@
         .production-carousel .slide .slide-label {
             position: absolute;
             bottom: 20px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             color: white;
             font-size: 0.8rem;
             padding: 4px 16px;
             border-radius: 20px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .production-carousel .slide .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .production-carousel .slide .no-image span:first-child {
+            font-size: 4rem;
+        }
+        .production-carousel .slide .no-image span:last-child {
+            font-size: 0.8rem;
+            color: #aaa;
         }
         .production-carousel .slide img {
             width: 100%;
@@ -881,7 +927,6 @@
             }
             .production-carousel .slide {
                 height: 250px;
-                font-size: 3rem;
             }
         }
         @media (max-width: 480px) {
@@ -1039,16 +1084,25 @@
                         <div class="production-carousel" id="productionCarousel">
                             <div class="track" id="carouselTrack">
                                 <div class="slide">
-                                    🏭
-                                    <span class="slide-label">Лазерная резка</span>
+                                    <div class="no-image">
+                                        <span>🏭</span>
+                                        <span>Лазерная резка</span>
+                                    </div>
+                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                                 <div class="slide">
-                                    ⚙️
-                                    <span class="slide-label">ЧПУ-станки</span>
+                                    <div class="no-image">
+                                        <span>⚙️</span>
+                                        <span>ЧПУ-станки</span>
+                                    </div>
+                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                                 <div class="slide">
-                                    🖨️
-                                    <span class="slide-label">3D-печать</span>
+                                    <div class="no-image">
+                                        <span>🖨️</span>
+                                        <span>3D-печать</span>
+                                    </div>
+                                    <span class="slide-label">📷 Добавьте фото</span>
                                 </div>
                             </div>
                             <button class="prod-arrow prev" onclick="moveCarousel(-1)">‹</button>
@@ -1171,7 +1225,9 @@
     </div>
 
     <script>
-        // ===== ВСЕ ТОВАРЫ (14 штук) =====
+        // ===== ТОВАРЫ С ПОДДЕРЖКОЙ РЕАЛЬНЫХ ФОТО =====
+        // Для добавления фото, замените строки-заглушки на:
+        // 'images/название_файла.jpg', 'images/файл2.jpg', 'images/файл3.jpg'
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1180,7 +1236,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '🎯', '✨']
+            images: ['images/garland-vanechkin-1.jpg', 'images/garland-vanechkin-2.jpg', 'images/garland-vanechkin-3.jpg']
         }, {
             id: 102,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "DO YOU SPEAK ENGLISH?"',
@@ -1189,7 +1245,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '📚', '✨']
+            images: ['images/garland-doyouspeak-1.jpg', 'images/garland-doyouspeak-2.jpg', 'images/garland-doyouspeak-3.jpg']
         }, {
             id: 103,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "GOOD VIBES ONLY"',
@@ -1198,14 +1254,14 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт',
                 'Психология'
             ],
-            images: ['🖼️', '🌟', '✨']
+            images: ['images/garland-goodvibes-1.jpg', 'images/garland-goodvibes-2.jpg', 'images/garland-goodvibes-3.jpg']
         }, {
             id: 104,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ЗНАНИЯ ЭТО СИЛА"',
             price: '990 ₽',
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт'],
-            images: ['🖼️', '💪', '🧠']
+            images: ['images/garland-znanie-1.jpg', 'images/garland-znanie-2.jpg', 'images/garland-znanie-3.jpg']
         }, {
             id: 105,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1214,7 +1270,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Биология', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '🧬', '🔬']
+            images: ['images/garland-biology-1.jpg', 'images/garland-biology-2.jpg', 'images/garland-biology-3.jpg']
         }, {
             id: 106,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1223,7 +1279,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Химия', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '⚗️', '🧪']
+            images: ['images/garland-chemistry-1.jpg', 'images/garland-chemistry-2.jpg', 'images/garland-chemistry-3.jpg']
         }, {
             id: 107,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1232,7 +1288,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Математика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '📐', '➕']
+            images: ['images/garland-math-1.jpg', 'images/garland-math-2.jpg', 'images/garland-math-3.jpg']
         }, {
             id: 108,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1241,7 +1297,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Русский язык', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '🇷🇺', '📖']
+            images: ['images/garland-russian-1.jpg', 'images/garland-russian-2.jpg', 'images/garland-russian-3.jpg']
         }, {
             id: 109,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1250,7 +1306,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Французский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '🇫🇷', '🥐']
+            images: ['images/garland-french-1.jpg', 'images/garland-french-2.jpg', 'images/garland-french-3.jpg']
         }, {
             id: 110,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1259,7 +1315,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Китайский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '🇨🇳', '🐉']
+            images: ['images/garland-chinese-1.jpg', 'images/garland-chinese-2.jpg', 'images/garland-chinese-3.jpg']
         }, {
             id: 111,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1268,7 +1324,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'История', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '📜', '🏛️']
+            images: ['images/garland-history-1.jpg', 'images/garland-history-2.jpg', 'images/garland-history-3.jpg']
         }, {
             id: 112,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1277,7 +1333,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Физика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['🖼️', '⚡', '🚀']
+            images: ['images/garland-physics-1.jpg', 'images/garland-physics-2.jpg', 'images/garland-physics-3.jpg']
         }, {
             id: 113,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1286,7 +1342,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '🇬🇧', '📚']
+            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
         }, {
             id: 114,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1295,7 +1351,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['🖼️', '🇬🇧', '🎯']
+            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
         }];
 
         // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
@@ -1333,17 +1389,26 @@
                 return;
             }
 
-            container.innerHTML = productList.map(p => `
-                <div class="product-card" data-id="${p.id}">
-                    <div class="prod-img">
-                        <span style="font-size:3rem;">${p.images[0]}</span>
-                        <span class="placeholder-label">📷 Фото товара</span>
+            container.innerHTML = productList.map(p => {
+                const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+                let imageHtml;
+                if (firstImage && firstImage.startsWith('images/')) {
+                    imageHtml = `<img src="${firstImage}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Фото товара</span></div>'">`;
+                } else {
+                    imageHtml = `<div class="no-image"><span>🖼️</span><span>Фото товара</span></div>`;
+                }
+                return `
+                    <div class="product-card" data-id="${p.id}">
+                        <div class="prod-img">
+                            ${imageHtml}
+                            <span class="placeholder-label">📷 Добавьте фото</span>
+                        </div>
+                        <h4>${p.name}</h4>
+                        <div class="prod-price">${p.price}</div>
+                        <button class="btn-detail" data-id="${p.id}">Подробнее</button>
                     </div>
-                    <h4>${p.name}</h4>
-                    <div class="prod-price">${p.price}</div>
-                    <button class="btn-detail" data-id="${p.id}">Подробнее</button>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             container.querySelectorAll('.btn-detail').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1362,13 +1427,22 @@
             const dotsContainer = document.getElementById('modalCarouselDots');
             if (!track) return;
 
-            currentModalImages = images.length ? images : ['📦'];
-            track.innerHTML = currentModalImages.map((img, idx) => `
-                <div class="modal-carousel-slide">
-                    <span style="font-size:4rem;">${img}</span>
-                    <span class="slide-label">📷 Фото ${idx + 1}</span>
-                </div>
-            `).join('');
+            currentModalImages = images && images.length ? images : ['🖼️', '🖼️', '🖼️'];
+            track.innerHTML = currentModalImages.map((img, idx) => {
+                const isRealImage = typeof img === 'string' && img.startsWith('images/');
+                let content;
+                if (isRealImage) {
+                    content = `<img src="${img}" alt="Фото товара" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Фото ${idx + 1}</span></div>'">`;
+                } else {
+                    content = `<div class="no-image"><span>🖼️</span><span>Фото ${idx + 1}</span></div>`;
+                }
+                return `
+                    <div class="modal-carousel-slide">
+                        ${content}
+                        <span class="slide-label">📷 Добавьте фото</span>
+                    </div>
+                `;
+            }).join('');
 
             dotsContainer.innerHTML = currentModalImages.map((_, i) => `
                 <span class="${i === 0 ? 'active-dot' : ''}" data-index="${i}"></span>
@@ -1494,11 +1568,11 @@
 
             const filtered = products.filter(p => {
                 const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type
-                .includes(t));
-                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(
-                t));
-                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(
-                t));
+                    .includes(t));
+                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age
+                    .includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org
+                    .includes(t));
                 const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
                     .subject.includes(t));
                 const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other
