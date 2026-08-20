@@ -1333,7 +1333,7 @@
             });
         }
 
-        // ===== ОТРИСОВКА ТОВАРОВ =====
+        // ===== ОТРИСОВКА ТОВАРОВ (С ПЕРВЫМ ФОТО НА ОБЛОЖКЕ) =====
         function renderProducts(containerId, productList) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1350,9 +1350,10 @@
             }
 
             container.innerHTML = productList.map(p => {
+                // Берём ПЕРВОЕ фото для обложки
                 const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
                 let imageHtml;
-                if (firstImage && firstImage.startsWith('images_2/')) {
+                if (firstImage) {
                     imageHtml = `<img src="${firstImage}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Нет фото</span></div>'">`;
                 } else {
                     imageHtml = `<div class="no-image"><span>🖼️</span><span>Нет фото</span></div>`;
@@ -1388,7 +1389,7 @@
 
             currentModalImages = images && images.length ? images : ['🖼️', '🖼️', '🖼️'];
             track.innerHTML = currentModalImages.map((img, idx) => {
-                const isRealImage = typeof img === 'string' && img.startsWith('images_2/');
+                const isRealImage = typeof img === 'string' && (img.startsWith('images/') || img.startsWith('images_2/'));
                 let content;
                 if (isRealImage) {
                     content = `<img src="${img}" alt="Фото товара" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖼️</span><span>Фото ${idx + 1}</span></div>'">`;
@@ -1529,8 +1530,7 @@
                     .includes(t));
                 const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age
                     .includes(t));
-                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org
-                    .includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org                    .includes(t));
                 const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
                     .subject.includes(t));
                 const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other
