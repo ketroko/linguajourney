@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProEdWorks — Оснащение и решения для образования</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <style>
         * {
             margin: 0;
@@ -67,10 +68,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white;
+            overflow: hidden;
             flex-shrink: 0;
+        }
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .brand .name {
             font-size: 1.4rem;
@@ -97,13 +101,15 @@
             justify-content: center;
             transition: 0.2s;
             text-decoration: none;
-            color: #5B2D8E;
-            font-weight: 700;
-            font-size: 0.8rem;
+            overflow: hidden;
+        }
+        .social-icon img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
         .social-icon:hover {
             background: #5B2D8E;
-            color: white;
         }
 
         .page-block {
@@ -330,7 +336,6 @@
             justify-content: center;
             border: 1px solid #d4c4e8;
             overflow: hidden;
-            position: relative;
         }
         .product-card .prod-img img {
             width: 100%;
@@ -352,9 +357,6 @@
         .product-card .prod-img .no-image span:last-child {
             font-size: 0.65rem;
             color: #aaa;
-            background: rgba(0,0,0,0.05);
-            padding: 2px 12px;
-            border-radius: 10px;
         }
         .product-card h4 {
             font-size: 0.95rem;
@@ -488,7 +490,6 @@
             align-items: center;
             justify-content: center;
             background: #F3EEFA;
-            position: relative;
             border: 1px solid #d4c4e8;
         }
         .modal-carousel-slide .no-image {
@@ -632,6 +633,11 @@
             background: #3a5d82;
             border-color: #3a5d82;
         }
+        .modal-order-options a img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
 
         .custom-block {
             margin-top: 32px;
@@ -700,12 +706,15 @@
             transition: 0.2s;
             cursor: pointer;
             text-decoration: none;
-            color: #5B2D8E;
-            font-weight: 700;
+            overflow: hidden;
+        }
+        .contacts-bottom .social-row .s-icon img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
         }
         .contacts-bottom .social-row .s-icon:hover {
             background: #5B2D8E;
-            color: white;
         }
         .contacts-bottom a {
             color: #5B2D8E;
@@ -759,21 +768,7 @@
             height: 450px;
             background: #F3EEFA;
             border: 1px solid #d4c4e8;
-            color: #999;
-            position: relative;
-        }
-        .production-carousel .slide .no-image {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        .production-carousel .slide .no-image span:first-child {
-            font-size: 4rem;
-        }
-        .production-carousel .slide .no-image span:last-child {
-            font-size: 0.8rem;
-            color: #aaa;
+            overflow: hidden;
         }
         .production-carousel .slide img {
             width: 100%;
@@ -781,6 +776,20 @@
             object-fit: contain;
             border-radius: 16px;
             background: #F3EEFA;
+        }
+        .production-carousel .slide .no-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+        }
+        .production-carousel .slide .no-image span:first-child {
+            font-size: 4rem;
+        }
+        .production-carousel .slide .no-image span:last-child {
+            font-size: 0.8rem;
+            color: #aaa;
         }
         .prod-arrow {
             position: absolute;
@@ -884,7 +893,6 @@
             .logo-circle {
                 width: 36px;
                 height: 36px;
-                font-size: 1rem;
             }
             .header-left .back-link {
                 width: 38px;
@@ -911,7 +919,6 @@
             .logo-circle {
                 width: 30px;
                 height: 30px;
-                font-size: 0.9rem;
             }
             .brand .tagline {
                 font-size: 0.6rem;
@@ -930,14 +937,18 @@
                 <a href="/" class="back-link">‹</a>
             </div>
             <div class="header-center">
-                <div class="logo-circle">P</div>
+                <div class="logo-circle">
+                    <img src="images/proedworks-logo.png" alt="ProEdWorks">
+                </div>
                 <div class="brand">
                     <span class="name">ProEdWorks</span>
                     <span class="tagline">Оснащение и решения для образования</span>
                 </div>
             </div>
             <div class="header-right">
-                <a href="https://vk.me/proedworks" target="_blank" class="social-icon">VK</a>
+                <a href="https://vk.me/proedworks" target="_blank" class="social-icon">
+                    <img src="images/vk-icon.png" alt="VK">
+                </a>
             </div>
         </div>
     </header>
@@ -962,7 +973,6 @@
                     <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
                 </div>
 
-                <!-- ВКЛАДКА 1 -->
                 <div class="tab-content active" id="tab1">
                     <h2>Образовательная продукция</h2>
                     <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
@@ -1042,7 +1052,6 @@
 
                     <div class="grid" id="productGrid"></div>
 
-                    <!-- ПРОИЗВОДСТВО -->
                     <div class="production-section">
                         <h3>🏭 Наше производство</h3>
                         <p class="sub">Изделия производятся на собственном оборудовании</p>
@@ -1050,22 +1059,13 @@
                         <div class="production-carousel" id="productionCarousel">
                             <div class="track" id="carouselTrack">
                                 <div class="slide">
-                                    <div class="no-image">
-                                        <span>🏭</span>
-                                        <span>Лазерная резка</span>
-                                    </div>
+                                    <img src="images/production-1.jpg" alt="Производство ProEdWorks" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🏭</span><span>Лазерная резка</span></div>'">
                                 </div>
                                 <div class="slide">
-                                    <div class="no-image">
-                                        <span>⚙️</span>
-                                        <span>ЧПУ-станки</span>
-                                    </div>
+                                    <img src="images/production-2.jpg" alt="Производство ProEdWorks" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>⚙️</span><span>ЧПУ-станки</span></div>'">
                                 </div>
                                 <div class="slide">
-                                    <div class="no-image">
-                                        <span>🖨️</span>
-                                        <span>3D-печать</span>
-                                    </div>
+                                    <img src="images/production-3.jpg" alt="Производство ProEdWorks" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'><span>🖨️</span><span>3D-печать</span></div>'">
                                 </div>
                             </div>
                             <button class="prod-arrow prev" onclick="moveCarousel(-1)">‹</button>
@@ -1093,7 +1093,6 @@
                     </div>
                 </div>
 
-                <!-- ВКЛАДКА 2 -->
                 <div class="tab-content" id="tab2">
                     <h2>Подарочные наборы</h2>
                     <p class="subtitle">Готовые комплекты для тёплых поздравлений. Скоро в продаже!</p>
@@ -1103,7 +1102,6 @@
                     </div>
                 </div>
 
-                <!-- ВКЛАДКА 3 -->
                 <div class="tab-content" id="tab3">
                     <h2>Мебель и оснащение</h2>
                     <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
@@ -1136,10 +1134,11 @@
                     </div>
                 </div>
 
-                <!-- КОНТАКТЫ -->
                 <div class="contacts-bottom">
                     <div class="social-row">
-                        <a href="https://vk.me/proedworks" target="_blank" class="s-icon">VK</a>
+                        <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
+                            <img src="images/vk-icon.png" alt="VK">
+                        </a>
                     </div>
                     <p>📧 <a href="mailto:proedworks@mail.ru">proedworks@mail.ru</a></p>
                     <p style="font-size:0.85rem;color:#888;margin-top:4px;">Ответим на вопросы, поможем подобрать решение</p>
@@ -1155,7 +1154,6 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1173,7 +1171,6 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">&times;</button>
@@ -1182,13 +1179,14 @@
                 В сообщении укажите: <strong id="orderProductName">Название товара</strong>
             </p>
             <div class="modal-order-options">
-                <a href="#" id="orderVkLink" target="_blank">ВКонтакте</a>
+                <a href="#" id="orderVkLink" target="_blank">
+                    <img src="images/vk-icon.png" alt="VK"> ВКонтакте
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        // ===== ТОВАРЫ =====
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1312,10 +1310,9 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images/garland-english-1.jpg', 'images/garland-english-2.jpg', 'images/garland-english-3.jpg']
+            images: ['images/garland-english-self-1.jpg', 'images/garland-english-self-2.jpg', 'images/garland-english-self-3.jpg']
         }];
 
-        // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
         let currentSlide = 0;
         const track = document.getElementById('carouselTrack');
         const dots = document.querySelectorAll('#carouselDots span');
@@ -1334,7 +1331,6 @@
             });
         }
 
-        // ===== ОТРИСОВКА ТОВАРОВ =====
         function renderProducts(containerId, productList) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1378,7 +1374,6 @@
             });
         }
 
-        // ===== МОДАЛЬНАЯ КАРУСЕЛЬ =====
         let modalCarouselIndex = 0;
         let currentModalImages = [];
 
@@ -1435,7 +1430,6 @@
             updateModalCarousel();
         }
 
-        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -1451,7 +1445,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1472,7 +1465,6 @@
             moveModalCarousel(1);
         });
 
-        // ===== КНОПКА "ЗАКАЗАТЬ" =====
         document.getElementById('modalOrderBtn').addEventListener('click', function() {
             const productId = parseInt(this.dataset.productId);
             const product = products.find(p => p.id === productId);
@@ -1499,7 +1491,6 @@
             }
         });
 
-        // ===== ТАБЫ =====
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1509,7 +1500,6 @@
             });
         });
 
-        // ===== ФИЛЬТРЫ =====
         function applyFilters() {
             const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
             document.querySelectorAll('#tab1 .filter-tags').forEach(group => {
@@ -1572,10 +1562,8 @@
             applyFilters();
         });
 
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
         renderProducts('productGrid', products);
 
-        // Карусель производства
         if (track && dots.length > 0) {
             updateCarousel();
             let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
