@@ -80,6 +80,25 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
+        .btn-purple {
+            display: inline-block;
+            background: #5B2D8E;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+        .btn-purple:hover {
+            background: #4a1f73;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
         .back-home {
             position: fixed;
             top: 20px;
@@ -439,22 +458,40 @@
             border: 2px solid #CC0000;
             transition: 0.2s;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
         .filter-product-card:hover {
             transform: translateY(-5px);
         }
-        .filter-product-card img {
+        .filter-product-card .prod-img {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 4 / 3;
             object-fit: cover;
             border-radius: 24px;
             margin-bottom: 16px;
             border: 1px solid #CC0000;
+            background: #F3EEFA;
+        }
+        .filter-product-card .prod-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+        .filter-product-card .prod-img .no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 3rem;
+            color: #999;
         }
         .filter-product-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #CC0000;
             margin-bottom: 8px;
+            line-height: 1.3;
         }
         .filter-product-card .price {
             font-size: 1.3rem;
@@ -467,11 +504,6 @@
             text-decoration: line-through;
             margin-right: 8px;
         }
-        .filter-product-card .tags {
-            font-size: 0.7rem;
-            color: #666;
-            margin-bottom: 12px;
-        }
         .details-link {
             color: #CC0000;
             text-decoration: underline;
@@ -479,6 +511,21 @@
             cursor: pointer;
             display: inline-block;
             margin-bottom: 12px;
+        }
+        .tag-link {
+            display: inline-block;
+            background: #5B2D8E;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tag-link:hover {
+            background: #4a1f73;
+            transform: scale(1.05);
         }
         .delivery-block {
             background: white;
@@ -607,24 +654,41 @@
             justify-content: center;
             margin-top: 24px;
         }
-        .focus-slider-container {
+        .modal-carousel {
             position: relative;
-            margin: 20px 0;
             overflow: hidden;
             border-radius: 24px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
         }
-        .focus-slider-track {
+        .modal-carousel-track {
             display: flex;
             transition: transform 0.5s ease;
         }
-        .focus-slide {
+        .modal-carousel-slide {
             min-width: 100%;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3EEFA;
         }
-        .focus-slide img, .focus-slide iframe {
+        .modal-carousel-slide iframe {
             width: 100%;
+            height: 100%;
+            border: none;
             border-radius: 24px;
         }
-        .focus-slider-prev, .focus-slider-next {
+        .modal-carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .modal-carousel-slide .no-image {
+            font-size: 4rem;
+            color: #999;
+        }
+        .modal-carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -642,11 +706,71 @@
             transition: 0.2s;
             z-index: 10;
         }
-        .focus-slider-prev:hover, .focus-slider-next:hover {
+        .modal-carousel-btn:hover {
             background: rgba(0,0,0,0.8);
         }
-        .focus-slider-prev { left: 10px; }
-        .focus-slider-next { right: 10px; }
+        .modal-carousel-btn.prev { left: 10px; }
+        .modal-carousel-btn.next { right: 10px; }
+        .modal-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 0 4px;
+        }
+        .modal-carousel-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .modal-carousel-dots span.active-dot {
+            background: #CC0000;
+        }
+        .modal-desc {
+            text-align: left;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 16px 0;
+            white-space: pre-line;
+        }
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin: 12px 0;
+        }
+        .modal-tags span {
+            background: #f0f0f0;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #555;
+        }
+        .modal-tags .tag-purple {
+            background: #5B2D8E;
+            color: white;
+        }
+        .btn-order {
+            background: #CC0000;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            width: 100%;
+        }
+        .btn-order:hover {
+            background: #990000;
+            transform: translateY(-2px);
+        }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.5rem; }
@@ -699,8 +823,8 @@
             <h1>🎓 Lingua Materials</h1>
             <p style="font-size: 1.2rem; margin: 20px 0;">Готовые разработки для преподавателей английского. Экономьте часы подготовки — скачивайте и проводите уроки с удовольствием.</p>
             <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                <a href="#free" class="btn-white">Бесплатные материалы →</a>
-                <a href="#products" class="btn-red">Платные разработки →</a>
+                <a href="#free" class="btn-white">Бесплатные материалы</a>
+                <a href="#products" class="btn-red">Платные разработки</a>
             </div>
         </div>
         <div class="first-screen-image">
@@ -732,13 +856,13 @@
                 <img src="images/tg-icon.png" alt="Telegram" class="icon-img" style="width: 60px; height: 60px;">
                 <h3>Telegram-канал</h3>
                 <p>500+ бесплатных файлов: рабочие листы, карточки, презентации</p>
-                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span>
+                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти</span>
             </a>
             <a href="https://vk.com/linguamaterials" target="_blank" class="link-card">
                 <img src="images/vk-icon.png" alt="VK" class="icon-img" style="width: 60px; height: 60px;">
                 <h3>Группа ВКонтакте</h3>
                 <p>Обсуждения, анонсы, эксклюзивные материалы для подписчиков</p>
-                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти →</span>
+                <span class="btn-red" style="display: inline-block; margin-top: 16px;">Перейти</span>
             </a>
         </div>
     </div>
@@ -756,6 +880,7 @@
                 <label class="filter-checkbox"><input type="checkbox" value="online" class="filter-format"> Онлайн занятия</label>
                 <label class="filter-checkbox"><input type="checkbox" value="offline" class="filter-format"> Офлайн занятия</label>
                 <label class="filter-checkbox"><input type="checkbox" value="cabin" class="filter-format"> Кабинет</label>
+                <label class="filter-checkbox"><input type="checkbox" value="proedworks" class="filter-format"> Продукция ProEdWorks</label>
             </div>
             <div class="filter-group">
                 <div class="filter-title">👥 Возраст</div>
@@ -790,7 +915,7 @@
         <div class="delivery-block">
             <h2 style="margin-bottom: 16px;">🚚 Доставка</h2>
             <p><strong>Электронные товары (PDF, ZIP, DOC)</strong> — скачиваются сразу после оплаты. Ссылка придёт на вашу почту.</p>
-            <p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и по всему миру. Доставка по России — от 300 ₽, по миру — от 500 ₽. Сроки: 3–14 дней в зависимости от региона.</p>
+            <p style="margin-top: 16px;"><strong>Физические товары</strong> — отправляем по России и по странам СНГ. Расчёт стоимости доставки и её длительности — индивидуально.</p>
             <p style="margin-top: 16px; font-size: 0.9rem; color: #888;">По всем вопросам пишите в Telegram или VK — отвечаем в течение суток.</p>
         </div>
     </div>
@@ -825,316 +950,539 @@
     </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ FOCUS -->
-<div id="focusModal" class="modal">
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ТОВАРОВ ProEdWorks -->
+<div id="productModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeFocusModal()">&times;</span>
-        <h3>🎯 Декор FOCUS</h3>
-        <div class="focus-slider-container">
-            <div class="focus-slider-track">
-                <div class="focus-slide">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                        <iframe src="https://rutube.ru/embed/dadaadbd3423aa06e88c560d76415c22/" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 24px;"></iframe>
-                    </div>
-                </div>
-                <div class="focus-slide">
-                    <img src="images/focus-photo-1.jpg" alt="Фото FOCUS 1" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+1'">
-                </div>
-                <div class="focus-slide">
-                    <img src="images/focus-photo-2.jpg" alt="Фото FOCUS 2" onerror="this.src='https://via.placeholder.com/600x400?text=Фото+2'">
-                </div>
-            </div>
-            <button class="focus-slider-prev">‹</button>
-            <button class="focus-slider-next">›</button>
+        <span class="close-modal" onclick="closeProductModal()">&times;</span>
+        <div class="modal-carousel" id="modalCarousel">
+            <div class="modal-carousel-track" id="modalCarouselTrack"></div>
+            <button class="modal-carousel-btn prev" id="modalCarouselPrev">‹</button>
+            <button class="modal-carousel-btn next" id="modalCarouselNext">›</button>
         </div>
-        <div style="text-align: left;">
-            <p><strong>Декор для тех, кому нужны FOCUSED STUDENTS</strong></p>
-            <p>💫 Декор для вашего кабинета, офиса, рабочего пространства, если ваши students отвлекаются и смотрят на часы с мыслью «сколько минут осталось до конца урока», или, если это вы сами…</p>
-            <p>⭐️ Изделие из черного АБС пластика<br>
-            ⭐️ Надежная упаковка (изделие доедет в целости и сохранности)<br>
-            ⭐️ Доставка по всей России (Почта России/СДЭК) и по всему миру</p>
-            <p>🔎 На видео продемонстрировали набор – 28 см в высоту<br>
-            15 наборов данного размера в наличии</p>
-            <p>📌 Есть изготовление по индивидуальным параметрам (отправим простую инструкцию для замеров)</p>
-            <p>💫 Стоимость изделий по желаемым параметрам рассчитывается индивидуально (писать в <a href="https://vk.com/linguajourney_workshop" target="_blank" class="btn-red" style="display: inline-block; padding: 6px 16px; font-size: 0.9rem;">Мастерскую LinguaJourney</a> или на почту <a href="mailto:linguamaterials@yandex.ru">linguamaterials@yandex.ru</a>)</p>
-            <p style="font-size: 0.8rem; color: #888;">*часы не входят в комплект</p>
-        </div>
-        <div class="order-buttons">
-            <button class="btn-red" onclick="openOrderFromFocus()">Оформить заказ</button>
-        </div>
+        <div class="modal-carousel-dots" id="modalCarouselDots"></div>
+        <h3 id="modalTitle">Название товара</h3>
+        <div class="modal-price" id="modalPrice" style="font-size: 1.3rem; font-weight: 800; color: #5B2D8E; margin: 8px 0;">990 ₽</div>
+        <div class="modal-desc" id="modalDesc">Описание товара</div>
+        <div class="modal-tags" id="modalTags"></div>
+        <button class="btn-order" id="modalOrderBtn" onclick="openOrderFromProduct()">Оформить заказ</button>
     </div>
 </div>
 
 <script>
-    (function() {
-        // ТОВАРЫ
-        const catalogProducts = [
-            { id: 11, name: "Декор FOCUS", price: 1490, oldPrice: 1700, img: "images/focus-decor-1.jpg", format: "cabin", topic: "decor" }
-        ];
+    // ===== ТОВАРЫ ProEdWorks (15 штук) =====
+    const proedworksProducts = [{
+        id: 101,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-vanechkin-1.jpg', 'images_2/garland-vanechkin-2.jpg', 'images_2/garland-vanechkin-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 102,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "DO YOU SPEAK ENGLISH?"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "DO YOU SPEAK ENGLISH?"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-doyouspeak-1.jpg', 'images_2/garland-doyouspeak-2.jpg', 'images_2/garland-doyouspeak-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 103,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "GOOD VIBES ONLY"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "GOOD VIBES ONLY"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-goodvibes-1.jpg', 'images_2/garland-goodvibes-2.jpg', 'images_2/garland-goodvibes-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 104,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ЗНАНИЯ ЭТО СИЛА"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-znanie-1.jpg', 'images_2/garland-znanie-2.jpg', 'images_2/garland-znanie-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 105,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-biology-1.jpg', 'images_2/garland-biology-2.jpg', 'images_2/garland-biology-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 106,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-chemistry-1.jpg', 'images_2/garland-chemistry-2.jpg', 'images_2/garland-chemistry-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 107,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-math-1.jpg', 'images_2/garland-math-2.jpg', 'images_2/garland-math-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 108,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-russian-1.jpg', 'images_2/garland-russian-2.jpg', 'images_2/garland-russian-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 109,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-french-1.jpg', 'images_2/garland-french-2.jpg', 'images_2/garland-french-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 110,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-chinese-1.jpg', 'images_2/garland-chinese-2.jpg', 'images_2/garland-chinese-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 111,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-history-1.jpg', 'images_2/garland-history-2.jpg', 'images_2/garland-history-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 112,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-physics-1.jpg', 'images_2/garland-physics-2.jpg', 'images_2/garland-physics-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 113,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-english-1.jpg', 'images_2/garland-english-2.jpg', 'images_2/garland-english-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 114,
+        name: 'ГИРЛЯНДА-РАСТЯЖКА "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"',
+        price: 990,
+        oldPrice: null,
+        desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
+        images: ['images_2/garland-english-self-1.jpg', 'images_2/garland-english-self-2.jpg', 'images_2/garland-english-self-3.jpg'],
+        format: 'proedworks',
+        hasVideo: false
+    }, {
+        id: 115,
+        name: 'ДЕКОР FOCUS',
+        price: 1490,
+        oldPrice: 1700,
+        desc: 'Декор для тех, кому нужны FOCUSED STUDENTS 💫\n\nДекор для вашего кабинета, офиса, рабочего пространства, если ваши students отвлекаются и смотрят на часы с мыслью «сколько минут осталось до конца урока», или, если это вы сами…\n\n⭐️ Изделие из черного АБС пластика\n⭐️ Надежная упаковка (изделие доедет в целости и сохранности)\n\n💰 Стоимость: 1490 руб.\n🚚 Доставка по всей России (Почта России/СДЭК)',
+        images: ['images_2/focus-1.jpg', 'images_2/focus-2.jpg', 'images_2/focus-3.jpg', 'images_2/focus-4.jpg'],
+        format: 'proedworks',
+        hasVideo: true,
+        videoUrl: 'https://rutube.ru/embed/dadaadbd3423aa06e88c560d76415c22/'
+    }];
 
-        // ВСЕ ТЕМЫ — «Другое» В САМОМ КОНЦЕ
-        const allTopicsRaw = [
-            { value: "alphabet", label: "🔤 Алфавит" },
-            { value: "animals", label: "🐱 Животные" },
-            { value: "birthday", label: "🎂 День рождения" },
-            { value: "city", label: "🏙️ Улица/город" },
-            { value: "clothes", label: "👕 Одежда" },
-            { value: "colors", label: "🎨 Цвета" },
-            { value: "countries", label: "🌍 Страны и национальности" },
-            { value: "decor", label: "🖼️ Декор" },
-            { value: "facebody", label: "👤 Лицо и тело" },
-            { value: "family", label: "👨‍👩‍👧 Семья и друзья" },
-            { value: "fashion", label: "👗 Мода" },
-            { value: "food", label: "🍎 Еда" },
-            { value: "grammar", label: "📖 Грамматика" },
-            { value: "hobbies", label: "🎮 Хобби" },
-            { value: "holidays", label: "🎄 Праздники" },
-            { value: "house", label: "🏠 Дом" },
-            { value: "illnesses", label: "🤒 Болезни" },
-            { value: "numbers", label: "🔢 Цифры" },
-            { value: "ordinal", label: "🔢 Порядковые числительные" },
-            { value: "politics", label: "🏛️ Политика" },
-            { value: "professions", label: "👨‍⚕️ Профессии" },
-            { value: "pronouns", label: "📚 Местоимения" },
-            { value: "school", label: "🏫 Школа" },
-            { value: "seasons", label: "🍂 Времена года/месяцы" },
-            { value: "shopping", label: "🛍️ Покупки/шопинг" },
-            { value: "time", label: "⏰ Время" },
-            { value: "toys", label: "🧸 Игрушки" },
-            { value: "travel", label: "✈️ Путешествия" },
-            { value: "weather", label: "☀️ Погода" },
-            { value: "weekdays", label: "📅 Дни недели" },
-            { value: "other", label: "📌 Другое" }
-        ];
-        
-        const allTopics = [...allTopicsRaw].sort((a, b) => a.label.localeCompare(b.label, 'ru'));
+    // ===== ВСЕ ТОВАРЫ ДЛЯ КАТАЛОГА (только ProEdWorks) =====
+    const allCatalogProducts = [];
 
-        const grammarSubtopics = [
-            "Артикли", "Вопросительные слова", "Герундий", "Глагол to be", "Have got/Has got",
-            "Исчисляемые/неисчисляемые", "Местоимения", "Модальные глаголы", "Множественное число",
-            "Неправильные глаголы", "Пассивный залог (passive voice)", "Порядковые числительные",
-            "Предлоги", "Present Simple", "Present Continuous", "Past Simple", "Past Continuous",
-            "Future Simple", "Comparative/Superlative", "There is/There are"
-        ];
+    // Добавляем товары ProEdWorks
+    proedworksProducts.forEach(p => {
+        // Определяем тему для фильтра (только те, что были в оригинале)
+        let topic = 'decor';
+        const nameLower = p.name.toLowerCase();
+        if (nameLower.includes('биолог')) topic = 'biology';
+        else if (nameLower.includes('хими')) topic = 'chemistry';
+        else if (nameLower.includes('математик')) topic = 'math';
+        else if (nameLower.includes('физик')) topic = 'physics';
+        else if (nameLower.includes('истор')) topic = 'history';
+        else if (nameLower.includes('русск')) topic = 'russian';
+        else if (nameLower.includes('англ')) topic = 'english';
+        else if (nameLower.includes('китай')) topic = 'chinese';
+        else if (nameLower.includes('fran')) topic = 'french';
+        else if (nameLower.includes('focus')) topic = 'decor';
+        else topic = 'decor';
 
-        let topicsContainer, productsGrid, resetBtn, topicSearch;
-        let formatCheckboxes = [], ageCheckboxes = [], levelCheckboxes = [];
-        let currentFormatFilters = [];
-        let currentAgeFilters = [];
-        let currentLevelFilters = [];
-        let currentTopicFilters = [];
-        let currentGrammarSubtopics = [];
-
-        function getAvailableTopics() {
-            if (currentFormatFilters.length === 0 && currentAgeFilters.length === 0 && currentLevelFilters.length === 0) {
-                return allTopics.map(t => ({ ...t, available: true }));
-            }
-            const available = new Set();
-            catalogProducts.forEach(product => {
-                let match = true;
-                if (currentFormatFilters.length > 0 && !currentFormatFilters.includes(product.format)) match = false;
-                if (currentAgeFilters.length > 0 && !currentAgeFilters.includes(product.age)) match = false;
-                if (currentLevelFilters.length > 0 && !currentLevelFilters.includes(product.level)) match = false;
-                if (match) available.add(product.topic);
-            });
-            return allTopics.map(topic => ({ ...topic, available: available.has(topic.value) }));
-        }
-
-        function renderTopicsList() {
-            if (!topicsContainer) return;
-            const availableTopics = getAvailableTopics();
-            const searchTerm = topicSearch ? topicSearch.value.toLowerCase() : '';
-            let filteredTopics = availableTopics;
-            if (searchTerm) {
-                filteredTopics = availableTopics.filter(t => t.label.toLowerCase().includes(searchTerm));
-            }
-            topicsContainer.innerHTML = filteredTopics.map(topic => {
-                const isChecked = currentTopicFilters.includes(topic.value);
-                const isAvailable = topic.available;
-                return `
-                    <div style="margin-bottom: 8px;">
-                        <label class="filter-checkbox ${!isAvailable ? 'disabled' : ''}" style="display: flex; align-items: center; gap: 8px; ${!isAvailable ? 'opacity:0.6; cursor:not-allowed;' : 'cursor:pointer;'}">
-                            <input type="checkbox" value="${topic.value}" class="filter-topic" ${isChecked && isAvailable ? 'checked' : ''} ${!isAvailable ? 'disabled' : ''}>
-                            ${topic.label}
-                        </label>
-                        ${topic.value === 'grammar' && isChecked ? `
-                            <div class="grammar-subtopics">
-                                ${grammarSubtopics.map(sub => `
-                                    <label class="grammar-subtopic-checkbox" style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer;">
-                                        <input type="checkbox" value="${sub}" class="filter-grammar-subtopic" ${currentGrammarSubtopics.includes(sub) ? 'checked' : ''}>
-                                        ${sub}
-                                    </label>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
-            
-            document.querySelectorAll('.filter-topic:not([disabled])').forEach(cb => {
-                cb.removeEventListener('change', handleTopicCheckboxChange);
-                cb.addEventListener('change', handleTopicCheckboxChange);
-            });
-            document.querySelectorAll('.filter-grammar-subtopic').forEach(cb => {
-                cb.removeEventListener('change', handleGrammarSubtopicChange);
-                cb.addEventListener('change', handleGrammarSubtopicChange);
-            });
-        }
-        
-        function handleTopicCheckboxChange(e) {
-            const val = e.target.value;
-            if (e.target.checked) {
-                if (!currentTopicFilters.includes(val)) currentTopicFilters.push(val);
-            } else {
-                currentTopicFilters = currentTopicFilters.filter(v => v !== val);
-                if (val === 'grammar') currentGrammarSubtopics = [];
-            }
-            renderTopicsList();
-            renderProducts();
-        }
-        
-        function handleGrammarSubtopicChange(e) {
-            const val = e.target.value;
-            if (e.target.checked) {
-                if (!currentGrammarSubtopics.includes(val)) currentGrammarSubtopics.push(val);
-            } else {
-                currentGrammarSubtopics = currentGrammarSubtopics.filter(v => v !== val);
-            }
-            renderProducts();
-        }
-        
-        function handleFormatCheckboxChange(e) {
-            const val = e.target.value;
-            if (e.target.checked) {
-                if (!currentFormatFilters.includes(val)) currentFormatFilters.push(val);
-            } else {
-                currentFormatFilters = currentFormatFilters.filter(v => v !== val);
-            }
-            renderTopicsList();
-            renderProducts();
-        }
-        
-        function handleAgeCheckboxChange(e) {
-            const val = e.target.value;
-            if (e.target.checked) {
-                if (!currentAgeFilters.includes(val)) currentAgeFilters.push(val);
-            } else {
-                currentAgeFilters = currentAgeFilters.filter(v => v !== val);
-            }
-            renderTopicsList();
-            renderProducts();
-        }
-        
-        function handleLevelCheckboxChange(e) {
-            const val = e.target.value;
-            if (e.target.checked) {
-                if (!currentLevelFilters.includes(val)) currentLevelFilters.push(val);
-            } else {
-                currentLevelFilters = currentLevelFilters.filter(v => v !== val);
-            }
-            renderTopicsList();
-            renderProducts();
-        }
-        
-        function renderProducts() {
-            if (!productsGrid) return;
-            let filtered = [...catalogProducts];
-            if (currentFormatFilters.length > 0) filtered = filtered.filter(p => currentFormatFilters.includes(p.format));
-            if (currentAgeFilters.length > 0) filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
-            if (currentLevelFilters.length > 0) filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
-            if (currentTopicFilters.length > 0) filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
-            if (currentGrammarSubtopics.length > 0 && currentTopicFilters.includes('grammar')) {
-                filtered = filtered.filter(p => p.topic === 'grammar');
-            }
-            if (filtered.length === 0) {
-                productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
-                return;
-            }
-            productsGrid.innerHTML = filtered.map(p => {
-                const tags = [];
-                if (p.format === 'online') tags.push('💻 Онлайн');
-                else if (p.format === 'offline') tags.push('📚 Офлайн');
-                else if (p.format === 'cabin') tags.push('🏫 Кабинет');
-                if (p.age === 'toddlers') tags.push('Малыши');
-                else if (p.age === 'kids') tags.push('Дошкольники');
-                else if (p.age === 'teens') tags.push('Школьники');
-                else if (p.age === 'adults') tags.push('Взрослые');
-                if (p.level) tags.push(p.level.toUpperCase());
-                if (p.topic === 'decor') tags.push('🎨 Декор');
-                else if (p.topic === 'grammar') tags.push('📖 Грамматика');
-                else if (p.topic === 'food') tags.push('🍎 Еда');
-                const tagsString = tags.join(' | ');
-                return `
-                    <div class="filter-product-card">
-                        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x300?text=📚'">
-                        <h3>${p.name}</h3>
-                        <div class="tags">${tagsString}</div>
-                        <div class="price"><span class="old-price">${p.oldPrice} ₽</span> ${p.price} ₽</div>
-                        <a href="#" class="details-link" onclick="openFocusModal(); return false;">Подробнее</a><br>
-                        <button class="btn-red" onclick="openOrderModal('${p.name}', ${p.price})">Оформить заказ</button>
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        function resetAllFilters() {
-            currentFormatFilters = [];
-            currentAgeFilters = [];
-            currentLevelFilters = [];
-            currentTopicFilters = [];
-            currentGrammarSubtopics = [];
-            if (formatCheckboxes.length) formatCheckboxes.forEach(cb => cb.checked = false);
-            if (ageCheckboxes.length) ageCheckboxes.forEach(cb => cb.checked = false);
-            if (levelCheckboxes.length) levelCheckboxes.forEach(cb => cb.checked = false);
-            if (topicSearch) topicSearch.value = '';
-            renderTopicsList();
-            renderProducts();
-        }
-        
-        function handleTopicSearchInput() {
-            renderTopicsList();
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            topicsContainer = document.getElementById('topicsContainer');
-            productsGrid = document.getElementById('filteredProductsGrid');
-            resetBtn = document.querySelector('.filter-reset');
-            topicSearch = document.getElementById('topicSearch');
-            formatCheckboxes = document.querySelectorAll('.filter-format');
-            ageCheckboxes = document.querySelectorAll('.filter-age');
-            levelCheckboxes = document.querySelectorAll('.filter-level');
-            if (formatCheckboxes.length) {
-                formatCheckboxes.forEach(cb => {
-                    cb.removeEventListener('change', handleFormatCheckboxChange);
-                    cb.addEventListener('change', handleFormatCheckboxChange);
-                });
-            }
-            if (ageCheckboxes.length) {
-                ageCheckboxes.forEach(cb => {
-                    cb.removeEventListener('change', handleAgeCheckboxChange);
-                    cb.addEventListener('change', handleAgeCheckboxChange);
-                });
-            }
-            if (levelCheckboxes.length) {
-                levelCheckboxes.forEach(cb => {
-                    cb.removeEventListener('change', handleLevelCheckboxChange);
-                    cb.addEventListener('change', handleLevelCheckboxChange);
-                });
-            }
-            if (resetBtn) {
-                resetBtn.removeEventListener('click', resetAllFilters);
-                resetBtn.addEventListener('click', resetAllFilters);
-            }
-            if (topicSearch) {
-                topicSearch.removeEventListener('input', handleTopicSearchInput);
-                topicSearch.addEventListener('input', handleTopicSearchInput);
-            }
-            renderTopicsList();
-            renderProducts();
+        allCatalogProducts.push({
+            id: p.id,
+            name: p.name,
+            price: p.price,
+            oldPrice: p.oldPrice,
+            img: p.images[0] || 'https://via.placeholder.com/300x300?text=🖼️',
+            format: 'proedworks',
+            age: 'teens',
+            level: 'b1',
+            topic: topic,
+            isProEdWorks: true,
+            images: p.images || ['https://via.placeholder.com/300x300?text=🖼️'],
+            desc: p.desc || 'Описание товара',
+            hasVideo: p.hasVideo || false,
+            videoUrl: p.videoUrl || null
         });
-    })();
+    });
 
-    // ГЛОБАЛЬНЫЕ ФУНКЦИИ ДЛЯ МОДАЛОК
+    // ===== ВСЕ ТЕМЫ (ТОЛЬКО ТЕ, ЧТО БЫЛИ В ОРИГИНАЛЕ) =====
+    // Убраны: chinese, english, french, russian
+    const allTopicsRaw = [
+        { value: "alphabet", label: "🔤 Алфавит" },
+        { value: "animals", label: "🐱 Животные" },
+        { value: "birthday", label: "🎂 День рождения" },
+        { value: "biology", label: "🧬 Биология" },
+        { value: "chemistry", label: "🧪 Химия" },
+        { value: "city", label: "🏙️ Улица/город" },
+        { value: "clothes", label: "👕 Одежда" },
+        { value: "colors", label: "🎨 Цвета" },
+        { value: "countries", label: "🌍 Страны и национальности" },
+        { value: "decor", label: "🖼️ Декор" },
+        { value: "facebody", label: "👤 Лицо и тело" },
+        { value: "family", label: "👨‍👩‍👧 Семья и друзья" },
+        { value: "fashion", label: "👗 Мода" },
+        { value: "food", label: "🍎 Еда" },
+        { value: "grammar", label: "📖 Грамматика" },
+        { value: "history", label: "📜 История" },
+        { value: "hobbies", label: "🎮 Хобби" },
+        { value: "holidays", label: "🎄 Праздники" },
+        { value: "house", label: "🏠 Дом" },
+        { value: "humor", label: "😂 Юмор" },
+        { value: "illnesses", label: "🤒 Болезни" },
+        { value: "math", label: "📐 Математика" },
+        { value: "motivation", label: "💪 Мотивация" },
+        { value: "numbers", label: "🔢 Цифры" },
+        { value: "ordinal", label: "🔢 Порядковые числительные" },
+        { value: "physics", label: "⚡ Физика" },
+        { value: "politics", label: "🏛️ Политика" },
+        { value: "professions", label: "👨‍⚕️ Профессии" },
+        { value: "pronouns", label: "📚 Местоимения" },
+        { value: "school", label: "🏫 Школа" },
+        { value: "seasons", label: "🍂 Времена года/месяцы" },
+        { value: "shopping", label: "🛍️ Покупки/шопинг" },
+        { value: "time", label: "⏰ Время" },
+        { value: "toys", label: "🧸 Игрушки" },
+        { value: "travel", label: "✈️ Путешествия" },
+        { value: "weather", label: "☀️ Погода" },
+        { value: "weekdays", label: "📅 Дни недели" },
+        { value: "other", label: "📌 Другое" }
+    ];
+
+    const allTopics = [...allTopicsRaw].sort((a, b) => a.label.localeCompare(b.label, 'ru'));
+
+    const grammarSubtopics = [
+        "Артикли", "Вопросительные слова", "Герундий", "Глагол to be", "Have got/Has got",
+        "Исчисляемые/неисчисляемые", "Местоимения", "Модальные глаголы", "Множественное число",
+        "Неправильные глаголы", "Пассивный залог (passive voice)", "Порядковые числительные",
+        "Предлоги", "Present Simple", "Present Continuous", "Past Simple", "Past Continuous",
+        "Future Simple", "Comparative/Superlative", "There is/There are"
+    ];
+
+    let topicsContainer, productsGrid, resetBtn, topicSearch;
+    let formatCheckboxes = [], ageCheckboxes = [], levelCheckboxes = [];
+    let currentFormatFilters = [];
+    let currentAgeFilters = [];
+    let currentLevelFilters = [];
+    let currentTopicFilters = [];
+    let currentGrammarSubtopics = [];
+
+    function getAvailableTopics() {
+        if (currentFormatFilters.length === 0 && currentAgeFilters.length === 0 && currentLevelFilters.length === 0) {
+            return allTopics.map(t => ({ ...t, available: true }));
+        }
+        const available = new Set();
+        allCatalogProducts.forEach(product => {
+            let match = true;
+            if (currentFormatFilters.length > 0 && !currentFormatFilters.includes(product.format)) match = false;
+            if (currentAgeFilters.length > 0 && !currentAgeFilters.includes(product.age)) match = false;
+            if (currentLevelFilters.length > 0 && !currentLevelFilters.includes(product.level)) match = false;
+            if (match) available.add(product.topic);
+        });
+        return allTopics.map(topic => ({ ...topic, available: available.has(topic.value) }));
+    }
+
+    function renderTopicsList() {
+        if (!topicsContainer) return;
+        const availableTopics = getAvailableTopics();
+        const searchTerm = topicSearch ? topicSearch.value.toLowerCase() : '';
+        let filteredTopics = availableTopics;
+        if (searchTerm) {
+            filteredTopics = availableTopics.filter(t => t.label.toLowerCase().includes(searchTerm));
+        }
+        topicsContainer.innerHTML = filteredTopics.map(topic => {
+            const isChecked = currentTopicFilters.includes(topic.value);
+            const isAvailable = topic.available;
+            return `
+                <div style="margin-bottom: 8px;">
+                    <label class="filter-checkbox ${!isAvailable ? 'disabled' : ''}" style="display: flex; align-items: center; gap: 8px; ${!isAvailable ? 'opacity:0.6; cursor:not-allowed;' : 'cursor:pointer;'}">
+                        <input type="checkbox" value="${topic.value}" class="filter-topic" ${isChecked && isAvailable ? 'checked' : ''} ${!isAvailable ? 'disabled' : ''}>
+                        ${topic.label}
+                    </label>
+                    ${topic.value === 'grammar' && isChecked ? `
+                        <div class="grammar-subtopics">
+                            ${grammarSubtopics.map(sub => `
+                                <label class="grammar-subtopic-checkbox" style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer;">
+                                    <input type="checkbox" value="${sub}" class="filter-grammar-subtopic" ${currentGrammarSubtopics.includes(sub) ? 'checked' : ''}>
+                                    ${sub}
+                                </label>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+        
+        document.querySelectorAll('.filter-topic:not([disabled])').forEach(cb => {
+            cb.removeEventListener('change', handleTopicCheckboxChange);
+            cb.addEventListener('change', handleTopicCheckboxChange);
+        });
+        document.querySelectorAll('.filter-grammar-subtopic').forEach(cb => {
+            cb.removeEventListener('change', handleGrammarSubtopicChange);
+            cb.addEventListener('change', handleGrammarSubtopicChange);
+        });
+    }
+    
+    function handleTopicCheckboxChange(e) {
+        const val = e.target.value;
+        if (e.target.checked) {
+            if (!currentTopicFilters.includes(val)) currentTopicFilters.push(val);
+        } else {
+            currentTopicFilters = currentTopicFilters.filter(v => v !== val);
+            if (val === 'grammar') currentGrammarSubtopics = [];
+        }
+        renderTopicsList();
+        renderProducts();
+    }
+    
+    function handleGrammarSubtopicChange(e) {
+        const val = e.target.value;
+        if (e.target.checked) {
+            if (!currentGrammarSubtopics.includes(val)) currentGrammarSubtopics.push(val);
+        } else {
+            currentGrammarSubtopics = currentGrammarSubtopics.filter(v => v !== val);
+        }
+        renderProducts();
+    }
+    
+    function handleFormatCheckboxChange(e) {
+        const val = e.target.value;
+        if (e.target.checked) {
+            if (!currentFormatFilters.includes(val)) currentFormatFilters.push(val);
+        } else {
+            currentFormatFilters = currentFormatFilters.filter(v => v !== val);
+        }
+        renderTopicsList();
+        renderProducts();
+    }
+    
+    function handleAgeCheckboxChange(e) {
+        const val = e.target.value;
+        if (e.target.checked) {
+            if (!currentAgeFilters.includes(val)) currentAgeFilters.push(val);
+        } else {
+            currentAgeFilters = currentAgeFilters.filter(v => v !== val);
+        }
+        renderTopicsList();
+        renderProducts();
+    }
+    
+    function handleLevelCheckboxChange(e) {
+        const val = e.target.value;
+        if (e.target.checked) {
+            if (!currentLevelFilters.includes(val)) currentLevelFilters.push(val);
+        } else {
+            currentLevelFilters = currentLevelFilters.filter(v => v !== val);
+        }
+        renderTopicsList();
+        renderProducts();
+    }
+    
+    function renderProducts() {
+        if (!productsGrid) return;
+        let filtered = [...allCatalogProducts];
+        if (currentFormatFilters.length > 0) filtered = filtered.filter(p => currentFormatFilters.includes(p.format));
+        if (currentAgeFilters.length > 0) filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
+        if (currentLevelFilters.length > 0) filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
+        if (currentTopicFilters.length > 0) filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
+        if (currentGrammarSubtopics.length > 0 && currentTopicFilters.includes('grammar')) {
+            filtered = filtered.filter(p => p.topic === 'grammar');
+        }
+        if (filtered.length === 0) {
+            productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
+            return;
+        }
+        productsGrid.innerHTML = filtered.map(p => {
+            const imgSrc = p.img || (p.images && p.images[0]) || 'https://via.placeholder.com/300x300?text=🖼️';
+
+            return `
+                <div class="filter-product-card">
+                    <div class="prod-img">
+                        <img src="${imgSrc}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'>🖼️</div>'">
+                    </div>
+                    <h3>${p.name}</h3>
+                    <div class="price">${p.oldPrice ? `<span class="old-price">${p.oldPrice} ₽</span>` : ''} ${p.price} ₽</div>
+                    <a href="#" class="details-link" onclick="openProEdWorksProductModal(${p.id}); return false;">Подробнее</a>
+                    <br>
+                    <button class="btn-red" onclick="openOrderModal('${p.name}', ${p.price})">Оформить заказ</button>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function resetAllFilters() {
+        currentFormatFilters = [];
+        currentAgeFilters = [];
+        currentLevelFilters = [];
+        currentTopicFilters = [];
+        currentGrammarSubtopics = [];
+        if (formatCheckboxes.length) formatCheckboxes.forEach(cb => cb.checked = false);
+        if (ageCheckboxes.length) ageCheckboxes.forEach(cb => cb.checked = false);
+        if (levelCheckboxes.length) levelCheckboxes.forEach(cb => cb.checked = false);
+        if (topicSearch) topicSearch.value = '';
+        renderTopicsList();
+        renderProducts();
+    }
+    
+    function handleTopicSearchInput() {
+        renderTopicsList();
+    }
+    
+    // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ТОВАРОВ ProEdWorks =====
+    let modalCarouselIndex = 0;
+    let currentModalImages = [];
+    let currentProductId = null;
+    let currentProductHasVideo = false;
+    let currentProductVideoUrl = null;
+
+    function openProEdWorksProductModal(id) {
+        const product = proedworksProducts.find(p => p.id === id);
+        if (!product) return;
+        currentProductId = id;
+        currentProductHasVideo = product.hasVideo || false;
+        currentProductVideoUrl = product.videoUrl || null;
+        
+        document.getElementById('modalTitle').textContent = product.name;
+        document.getElementById('modalPrice').textContent = product.price + ' ₽';
+        document.getElementById('modalDesc').textContent = product.desc;
+        
+        // ТОЛЬКО 3 ТЕГА в модалке
+        const tagList = [
+            { label: '🏫 Кабинет', type: 'normal' },
+            { label: '🖼️ Декор', type: 'normal' },
+            { label: '⭐ Продукция ProEdWorks', type: 'purple' }
+        ];
+        const tagsHtml = tagList.map(t => 
+            t.type === 'purple' 
+                ? `<span class="tag-purple"><a href="proedworks.html" style="color: white; text-decoration: none;">${t.label}</a></span>` 
+                : `<span>${t.label}</span>`
+        ).join('');
+        document.getElementById('modalTags').innerHTML = tagsHtml;
+        
+        // Карусель с видео для FOCUS
+        renderModalCarousel(product.images, product.hasVideo, product.videoUrl);
+        
+        document.getElementById('productModal').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function renderModalCarousel(images, hasVideo, videoUrl) {
+        const track = document.getElementById('modalCarouselTrack');
+        const dotsContainer = document.getElementById('modalCarouselDots');
+        if (!track) return;
+
+        let slides = [];
+        
+        // Если есть видео — добавляем его ПЕРВЫМ слайдом
+        if (hasVideo && videoUrl) {
+            slides.push(`
+                <div class="modal-carousel-slide">
+                    <iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            `);
+        }
+        
+        // Добавляем фото
+        const imgSlides = (images && images.length) ? images : ['https://via.placeholder.com/600x400?text=🖼️'];
+        imgSlides.forEach(img => {
+            slides.push(`
+                <div class="modal-carousel-slide">
+                    <img src="${img}" alt="Фото товара" onerror="this.innerHTML='<div class=\\'no-image\\'>🖼️</div>'">
+                </div>
+            `);
+        });
+
+        currentModalImages = slides;
+        track.innerHTML = slides.join('');
+
+        dotsContainer.innerHTML = slides.map((_, i) => `
+            <span class="${i === 0 ? 'active-dot' : ''}" data-index="${i}"></span>
+        `).join('');
+
+        modalCarouselIndex = 0;
+        updateModalCarousel();
+
+        dotsContainer.querySelectorAll('span').forEach(dot => {
+            dot.addEventListener('click', function() {
+                modalCarouselIndex = parseInt(this.dataset.index);
+                updateModalCarousel();
+            });
+        });
+    }
+
+    function updateModalCarousel() {
+        const track = document.getElementById('modalCarouselTrack');
+        const dots = document.querySelectorAll('#modalCarouselDots span');
+        if (!track) return;
+        track.style.transform = `translateX(-${modalCarouselIndex * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active-dot', i === modalCarouselIndex);
+        });
+    }
+
+    function moveModalCarousel(direction) {
+        const total = currentModalImages.length;
+        if (total === 0) return;
+        modalCarouselIndex = (modalCarouselIndex + direction + total) % total;
+        updateModalCarousel();
+    }
+
+    function closeProductModal() {
+        document.getElementById('productModal').classList.remove('show');
+        document.body.style.overflow = '';
+        modalCarouselIndex = 0;
+        const track = document.getElementById('modalCarouselTrack');
+        if (track) track.style.transform = 'translateX(0px)';
+    }
+
+    function openOrderFromProduct() {
+        const product = proedworksProducts.find(p => p.id === currentProductId);
+        if (!product) return;
+        closeProductModal();
+        openOrderModal(product.name, product.price);
+    }
+
+    // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ЗАКАЗА (РАБОТАЕТ ОТВСЮДУ) =====
     function openOrderModal(productName, price) {
         const modal = document.getElementById('orderModal');
         if (!modal) return;
@@ -1153,55 +1501,59 @@
             document.body.style.overflow = '';
         }
     }
-    
-    function openOrderFromFocus() {
-        closeFocusModal();
-        openOrderModal("Декор FOCUS", 1490);
-    }
-    
-    let focusCurrentIndex = 0;
-    function initFocusSlider() {
-        const track = document.querySelector('.focus-slider-track');
-        const slides = track ? track.children : [];
-        const prevBtn = document.querySelector('.focus-slider-prev');
-        const nextBtn = document.querySelector('.focus-slider-next');
-        if (!track || slides.length === 0) return;
-        function updateSlide() {
-            const slideWidth = slides[0].clientWidth;
-            track.style.transform = `translateX(-${focusCurrentIndex * slideWidth}px)`;
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    document.addEventListener('DOMContentLoaded', () => {
+        topicsContainer = document.getElementById('topicsContainer');
+        productsGrid = document.getElementById('filteredProductsGrid');
+        resetBtn = document.querySelector('.filter-reset');
+        topicSearch = document.getElementById('topicSearch');
+        formatCheckboxes = document.querySelectorAll('.filter-format');
+        ageCheckboxes = document.querySelectorAll('.filter-age');
+        levelCheckboxes = document.querySelectorAll('.filter-level');
+        
+        if (formatCheckboxes.length) {
+            formatCheckboxes.forEach(cb => {
+                cb.removeEventListener('change', handleFormatCheckboxChange);
+                cb.addEventListener('change', handleFormatCheckboxChange);
+            });
         }
-        if (prevBtn) prevBtn.onclick = () => { focusCurrentIndex = (focusCurrentIndex - 1 + slides.length) % slides.length; updateSlide(); };
-        if (nextBtn) nextBtn.onclick = () => { focusCurrentIndex = (focusCurrentIndex + 1) % slides.length; updateSlide(); };
-        window.addEventListener('resize', updateSlide);
-        setTimeout(updateSlide, 100);
-    }
-    
-    function openFocusModal() {
-        const modal = document.getElementById('focusModal');
-        if (modal) {
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            setTimeout(initFocusSlider, 50);
+        if (ageCheckboxes.length) {
+            ageCheckboxes.forEach(cb => {
+                cb.removeEventListener('change', handleAgeCheckboxChange);
+                cb.addEventListener('change', handleAgeCheckboxChange);
+            });
         }
-    }
-    
-    function closeFocusModal() {
-        const modal = document.getElementById('focusModal');
-        if (modal) {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-            focusCurrentIndex = 0;
-            const track = document.querySelector('.focus-slider-track');
-            if (track) track.style.transform = 'translateX(0px)';
+        if (levelCheckboxes.length) {
+            levelCheckboxes.forEach(cb => {
+                cb.removeEventListener('change', handleLevelCheckboxChange);
+                cb.addEventListener('change', handleLevelCheckboxChange);
+            });
         }
-    }
-    
-    window.openOrderModal = openOrderModal;
-    window.closeOrderModal = closeOrderModal;
-    window.openFocusModal = openFocusModal;
-    window.closeFocusModal = closeFocusModal;
-    window.openOrderFromFocus = openOrderFromFocus;
-    
+        if (resetBtn) {
+            resetBtn.removeEventListener('click', resetAllFilters);
+            resetBtn.addEventListener('click', resetAllFilters);
+        }
+        if (topicSearch) {
+            topicSearch.removeEventListener('input', handleTopicSearchInput);
+            topicSearch.addEventListener('input', handleTopicSearchInput);
+        }
+        
+        // Кнопки карусели
+        document.getElementById('modalCarouselPrev').addEventListener('click', function(e) {
+            e.stopPropagation();
+            moveModalCarousel(-1);
+        });
+        document.getElementById('modalCarouselNext').addEventListener('click', function(e) {
+            e.stopPropagation();
+            moveModalCarousel(1);
+        });
+        
+        renderTopicsList();
+        renderProducts();
+    });
+
+    // ===== СКРОЛЛ =====
     window.addEventListener('scroll', function() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1222,14 +1574,16 @@
     
     window.onclick = function(event) {
         const orderModal = document.getElementById('orderModal');
-        const focusModal = document.getElementById('focusModal');
+        const productModal = document.getElementById('productModal');
         if (event.target === orderModal) closeOrderModal();
-        if (event.target === focusModal) closeFocusModal();
+        if (event.target === productModal) closeProductModal();
     };
     
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('scrollPosition', window.scrollY);
-    });
+    window.openOrderModal = openOrderModal;
+    window.closeOrderModal = closeOrderModal;
+    window.openProEdWorksProductModal = openProEdWorksProductModal;
+    window.closeProductModal = closeProductModal;
+    window.openOrderFromProduct = openOrderFromProduct;
 </script>
 
 </body>
