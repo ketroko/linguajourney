@@ -1187,7 +1187,11 @@
     </div>
 
     <script>
-        // ===== ВСЕ ТОВАРЫ — ФОТО ХРАНЯТСЯ В ПАПКЕ images_2 =====
+        // ===== ОБЩИЕ ФОТО ДЛЯ 2-ГО И 3-ГО СЛАЙДА =====
+        const COMMON_PHOTO_2 = 'images_2/photo-2.jpg';
+        const COMMON_PHOTO_3 = 'images_2/photo-3.jpg';
+
+        // ===== ВСЕ ТОВАРЫ =====
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1196,7 +1200,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-vanechkin-1.jpg', 'images_2/garland-vanechkin-2.jpg', 'images_2/garland-vanechkin-3.jpg']
+            images: ['images_2/garland-vanechkin-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 102,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "DO YOU SPEAK ENGLISH?"',
@@ -1205,7 +1209,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-doyouspeak-1.jpg', 'images_2/garland-doyouspeak-2.jpg', 'images_2/garland-doyouspeak-3.jpg']
+            images: ['images_2/garland-doyouspeak-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 103,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "GOOD VIBES ONLY"',
@@ -1214,14 +1218,14 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт',
                 'Психология'
             ],
-            images: ['images_2/garland-goodvibes-1.jpg', 'images_2/garland-goodvibes-2.jpg', 'images_2/garland-goodvibes-3.jpg']
+            images: ['images_2/garland-goodvibes-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 104,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ЗНАНИЯ ЭТО СИЛА"',
             price: '990 ₽',
             desc: 'ГИРЛЯНДА-РАСТЯЖКА ДЛЯ ВАШЕГО КАБИНЕТА/КЛАССА/ОФИСА ✨\n\nГирлянда-растяжка "ЗНАНИЯ ЭТО СИЛА"\n\nДеревянные буквы (из ЛХДФ) высотой 10 см. Чёткий шрифт, хорошо читается с любого места. В комплекте всё для монтажа: эластичный шнур 300 см и гвоздики для крепления.\n\n💰 Стоимость: 990 руб.\n🚚 Доставка по России',
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Юмор', 'Мотивация', 'Ремонт'],
-            images: ['images_2/garland-znanie-1.jpg', 'images_2/garland-znanie-2.jpg', 'images_2/garland-znanie-3.jpg']
+            images: ['images_2/garland-znanie-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 105,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "БИОЛОГИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1230,7 +1234,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Биология', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-biology-1.jpg', 'images_2/garland-biology-2.jpg', 'images_2/garland-biology-3.jpg']
+            images: ['images_2/garland-biology-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 106,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ХИМИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1239,7 +1243,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Химия', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-chemistry-1.jpg', 'images_2/garland-chemistry-2.jpg', 'images_2/garland-chemistry-3.jpg']
+            images: ['images_2/garland-chemistry-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 107,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "МАТЕМАТИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1248,7 +1252,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Математика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-math-1.jpg', 'images_2/garland-math-2.jpg', 'images_2/garland-math-3.jpg']
+            images: ['images_2/garland-math-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 108,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "РУССКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1257,7 +1261,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Русский язык', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-russian-1.jpg', 'images_2/garland-russian-2.jpg', 'images_2/garland-russian-3.jpg']
+            images: ['images_2/garland-russian-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 109,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "FRANÇAIS САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1266,7 +1270,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Французский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-french-1.jpg', 'images_2/garland-french-2.jpg', 'images_2/garland-french-3.jpg']
+            images: ['images_2/garland-french-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 110,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "КИТАЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1275,7 +1279,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Китайский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-chinese-1.jpg', 'images_2/garland-chinese-2.jpg', 'images_2/garland-chinese-3.jpg']
+            images: ['images_2/garland-chinese-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 111,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ИСТОРИЯ САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1284,7 +1288,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'История', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-history-1.jpg', 'images_2/garland-history-2.jpg', 'images_2/garland-history-3.jpg']
+            images: ['images_2/garland-history-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 112,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ФИЗИКА САМА СЕБЯ НЕ ВЫУЧИТ"',
@@ -1293,7 +1297,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Офис', 'Физика', 'Юмор', 'Мотивация',
                 'Ремонт'
             ],
-            images: ['images_2/garland-physics-1.jpg', 'images_2/garland-physics-2.jpg', 'images_2/garland-physics-3.jpg']
+            images: ['images_2/garland-physics-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 113,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "АНГЛИЙСКИЙ САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1302,7 +1306,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-english-1.jpg', 'images_2/garland-english-2.jpg', 'images_2/garland-english-3.jpg']
+            images: ['images_2/garland-english-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
             id: 114,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ENGLISH САМ СЕБЯ НЕ ВЫУЧИТ"',
@@ -1311,7 +1315,7 @@
             tags: ['Декор', 'Панно', 'Школьникам', 'Образовательный центр', 'Языковая школа', 'Офис', 'Английский язык',
                 'Юмор', 'Мотивация', 'Ремонт'
             ],
-            images: ['images_2/garland-english-self-1.jpg', 'images_2/garland-english-self-2.jpg', 'images_2/garland-english-self-3.jpg']
+            images: ['images_2/garland-english-self-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }];
 
         // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
@@ -1333,7 +1337,7 @@
             });
         }
 
-        // ===== ОТРИСОВКА ТОВАРОВ (С ПЕРВЫМ ФОТО НА ОБЛОЖКЕ) =====
+        // ===== ОТРИСОВКА ТОВАРОВ =====
         function renderProducts(containerId, productList) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1350,7 +1354,6 @@
             }
 
             container.innerHTML = productList.map(p => {
-                // Берём ПЕРВОЕ фото для обложки
                 const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
                 let imageHtml;
                 if (firstImage) {
@@ -1530,7 +1533,8 @@
                     .includes(t));
                 const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age
                     .includes(t));
-                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org                    .includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org
+                    .includes(t));
                 const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
                     .subject.includes(t));
                 const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other
