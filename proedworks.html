@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProEdWorks — Оснащение и решения для образования</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images_2/favicon.png">
     <style>
         * {
             margin: 0;
@@ -39,6 +39,187 @@
             box-shadow: 0 2px 8px rgba(91, 45, 142, 0.3);
         }
 
+        /* ===== ПЕРВЫЙ ЭКРАН ===== */
+        .first-screen {
+            background: #5B2D8E;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 0 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .first-screen-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images_2/lingua-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .first-screen .container {
+            position: relative;
+            z-index: 2;
+        }
+        .first-screen-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .first-screen-text {
+            flex: 1;
+        }
+        .first-screen-text .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .first-screen-text .logo-title .logo-circle-big {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .first-screen-text .logo-title .logo-circle-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .first-screen-text h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+        }
+        .first-screen-text .subtitle-main {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .first-screen-text .subtitle-desc {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 500px;
+            margin-bottom: 24px;
+        }
+        .first-screen-image {
+            flex: 1;
+        }
+        .first-screen-image img {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .btn-white {
+            display: inline-block;
+            background: white;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #5B2D8E;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+        .btn-white:hover {
+            background: #F3EEFA;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== КНОПКИ НА ПЕРВОМ ЭКРАНЕ (светло-фиолетовые) ===== */
+        .first-screen-top-btns {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 24px;
+            pointer-events: none;
+        }
+        .first-screen-top-btns .left-btns,
+        .first-screen-top-btns .right-btns {
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+        }
+        .first-screen-top-btns a {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(243, 238, 250, 0.85);
+            backdrop-filter: blur(8px);
+            color: #5B2D8E;
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 300;
+            transition: 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .first-screen-top-btns a:hover {
+            background: rgba(243, 238, 250, 1);
+            transform: scale(1.05);
+        }
+        .first-screen-top-btns .back-link {
+            font-size: 1.8rem;
+        }
+        .first-screen-top-btns .social-icon-top {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(243, 238, 250, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            text-decoration: none;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .first-screen-top-btns .social-icon-top img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+        .first-screen-top-btns .social-icon-top:hover {
+            background: rgba(243, 238, 250, 1);
+            transform: scale(1.05);
+        }
+
+        /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         header {
             background: #F3EEFA;
             padding: 16px 0;
@@ -50,23 +231,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
-        }
-        .header-left .back-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #5B2D8E;
-            color: white;
-            text-decoration: none;
-            font-size: 1.6rem;
-            font-weight: 300;
-            transition: 0.3s;
-        }
-        .header-left .back-link:hover {
-            background: #7B4DAE;
         }
         .header-center {
             display: flex;
@@ -137,12 +301,6 @@
         .page-title {
             text-align: center;
             margin-bottom: 28px;
-        }
-        .page-title h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #5B2D8E;
-            margin-bottom: 4px;
         }
         .page-title .desc {
             font-size: 1.05rem;
@@ -921,13 +1079,31 @@
                 width: 36px;
                 height: 36px;
             }
-            .header-left .back-link {
-                width: 38px;
-                height: 38px;
-                font-size: 1.3rem;
-            }
             .production-carousel .slide {
                 height: 250px;
+            }
+            .first-screen-text h1 {
+                font-size: 2rem;
+            }
+            .first-screen-text .subtitle-main {
+                font-size: 1rem;
+            }
+            .first-screen-text .subtitle-desc {
+                font-size: 0.9rem;
+            }
+            .first-screen-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .first-screen-top-btns {
+                padding: 0 12px;
+                top: 12px;
+            }
+            .first-screen-top-btns a,
+            .first-screen-top-btns .social-icon-top {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
             }
         }
         @media (max-width: 480px) {
@@ -953,6 +1129,13 @@
             .filter-bottom {
                 text-align: center;
             }
+            .first-screen-text h1 {
+                font-size: 1.6rem;
+            }
+            .first-screen-text .logo-title .logo-circle-big {
+                width: 44px;
+                height: 44px;
+            }
         }
     </style>
 </head>
@@ -961,11 +1144,45 @@
     <!-- ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ ===== -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <header>
-        <div class="container">
-            <div class="header-left">
+    <!-- ===== ПЕРВЫЙ ЭКРАН ===== -->
+    <div class="first-screen">
+        <div class="first-screen-bg"></div>
+
+        <!-- КНОПКИ В ВЕРХНИХ УГЛАХ (светло-фиолетовые) -->
+        <div class="first-screen-top-btns">
+            <div class="left-btns">
                 <a href="/" class="back-link">‹</a>
             </div>
+            <div class="right-btns">
+                <a href="https://t.me/proedworks" target="_blank" class="social-icon-top">
+                    <img src="images/tg-icon.png" alt="Telegram" onerror="this.style.display='none'">
+                </a>
+                <a href="https://vk.me/proedworks" target="_blank" class="social-icon-top">
+                    <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
+                </a>
+            </div>
+        </div>
+
+        <div class="container first-screen-container">
+            <div class="first-screen-text">
+                <div class="logo-title">
+                    <div class="logo-circle-big">
+                        <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.style.display='none'">
+                    </div>
+                    <h1>ProEdWorks</h1>
+                </div>
+                <p class="subtitle-main">Оснащение и решения для образования</p>
+                <p class="subtitle-desc">Производим и поставляем товары для образовательных организаций</p>
+                <a href="#products" class="btn-white" id="scrollToCatalog">Перейти к каталогу</a>
+            </div>
+            <div class="first-screen-image">
+                <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.src='https://via.placeholder.com/500x300?text=ProEdWorks'">
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
             <div class="header-center">
                 <div class="logo-circle">
                     <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.style.display='none'">
@@ -987,8 +1204,7 @@
         <div class="container">
             <div class="page-block">
 
-                <div class="page-title">
-                    <h1>ProEdWorks</h1>
+                <div class="page-title fade-section" id="products">
                     <p class="desc">
                         Всё для школ, детских садов и частных центров:
                         <strong>образовательная продукция</strong>,
@@ -997,17 +1213,17 @@
                     </p>
                 </div>
 
-                <div class="tabs">
+                <div class="tabs fade-section">
                     <button class="tab-btn active" data-tab="tab1">🎓 Образовательная продукция</button>
                     <button class="tab-btn" data-tab="tab2">🎁 Подарочные наборы</button>
                     <button class="tab-btn" data-tab="tab3">🪑 Мебель и оснащение</button>
                 </div>
 
                 <div class="tab-content active" id="tab1">
-                    <h2>Образовательная продукция</h2>
-                    <p class="subtitle">То, что мы производим сами — от идеи до готового изделия</p>
+                    <h2 class="fade-section">Образовательная продукция</h2>
+                    <p class="subtitle fade-section">То, что мы производим сами — от идеи до готового изделия</p>
 
-                    <div class="filter-section">
+                    <div class="filter-section fade-section">
                         <div class="filter-grid">
                             <div class="filter-group">
                                 <div class="filter-label">📌 Формат</div>
@@ -1082,7 +1298,7 @@
 
                     <div class="grid" id="productGrid"></div>
 
-                    <div class="production-section">
+                    <div class="production-section fade-section">
                         <h3>🏭 Наше производство</h3>
                         <p class="sub">Изделия производятся на собственном оборудовании</p>
 
@@ -1116,7 +1332,7 @@
                         </div>
                     </div>
 
-                    <div class="custom-block">
+                    <div class="custom-block fade-section">
                         <h4>✏️ Индивидуальные заказы</h4>
                         <p>Нужно что-то особенное? Разработаем и изготовим под ваш запрос — от дизайн-проекта до готового изделия.</p>
                         <a href="https://vk.ru/proedworks" target="_blank" class="btn">Оформить заказ</a>
@@ -1164,10 +1380,13 @@
                     </div>
                 </div>
 
-                <div class="contacts-bottom">
+                <div class="contacts-bottom fade-section">
                     <div class="social-row">
                         <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
                             <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
+                        </a>
+                        <a href="https://t.me/proedworks" target="_blank" class="s-icon">
+                            <img src="images/tg-icon.png" alt="Telegram" onerror="this.style.display='none'">
                         </a>
                     </div>
                     <p>📧 <a href="mailto:proedworks@mail.ru">proedworks@mail.ru</a></p>
@@ -1231,6 +1450,36 @@
             const scrolled = (winScroll / height) * 100;
             document.getElementById('scrollProgress').style.width = scrolled + '%';
         });
+
+        // ===== ПЛАВНАЯ ПРОКРУТКА К КАТАЛОГУ =====
+        document.getElementById('scrollToCatalog').addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.getElementById('products');
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+
+        // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ПРИ 30% ВИДИМОСТИ =====
+        function handleScrollAnimations() {
+            const sections = document.querySelectorAll('.fade-section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight * 0.7 && rect.bottom > 0) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('load', function() {
+            setTimeout(handleScrollAnimations, 100);
+        });
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('resize', handleScrollAnimations);
 
         // ===== ОБЩИЕ ФОТО ДЛЯ 2-ГО И 3-ГО СЛАЙДА =====
         const COMMON_PHOTO_2 = 'images_2/photo-2.jpg';
@@ -1362,7 +1611,6 @@
             ],
             images: ['images_2/garland-english-self-1.jpg', COMMON_PHOTO_2, COMMON_PHOTO_3]
         }, {
-            // ===== НОВЫЙ ТОВАР: ДЕКОР FOCUS =====
             id: 115,
             name: 'ДЕКОР FOCUS',
             price: '1490 ₽',
