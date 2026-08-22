@@ -1124,7 +1124,10 @@
             images: p.images || ['https://via.placeholder.com/300x300?text=🖼️'],
             desc: p.desc || 'Описание товара',
             hasVideo: p.hasVideo || false,
-            videoUrl: p.videoUrl || null
+            videoUrl: p.videoUrl || null,
+            // ===== ДОБАВЛЯЕМ ДЛЯ ФИЛЬТРОВ =====
+            filterFormat: 'cabin',
+            filterDecor: 'decor'
         });
     });
 
@@ -1195,7 +1198,20 @@
         const available = new Set();
         allCatalogProducts.forEach(product => {
             let match = true;
-            if (currentFormatFilters.length > 0 && !currentFormatFilters.includes(product.format)) match = false;
+            if (currentFormatFilters.length > 0) {
+                let formatMatch = false;
+                // Проверяем, совпадает ли формат товара с фильтром
+                currentFormatFilters.forEach(filter => {
+                    if (filter === 'cabin' && (product.format === 'cabin' || product.filterFormat === 'cabin')) {
+                        formatMatch = true;
+                    } else if (filter === 'proedworks' && product.format === 'proedworks') {
+                        formatMatch = true;
+                    } else if (filter === product.format) {
+                        formatMatch = true;
+                    }
+                });
+                if (!formatMatch) match = false;
+            }
             if (currentAgeFilters.length > 0 && !currentAgeFilters.includes(product.age)) match = false;
             if (currentLevelFilters.length > 0 && !currentLevelFilters.includes(product.level)) match = false;
             if (match) available.add(product.topic);
@@ -1305,13 +1321,48 @@
     function renderProducts() {
         if (!productsGrid) return;
         let filtered = [...allCatalogProducts];
-        if (currentFormatFilters.length > 0) filtered = filtered.filter(p => currentFormatFilters.includes(p.format));
-        if (currentAgeFilters.length > 0) filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
-        if (currentLevelFilters.length > 0) filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
-        if (currentTopicFilters.length > 0) filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
+        
+        // ===== ФИЛЬТР ПО ФОРМАТУ =====
+        if (currentFormatFilters.length > 0) {
+            filtered = filtered.filter(p => {
+                let formatMatch = false;
+                currentFormatFilters.forEach(filter => {
+                    // Если выбран фильтр "Кабинет" — показываем товары с format: 'cabin' ИЛИ filterFormat: 'cabin'
+                    if (filter === 'cabin' && (p.format === 'cabin' || p.filterFormat === 'cabin')) {
+                        formatMatch = true;
+                    }
+                    // Если выбран "Продукция ProEdWorks" — показываем только товары с format: 'proedworks'
+                    else if (filter === 'proedworks' && p.format === 'proedworks') {
+                        formatMatch = true;
+                    }
+                    // Остальные форматы (online, offline)
+                    else if (filter === p.format) {
+                        formatMatch = true;
+                    }
+                });
+                return formatMatch;
+            });
+        }
+        
+        // ===== ФИЛЬТР ПО ВОЗРАСТУ =====
+        if (currentAgeFilters.length > 0) {
+            filtered = filtered.filter(p => currentAgeFilters.includes(p.age));
+        }
+        
+        // ===== ФИЛЬТР ПО УРОВНЮ =====
+        if (currentLevelFilters.length > 0) {
+            filtered = filtered.filter(p => currentLevelFilters.includes(p.level));
+        }
+        
+        // ===== ФИЛЬТР ПО ТЕМЕ =====
+        if (currentTopicFilters.length > 0) {
+            filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
+        }
+        
         if (currentGrammarSubtopics.length > 0 && currentTopicFilters.includes('grammar')) {
             filtered = filtered.filter(p => p.topic === 'grammar');
         }
+        
         if (filtered.length === 0) {
             productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
             return;
@@ -1334,7 +1385,6 @@
             `;
         }).join('');
 
-        // ===== НАВЕШИВАЕМ ОБРАБОТЧИКИ НА ВСЕ КНОПКИ "Оформить заказ" =====
         document.querySelectorAll('.order-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
