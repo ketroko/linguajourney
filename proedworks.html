@@ -26,7 +26,7 @@
             padding: 0 20px;
         }
 
-        /* ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ (ФИОЛЕТОВАЯ) ===== */
+        /* ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ ===== */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -44,10 +44,12 @@
             background: #5B2D8E;
             position: relative;
             overflow: hidden;
-            padding: 40px 0 20px;
+            padding: 60px 0 40px;
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         .first-screen-bg {
             position: absolute;
@@ -59,91 +61,81 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.15;
+            opacity: 0.12;
             pointer-events: none;
         }
         .first-screen .container {
             position: relative;
             z-index: 2;
+            display: flex;
+            justify-content: center;
         }
-        .first-screen-container {
+        .first-screen-content {
+            max-width: 800px;
+        }
+        .first-screen-content .logo-title {
             display: flex;
             align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 16px;
         }
-        .first-screen-text {
-            flex: 1;
-        }
-        .first-screen-text .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-        .first-screen-text .logo-title .logo-circle-big {
-            width: 64px;
-            height: 64px;
+        .first-screen-content .logo-title .logo-circle-big {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             flex-shrink: 0;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
         }
-        .first-screen-text .logo-title .logo-circle-big img {
+        .first-screen-content .logo-title .logo-circle-big img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .first-screen-text h1 {
-            font-size: 2.8rem;
+        .first-screen-content h1 {
+            font-size: 4rem;
             font-weight: 800;
             color: white;
+            letter-spacing: -0.02em;
         }
-        .first-screen-text .subtitle-main {
-            font-size: 1.2rem;
+        .first-screen-content .subtitle-main {
+            font-size: 1.5rem;
             color: rgba(255,255,255,0.9);
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
-        .first-screen-text .subtitle-desc {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.75);
-            max-width: 500px;
-            margin-bottom: 24px;
-        }
-        .first-screen-image {
-            flex: 1;
-        }
-        .first-screen-image img {
-            width: 100%;
-            border-radius: 32px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        .first-screen-content .subtitle-desc {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 30px;
         }
         .btn-white {
             display: inline-block;
             background: white;
-            padding: 14px 32px;
-            font-size: 1.1rem;
+            padding: 16px 40px;
+            font-size: 1.15rem;
             font-weight: 600;
             color: #5B2D8E;
             text-decoration: none;
-            border-radius: 16px;
+            border-radius: 50px;
             transition: all 0.2s ease;
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
         .btn-white:hover {
             background: #F3EEFA;
             transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
         }
 
-        /* ===== КНОПКИ НА ПЕРВОМ ЭКРАНЕ (светло-фиолетовые) ===== */
+        /* ===== КНОПКИ НА ПЕРВОМ ЭКРАНЕ ===== */
         .first-screen-top-btns {
             position: absolute;
             top: 24px;
@@ -177,6 +169,8 @@
             font-weight: 300;
             transition: 0.3s;
             box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            line-height: 1;
+            text-align: center;
         }
         .first-screen-top-btns a:hover {
             background: rgba(243, 238, 250, 1);
@@ -209,7 +203,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+        /* ===== АНИМАЦИЯ ===== */
         .fade-section {
             opacity: 0;
             transform: translateY(40px);
@@ -220,75 +214,7 @@
             transform: translateY(0);
         }
 
-        header {
-            background: #F3EEFA;
-            padding: 16px 0;
-            border-bottom: 3px solid #5B2D8E;
-        }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .header-center {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-circle {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #5B2D8E;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .logo-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .brand .name {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #5B2D8E;
-        }
-        .brand .tagline {
-            font-size: 0.75rem;
-            color: #888;
-        }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: white;
-            border: 2px solid #5B2D8E;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            text-decoration: none;
-            overflow: hidden;
-        }
-        .social-icon img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-        .social-icon:hover {
-            background: #5B2D8E;
-        }
-
+        /* ===== ОСТАЛЬНЫЕ СТИЛИ ===== */
         .page-block {
             background: white;
             border-radius: 48px;
@@ -476,11 +402,51 @@
             transform: translateY(-2px);
         }
 
+        /* ===== ПАГИНАЦИЯ ===== */
+        .grid-wrapper {
+            position: relative;
+        }
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
+        .grid .product-card {
+            display: flex;
+        }
+        .grid .product-card.hidden {
+            display: none;
+        }
+        .show-more-wrapper {
+            text-align: center;
+            margin-top: 32px;
+        }
+        .show-more-btn {
+            background: #5B2D8E;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(91, 45, 142, 0.25);
+        }
+        .show-more-btn:hover {
+            background: #7B4DAE;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 45, 142, 0.3);
+        }
+        .show-more-btn.hidden {
+            display: none;
+        }
+        .show-more-btn .count {
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
         .product-card {
             background: #FEF9E6;
             border-radius: 24px;
@@ -1072,28 +1038,17 @@
             .modal-content {
                 padding: 28px 20px;
             }
-            .brand .name {
-                font-size: 1rem;
-            }
-            .logo-circle {
-                width: 36px;
-                height: 36px;
-            }
             .production-carousel .slide {
                 height: 250px;
             }
-            .first-screen-text h1 {
-                font-size: 2rem;
+            .first-screen-content h1 {
+                font-size: 2.8rem;
             }
-            .first-screen-text .subtitle-main {
+            .first-screen-content .subtitle-main {
+                font-size: 1.2rem;
+            }
+            .first-screen-content .subtitle-desc {
                 font-size: 1rem;
-            }
-            .first-screen-text .subtitle-desc {
-                font-size: 0.9rem;
-            }
-            .first-screen-container {
-                flex-direction: column;
-                text-align: center;
             }
             .first-screen-top-btns {
                 padding: 0 12px;
@@ -1104,6 +1059,10 @@
                 width: 36px;
                 height: 36px;
                 font-size: 1.2rem;
+            }
+            .first-screen-content .logo-title .logo-circle-big {
+                width: 60px;
+                height: 60px;
             }
         }
         @media (max-width: 480px) {
@@ -1116,25 +1075,25 @@
             .tab-btn {
                 min-width: 100%;
             }
-            .brand .name {
-                font-size: 0.9rem;
-            }
-            .logo-circle {
-                width: 30px;
-                height: 30px;
-            }
-            .brand .tagline {
-                font-size: 0.6rem;
-            }
             .filter-bottom {
                 text-align: center;
             }
-            .first-screen-text h1 {
-                font-size: 1.6rem;
+            .first-screen-content h1 {
+                font-size: 2rem;
             }
-            .first-screen-text .logo-title .logo-circle-big {
-                width: 44px;
-                height: 44px;
+            .first-screen-content .subtitle-main {
+                font-size: 1rem;
+            }
+            .first-screen-content .subtitle-desc {
+                font-size: 0.9rem;
+            }
+            .first-screen-content .logo-title {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .first-screen-content .logo-title .logo-circle-big {
+                width: 56px;
+                height: 56px;
             }
         }
     </style>
@@ -1148,7 +1107,7 @@
     <div class="first-screen">
         <div class="first-screen-bg"></div>
 
-        <!-- КНОПКИ В ВЕРХНИХ УГЛАХ (светло-фиолетовые) -->
+        <!-- КНОПКИ В ВЕРХНИХ УГЛАХ -->
         <div class="first-screen-top-btns">
             <div class="left-btns">
                 <a href="/" class="back-link">‹</a>
@@ -1157,14 +1116,14 @@
                 <a href="https://t.me/proedworks" target="_blank" class="social-icon-top">
                     <img src="images/tg-icon.png" alt="Telegram" onerror="this.style.display='none'">
                 </a>
-                <a href="https://vk.me/proedworks" target="_blank" class="social-icon-top">
+                <a href="https://vk.ru/proedworks" target="_blank" class="social-icon-top">
                     <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
                 </a>
             </div>
         </div>
 
-        <div class="container first-screen-container">
-            <div class="first-screen-text">
+        <div class="container">
+            <div class="first-screen-content">
                 <div class="logo-title">
                     <div class="logo-circle-big">
                         <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.style.display='none'">
@@ -1175,30 +1134,8 @@
                 <p class="subtitle-desc">Производим и поставляем товары для образовательных организаций</p>
                 <a href="#products" class="btn-white" id="scrollToCatalog">Перейти к каталогу</a>
             </div>
-            <div class="first-screen-image">
-                <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.src='https://via.placeholder.com/500x300?text=ProEdWorks'">
-            </div>
         </div>
     </div>
-
-    <header>
-        <div class="container">
-            <div class="header-center">
-                <div class="logo-circle">
-                    <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.style.display='none'">
-                </div>
-                <div class="brand">
-                    <span class="name">ProEdWorks</span>
-                    <span class="tagline">Оснащение и решения для образования</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <a href="https://vk.me/proedworks" target="_blank" class="social-icon">
-                    <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
-                </a>
-            </div>
-        </div>
-    </header>
 
     <section>
         <div class="container">
@@ -1296,7 +1233,15 @@
                         </div>
                     </div>
 
-                    <div class="grid" id="productGrid"></div>
+                    <!-- ===== ГРИД С ПАГИНАЦИЕЙ ===== -->
+                    <div class="grid-wrapper">
+                        <div class="grid" id="productGrid"></div>
+                        <div class="show-more-wrapper">
+                            <button class="show-more-btn" id="showMoreBtn">
+                                Показать все товары <span class="count" id="hiddenCount"></span>
+                            </button>
+                        </div>
+                    </div>
 
                     <div class="production-section fade-section">
                         <h3>🏭 Наше производство</h3>
@@ -1376,13 +1321,13 @@
                     </div>
 
                     <div style="text-align:center;margin-top:24px;">
-                        <a href="https://vk.me/proedworks" target="_blank" class="btn">Подобрать оснащение</a>
+                        <a href="https://vk.ru/proedworks" target="_blank" class="btn">Подобрать оснащение</a>
                     </div>
                 </div>
 
                 <div class="contacts-bottom fade-section">
                     <div class="social-row">
-                        <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
+                        <a href="https://vk.ru/proedworks" target="_blank" class="s-icon">
                             <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
                         </a>
                         <a href="https://t.me/proedworks" target="_blank" class="s-icon">
@@ -1403,7 +1348,7 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
+    <!-- МОДАЛЬНЫЕ ОКНА -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1421,7 +1366,6 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА СВЯЗИ (VK + Telegram) -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">&times;</button>
@@ -1443,7 +1387,7 @@
     </div>
 
     <script>
-        // ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ =====
+        // ===== ПОЛОСКА ПРОГРЕССА =====
         window.addEventListener('scroll', function() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1451,19 +1395,16 @@
             document.getElementById('scrollProgress').style.width = scrolled + '%';
         });
 
-        // ===== ПЛАВНАЯ ПРОКРУТКА К КАТАЛОГУ =====
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
         document.getElementById('scrollToCatalog').addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.getElementById('products');
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
 
-        // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ПРИ 30% ВИДИМОСТИ =====
+        // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ =====
         function handleScrollAnimations() {
             const sections = document.querySelectorAll('.fade-section');
             sections.forEach(section => {
@@ -1481,7 +1422,7 @@
         window.addEventListener('scroll', handleScrollAnimations);
         window.addEventListener('resize', handleScrollAnimations);
 
-        // ===== ОБЩИЕ ФОТО ДЛЯ 2-ГО И 3-ГО СЛАЙДА =====
+        // ===== ОБЩИЕ ФОТО =====
         const COMMON_PHOTO_2 = 'images_2/photo-2.jpg';
         const COMMON_PHOTO_3 = 'images_2/photo-3.jpg';
 
@@ -1642,23 +1583,35 @@
             });
         }
 
-        // ===== ОТРИСОВКА ТОВАРОВ =====
-        function renderProducts(containerId, productList) {
+        // ===== ПЕРЕМЕННЫЕ ДЛЯ ПАГИНАЦИИ =====
+        const ITEMS_PER_PAGE = 9;
+        let currentFilteredProducts = [];
+        let isAllVisible = false;
+
+        // ===== ОТРИСОВКА ТОВАРОВ С ПАГИНАЦИЕЙ =====
+        function renderProductsWithPagination(containerId, productList) {
             const container = document.getElementById(containerId);
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            const hiddenCountSpan = document.getElementById('hiddenCount');
             if (!container) return;
+
+            currentFilteredProducts = productList;
+            isAllVisible = false;
 
             if (productList.length === 0) {
                 container.innerHTML = `
                     <div class="no-products">
                         <h3>🤷 Ничего не найдено</h3>
                         <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
-                        <a href="https://vk.me/proedworks" target="_blank" class="btn">Написать в VK</a>
+                        <a href="https://vk.ru/proedworks" target="_blank" class="btn">Написать в VK</a>
                     </div>
                 `;
+                showMoreBtn.classList.add('hidden');
                 return;
             }
 
-            container.innerHTML = productList.map(p => {
+            // Строим HTML для всех товаров
+            const allCardsHtml = productList.map(p => {
                 const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
                 let imageHtml;
                 if (firstImage) {
@@ -1678,6 +1631,28 @@
                 `;
             }).join('');
 
+            // Вставляем все карточки в контейнер
+            container.innerHTML = allCardsHtml;
+
+            // Показываем только первые ITEMS_PER_PAGE товаров
+            const allCards = container.querySelectorAll('.product-card');
+            const totalItems = allCards.length;
+
+            if (totalItems > ITEMS_PER_PAGE) {
+                allCards.forEach((card, index) => {
+                    if (index >= ITEMS_PER_PAGE) {
+                        card.classList.add('hidden');
+                    }
+                });
+                const hiddenCount = totalItems - ITEMS_PER_PAGE;
+                hiddenCountSpan.textContent = `(ещё ${hiddenCount})`;
+                showMoreBtn.classList.remove('hidden');
+                showMoreBtn.textContent = `Показать все товары (ещё ${hiddenCount})`;
+            } else {
+                showMoreBtn.classList.add('hidden');
+            }
+
+            // Навешиваем обработчики на кнопки "Подробнее"
             container.querySelectorAll('.btn-detail').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
@@ -1685,6 +1660,33 @@
                 });
             });
         }
+
+        // ===== КНОПКА "ПОКАЗАТЬ ВСЕ" =====
+        document.getElementById('showMoreBtn').addEventListener('click', function() {
+            const container = document.getElementById('productGrid');
+            if (!container) return;
+
+            const allCards = container.querySelectorAll('.product-card');
+            if (isAllVisible) {
+                // Сворачиваем обратно
+                allCards.forEach((card, index) => {
+                    if (index >= ITEMS_PER_PAGE) {
+                        card.classList.add('hidden');
+                    }
+                });
+                const totalItems = currentFilteredProducts.length;
+                const hiddenCount = totalItems - ITEMS_PER_PAGE;
+                this.textContent = `Показать все товары (ещё ${hiddenCount})`;
+                isAllVisible = false;
+            } else {
+                // Показываем все
+                allCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+                this.textContent = `Свернуть товары`;
+                isAllVisible = true;
+            }
+        });
 
         // ===== МОДАЛЬНАЯ КАРУСЕЛЬ =====
         let modalCarouselIndex = 0;
@@ -1743,7 +1745,7 @@
             updateModalCarousel();
         }
 
-        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
+        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -1759,7 +1761,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
+        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1780,7 +1782,7 @@
             moveModalCarousel(1);
         });
 
-        // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛЬНОМ ОКНЕ ТОВАРА =====
+        // ===== КНОПКА "ЗАКАЗАТЬ" =====
         document.getElementById('modalOrderBtn').addEventListener('click', function() {
             const productId = parseInt(this.dataset.productId);
             const product = products.find(p => p.id === productId);
@@ -1788,14 +1790,12 @@
 
             document.getElementById('orderProductName').textContent = product.name;
 
-            // Ссылка для VK
             const vkLink = document.getElementById('orderVkLink');
             if (vkLink) {
                 const message = `Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
-                vkLink.href = `https://vk.me/proedworks?text=${encodeURIComponent(message)}`;
+                vkLink.href = `https://vk.ru/proedworks?text=${encodeURIComponent(message)}`;
             }
 
-            // Ссылка для Telegram (пользователь ketro_ko)
             const tgLink = document.getElementById('orderTgLink');
             if (tgLink) {
                 const message = `Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
@@ -1806,7 +1806,6 @@
             document.getElementById('orderModal').classList.add('active');
         });
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ВЫБОРА КАНАЛА =====
         document.getElementById('orderModalClose').addEventListener('click', function() {
             document.getElementById('orderModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1857,7 +1856,10 @@
                     .includes(t));
                 return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
             });
-            renderProducts('productGrid', filtered);
+
+            // Сбрасываем состояние "показать все" при фильтрации
+            isAllVisible = false;
+            renderProductsWithPagination('productGrid', filtered);
         }
 
         document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
@@ -1892,7 +1894,7 @@
         });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
-        renderProducts('productGrid', products);
+        renderProductsWithPagination('productGrid', products);
 
         if (track && dots.length > 0) {
             updateCarousel();
