@@ -26,6 +26,19 @@
             padding: 0 20px;
         }
 
+        /* ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ (ФИОЛЕТОВАЯ) ===== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: #5B2D8E;
+            z-index: 9999;
+            transition: width 0.1s;
+            box-shadow: 0 2px 8px rgba(91, 45, 142, 0.3);
+        }
+
         header {
             background: #F3EEFA;
             padding: 16px 0;
@@ -620,8 +633,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #4c75a3;
-            border: 2px solid #4c75a3;
             padding: 12px 24px;
             border-radius: 40px;
             text-decoration: none;
@@ -630,13 +641,29 @@
             transition: 0.2s;
         }
         .modal-order-options a:hover {
-            background: #3a5d82;
-            border-color: #3a5d82;
+            opacity: 0.85;
+            transform: translateY(-2px);
         }
         .modal-order-options a img {
             width: 24px;
             height: 24px;
-            filter: brightness(0) invert(1);
+            object-fit: contain;
+        }
+        .modal-order-options .vk-btn {
+            background: #4c75a3;
+            border: 2px solid #4c75a3;
+        }
+        .modal-order-options .vk-btn:hover {
+            background: #3a5d82;
+            border-color: #3a5d82;
+        }
+        .modal-order-options .tg-btn {
+            background: #0088cc;
+            border: 2px solid #0088cc;
+        }
+        .modal-order-options .tg-btn:hover {
+            background: #006699;
+            border-color: #006699;
         }
 
         .custom-block {
@@ -931,6 +958,9 @@
 </head>
 <body>
 
+    <!-- ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ ===== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <header>
         <div class="container">
             <div class="header-left">
@@ -938,7 +968,7 @@
             </div>
             <div class="header-center">
                 <div class="logo-circle">
-                    <img src="images/proedworks-logo.png" alt="ProEdWorks">
+                    <img src="images_2/proedworks-logo.jpg" alt="ProEdWorks" onerror="this.style.display='none'">
                 </div>
                 <div class="brand">
                     <span class="name">ProEdWorks</span>
@@ -947,7 +977,7 @@
             </div>
             <div class="header-right">
                 <a href="https://vk.me/proedworks" target="_blank" class="social-icon">
-                    <img src="images/vk-icon.png" alt="VK">
+                    <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
                 </a>
             </div>
         </div>
@@ -1137,7 +1167,7 @@
                 <div class="contacts-bottom">
                     <div class="social-row">
                         <a href="https://vk.me/proedworks" target="_blank" class="s-icon">
-                            <img src="images/vk-icon.png" alt="VK">
+                            <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'">
                         </a>
                     </div>
                     <p>📧 <a href="mailto:proedworks@mail.ru">proedworks@mail.ru</a></p>
@@ -1154,6 +1184,7 @@
         </div>
     </footer>
 
+    <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1171,6 +1202,7 @@
         </div>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА КАНАЛА СВЯЗИ (VK + Telegram) -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">&times;</button>
@@ -1179,14 +1211,27 @@
                 В сообщении укажите: <strong id="orderProductName">Название товара</strong>
             </p>
             <div class="modal-order-options">
-                <a href="#" id="orderVkLink" target="_blank">
-                    <img src="images/vk-icon.png" alt="VK"> ВКонтакте
+                <a href="#" id="orderVkLink" target="_blank" class="vk-btn" style="display:flex;align-items:center;gap:10px;">
+                    <img src="images/vk-icon.png" alt="VK" onerror="this.style.display='none'" style="width:24px;height:24px;object-fit:contain;">
+                    ВКонтакте
+                </a>
+                <a href="#" id="orderTgLink" target="_blank" class="tg-btn" style="display:flex;align-items:center;gap:10px;">
+                    <img src="images/tg-icon.png" alt="Telegram" onerror="this.style.display='none'" style="width:24px;height:24px;object-fit:contain;">
+                    Telegram
                 </a>
             </div>
         </div>
     </div>
 
     <script>
+        // ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ =====
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
         // ===== ОБЩИЕ ФОТО ДЛЯ 2-ГО И 3-ГО СЛАЙДА =====
         const COMMON_PHOTO_2 = 'images_2/photo-2.jpg';
         const COMMON_PHOTO_3 = 'images_2/photo-3.jpg';
@@ -1450,7 +1495,7 @@
             updateModalCarousel();
         }
 
-        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
+        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -1466,7 +1511,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
+        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ТОВАРА =====
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1487,22 +1532,33 @@
             moveModalCarousel(1);
         });
 
-        // ===== КНОПКА "ЗАКАЗАТЬ" =====
+        // ===== КНОПКА "ЗАКАЗАТЬ" В МОДАЛЬНОМ ОКНЕ ТОВАРА =====
         document.getElementById('modalOrderBtn').addEventListener('click', function() {
             const productId = parseInt(this.dataset.productId);
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
             document.getElementById('orderProductName').textContent = product.name;
+
+            // Ссылка для VK
             const vkLink = document.getElementById('orderVkLink');
             if (vkLink) {
-                vkLink.href = `https://vk.me/proedworks?text=Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
+                const message = `Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
+                vkLink.href = `https://vk.me/proedworks?text=${encodeURIComponent(message)}`;
+            }
+
+            // Ссылка для Telegram (пользователь ketro_ko)
+            const tgLink = document.getElementById('orderTgLink');
+            if (tgLink) {
+                const message = `Здравствуйте! Хочу заказать "${product.name}" за ${product.price}`;
+                tgLink.href = `https://t.me/ketro_ko?text=${encodeURIComponent(message)}`;
             }
 
             document.getElementById('productModal').classList.remove('active');
             document.getElementById('orderModal').classList.add('active');
         });
 
+        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ВЫБОРА КАНАЛА =====
         document.getElementById('orderModalClose').addEventListener('click', function() {
             document.getElementById('orderModal').classList.remove('active');
             document.body.style.overflow = '';
