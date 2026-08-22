@@ -26,7 +26,6 @@
             padding: 0 20px;
         }
 
-        /* ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ ===== */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -38,8 +37,12 @@
             transition: width 0.1s;
             box-shadow: 0 2px 8px rgba(91, 45, 142, 0.3);
         }
+        @media (max-width: 768px) {
+            .scroll-progress {
+                display: none !important;
+            }
+        }
 
-        /* ===== ПЕРВЫЙ ЭКРАН ===== */
         .first-screen {
             background: #5B2D8E;
             position: relative;
@@ -135,7 +138,6 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
         }
 
-        /* ===== КНОПКИ НА ПЕРВОМ ЭКРАНЕ ===== */
         .first-screen-top-btns {
             position: absolute;
             top: 24px;
@@ -203,7 +205,6 @@
             transform: scale(1.05);
         }
 
-        /* ===== АНИМАЦИЯ ===== */
         .fade-section {
             opacity: 0;
             transform: translateY(40px);
@@ -214,7 +215,6 @@
             transform: translateY(0);
         }
 
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ ===== */
         .page-block {
             background: white;
             border-radius: 48px;
@@ -235,6 +235,57 @@
             margin: 0 auto;
         }
         .page-title .desc strong {
+            color: #5B2D8E;
+        }
+
+        .tools-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+            justify-content: center;
+        }
+        .tools-panel .tool-btn {
+            background: #F8F4FC;
+            border: 2px solid #D4C4E8;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tools-panel .tool-btn:hover {
+            background: #E8E0F2;
+            border-color: #5B2D8E;
+        }
+        .tools-panel .tool-btn.active {
+            background: #5B2D8E;
+            color: white;
+            border-color: #5B2D8E;
+        }
+
+        .filter-stats {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 20px;
+            padding: 6px 16px;
+            background: #F8F4FC;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+            min-width: 120px;
+        }
+        .filter-stats strong {
             color: #5B2D8E;
         }
 
@@ -274,14 +325,8 @@
             display: block;
         }
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(8px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .tab-content h2 {
@@ -297,36 +342,67 @@
             font-size: 1rem;
         }
 
-        .filter-section {
-            background: #F8F4FC;
-            border-radius: 32px;
-            padding: 28px 32px;
-            margin-bottom: 32px;
-            border: 1px solid #D4C4E8;
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
         }
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px 30px;
-        }
-        .filter-group {
+        .modal-overlay.active {
             display: flex;
-            flex-direction: column;
         }
-        .filter-group .filter-label {
-            font-weight: 600;
+        .modal-content {
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #888;
+            transition: 0.2s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: #E67E22;
+        }
+
+        .modal-filter-group {
+            margin-bottom: 20px;
+        }
+        .modal-filter-group .filter-label {
+            font-weight: 700;
             font-size: 0.9rem;
             color: #5B2D8E;
             margin-bottom: 8px;
-            flex-shrink: 0;
+            display: block;
         }
-        .filter-tags {
+        .modal-filter-group .filter-tags {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 6px;
         }
-        .filter-tag {
-            background: white;
+        .modal-filter-group .filter-tag {
+            background: #F8F4FC;
             border: 1px solid #D4C4E8;
             padding: 4px 14px;
             border-radius: 30px;
@@ -337,72 +413,108 @@
             transition: 0.2s;
             font-family: inherit;
             user-select: none;
-            display: inline-block;
-            width: auto;
-            align-self: flex-start;
-            text-align: left;
         }
-        .filter-tag:hover {
+        .modal-filter-group .filter-tag:hover {
             background: #E8E0F2;
             border-color: #5B2D8E;
         }
-        .filter-tag.active {
+        .modal-filter-group .filter-tag.active {
             background: #5B2D8E;
             color: white;
             border-color: #5B2D8E;
         }
-        .filter-tag.all-tag {
+        .modal-filter-group .filter-tag.all-tag {
             background: transparent;
             border-color: #ccc;
             color: #999;
         }
-        .filter-tag.all-tag.active {
+        .modal-filter-group .filter-tag.all-tag.active {
             background: #5B2D8E;
             color: white;
             border-color: #5B2D8E;
         }
-        .filter-group.scrollable .filter-tags {
-            max-height: 160px;
+        .modal-filter-group.scrollable .filter-tags {
+            max-height: 120px;
             overflow-y: auto;
             padding-right: 6px;
         }
-        .filter-group.scrollable .filter-tags::-webkit-scrollbar {
+        .modal-filter-group.scrollable .filter-tags::-webkit-scrollbar {
             width: 5px;
         }
-        .filter-group.scrollable .filter-tags::-webkit-scrollbar-track {
+        .modal-filter-group.scrollable .filter-tags::-webkit-scrollbar-track {
             background: #E8E0F2;
             border-radius: 10px;
         }
-        .filter-group.scrollable .filter-tags::-webkit-scrollbar-thumb {
+        .modal-filter-group.scrollable .filter-tags::-webkit-scrollbar-thumb {
             background: #5B2D8E;
             border-radius: 10px;
         }
 
-        .filter-bottom {
-            text-align: right;
-            margin-top: 16px;
-            border-top: 1px solid #d4c4e8;
-            padding-top: 16px;
+        .modal-filter-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
-        .filter-reset-btn {
-            background: transparent;
-            border: 2px solid #5B2D8E;
-            color: #5B2D8E;
-            padding: 8px 24px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-        .filter-reset-btn:hover {
+        .modal-filter-actions .btn-primary {
             background: #5B2D8E;
             color: white;
-            transform: translateY(-2px);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            flex: 1;
+            transition: 0.2s;
+        }
+        .modal-filter-actions .btn-primary:hover {
+            background: #7B4DAE;
+        }
+        .modal-filter-actions .btn-secondary {
+            background: transparent;
+            color: #5B2D8E;
+            border: 2px solid #5B2D8E;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .modal-filter-actions .btn-secondary:hover {
+            background: #F3EEFA;
         }
 
-        /* ===== ПАГИНАЦИЯ ===== */
+        .sort-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .sort-options button {
+            background: #F8F4FC;
+            border: 2px solid #D4C4E8;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            text-align: left;
+        }
+        .sort-options button:hover {
+            background: #E8E0F2;
+            border-color: #5B2D8E;
+        }
+        .sort-options button.active-sort {
+            background: #5B2D8E;
+            color: white;
+            border-color: #5B2D8E;
+        }
+
         .grid-wrapper {
             position: relative;
         }
@@ -562,50 +674,6 @@
         .no-products .btn:hover {
             background: #F7FF5B;
             color: #1f2937;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal-content {
-            background: white;
-            border-radius: 48px;
-            padding: 40px;
-            max-width: 520px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #888;
-            transition: 0.2s;
-            background: none;
-            border: none;
-            line-height: 1;
-        }
-        .modal-close:hover {
-            color: #E67E22;
         }
 
         .modal-carousel {
@@ -1021,10 +1089,6 @@
             .page-block {
                 padding: 24px 16px;
             }
-            .filter-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
             .grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 16px;
@@ -1064,19 +1128,26 @@
                 width: 60px;
                 height: 60px;
             }
+            .tools-panel {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .tools-panel .tool-btn {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+            .filter-stats {
+                font-size: 0.8rem;
+                padding: 4px 14px;
+                min-width: 100px;
+            }
         }
         @media (max-width: 480px) {
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
             .grid {
                 grid-template-columns: 1fr;
             }
             .tab-btn {
                 min-width: 100%;
-            }
-            .filter-bottom {
-                text-align: center;
             }
             .first-screen-content h1 {
                 font-size: 2rem;
@@ -1100,14 +1171,10 @@
 </head>
 <body>
 
-    <!-- ===== ПОЛОСКА ПРОГРЕССА ПРОКРУТКИ ===== -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- ===== ПЕРВЫЙ ЭКРАН ===== -->
     <div class="first-screen">
         <div class="first-screen-bg"></div>
-
-        <!-- КНОПКИ В ВЕРХНИХ УГЛАХ -->
         <div class="first-screen-top-btns">
             <div class="left-btns">
                 <a href="/" class="back-link">‹</a>
@@ -1121,7 +1188,6 @@
                 </a>
             </div>
         </div>
-
         <div class="container">
             <div class="first-screen-content">
                 <div class="logo-title">
@@ -1160,84 +1226,16 @@
                     <h2 class="fade-section">Образовательная продукция</h2>
                     <p class="subtitle fade-section">То, что мы производим сами — от идеи до готового изделия</p>
 
-                    <div class="filter-section fade-section">
-                        <div class="filter-grid">
-                            <div class="filter-group">
-                                <div class="filter-label">📌 Формат</div>
-                                <div class="filter-tags" data-category="type">
-                                    <span class="filter-tag all-tag active">Все</span>
-                                    <span class="filter-tag">Плакаты</span>
-                                    <span class="filter-tag">Панно</span>
-                                    <span class="filter-tag">Игрушки</span>
-                                    <span class="filter-tag">Игры</span>
-                                    <span class="filter-tag">Декор</span>
-                                </div>
-                            </div>
-                            <div class="filter-group">
-                                <div class="filter-label">📌 Возраст</div>
-                                <div class="filter-tags" data-category="age">
-                                    <span class="filter-tag all-tag active">Все</span>
-                                    <span class="filter-tag">Дошкольникам</span>
-                                    <span class="filter-tag">Школьникам</span>
-                                </div>
-                            </div>
-                            <div class="filter-group">
-                                <div class="filter-label">📌 Организация</div>
-                                <div class="filter-tags" data-category="org">
-                                    <span class="filter-tag all-tag active">Все</span>
-                                    <span class="filter-tag">Детский сад</span>
-                                    <span class="filter-tag">Образовательный центр</span>
-                                    <span class="filter-tag">Языковая школа</span>
-                                    <span class="filter-tag">Офис</span>
-                                </div>
-                            </div>
-                            <div class="filter-group scrollable">
-                                <div class="filter-label">📌 Предмет</div>
-                                <div class="filter-tags" data-category="subject">
-                                    <span class="filter-tag all-tag active">Все</span>
-                                    <span class="filter-tag">Русский язык</span>
-                                    <span class="filter-tag">Английский язык</span>
-                                    <span class="filter-tag">Китайский язык</span>
-                                    <span class="filter-tag">Немецкий язык</span>
-                                    <span class="filter-tag">Испанский язык</span>
-                                    <span class="filter-tag">Французский язык</span>
-                                    <span class="filter-tag">Математика</span>
-                                    <span class="filter-tag">Информатика</span>
-                                    <span class="filter-tag">Физика</span>
-                                    <span class="filter-tag">Химия</span>
-                                    <span class="filter-tag">Биология</span>
-                                    <span class="filter-tag">География</span>
-                                    <span class="filter-tag">Литература</span>
-                                    <span class="filter-tag">История</span>
-                                    <span class="filter-tag">Музыка</span>
-                                    <span class="filter-tag">Психология</span>
-                                    <span class="filter-tag">Мотивация</span>
-                                    <span class="filter-tag">Юмор</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #d4c4e8;">
-                            <div style="display:flex;flex-wrap:wrap;gap:20px 40px;">
-                                <div class="filter-group" style="flex:1;min-width:120px;">
-                                    <div class="filter-label">📌 Другое</div>
-                                    <div class="filter-tags" data-category="other">
-                                        <span class="filter-tag all-tag active">Все</span>
-                                        <span class="filter-tag">Ремонт</span>
-                                        <span class="filter-tag">Рабочее место</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-bottom">
-                            <button class="filter-reset-btn" id="resetFilters">Сбросить фильтры</button>
-                        </div>
+                    <div class="tools-panel fade-section">
+                        <button class="tool-btn" id="filterToggleBtn">🎯 Фильтры</button>
+                        <button class="tool-btn" id="sortToggleBtn">↕ Сортировка</button>
+                        <div class="filter-stats" id="filterStats">Найдено <strong id="foundCount">0</strong> товаров</div>
                     </div>
 
-                    <!-- ===== ГРИД С ПАГИНАЦИЕЙ ===== -->
                     <div class="grid-wrapper">
                         <div class="grid" id="productGrid"></div>
                         <div class="show-more-wrapper">
-                            <button class="show-more-btn" id="showMoreBtn">
+                            <button class="show-more-btn hidden" id="showMoreBtn">
                                 Показать все товары <span class="count" id="hiddenCount"></span>
                             </button>
                         </div>
@@ -1246,7 +1244,6 @@
                     <div class="production-section fade-section">
                         <h3>🏭 Наше производство</h3>
                         <p class="sub">Изделия производятся на собственном оборудовании</p>
-
                         <div class="production-carousel" id="productionCarousel">
                             <div class="track" id="carouselTrack">
                                 <div class="slide">
@@ -1267,7 +1264,6 @@
                                 <span></span>
                             </div>
                         </div>
-
                         <div class="tech-tags">
                             <span>Лазерные станки</span>
                             <span>ЧПУ-станки</span>
@@ -1296,12 +1292,10 @@
                 <div class="tab-content" id="tab3">
                     <h2>Мебель и оснащение</h2>
                     <p class="subtitle">Поставки из России и Китая — надёжно, сертифицированно, под заказ</p>
-
                     <div style="text-align:center;padding:60px 20px;background:#F3EEFA;border-radius:32px;border:2px dashed #5B2D8E;">
                         <h3 style="font-size:1.5rem;color:#5B2D8E;margin-bottom:8px;">🪑 Ждём поставок!</h3>
                         <p style="color:#666;font-size:1rem;max-width:500px;margin:0 auto;">Следите за обновлениями — скоро здесь появится мебель и оснащение для ваших классов и кабинетов.</p>
                     </div>
-
                     <div style="margin-top:28px;background:#F3EEFA;padding:24px;border-radius:24px;text-align:center;border:2px solid #5B2D8E;">
                         <p style="font-size:0.95rem;color:#333;font-weight:600;">⚡ Сравните параметры</p>
                         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:12px;font-size:0.9rem;">
@@ -1319,7 +1313,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div style="text-align:center;margin-top:24px;">
                         <a href="https://vk.ru/proedworks" target="_blank" class="btn">Подобрать оснащение</a>
                     </div>
@@ -1348,7 +1341,96 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНЫЕ ОКНА -->
+    <!-- МОДАЛКА ФИЛЬТРОВ -->
+    <div class="modal-overlay" id="filterModal">
+        <div class="modal-content">
+            <button class="modal-close" id="filterModalClose">&times;</button>
+            <h3 style="text-align:center;color:#5B2D8E;margin-bottom:16px;">🎯 Фильтры</h3>
+
+            <div class="modal-filter-group">
+                <span class="filter-label">📌 Формат</span>
+                <div class="filter-tags" data-category="type">
+                    <span class="filter-tag all-tag active">Все</span>
+                    <span class="filter-tag">Плакаты</span>
+                    <span class="filter-tag">Панно</span>
+                    <span class="filter-tag">Игрушки</span>
+                    <span class="filter-tag">Игры</span>
+                    <span class="filter-tag">Декор</span>
+                </div>
+            </div>
+            <div class="modal-filter-group">
+                <span class="filter-label">📌 Возраст</span>
+                <div class="filter-tags" data-category="age">
+                    <span class="filter-tag all-tag active">Все</span>
+                    <span class="filter-tag">Дошкольникам</span>
+                    <span class="filter-tag">Школьникам</span>
+                </div>
+            </div>
+            <div class="modal-filter-group">
+                <span class="filter-label">📌 Организация</span>
+                <div class="filter-tags" data-category="org">
+                    <span class="filter-tag all-tag active">Все</span>
+                    <span class="filter-tag">Детский сад</span>
+                    <span class="filter-tag">Образовательный центр</span>
+                    <span class="filter-tag">Языковая школа</span>
+                    <span class="filter-tag">Офис</span>
+                </div>
+            </div>
+            <div class="modal-filter-group scrollable">
+                <span class="filter-label">📌 Предмет</span>
+                <div class="filter-tags" data-category="subject">
+                    <span class="filter-tag all-tag active">Все</span>
+                    <span class="filter-tag">Русский язык</span>
+                    <span class="filter-tag">Английский язык</span>
+                    <span class="filter-tag">Китайский язык</span>
+                    <span class="filter-tag">Немецкий язык</span>
+                    <span class="filter-tag">Испанский язык</span>
+                    <span class="filter-tag">Французский язык</span>
+                    <span class="filter-tag">Математика</span>
+                    <span class="filter-tag">Информатика</span>
+                    <span class="filter-tag">Физика</span>
+                    <span class="filter-tag">Химия</span>
+                    <span class="filter-tag">Биология</span>
+                    <span class="filter-tag">География</span>
+                    <span class="filter-tag">Литература</span>
+                    <span class="filter-tag">История</span>
+                    <span class="filter-tag">Музыка</span>
+                    <span class="filter-tag">Психология</span>
+                    <span class="filter-tag">Мотивация</span>
+                    <span class="filter-tag">Юмор</span>
+                </div>
+            </div>
+            <div class="modal-filter-group">
+                <span class="filter-label">📌 Другое</span>
+                <div class="filter-tags" data-category="other">
+                    <span class="filter-tag all-tag active">Все</span>
+                    <span class="filter-tag">Ремонт</span>
+                    <span class="filter-tag">Рабочее место</span>
+                </div>
+            </div>
+
+            <div class="modal-filter-actions">
+                <button class="btn-secondary" id="resetFiltersModal">Сбросить</button>
+                <button class="btn-primary" id="applyFiltersModal">Показать товары</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА СОРТИРОВКИ -->
+    <div class="modal-overlay" id="sortModal">
+        <div class="modal-content">
+            <button class="modal-close" id="sortModalClose">&times;</button>
+            <h3 style="text-align:center;color:#5B2D8E;margin-bottom:12px;">↕ Сортировка</h3>
+            <p style="text-align:center;color:#888;font-size:0.9rem;margin-bottom:12px;">Выберите порядок отображения</p>
+            <div class="sort-options">
+                <button data-sort="default" class="active-sort">📌 По умолчанию</button>
+                <button data-sort="price-asc">💰 Сначала дешёвые</button>
+                <button data-sort="price-desc">💰 Сначала дорогие</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ТОВАРА -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1366,6 +1448,7 @@
         </div>
     </div>
 
+    <!-- МОДАЛКА ЗАКАЗА -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="modal-close" id="orderModalClose">&times;</button>
@@ -1392,7 +1475,8 @@
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollProgress').style.width = scrolled + '%';
+            const el = document.getElementById('scrollProgress');
+            if (el) el.style.width = scrolled + '%';
         });
 
         // ===== ПЛАВНАЯ ПРОКРУТКА =====
@@ -1404,29 +1488,23 @@
             }
         });
 
-        // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ =====
+        // ===== АНИМАЦИЯ =====
         function handleScrollAnimations() {
-            const sections = document.querySelectorAll('.fade-section');
-            sections.forEach(section => {
+            document.querySelectorAll('.fade-section').forEach(section => {
                 const rect = section.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                if (rect.top < windowHeight * 0.7 && rect.bottom > 0) {
+                if (rect.top < window.innerHeight * 0.7 && rect.bottom > 0) {
                     section.classList.add('visible');
                 }
             });
         }
-
-        window.addEventListener('load', function() {
-            setTimeout(handleScrollAnimations, 100);
-        });
+        window.addEventListener('load', () => setTimeout(handleScrollAnimations, 100));
         window.addEventListener('scroll', handleScrollAnimations);
         window.addEventListener('resize', handleScrollAnimations);
 
-        // ===== ОБЩИЕ ФОТО =====
+        // ===== ДАННЫЕ =====
         const COMMON_PHOTO_2 = 'images_2/photo-2.jpg';
         const COMMON_PHOTO_3 = 'images_2/photo-3.jpg';
 
-        // ===== ВСЕ ТОВАРЫ =====
         const products = [{
             id: 101,
             name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1583,35 +1661,59 @@
             });
         }
 
-        // ===== ПЕРЕМЕННЫЕ ДЛЯ ПАГИНАЦИИ =====
-        const ITEMS_PER_PAGE = 9;
-        let currentFilteredProducts = [];
+        // ===== ПЕРЕМЕННЫЕ =====
+        const ITEMS_PER_PAGE_MOBILE = 3;
+        const ITEMS_PER_PAGE_DESKTOP = 9;
         let isAllVisible = false;
+        let currentSort = 'default';
+        let activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
 
-        // ===== ОТРИСОВКА ТОВАРОВ С ПАГИНАЦИЕЙ =====
-        function renderProductsWithPagination(containerId, productList) {
+        function getItemsPerPage() {
+            return window.innerWidth <= 768 ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE_DESKTOP;
+        }
+
+        // ===== ОСНОВНАЯ ФУНКЦИЯ ОТРИСОВКИ =====
+        function renderProducts(containerId, productList) {
             const container = document.getElementById(containerId);
             const showMoreBtn = document.getElementById('showMoreBtn');
             const hiddenCountSpan = document.getElementById('hiddenCount');
+            const foundCount = document.getElementById('foundCount');
             if (!container) return;
 
-            currentFilteredProducts = productList;
-            isAllVisible = false;
+            if (!foundCount) return;
 
             if (productList.length === 0) {
                 container.innerHTML = `
                     <div class="no-products">
                         <h3>🤷 Ничего не найдено</h3>
-                        <p>Мы не нашли товаров по выбранным фильтрам.<br>Расскажите, что бы вы хотели видеть в нашем каталоге — мы учтём ваши пожелания!</p>
-                        <a href="https://vk.ru/proedworks" target="_blank" class="btn">Написать в VK</a>
+                        <p>По выбранным фильтрам ничего не найдено.<br>Попробуйте сбросить фильтры.</p>
+                        <button class="btn" id="resetFiltersBtn">Сбросить фильтры</button>
                     </div>
                 `;
+                const resetBtn = document.getElementById('resetFiltersBtn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', function() {
+                        resetAllFilters();
+                        applyAllFilters();
+                    });
+                }
                 showMoreBtn.classList.add('hidden');
+                foundCount.textContent = '0';
                 return;
             }
 
-            // Строим HTML для всех товаров
-            const allCardsHtml = productList.map(p => {
+            foundCount.textContent = productList.length;
+
+            // Сортировка
+            let sorted = [...productList];
+            if (currentSort === 'price-asc') {
+                sorted.sort((a, b) => parseInt(a.price.replace(/[^\d]/g, '')) - parseInt(b.price.replace(/[^\d]/g, '')));
+            } else if (currentSort === 'price-desc') {
+                sorted.sort((a, b) => parseInt(b.price.replace(/[^\d]/g, '')) - parseInt(a.price.replace(/[^\d]/g, '')));
+            }
+
+            // Строим карточки
+            const allCardsHtml = sorted.map(p => {
                 const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
                 let imageHtml;
                 if (firstImage) {
@@ -1631,28 +1733,41 @@
                 `;
             }).join('');
 
-            // Вставляем все карточки в контейнер
             container.innerHTML = allCardsHtml;
 
-            // Показываем только первые ITEMS_PER_PAGE товаров
             const allCards = container.querySelectorAll('.product-card');
             const totalItems = allCards.length;
+            const perPage = getItemsPerPage();
 
-            if (totalItems > ITEMS_PER_PAGE) {
+            if (isAllVisible) {
+                allCards.forEach(c => c.classList.remove('hidden'));
+                showMoreBtn.textContent = `Свернуть товары`;
+                showMoreBtn.classList.remove('hidden');
+                hiddenCountSpan.textContent = '';
+                attachDetailButtons(container);
+                return;
+            }
+
+            if (totalItems > perPage) {
                 allCards.forEach((card, index) => {
-                    if (index >= ITEMS_PER_PAGE) {
+                    if (index >= perPage) {
                         card.classList.add('hidden');
                     }
                 });
-                const hiddenCount = totalItems - ITEMS_PER_PAGE;
+                const hiddenCount = totalItems - perPage;
                 hiddenCountSpan.textContent = `(ещё ${hiddenCount})`;
                 showMoreBtn.classList.remove('hidden');
                 showMoreBtn.textContent = `Показать все товары (ещё ${hiddenCount})`;
+                isAllVisible = false;
             } else {
                 showMoreBtn.classList.add('hidden');
+                isAllVisible = false;
             }
 
-            // Навешиваем обработчики на кнопки "Подробнее"
+            attachDetailButtons(container);
+        }
+
+        function attachDetailButtons(container) {
             container.querySelectorAll('.btn-detail').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
@@ -1667,19 +1782,19 @@
             if (!container) return;
 
             const allCards = container.querySelectorAll('.product-card');
+            const totalItems = allCards.length;
+            const perPage = getItemsPerPage();
+
             if (isAllVisible) {
-                // Сворачиваем обратно
                 allCards.forEach((card, index) => {
-                    if (index >= ITEMS_PER_PAGE) {
+                    if (index >= perPage) {
                         card.classList.add('hidden');
                     }
                 });
-                const totalItems = currentFilteredProducts.length;
-                const hiddenCount = totalItems - ITEMS_PER_PAGE;
+                const hiddenCount = totalItems - perPage;
                 this.textContent = `Показать все товары (ещё ${hiddenCount})`;
                 isAllVisible = false;
             } else {
-                // Показываем все
                 allCards.forEach(card => {
                     card.classList.remove('hidden');
                 });
@@ -1745,7 +1860,6 @@
             updateModalCarousel();
         }
 
-        // ===== ОТКРЫТИЕ МОДАЛЬНОГО ОКНА =====
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -1761,7 +1875,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
+        // Закрытие модалок
         document.getElementById('modalClose').addEventListener('click', function() {
             document.getElementById('productModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1782,7 +1896,6 @@
             moveModalCarousel(1);
         });
 
-        // ===== КНОПКА "ЗАКАЗАТЬ" =====
         document.getElementById('modalOrderBtn').addEventListener('click', function() {
             const productId = parseInt(this.dataset.productId);
             const product = products.find(p => p.id === productId);
@@ -1824,45 +1937,54 @@
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
                 document.getElementById(this.dataset.tab).classList.add('active');
+                if (this.dataset.tab === 'tab1') {
+                    applyAllFilters();
+                }
             });
         });
 
         // ===== ФИЛЬТРЫ =====
-        function applyFilters() {
-            const activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
-            document.querySelectorAll('#tab1 .filter-tags').forEach(group => {
+        function getActiveFiltersFromModal() {
+            const filters = { type: [], age: [], org: [], subject: [], other: [] };
+            document.querySelectorAll('#filterModal .filter-tags').forEach(group => {
                 const category = group.dataset.category;
                 const activeTags = [];
                 group.querySelectorAll('.filter-tag.active:not(.all-tag)').forEach(t => {
                     activeTags.push(t.textContent.trim());
                 });
-                if (category === 'type') activeFilters.type = activeTags;
-                else if (category === 'age') activeFilters.age = activeTags;
-                else if (category === 'org') activeFilters.org = activeTags;
-                else if (category === 'subject') activeFilters.subject = activeTags;
-                else if (category === 'other') activeFilters.other = activeTags;
+                if (category === 'type') filters.type = activeTags;
+                else if (category === 'age') filters.age = activeTags;
+                else if (category === 'org') filters.org = activeTags;
+                else if (category === 'subject') filters.subject = activeTags;
+                else if (category === 'other') filters.other = activeTags;
             });
+            return filters;
+        }
 
-            const filtered = products.filter(p => {
-                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type
-                    .includes(t));
-                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age
-                    .includes(t));
-                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org
-                    .includes(t));
-                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters
-                    .subject.includes(t));
-                const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other
-                    .includes(t));
+        function applyAllFilters() {
+            activeFilters = getActiveFiltersFromModal();
+
+            let filtered = products.filter(p => {
+                const matchesType = activeFilters.type.length === 0 || p.tags.some(t => activeFilters.type.includes(t));
+                const matchesAge = activeFilters.age.length === 0 || p.tags.some(t => activeFilters.age.includes(t));
+                const matchesOrg = activeFilters.org.length === 0 || p.tags.some(t => activeFilters.org.includes(t));
+                const matchesSubject = activeFilters.subject.length === 0 || p.tags.some(t => activeFilters.subject.includes(t));
+                const matchesOther = activeFilters.other.length === 0 || p.tags.some(t => activeFilters.other.includes(t));
                 return matchesType && matchesAge && matchesOrg && matchesSubject && matchesOther;
             });
 
-            // Сбрасываем состояние "показать все" при фильтрации
             isAllVisible = false;
-            renderProductsWithPagination('productGrid', filtered);
+            renderProducts('productGrid', filtered);
         }
 
-        document.querySelectorAll('#tab1 .filter-tag').forEach(tag => {
+        function resetAllFilters() {
+            document.querySelectorAll('#filterModal .filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#filterModal .all-tag').forEach(t => t.classList.add('active'));
+            activeFilters = { type: [], age: [], org: [], subject: [], other: [] };
+        }
+
+        // ===== МОДАЛЬНЫЕ ФИЛЬТРЫ =====
+        document.querySelectorAll('#filterModal .filter-tag').forEach(tag => {
             tag.addEventListener('click', function() {
                 const parent = this.closest('.filter-tags');
                 const allTag = parent.querySelector('.all-tag');
@@ -1870,7 +1992,6 @@
                 if (this.classList.contains('all-tag')) {
                     parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    applyFilters();
                     return;
                 }
 
@@ -1883,19 +2004,69 @@
                 } else {
                     allTag.classList.add('active');
                 }
-                applyFilters();
             });
         });
 
-        document.getElementById('resetFilters').addEventListener('click', function() {
-            document.querySelectorAll('#tab1 .filter-tag').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('#tab1 .all-tag').forEach(t => t.classList.add('active'));
-            applyFilters();
+        document.getElementById('resetFiltersModal').addEventListener('click', function() {
+            document.querySelectorAll('#filterModal .filter-tag').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#filterModal .all-tag').forEach(t => t.classList.add('active'));
+        });
+
+        document.getElementById('applyFiltersModal').addEventListener('click', function() {
+            document.getElementById('filterModal').classList.remove('active');
+            document.body.style.overflow = '';
+            applyAllFilters();
+        });
+
+        // ===== ОТКРЫТИЕ МОДАЛКИ ФИЛЬТРОВ =====
+        document.getElementById('filterToggleBtn').addEventListener('click', function() {
+            document.getElementById('filterModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('filterModalClose').addEventListener('click', function() {
+            document.getElementById('filterModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('filterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ===== СОРТИРОВКА =====
+        document.querySelectorAll('#sortModal .sort-options button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#sortModal .sort-options button').forEach(b => b.classList.remove('active-sort'));
+                this.classList.add('active-sort');
+                currentSort = this.dataset.sort;
+                document.getElementById('sortModal').classList.remove('active');
+                document.body.style.overflow = '';
+                applyAllFilters();
+            });
+        });
+
+        document.getElementById('sortToggleBtn').addEventListener('click', function() {
+            document.getElementById('sortModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('sortModalClose').addEventListener('click', function() {
+            document.getElementById('sortModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('sortModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
-        renderProductsWithPagination('productGrid', products);
+        applyAllFilters();
 
+        // ===== КАРУСЕЛЬ ПРОИЗВОДСТВА =====
         if (track && dots.length > 0) {
             updateCarousel();
             let autoSlide = setInterval(() => window.moveCarousel(1), 4000);
@@ -1908,6 +2079,16 @@
                 });
             }
         }
+
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (!isAllVisible) {
+                    applyAllFilters();
+                }
+            }, 300);
+        });
     </script>
 </body>
 </html>
