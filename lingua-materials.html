@@ -80,25 +80,6 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
-        .btn-purple {
-            display: inline-block;
-            background: #5B2D8E;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            text-decoration: none;
-            border-radius: 16px;
-            transition: all 0.2s ease;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-        }
-        .btn-purple:hover {
-            background: #4a1f73;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
         .back-home {
             position: fixed;
             top: 20px;
@@ -512,21 +493,6 @@
             display: inline-block;
             margin-bottom: 12px;
         }
-        .tag-link {
-            display: inline-block;
-            background: #5B2D8E;
-            color: white;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tag-link:hover {
-            background: #4a1f73;
-            transform: scale(1.05);
-        }
         .delivery-block {
             background: white;
             border-radius: 48px;
@@ -754,23 +720,6 @@
             background: #5B2D8E;
             color: white;
         }
-        .btn-order {
-            background: #CC0000;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
-            width: 100%;
-        }
-        .btn-order:hover {
-            background: #990000;
-            transform: translateY(-2px);
-        }
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             h2 { font-size: 1.5rem; }
@@ -943,6 +892,7 @@
     <div class="modal-content" style="max-width: 500px;">
         <span class="close-modal" onclick="closeOrderModal()">&times;</span>
         <h3 id="orderProductTitle">Оформление заказа</h3>
+        <p style="font-size: 0.9rem; color: #888; margin-bottom: 16px;">Напишите кодовое слово/фразу и выберите способ связи:</p>
         <div class="order-buttons">
             <a href="#" id="orderVkLink" target="_blank" class="btn-red" style="background: #4c75a3;">Во ВКонтакте</a>
             <a href="#" id="orderTgLink" target="_blank" class="btn-red" style="background: #0088cc;">В Telegram</a>
@@ -950,7 +900,7 @@
     </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ТОВАРОВ ProEdWorks -->
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ТОВАРОВ ProEdWorks (БЕЗ КНОПКИ) -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeProductModal()">&times;</span>
@@ -964,11 +914,42 @@
         <div class="modal-price" id="modalPrice" style="font-size: 1.3rem; font-weight: 800; color: #5B2D8E; margin: 8px 0;">990 ₽</div>
         <div class="modal-desc" id="modalDesc">Описание товара</div>
         <div class="modal-tags" id="modalTags"></div>
-        <button class="btn-order" id="modalOrderBtn" onclick="openOrderFromProduct()">Оформить заказ</button>
     </div>
 </div>
 
 <script>
+    // ===== ===== ===== ===== =====
+    // ===== ГЛАВНАЯ ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА (РАБОЧАЯ) =====
+    // ===== ===== ===== ===== =====
+    function openOrderModal(productName, price) {
+        console.log('🟢 openOrderModal вызвана для:', productName, 'цена:', price);
+        const modal = document.getElementById('orderModal');
+        if (!modal) {
+            console.error('❌ Модальное окно не найдено!');
+            return;
+        }
+        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
+        const message = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}" за ${price} ₽.`);
+        document.getElementById('orderVkLink').href = `https://vk.me/linguamaterials?text=${message}`;
+        document.getElementById('orderTgLink').href = `https://t.me/ketelina_lm?text=${message}`;
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        console.log('✅ Модальное окно открыто!');
+    }
+
+    function closeOrderModal() {
+        const modal = document.getElementById('orderModal');
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Закрытие по клику вне модального окна
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+        if (e.target === this) closeOrderModal();
+    });
+
     // ===== ТОВАРЫ ProEdWorks (15 штук) =====
     const proedworksProducts = [{
         id: 101,
@@ -1108,12 +1089,10 @@
         videoUrl: 'https://rutube.ru/embed/dadaadbd3423aa06e88c560d76415c22/'
     }];
 
-    // ===== ВСЕ ТОВАРЫ ДЛЯ КАТАЛОГА (только ProEdWorks) =====
+    // ===== ВСЕ ТОВАРЫ ДЛЯ КАТАЛОГА =====
     const allCatalogProducts = [];
 
-    // Добавляем товары ProEdWorks
     proedworksProducts.forEach(p => {
-        // Определяем тему для фильтра (только те, что были в оригинале)
         let topic = 'decor';
         const nameLower = p.name.toLowerCase();
         if (nameLower.includes('биолог')) topic = 'biology';
@@ -1146,8 +1125,7 @@
         });
     });
 
-    // ===== ВСЕ ТЕМЫ (ТОЛЬКО ТЕ, ЧТО БЫЛИ В ОРИГИНАЛЕ) =====
-    // Убраны: chinese, english, french, russian
+    // ===== ВСЕ ТЕМЫ (только те, что были в оригинале) =====
     const allTopicsRaw = [
         { value: "alphabet", label: "🔤 Алфавит" },
         { value: "animals", label: "🐱 Животные" },
@@ -1318,6 +1296,7 @@
         renderProducts();
     }
     
+    // ===== ГЛАВНАЯ ФУНКЦИЯ ОТРИСОВКИ ТОВАРОВ =====
     function renderProducts() {
         if (!productsGrid) return;
         let filtered = [...allCatalogProducts];
@@ -1344,7 +1323,8 @@
                     <div class="price">${p.oldPrice ? `<span class="old-price">${p.oldPrice} ₽</span>` : ''} ${p.price} ₽</div>
                     <a href="#" class="details-link" onclick="openProEdWorksProductModal(${p.id}); return false;">Подробнее</a>
                     <br>
-                    <button class="btn-red" onclick="openOrderModal('${p.name}', ${p.price})">Оформить заказ</button>
+                    <!-- ===== КНОПКА С ЯВНЫМ ВЫЗОВОМ И ЛОГИРОВАНИЕМ ===== -->
+                    <button class="btn-red" onclick="console.log('🔴 КЛИК ПО ГИРЛЯНДЕ!'); openOrderModal('${p.name}', ${p.price});">Оформить заказ</button>
                 </div>
             `;
         }).join('');
@@ -1375,7 +1355,7 @@
     let currentProductHasVideo = false;
     let currentProductVideoUrl = null;
 
-    function openProEdWorksProductModal(id) {
+    window.openProEdWorksProductModal = function(id) {
         const product = proedworksProducts.find(p => p.id === id);
         if (!product) return;
         currentProductId = id;
@@ -1386,7 +1366,6 @@
         document.getElementById('modalPrice').textContent = product.price + ' ₽';
         document.getElementById('modalDesc').textContent = product.desc;
         
-        // ТОЛЬКО 3 ТЕГА в модалке
         const tagList = [
             { label: '🏫 Кабинет', type: 'normal' },
             { label: '🖼️ Декор', type: 'normal' },
@@ -1399,12 +1378,19 @@
         ).join('');
         document.getElementById('modalTags').innerHTML = tagsHtml;
         
-        // Карусель с видео для FOCUS
         renderModalCarousel(product.images, product.hasVideo, product.videoUrl);
         
         document.getElementById('productModal').classList.add('show');
         document.body.style.overflow = 'hidden';
-    }
+    };
+
+    window.closeProductModal = function() {
+        document.getElementById('productModal').classList.remove('show');
+        document.body.style.overflow = '';
+        modalCarouselIndex = 0;
+        const track = document.getElementById('modalCarouselTrack');
+        if (track) track.style.transform = 'translateX(0px)';
+    };
 
     function renderModalCarousel(images, hasVideo, videoUrl) {
         const track = document.getElementById('modalCarouselTrack');
@@ -1413,7 +1399,6 @@
 
         let slides = [];
         
-        // Если есть видео — добавляем его ПЕРВЫМ слайдом
         if (hasVideo && videoUrl) {
             slides.push(`
                 <div class="modal-carousel-slide">
@@ -1422,7 +1407,6 @@
             `);
         }
         
-        // Добавляем фото
         const imgSlides = (images && images.length) ? images : ['https://via.placeholder.com/600x400?text=🖼️'];
         imgSlides.forEach(img => {
             slides.push(`
@@ -1467,41 +1451,6 @@
         updateModalCarousel();
     }
 
-    function closeProductModal() {
-        document.getElementById('productModal').classList.remove('show');
-        document.body.style.overflow = '';
-        modalCarouselIndex = 0;
-        const track = document.getElementById('modalCarouselTrack');
-        if (track) track.style.transform = 'translateX(0px)';
-    }
-
-    function openOrderFromProduct() {
-        const product = proedworksProducts.find(p => p.id === currentProductId);
-        if (!product) return;
-        closeProductModal();
-        openOrderModal(product.name, product.price);
-    }
-
-    // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ЗАКАЗА (РАБОТАЕТ ОТВСЮДУ) =====
-    function openOrderModal(productName, price) {
-        const modal = document.getElementById('orderModal');
-        if (!modal) return;
-        document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
-        const message = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}" за ${price} ₽.`);
-        document.getElementById('orderVkLink').href = `https://vk.me/linguamaterials?text=${message}`;
-        document.getElementById('orderTgLink').href = `https://t.me/ketelina_lm?text=${message}`;
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeOrderModal() {
-        const modal = document.getElementById('orderModal');
-        if (modal) {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    }
-
     // ===== ИНИЦИАЛИЗАЦИЯ =====
     document.addEventListener('DOMContentLoaded', () => {
         topicsContainer = document.getElementById('topicsContainer');
@@ -1539,7 +1488,6 @@
             topicSearch.addEventListener('input', handleTopicSearchInput);
         }
         
-        // Кнопки карусели
         document.getElementById('modalCarouselPrev').addEventListener('click', function(e) {
             e.stopPropagation();
             moveModalCarousel(-1);
@@ -1576,14 +1524,8 @@
         const orderModal = document.getElementById('orderModal');
         const productModal = document.getElementById('productModal');
         if (event.target === orderModal) closeOrderModal();
-        if (event.target === productModal) closeProductModal();
+        if (event.target === productModal) window.closeProductModal();
     };
-    
-    window.openOrderModal = openOrderModal;
-    window.closeOrderModal = closeOrderModal;
-    window.openProEdWorksProductModal = openProEdWorksProductModal;
-    window.closeProductModal = closeProductModal;
-    window.openOrderFromProduct = openOrderFromProduct;
 </script>
 
 </body>
