@@ -892,7 +892,7 @@
     <div class="modal-content" style="max-width: 500px;">
         <span class="close-modal" onclick="closeOrderModal()">&times;</span>
         <h3 id="orderProductTitle">Оформление заказа</h3>
-        <p style="font-size: 0.9rem; color: #888; margin-bottom: 16px;">Напишите кодовое слово/фразу и выберите способ связи:</p>
+        <p style="font-size: 0.9rem; color: #888; margin-bottom: 16px;" id="orderProductCode">Напишите кодовое слово/фразу и выберите способ связи:</p>
         <div class="order-buttons">
             <a href="#" id="orderVkLink" target="_blank" class="btn-red" style="background: #4c75a3;">Во ВКонтакте</a>
             <a href="#" id="orderTgLink" target="_blank" class="btn-red" style="background: #0088cc;">В Telegram</a>
@@ -918,9 +918,9 @@
 </div>
 
 <script>
-    // ===== ===== ===== ===== =====
-    // ===== ГЛАВНАЯ ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА (РАБОЧАЯ) =====
-    // ===== ===== ===== ===== =====
+    // ============================================================
+    // ===== ГЛАВНАЯ ФУНКЦИЯ ДЛЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА =====
+    // ============================================================
     function openOrderModal(productName, price) {
         console.log('🟢 openOrderModal вызвана для:', productName, 'цена:', price);
         const modal = document.getElementById('orderModal');
@@ -929,6 +929,7 @@
             return;
         }
         document.getElementById('orderProductTitle').innerText = `Оформление заказа: ${productName}`;
+        document.getElementById('orderProductCode').innerHTML = `Напишите кодовое слово/фразу - <strong>${productName}</strong>`;
         const message = encodeURIComponent(`Здравствуйте! Хочу оформить заказ на "${productName}" за ${price} ₽.`);
         document.getElementById('orderVkLink').href = `https://vk.me/linguamaterials?text=${message}`;
         document.getElementById('orderTgLink').href = `https://t.me/ketelina_lm?text=${message}`;
@@ -950,7 +951,9 @@
         if (e.target === this) closeOrderModal();
     });
 
+    // ============================================================
     // ===== ТОВАРЫ ProEdWorks (15 штук) =====
+    // ============================================================
     const proedworksProducts = [{
         id: 101,
         name: 'ГИРЛЯНДА-РАСТЯЖКА "ВАНЕЧКИН ДУ Ю СПИК ИНГЛИШ?"',
@@ -1296,7 +1299,9 @@
         renderProducts();
     }
     
+    // ============================================================
     // ===== ГЛАВНАЯ ФУНКЦИЯ ОТРИСОВКИ ТОВАРОВ =====
+    // ============================================================
     function renderProducts() {
         if (!productsGrid) return;
         let filtered = [...allCatalogProducts];
@@ -1311,11 +1316,12 @@
             productsGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px;">Ничего не найдено. Попробуйте изменить фильтры.</p>';
             return;
         }
+        
         productsGrid.innerHTML = filtered.map(p => {
             const imgSrc = p.img || (p.images && p.images[0]) || 'https://via.placeholder.com/300x300?text=🖼️';
 
             return `
-                <div class="filter-product-card">
+                <div class="filter-product-card" data-product-id="${p.id}">
                     <div class="prod-img">
                         <img src="${imgSrc}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'>🖼️</div>'">
                     </div>
@@ -1323,11 +1329,21 @@
                     <div class="price">${p.oldPrice ? `<span class="old-price">${p.oldPrice} ₽</span>` : ''} ${p.price} ₽</div>
                     <a href="#" class="details-link" onclick="openProEdWorksProductModal(${p.id}); return false;">Подробнее</a>
                     <br>
-                    <!-- ===== КНОПКА С ЯВНЫМ ВЫЗОВОМ И ЛОГИРОВАНИЕМ ===== -->
-                    <button class="btn-red" onclick="console.log('🔴 КЛИК ПО ГИРЛЯНДЕ!'); openOrderModal('${p.name}', ${p.price});">Оформить заказ</button>
+                    <button class="btn-red order-btn" data-name="${p.name}" data-price="${p.price}">Оформить заказ</button>
                 </div>
             `;
         }).join('');
+
+        // ===== НАВЕШИВАЕМ ОБРАБОТЧИКИ НА ВСЕ КНОПКИ "Оформить заказ" =====
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const name = this.getAttribute('data-name');
+                const price = parseInt(this.getAttribute('data-price'));
+                console.log('🔴 КЛИК ПО КНОПКЕ "Оформить заказ" для:', name);
+                openOrderModal(name, price);
+            });
+        });
     }
     
     function resetAllFilters() {
@@ -1348,7 +1364,9 @@
         renderTopicsList();
     }
     
+    // ============================================================
     // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ТОВАРОВ ProEdWorks =====
+    // ============================================================
     let modalCarouselIndex = 0;
     let currentModalImages = [];
     let currentProductId = null;
@@ -1451,7 +1469,9 @@
         updateModalCarousel();
     }
 
+    // ============================================================
     // ===== ИНИЦИАЛИЗАЦИЯ =====
+    // ============================================================
     document.addEventListener('DOMContentLoaded', () => {
         topicsContainer = document.getElementById('topicsContainer');
         productsGrid = document.getElementById('filteredProductsGrid');
