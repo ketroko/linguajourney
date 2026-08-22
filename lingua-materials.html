@@ -1125,9 +1125,7 @@
             desc: p.desc || 'Описание товара',
             hasVideo: p.hasVideo || false,
             videoUrl: p.videoUrl || null,
-            // ===== ДОБАВЛЯЕМ ДЛЯ ФИЛЬТРОВ =====
-            filterFormat: 'cabin',
-            filterDecor: 'decor'
+            filterFormat: 'cabin'
         });
     });
 
@@ -1200,7 +1198,6 @@
             let match = true;
             if (currentFormatFilters.length > 0) {
                 let formatMatch = false;
-                // Проверяем, совпадает ли формат товара с фильтром
                 currentFormatFilters.forEach(filter => {
                     if (filter === 'cabin' && (product.format === 'cabin' || product.filterFormat === 'cabin')) {
                         formatMatch = true;
@@ -1327,15 +1324,12 @@
             filtered = filtered.filter(p => {
                 let formatMatch = false;
                 currentFormatFilters.forEach(filter => {
-                    // Если выбран фильтр "Кабинет" — показываем товары с format: 'cabin' ИЛИ filterFormat: 'cabin'
                     if (filter === 'cabin' && (p.format === 'cabin' || p.filterFormat === 'cabin')) {
                         formatMatch = true;
                     }
-                    // Если выбран "Продукция ProEdWorks" — показываем только товары с format: 'proedworks'
                     else if (filter === 'proedworks' && p.format === 'proedworks') {
                         formatMatch = true;
                     }
-                    // Остальные форматы (online, offline)
                     else if (filter === p.format) {
                         formatMatch = true;
                     }
@@ -1356,7 +1350,18 @@
         
         // ===== ФИЛЬТР ПО ТЕМЕ =====
         if (currentTopicFilters.length > 0) {
-            filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
+            // ===== СПЕЦИАЛЬНАЯ ЛОГИКА ДЛЯ "ДЕКОР" =====
+            if (currentTopicFilters.includes('decor')) {
+                // Если выбран "Декор" — показываем:
+                // 1. Товары с topic = 'decor'
+                // 2. ВСЕ товары ProEdWorks (у них есть тег "Декор")
+                filtered = filtered.filter(p => {
+                    return p.topic === 'decor' || p.isProEdWorks === true;
+                });
+            } else {
+                // Для остальных тем — обычная фильтрация
+                filtered = filtered.filter(p => currentTopicFilters.includes(p.topic));
+            }
         }
         
         if (currentGrammarSubtopics.length > 0 && currentTopicFilters.includes('grammar')) {
